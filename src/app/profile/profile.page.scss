@@ -1,0 +1,179 @@
+
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  div#loaderHolder {
+    width: 100%;
+    text-align: -webkit-center;
+    position: absolute;
+    top: 50%;
+  }
+
+  div#videoPlaceholder {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1000000000;
+    display:none;
+    background: black;
+}
+
+#videobcg {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+  transform: scale(1.06); /* scale up to hide the edge blur */
+}
+
+#content{
+  text-align:-webkit-center;
+}
+
+#dp {
+  width: 80px;
+  height: 80px;
+  background: rgba(128, 128, 128, 0.41);
+  background-size:cover !important;
+  border-radius: 50%;
+}
+
+div#profileBlock {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+
+  #Followers{
+    font-size: 16px;
+    margin-top: 0px;
+  }
+
+  #username{
+    font-size: 20px;
+    margin-bottom: 5px;
+    font-size: 13px;
+
+
+  }
+
+}
+
+#Following{
+  height: 28px;
+  text-align: -webkit-center;
+  width: 100%;
+  padding-left: 27%;
+  font-size: 13px;
+
+  span {
+    margin-left: 15px;
+    float: left;
+}
+
+}
+
+p#followBtn {
+  margin: 0px;
+  padding: 0px;
+  width: 150px;
+  height: 28px;
+  background: orange;
+  color: white;
+  padding-top: 4px;
+  border-radius: 7px;
+  cursor: pointer;
+  margin-bottom: 22px;
+}
+
+
+#ufollowBtn{
+  margin: 0px;
+  padding: 0px;
+  width: 150px;
+  height: 28px;
+  background: #F44336;
+  color: white;
+  padding-top: 4px;
+  border-radius: 7px;
+  cursor: pointer;
+  margin-bottom: 22px;
+}
+
+p#Posts {
+  font-size: 13px;
+  color: gray;
+  margin: 0px;
+}
+
+p#bio {
+  text-align: -webkit-center;
+  color: gray;
+  font-size: 13px;
+}
+
+
+div#uploadedHeading {
+  width: 100%;
+  height: 35px;
+  text-align: -webkit-center;
+  margin-top: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.09019607843137255);
+  padding-top: 10px;
+  font-size: 14px;
+}
+
+
+#profileName{
+  width: auto;
+  position: absolute;
+  font-size: 15px;
+  margin-top: 5px;
+  float:left;
+  margin-left: 28%;
+}
+
+
+
+
+
+div#playlists {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  padding-bottom: 20px;
+
+  div#playlist {
+    width: 33%;
+    height: 115px;
+    float: left;
+    background-size: cover !important;
+}
+}
+
+
+#playlistPreview{
+  float: left;
+  color: white;
+  font-weight: lighter;
+  width: 100%;
+  height: 100%;
+  background: #0000003d;
+  padding-top: 67%;
+  text-align: left;
+  padding-left: 7px;
+  font-size: 13px;
+}
+
+span#metric {
+  margin-left: 5px;
+}
+
+#bottomBar{
+  background: rgba(0, 0, 0, 0.38);
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  height: 57px;
+}

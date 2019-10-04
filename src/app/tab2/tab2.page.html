@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Search
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!--<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>-->
+
+  <!-- Searchbar with cancel button always shown -->
+  <!-- Animated Searchbar -->
+  <ion-searchbar [(ngModel)]="searchTerm" animated (ionChange) = "getSearchResults()"></ion-searchbar>
+  <div id="searchTags">
+      <span class="searchFilter" id="selectedTag">People</span>
+      <span class="searchFilter">Videos</span>
+  </div>
+
+  <ion-item button *ngFor='let item of ( results | async)'>
+      <p (click)="viewProfile(item.id,item.email)">{{ item.first_name + " "  + item.last_name }} </p>
+  </ion-item>
+
+  <div id="bottomBar"></div>
+</ion-content>

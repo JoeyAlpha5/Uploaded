@@ -1,0 +1,49 @@
+
+
+<ion-content>
+  <ion-slides id="slides" [options]="slideOpts" (ionSlideDidChange)="swiped()">
+    <ion-slide (click)="playVideo(i)" id='slider' *ngFor='let item of ( results | async); let i = index' (swipeup)="onSwipeUp( item.user_id,item.user_email )">
+    <div id="feddStreemBTN">
+      <p>Live | Stream </p>
+    </div>
+      <video class="videobcg" id="{{i}}videobcg" muted="muted" volume="0" poster="https://res.cloudinary.com/uploaded/video/upload/v1567818053/{{ item.file }}.jpg">
+        <source src="https://res.cloudinary.com/uploaded/video/upload/v1567818053/{{ item.file }}.mp4" type="video/mp4">
+      </video>
+      <div id="PostData">
+          <ion-icon *ngIf="item.liked == 1" [ngStyle]="{color:'red'}" name="heart" id="{{item.post_id}}likeIcon" (click)="like(item.post_id)"></ion-icon>
+          <ion-icon *ngIf="item.liked == 0" name="heart" id="{{item.post_id}}likeIcon" (click)="like(item.post_id)"></ion-icon><span id="{{item.post_id}}likeCount">{{ item.like }}</span><br>
+          <ion-icon name="share-alt" id="postIcon"></ion-icon><br>
+          <ion-icon name="text" id="postIcon"></ion-icon>
+      </div>
+
+
+      <div id="userinfo">
+         <p>@{{ item.username }}</p>
+         <p id="postGenre">{{ item.genre }}</p>
+         <p id="postDescription">{{ item.description }}</p>
+         <div class="commentBox" id="{{item.post_id}}commentBox">
+
+            <span id="comment" *ngFor='let comment of commentsRef$ | async'>
+              <span *ngIf="item.post_id == comment.post">
+                <span id="userComment">@{{comment.user}}</span> {{ comment.comment }}<br><br>
+              </span>
+            </span>
+
+         </div>
+         <input type="text" class="commentInput" id="{{item.post_id}}commentInput" placeholder="Add Comment...">
+         <span (click)="postComment(item.post_id)" id="commentBtn">Post</span>
+      </div>
+      
+      <div id="overlay">
+       
+      </div>
+    </ion-slide>
+    
+  </ion-slides>
+
+
+
+</ion-content>
+
+
+

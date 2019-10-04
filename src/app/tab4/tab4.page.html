@@ -1,0 +1,74 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title id="profileName" *ngFor='let profile of ( results| async)'> 
+          {{ profile.first_name }} {{ profile.last_name }}
+      </ion-title>
+      <p id="settings" (click)="showSettings()">
+        Settings
+      </p>
+
+    </ion-toolbar>
+  </ion-header>
+  
+  <div id="videoPlaceholder">
+
+  </div>
+
+<ion-content >
+
+  <div id="Settings">
+      <p (click)="editProfile()">Edit profile</p>
+      <hr>
+      <p (click)="logout()">Logout</p>
+  </div>
+
+
+<!---upload button-->
+
+
+  <div id='progressDiv'>
+      <div id='Loader'></div>
+  </div>
+
+  <div id="content" *ngFor='let profile of ( results | async)'>
+
+      <div id='profileBlock'>
+          <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(http://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" ></div>
+          <div *ngIf="profile.image == undefined" id='dp'></div>
+          <p id='username'>{{ profile.username }} </p>
+          <p id='Posts'>{{ profile.total_posts }} Uploaded playlists</p>
+          <p id='Following'> <span><b>Followers:</b><br/> <font id="Followers">{{ profile.followers }}</font></span>  <span><b>Following: </b><br/> <font id="Followings">{{ profile.following }}</font></span>  </p>
+        </div>
+        <p id='bio'>{{ profile.bio }}</p>
+
+      <div id='uploadedHeading'>Uploaded playlists</div>
+      <div id="playlists">
+        <div id="playlist"  *ngFor='let item of ( Playlists | async)'  [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
+
+          <div id="playlistPreview">
+            <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
+          </div>
+        </div> 
+      </div>
+  </div>
+ <div id="bottomBar"></div>
+
+ <div id="editProfile" *ngFor='let profile of ( results | async)'>
+    <div id="profile">
+        <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" ><div>Edit</div></div>
+        <div *ngIf="profile.image == undefined" id='dp'><div>Edit</div></div><br>
+        <span>Username: </span><br>
+        <input type="text" id="user_name" value="{{ profile.username }}" required><br><br>
+        <span>First Name: </span><br>
+        <input type="text" id="first_name" value="{{ profile.first_name }}" required><br><br>
+        <span>Last Name: </span><br>
+        <input type="text" id="last_name" value="{{ profile.last_name }}" required><br><br>
+        <span>Bio: </span><br>
+        <input type="text" id="bioInput" value="{{ profile.bio}}" required><br><br>
+        <ion-button (click)="updateProfile()">Save</ion-button>
+    </div>
+
+ </div>
+
+ <div id="closeMenu" (click)="closeMenu()"></div>
+</ion-content>

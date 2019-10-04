@@ -1,0 +1,61 @@
+#bottomBar{
+    background: rgba(0, 0, 0, 0.38);
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    height: 57px;
+  }
+
+  #dp {
+    border-radius: 50%;
+    background-size:cover !important;
+    float: left;
+    width: 50px !important;
+    height: 50px !important;
+    margin-left: 15px;
+    margin-top: 15px;
+  }
+
+ion-input#uploadDesc {
+    width: 250px;
+    margin-left: 10px;
+    float: left;
+    margin-top: 26px;
+}
+
+div#uploadImage {
+  width: 100%;
+  height: 70px;
+  float: left;
+
+}
+
+ion-label#FileInputabel {
+  text-align: left;
+  float: left;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+div#options #label {
+  font-size: 13px;
+  margin-left: 15px;
+}
+
+div.options #label {
+  float: left;
+  margin-top: 20px;
+}
+
+ion-toggle#toggle {
+  float: right;
+  margin-top: 8px;
+}
+
+div#options {
+  width: 100%;
+  height: 53px;
+  float: left;
+  background: rgba(0, 0, 0, 0.03);
+  margin-top: 11px;
+}

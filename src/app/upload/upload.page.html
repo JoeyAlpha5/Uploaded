@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Upload</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngFor='let profile of ( results | async)'>
+
+    <div id="uploadImage">
+        <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" ></div>
+        <div *ngIf="profile.image == undefined" id='dp'></div>
+        <ion-input id="uploadDesc" placeholder="Upload Description"></ion-input>
+    </div>
+   <div id="options" class="options">
+    <ion-label id="label">Add to your feed: </ion-label>
+    <ion-toggle id="toggle" color="dark"></ion-toggle>
+  </div>
+  <div id="options">
+      <ion-label id="label">Music Genre: </ion-label>
+      <ion-select id="toggle" value="brown" okText="Okay" cancelText="Dismiss">
+        <ion-select-option value="brown">HipHop</ion-select-option>
+        <ion-select-option value="blonde">House</ion-select-option>
+        <ion-select-option value="black">Jazz</ion-select-option>
+        <ion-select-option value="red">Indie</ion-select-option>
+        <ion-select-option value="red">Popp</ion-select-option>
+        <ion-select-option value="red">Rock</ion-select-option>
+      </ion-select>
+    </div>
+
+
+    <ion-label id="FileInputabel">File: </ion-label>
+    <ion-input type="file" id="uploadDesc"></ion-input>
+
+  <div id="bottomBar"></div>
+</ion-content>
