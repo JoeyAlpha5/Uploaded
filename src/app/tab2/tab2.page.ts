@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RequestsService } from '../services/requests.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -12,15 +13,14 @@ export class Tab2Page {
   results: Observable<any>;
   searchTerm = '';
   profile_url =  'https://uploaded.herokuapp.com/users/users';
-  constructor(private requests: RequestsService, private route: Router ) {}
+  constructor(private requests: RequestsService, private route: Router,private storage: Storage ) {}
 
   ionViewDidEnter() {
-    var Email = JSON.parse(localStorage.getItem('email'));
-    var Password = localStorage.getItem('password');
-    if(Email == null && Password == null){
-      window.location.href = '';
-      return;
-    }
+    this.storage.get('mail').then((val) => {
+      if(val == undefined){
+        this.route.navigate(['']);
+      }
+    })
   }
 
 
@@ -32,8 +32,8 @@ export class Tab2Page {
 
   viewProfile(user_id,email){
     console.log("user",user_id);
-    localStorage.setItem("user_id",user_id);
-    localStorage.setItem("userProfileEmail",email);
+    this.storage.set("user_id",user_id);
+    this.storage.set("userProfileEmail",email);
     this.route.navigate(['/home/tabs/profile']);
   }
 

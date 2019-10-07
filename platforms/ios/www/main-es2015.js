@@ -10,23 +10,21 @@
 var map = {
 	"./login/login.module": [
 		"./src/app/login/login.module.ts",
-		"default~login-login-module~tab1-tab1-module~tab4-tab4-module",
+		"default~login-login-module~tab1-tab1-module~tab4-tab4-module~upload-upload-module",
 		"login-login-module"
 	],
 	"./profile/profile.module": [
 		"./src/app/profile/profile.module.ts",
-		"common",
 		"profile-profile-module"
 	],
 	"./tab4/tab4.module": [
 		"./src/app/tab4/tab4.module.ts",
-		"default~login-login-module~tab1-tab1-module~tab4-tab4-module",
-		"common",
+		"default~login-login-module~tab1-tab1-module~tab4-tab4-module~upload-upload-module",
 		"tab4-tab4-module"
 	],
 	"./upload/upload.module": [
 		"./src/app/upload/upload.module.ts",
-		"common",
+		"default~login-login-module~tab1-tab1-module~tab4-tab4-module~upload-upload-module",
 		"upload-upload-module"
 	]
 };
@@ -619,6 +617,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _firebase_env__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./firebase-env */ "./src/app/firebase-env.ts");
 /* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! hammerjs */ "./node_modules/hammerjs/hammer.js");
 /* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(hammerjs__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
+
 
 
 
@@ -651,6 +651,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"],
             angularfire2__WEBPACK_IMPORTED_MODULE_10__["AngularFireModule"].initializeApp(_firebase_env__WEBPACK_IMPORTED_MODULE_12__["firebaseConfig"]),
             angularfire2_database__WEBPACK_IMPORTED_MODULE_11__["AngularFireDatabaseModule"],
+            _ionic_storage__WEBPACK_IMPORTED_MODULE_14__["IonicStorageModule"].forRoot()
         ],
         providers: [
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
@@ -754,7 +755,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/pc/Desktop/Uploaded/App/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/apple/Desktop/Uploaded/Uploaded/src/main.ts */"./src/main.ts");
 
 
 /***/ })

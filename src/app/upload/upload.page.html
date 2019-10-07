@@ -4,32 +4,37 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngFor='let profile of ( results | async)'>
+<ion-content>
 
+    <ion-input (change)="changeListener($event)" type="file" accept="video/*" id="uploadDesc"></ion-input>
+    <ion-progress-bar *ngIf="displayLoading == true" id="uploadProgress" type="indeterminate"></ion-progress-bar>
     <div id="uploadImage">
-        <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" ></div>
-        <div *ngIf="profile.image == undefined" id='dp'></div>
-        <ion-input id="uploadDesc" placeholder="Upload Description"></ion-input>
+      <ion-icon name="cloud-upload" id="uploadIcon"></ion-icon>
+      <p>Upload your video</p>
+      <span>Tap here to select a video from your device to</span>
     </div>
    <div id="options" class="options">
     <ion-label id="label">Add to your feed: </ion-label>
-    <ion-toggle id="toggle" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" (ionChange)="addPlaylist($event)" color="dark"></ion-toggle>
   </div>
   <div id="options">
       <ion-label id="label">Music Genre: </ion-label>
-      <ion-select id="toggle" value="brown" okText="Okay" cancelText="Dismiss">
-        <ion-select-option value="brown">HipHop</ion-select-option>
-        <ion-select-option value="blonde">House</ion-select-option>
-        <ion-select-option value="black">Jazz</ion-select-option>
-        <ion-select-option value="red">Indie</ion-select-option>
-        <ion-select-option value="red">Popp</ion-select-option>
-        <ion-select-option value="red">Rock</ion-select-option>
+      <ion-select id="Select" okText="Okay" cancelText="Dismiss">
+        <ion-select-option value="HipHop">HipHop</ion-select-option>
+        <ion-select-option value="House">House</ion-select-option>
+        <ion-select-option value="Jazz">Jazz</ion-select-option>
+        <ion-select-option value="Indie">Indie</ion-select-option>
+        <ion-select-option value="Popp">Popp</ion-select-option>
+        <ion-select-option value="Rock">Rock</ion-select-option>
       </ion-select>
     </div>
 
+    <ion-input type="text" id="uploadDescription" placeholder="Upload description"></ion-input>
 
-    <ion-label id="FileInputabel">File: </ion-label>
-    <ion-input type="file" id="uploadDesc"></ion-input>
+    <div id="uploadBtnDiv"><ion-button id="uploadBtn" (click)="upload()">Publish video</ion-button></div>
+
+    
+    
 
   <div id="bottomBar"></div>
 </ion-content>

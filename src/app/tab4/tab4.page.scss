@@ -59,14 +59,14 @@ div#Settings {
   height: 102px;
   float: right;
   background: white;
-  position: fixed;
+  position: sticky;
   right: 0;
   top: 0;
-  z-index: 1000000;
+  z-index: 99999;
   border-radius: 5px;
   box-shadow: 1px 1px 1px 1px rgba(158, 158, 158, 0.53);
   padding-top: 8px;
-  display:none;
+  display: none;
 }
 
 div#Settings p {
@@ -83,7 +83,7 @@ div#Settings hr {
 div#profileBlock {
   width: 100%;
   height: auto;
-  margin-top: 20px;
+  margin-top: 10px;
 
   #Followers{
     font-size: 16px;
@@ -115,13 +115,49 @@ div#profileBlock {
 }
 
 
-div#editProfile {
+#editProfile {
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  text-align: -webkit-center;
+  overflow: scroll;
+  display: none;
+  width: 300px;
+  height: 435px;
+  background: white;
+  border-radius: 7px;
+  margin-top: 17%;
+  text-align: left;
+
+  #dp{
+    width: 100%;
+    height: 114px;
+    background: rgba(128, 128, 128, 0.41);
+    background-size: cover !important;
+    border-radius: 0 !important;
+
+    div{
+      width: 100%;
+      height: 100%;
+      color: white;
+      background: rgba(0, 0, 0, 0.36);
+      padding-top: 29px;
+      border-radius: 0 !important;
+      padding-left: 15px;
+  }
+
+  }
+
+}
+
+
+div#Profileoverlay{
   width: 100%;
   height: 100%;
   position: fixed;
-  background: #00000061;
+  background: rgba(0, 0, 0, 0.7607843137254902);
   top: 0;
-  z-index: 100;
+  z-index: 9998;
   text-align: -webkit-center;
   display: none;
 }
@@ -133,15 +169,6 @@ div#closeMenu {
   background: transparent;
   top: 0;
   display: none;
-}
-
-div#profile {
-  width: 300px;
-  height: 435px;
-  background: white;
-  border-radius: 7px;
-  margin-top: 17%;
-  padding-top: 12px;
 }
 
 div#dp div {
@@ -271,9 +298,9 @@ span#metric {
 }
 
 #bottomBar{
-  background: rgba(0, 0, 0, 0.38);
+  background: #000000;
   bottom: 0;
   position: absolute;
   width: 100%;
-  height: 57px;
+  height: 60px;
 }

@@ -1,19 +1,20 @@
 
 
 <ion-content>
+  <ion-refresher id="refresher" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-slides id="slides" [options]="slideOpts" (ionSlideDidChange)="swiped()">
-    <ion-slide (click)="playVideo(i)" id='slider' *ngFor='let item of ( results | async); let i = index' (swipeup)="onSwipeUp( item.user_id,item.user_email )">
-    <div id="feddStreemBTN">
-      <p>Live | Stream </p>
-    </div>
-      <video class="videobcg" id="{{i}}videobcg" muted="muted" volume="0" poster="https://res.cloudinary.com/uploaded/video/upload/v1567818053/{{ item.file }}.jpg">
+    <ion-slide id='slider' *ngFor='let item of ( results | async); let i = index' (swipeup)="onSwipeUp( item.user_id,item.user_email )">
+      <video playsinline webkit-playsinline muted class="videobcg" id="{{i}}videobcg" muted="muted" volume="0" poster="https://res.cloudinary.com/uploaded/video/upload/v1567818053/{{ item.file }}.jpg">
         <source src="https://res.cloudinary.com/uploaded/video/upload/v1567818053/{{ item.file }}.mp4" type="video/mp4">
       </video>
       <div id="PostData">
-          <ion-icon *ngIf="item.liked == 1" [ngStyle]="{color:'red'}" name="heart" id="{{item.post_id}}likeIcon" (click)="like(item.post_id)"></ion-icon>
-          <ion-icon *ngIf="item.liked == 0" name="heart" id="{{item.post_id}}likeIcon" (click)="like(item.post_id)"></ion-icon><span id="{{item.post_id}}likeCount">{{ item.like }}</span><br>
-          <ion-icon name="share-alt" id="postIcon"></ion-icon><br>
-          <ion-icon name="text" id="postIcon"></ion-icon>
+          <ion-icon class="icon" *ngIf="item.liked == 0" name="heart" id="{{item.post_id}}likeIcon" (click)="like(item.post_id)"></ion-icon><span *ngIf="item.liked == 0" id="{{item.post_id}}likeCount">{{ item.like }}</span><br *ngIf="item.liked == 0">
+          <ion-icon class="icon" *ngIf="item.liked == 1" [ngStyle]="{color:'red'}" name="heart" id="{{item.post_id}}likeIcon" (click)="like(item.post_id)"></ion-icon><span *ngIf="item.liked == 1" id="{{item.post_id}}likeCount">{{ item.like }}</span><br *ngIf="item.liked == 1"/>
+          <ion-icon class="icon" (click)="repost(item.post_id)" name="share-alt" id="postIcon"></ion-icon><span id="{{item.reposts}}repostCount">{{ item.like }}</span><br>
+          <ion-icon class="icon" name="share" id="postIcon"></ion-icon><br>
+          <ion-icon class="icon" name="text" id="postIcon"></ion-icon>
       </div>
 
 
@@ -34,9 +35,11 @@
          <span (click)="postComment(item.post_id)" id="commentBtn">Post</span>
       </div>
       
-      <div id="overlay">
+      <div id="overlay" (click)="playVideo(i)">
        
       </div>
+
+      <div>{{ results.length }}</div>
     </ion-slide>
     
   </ion-slides>

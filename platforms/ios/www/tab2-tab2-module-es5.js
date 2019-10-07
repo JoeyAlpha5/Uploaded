@@ -11,6 +11,105 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Search\n
 
 /***/ }),
 
+/***/ "./src/app/services/requests.service.ts":
+/*!**********************************************!*\
+  !*** ./src/app/services/requests.service.ts ***!
+  \**********************************************/
+/*! exports provided: RequestsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RequestsService", function() { return RequestsService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
+
+
+var RequestsService = /** @class */ (function () {
+    function RequestsService(http) {
+        this.http = http;
+    }
+    //get profile api
+    RequestsService.prototype.getProfile = function (url, email) {
+        return this.http.get(url, { params: { email: email, type: 'profile' } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.getProfilePlaylists = function (url, email) {
+        return this.http.get(url, { params: { email: email, type: 'profile' } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["posts"];
+        }));
+    };
+    RequestsService.prototype.getSearchResults = function (url, searchTerm, user_email) {
+        return this.http.get(url, { params: { Term: searchTerm, type: 'search', email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.updateProfile = function (url, user_email, user_name, first_name, last_name, bio) {
+        return this.http.get(url, { params: { type: 'updateProfile', email: user_email, user_name: user_name, first_name: first_name, last_name: last_name, bio: bio } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.getFeed = function (url, user_email) {
+        return this.http.get(url, { params: { type: 'feed', email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.getUserProfile = function (url, user_id, user_email) {
+        return this.http.get(url, { params: { type: 'getUser_UD', user_id: user_id, email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.Follow = function (url, user_id, user_email) {
+        return this.http.get(url, { params: { type: 'Follow', user_id: user_id, email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.Like = function (url, user_email, post_id) {
+        return this.http.get(url, { params: { type: 'like', email: user_email, post: post_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.Upload = function (url, user_email, file, description, genre, playlisted) {
+        return this.http.get(url, { params: { type: 'upload', email: user_email, file: file, description: description, genre: genre, playlisted: playlisted } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["newly created post_id"];
+        }));
+    };
+    RequestsService.prototype.Login = function (url, user_email, password) {
+        return this.http.get(url, { params: { type: 'login', email: user_email, password: password } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results;
+        }));
+    };
+    RequestsService.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }
+    ]; };
+    RequestsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
+    ], RequestsService);
+    return RequestsService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/tab2/tab2.module.ts":
 /*!*************************************!*\
   !*** ./src/app/tab2/tab2.module.ts ***!
@@ -63,7 +162,7 @@ var Tab2PageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#bottomBar {\n  background: rgba(0, 0, 0, 0.38);\n  bottom: 0;\n  position: absolute;\n  width: 100%;\n  height: 57px;\n}\n\ndiv#searchTags span {\n  margin-left: 15px;\n  color: gray;\n  font-size: 12px;\n}\n\n#selectedTag {\n  font-weight: bold;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9wYy9EZXNrdG9wL1VwbG9hZGVkL0FwcC9zcmMvYXBwL3RhYjIvdGFiMi5wYWdlLnNjc3MiLCJzcmMvYXBwL3RhYjIvdGFiMi5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSwrQkFBQTtFQUNBLFNBQUE7RUFDQSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0FDQ0o7O0FER0E7RUFDSSxpQkFBQTtFQUNBLFdBQUE7RUFDQSxlQUFBO0FDQUo7O0FER0E7RUFDSSxpQkFBQTtBQ0FKIiwiZmlsZSI6InNyYy9hcHAvdGFiMi90YWIyLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNib3R0b21CYXJ7XG4gICAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjM4KTtcbiAgICBib3R0b206IDA7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogNTdweDtcbn1cblxuXG5kaXYjc2VhcmNoVGFncyBzcGFuIHtcbiAgICBtYXJnaW4tbGVmdDogMTVweDtcbiAgICBjb2xvcjogZ3JheTtcbiAgICBmb250LXNpemU6IDEycHg7XG59XG5cbiNzZWxlY3RlZFRhZ3tcbiAgICBmb250LXdlaWdodDogYm9sZDtcbn0iLCIjYm90dG9tQmFyIHtcbiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjM4KTtcbiAgYm90dG9tOiAwO1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDU3cHg7XG59XG5cbmRpdiNzZWFyY2hUYWdzIHNwYW4ge1xuICBtYXJnaW4tbGVmdDogMTVweDtcbiAgY29sb3I6IGdyYXk7XG4gIGZvbnQtc2l6ZTogMTJweDtcbn1cblxuI3NlbGVjdGVkVGFnIHtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59Il19 */"
+module.exports = "#bottomBar {\n  background: #000000;\n  bottom: 0;\n  position: absolute;\n  width: 100%;\n  height: 60px;\n}\n\ndiv#searchTags span {\n  margin-left: 15px;\n  color: gray;\n  font-size: 12px;\n}\n\n#selectedTag {\n  font-weight: bold;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hcHBsZS9EZXNrdG9wL1VwbG9hZGVkL1VwbG9hZGVkL3NyYy9hcHAvdGFiMi90YWIyLnBhZ2Uuc2NzcyIsInNyYy9hcHAvdGFiMi90YWIyLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLG1CQUFBO0VBQ0EsU0FBQTtFQUNBLGtCQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7QUNDSjs7QURHQTtFQUNJLGlCQUFBO0VBQ0EsV0FBQTtFQUNBLGVBQUE7QUNBSjs7QURHQTtFQUNJLGlCQUFBO0FDQUoiLCJmaWxlIjoic3JjL2FwcC90YWIyL3RhYjIucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI2JvdHRvbUJhcntcbiAgICBiYWNrZ3JvdW5kOiAjMDAwMDAwO1xuICAgIGJvdHRvbTogMDtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiA2MHB4O1xufVxuXG5cbmRpdiNzZWFyY2hUYWdzIHNwYW4ge1xuICAgIG1hcmdpbi1sZWZ0OiAxNXB4O1xuICAgIGNvbG9yOiBncmF5O1xuICAgIGZvbnQtc2l6ZTogMTJweDtcbn1cblxuI3NlbGVjdGVkVGFne1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xufSIsIiNib3R0b21CYXIge1xuICBiYWNrZ3JvdW5kOiAjMDAwMDAwO1xuICBib3R0b206IDA7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogNjBweDtcbn1cblxuZGl2I3NlYXJjaFRhZ3Mgc3BhbiB7XG4gIG1hcmdpbi1sZWZ0OiAxNXB4O1xuICBjb2xvcjogZ3JheTtcbiAgZm9udC1zaXplOiAxMnB4O1xufVxuXG4jc2VsZWN0ZWRUYWcge1xuICBmb250LXdlaWdodDogYm9sZDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -81,24 +180,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_requests_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/requests.service */ "./src/app/services/requests.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+
 
 
 
 
 var Tab2Page = /** @class */ (function () {
-    function Tab2Page(requests, route) {
+    function Tab2Page(requests, route, storage) {
         this.requests = requests;
         this.route = route;
+        this.storage = storage;
         this.searchTerm = '';
         this.profile_url = 'https://uploaded.herokuapp.com/users/users';
     }
     Tab2Page.prototype.ionViewDidEnter = function () {
-        var Email = JSON.parse(localStorage.getItem('email'));
-        var Password = localStorage.getItem('password');
-        if (Email == null && Password == null) {
-            window.location.href = '';
-            return;
-        }
+        var _this = this;
+        this.storage.get('mail').then(function (val) {
+            if (val == undefined) {
+                _this.route.navigate(['']);
+            }
+        });
     };
     Tab2Page.prototype.getSearchResults = function () {
         console.log(this.searchTerm);
@@ -113,7 +215,8 @@ var Tab2Page = /** @class */ (function () {
     };
     Tab2Page.ctorParameters = function () { return [
         { type: _services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"] },
-        { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+        { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"] }
     ]; };
     Tab2Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -121,7 +224,7 @@ var Tab2Page = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./tab2.page.html */ "./node_modules/raw-loader/index.js!./src/app/tab2/tab2.page.html"),
             styles: [__webpack_require__(/*! ./tab2.page.scss */ "./src/app/tab2/tab2.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"]])
     ], Tab2Page);
     return Tab2Page;
 }());

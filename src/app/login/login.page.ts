@@ -3,6 +3,8 @@ import { Storage } from '@ionic/storage';
 import * as $ from 'jquery';
 import { LoadingController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { RequestsService } from '../services/requests.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -10,7 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class LoginPage implements OnInit {
 
-  constructor(public loadingController: LoadingController, private statusBar: StatusBar) {
+  constructor(public loadingController: LoadingController, private statusBar: StatusBar,private route: Router, private requests: RequestsService,private storage: Storage ) {
     // let status bar overlay webview
     this.statusBar.overlaysWebView(false);
 
@@ -26,15 +28,18 @@ export class LoginPage implements OnInit {
   ionViewDidEnter() {
     // Put here the code you want to execute
     console.log('page has loaded');
-    //check for stored credentials
-    const email = localStorage.getItem('email');
-    const password = localStorage.getItem('password');
-    if(email == null && password == null){
-      $('.login').show();
-    }else{
-      window.location.href = 'home/tabs/tab1';
-    }
     this.presentLoading();
+    //check for stored credentials
+    this.storage.get('mail').then((val) => {
+      let profile_url =  'https://uploaded.herokuapp.com/users/users';
+      //profile_url = 'http://127.0.0.1:8000/users/users'
+      if(val == undefined){
+        $(".login").show();
+      }else{
+        this.route.navigate(['/home/tabs/tab1']);
+      }
+    });
+    
   }
 
 
@@ -47,35 +52,29 @@ export class LoginPage implements OnInit {
       this.presentLoadingWithOptions(message);
     }
     else {
+      let url = 'https://uploaded.herokuapp.com/users/users';
       this.presentLoading();
-      $.ajax({
-        type: 'GET',
-        url: 'https://uploaded.herokuapp.com/users/users',
-        dataType: 'json',
-        data: {email: emailInput, password: passwordInput, type: 'login'},
-        async: true,
-        success: function(data) {
-          //
-          if(data.data == "Authentication test passed") {
-            localStorage.setItem('email', JSON.stringify(emailInput));
-            localStorage.setItem('password', JSON.stringify(passwordInput));
-            localStorage.setItem('username', JSON.stringify(data.username));
-            $(".signInPrompt").text("Login successful");
-            $("#UploadedHeading").text(JSON.stringify(emailInput));
-            $("#UploadedHeading").css("color","#0d8479");
-            $(".signInPrompt").css("color","#0d8479");
-            window.location.href = 'home/tabs/tab1';
-          }else{
-            $(".signInPrompt").text("User not found");
-            $("#UploadedHeading").text(JSON.stringify(emailInput));
-            $("#UploadedHeading").css("color","#f44336");
-            $(".signInPrompt").css("color","#f44336");
-            
-          }
+      let login = this.requests.Login(url,emailInput,passwordInput);
+      login.subscribe(data =>{
+        console.log(data.data);
+        if(data.data == "Authentication test passed") {
+          this.storage.set('mail', emailInput);
+          this.storage.set('password', emailInput);
+          this.storage.set('username', data.username);
+          $(".signInPrompt").text("Login successful");
+          $("#UploadedHeading").text(JSON.stringify(emailInput));
+          $("#UploadedHeading").css("color","#0d8479");
+          $(".signInPrompt").css("color","#0d8479");
+          this.route.navigate(['home/tabs/tab1']);
+       }else{
+          $(".signInPrompt").text("User not found");
+          $("#UploadedHeading").text(JSON.stringify(emailInput));
+          $("#UploadedHeading").css("color","#f44336");
+          $(".signInPrompt").css("color","#f44336"); 
+      }
 
-          console.log(data);
-        }
-      });
+
+      })
     }
   }
 

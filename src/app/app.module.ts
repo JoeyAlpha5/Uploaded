@@ -14,7 +14,7 @@ import { AngularFireDatabaseModule } from "angularfire2/database";
 import { firebaseConfig } from "./firebase-env";
 import * as Hammer from 'hammerjs';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
-
+import { IonicStorageModule } from '@ionic/storage';
 
 export class CustomHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -28,6 +28,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,

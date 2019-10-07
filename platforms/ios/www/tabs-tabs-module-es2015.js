@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-tabs id=\"page\">\n\n  <ion-tab-bar slot=\"bottom\" id=\"tabs\">\n    <ion-tab-button tab=\"tab1\" id=\"tab1\">\n      <ion-icon id=\"navIcon\" name=\"home\"></ion-icon>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab2\" id=\"tab2\">\n      <ion-icon id=\"navIcon\" name=\"search\"></ion-icon>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"upload\" id=\"tab2\" >\n      <ion-icon name=\"add-circle-outline\"></ion-icon>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab3\" id=\"tab3\">\n      <ion-icon id=\"navIcon\" name=\"notifications\"></ion-icon>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab4\" id=\"tab4\">\n      <ion-icon id=\"navIcon\" name=\"person\"></ion-icon>\n    </ion-tab-button>\n  </ion-tab-bar>\n\n</ion-tabs>\n"
+module.exports = "<ion-tabs id=\"page\">\n    \n    <ion-tab-bar slot=\"bottom\" id=\"tabs\">\n          <ion-tab-button tab=\"tab1\" id=\"tab1\">\n            <ion-icon  name=\"home\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"tab2\" id=\"tab2\">\n            <ion-icon  name=\"search\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"upload\" id=\"tab2\" >\n            <ion-icon name=\"add-circle-outline\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"tab3\" id=\"tab3\">\n            <ion-icon  name=\"notifications\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"tab4\" id=\"tab4\">\n            <ion-icon  name=\"person\"></ion-icon>\n          </ion-tab-button>\n    </ion-tab-bar>\n\n    \n\n</ion-tabs>\n"
 
 /***/ }),
 
@@ -60,7 +60,7 @@ TabsPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#tabs {\n  background: transparent;\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n}\n\n#tab-button-tab1, #tab-button-tab2, #tab-button-tab3, #tab-button-tab4 {\n  background: transparent;\n}\n\nion-tab-button#tab-button-upload {\n  background: transparent;\n}\n\n#navIcon {\n  color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9wYy9EZXNrdG9wL1VwbG9hZGVkL0FwcC9zcmMvYXBwL3RhYnMvdGFicy5wYWdlLnNjc3MiLCJzcmMvYXBwL3RhYnMvdGFicy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQ0E7RUFDSSx1QkFBQTtFQUNBLGtCQUFBO0VBQ0EsU0FBQTtFQUNBLFdBQUE7QUNBSjs7QURHRTtFQUNFLHVCQUFBO0FDQUo7O0FER0E7RUFDSSx1QkFBQTtBQ0FKOztBREdFO0VBQ0ksWUFBQTtBQ0FOIiwiZmlsZSI6InNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG4jdGFic3tcclxuICAgIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgYm90dG9tOiAwO1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgfVxyXG4gIFxyXG4gICN0YWItYnV0dG9uLXRhYjEsICN0YWItYnV0dG9uLXRhYjIsICN0YWItYnV0dG9uLXRhYjMsICN0YWItYnV0dG9uLXRhYjR7XHJcbiAgICBiYWNrZ3JvdW5kOnRyYW5zcGFyZW50O1xyXG4gIH1cclxuXHJcbmlvbi10YWItYnV0dG9uI3RhYi1idXR0b24tdXBsb2FkIHtcclxuICAgIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xyXG59XHJcblxyXG4gICNuYXZJY29ue1xyXG4gICAgICBjb2xvcjogd2hpdGU7XHJcbiAgfSIsIiN0YWJzIHtcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYm90dG9tOiAwO1xuICB3aWR0aDogMTAwJTtcbn1cblxuI3RhYi1idXR0b24tdGFiMSwgI3RhYi1idXR0b24tdGFiMiwgI3RhYi1idXR0b24tdGFiMywgI3RhYi1idXR0b24tdGFiNCB7XG4gIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xufVxuXG5pb24tdGFiLWJ1dHRvbiN0YWItYnV0dG9uLXVwbG9hZCB7XG4gIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xufVxuXG4jbmF2SWNvbiB7XG4gIGNvbG9yOiB3aGl0ZTtcbn0iXX0= */"
+module.exports = "#tabs {\n  background: transparent;\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  height: 60px;\n}\n\n#tab-button-tab1, #tab-button-tab2, #tab-button-tab3, #tab-button-tab4 {\n  background: transparent;\n}\n\nion-tab-button#tab-button-upload {\n  background: transparent;\n}\n\n#navIcon {\n  color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hcHBsZS9EZXNrdG9wL1VwbG9hZGVkL1VwbG9hZGVkL3NyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLHVCQUFBO0VBQ0Esa0JBQUE7RUFDQSxTQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7QUNBSjs7QURJRTtFQUNFLHVCQUFBO0FDREo7O0FESUE7RUFDSSx1QkFBQTtBQ0RKOztBRElFO0VBQ0ksWUFBQTtBQ0ROIiwiZmlsZSI6InNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG4jdGFic3tcclxuICAgIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgYm90dG9tOiAwO1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBoZWlnaHQ6NjBweDtcclxuXHJcbiAgfVxyXG4gIFxyXG4gICN0YWItYnV0dG9uLXRhYjEsICN0YWItYnV0dG9uLXRhYjIsICN0YWItYnV0dG9uLXRhYjMsICN0YWItYnV0dG9uLXRhYjR7XHJcbiAgICBiYWNrZ3JvdW5kOnRyYW5zcGFyZW50O1xyXG4gIH1cclxuXHJcbmlvbi10YWItYnV0dG9uI3RhYi1idXR0b24tdXBsb2FkIHtcclxuICAgIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xyXG59XHJcblxyXG4gICNuYXZJY29ue1xyXG4gICAgICBjb2xvcjogd2hpdGU7XHJcbiAgfSIsIiN0YWJzIHtcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYm90dG9tOiAwO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiA2MHB4O1xufVxuXG4jdGFiLWJ1dHRvbi10YWIxLCAjdGFiLWJ1dHRvbi10YWIyLCAjdGFiLWJ1dHRvbi10YWIzLCAjdGFiLWJ1dHRvbi10YWI0IHtcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XG59XG5cbmlvbi10YWItYnV0dG9uI3RhYi1idXR0b24tdXBsb2FkIHtcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XG59XG5cbiNuYXZJY29uIHtcbiAgY29sb3I6IHdoaXRlO1xufSJdfQ== */"
 
 /***/ }),
 
@@ -80,47 +80,6 @@ __webpack_require__.r(__webpack_exports__);
 
 let TabsPage = class TabsPage {
     constructor() { }
-    ionViewDidEnter() {
-        // Put here the code you want to execute
-        console.log('page has loaded');
-        //check if user is signed in
-        const email = localStorage.getItem('email');
-        const password = localStorage.getItem('password');
-        if (email == null && password == null) {
-            window.location.href = '';
-        }
-        else {
-            console.log('User is signed in');
-        }
-    }
-    //upload playlist
-    upload() {
-        console.log("uploaded");
-        var fileUpload = document.getElementsByClassName("native-input sc-ion-input-md")[0].files[0];
-        var email = JSON.parse(localStorage.getItem("email"));
-        console.log(fileUpload);
-        var message = fileUpload.name;
-        $("#progressDiv").show();
-        //this.presentLoading(message);
-        var fd = new FormData();
-        fd.append('upload', fileUpload);
-        fd.append('type', "fileUpload");
-        fd.append('email', email);
-        //upload file
-        $.ajax({
-            type: 'POST',
-            url: 'http://127.0.0.1:8000/users/users',
-            dataType: 'json',
-            data: fd,
-            async: true,
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                $("#progressDiv").hide();
-                window.location.href = 'home/tabs/tab4';
-            },
-        });
-    }
 };
 TabsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -163,7 +122,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | tab1-tab1-module */[__webpack_require__.e("default~login-login-module~tab1-tab1-module~tab4-tab4-module"), __webpack_require__.e("common"), __webpack_require__.e("tab1-tab1-module")]).then(__webpack_require__.bind(null, /*! ../tab1/tab1.module */ "./src/app/tab1/tab1.module.ts")).then(m => m.Tab1PageModule)
+                        loadChildren: () => Promise.all(/*! import() | tab1-tab1-module */[__webpack_require__.e("default~login-login-module~tab1-tab1-module~tab4-tab4-module~upload-upload-module"), __webpack_require__.e("tab1-tab1-module")]).then(__webpack_require__.bind(null, /*! ../tab1/tab1.module */ "./src/app/tab1/tab1.module.ts")).then(m => m.Tab1PageModule)
                     }
                 ]
             },
@@ -172,7 +131,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | tab2-tab2-module */[__webpack_require__.e("common"), __webpack_require__.e("tab2-tab2-module")]).then(__webpack_require__.bind(null, /*! ../tab2/tab2.module */ "./src/app/tab2/tab2.module.ts")).then(m => m.Tab2PageModule)
+                        loadChildren: () => __webpack_require__.e(/*! import() | tab2-tab2-module */ "tab2-tab2-module").then(__webpack_require__.bind(null, /*! ../tab2/tab2.module */ "./src/app/tab2/tab2.module.ts")).then(m => m.Tab2PageModule)
                     }
                 ]
             },
@@ -190,7 +149,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | tab4-tab4-module */[__webpack_require__.e("default~login-login-module~tab1-tab1-module~tab4-tab4-module"), __webpack_require__.e("common"), __webpack_require__.e("tab4-tab4-module")]).then(__webpack_require__.bind(null, /*! ../tab4/tab4.module */ "./src/app/tab4/tab4.module.ts")).then(m => m.Tab4PageModule)
+                        loadChildren: () => Promise.all(/*! import() | tab4-tab4-module */[__webpack_require__.e("default~login-login-module~tab1-tab1-module~tab4-tab4-module~upload-upload-module"), __webpack_require__.e("tab4-tab4-module")]).then(__webpack_require__.bind(null, /*! ../tab4/tab4.module */ "./src/app/tab4/tab4.module.ts")).then(m => m.Tab4PageModule)
                     }
                 ]
             },
@@ -199,7 +158,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | profile-profile-module */[__webpack_require__.e("common"), __webpack_require__.e("profile-profile-module")]).then(__webpack_require__.bind(null, /*! ../profile/profile.module */ "./src/app/profile/profile.module.ts")).then(m => m.ProfilePageModule)
+                        loadChildren: () => __webpack_require__.e(/*! import() | profile-profile-module */ "profile-profile-module").then(__webpack_require__.bind(null, /*! ../profile/profile.module */ "./src/app/profile/profile.module.ts")).then(m => m.ProfilePageModule)
                     }
                 ]
             },
@@ -208,7 +167,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | upload-upload-module */[__webpack_require__.e("common"), __webpack_require__.e("upload-upload-module")]).then(__webpack_require__.bind(null, /*! ../upload/upload.module */ "./src/app/upload/upload.module.ts")).then(m => m.UploadPageModule)
+                        loadChildren: () => Promise.all(/*! import() | upload-upload-module */[__webpack_require__.e("default~login-login-module~tab1-tab1-module~tab4-tab4-module~upload-upload-module"), __webpack_require__.e("upload-upload-module")]).then(__webpack_require__.bind(null, /*! ../upload/upload.module */ "./src/app/upload/upload.module.ts")).then(m => m.UploadPageModule)
                     }
                 ]
             },

@@ -16,6 +16,10 @@
 
 <ion-content >
 
+  <ion-refresher id="refresher" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <div id="Settings">
       <p (click)="editProfile()">Edit profile</p>
       <hr>
@@ -23,17 +27,9 @@
   </div>
 
 
-<!---upload button-->
-
-
-  <div id='progressDiv'>
-      <div id='Loader'></div>
-  </div>
-
   <div id="content" *ngFor='let profile of ( results | async)'>
-
       <div id='profileBlock'>
-          <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(http://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" ></div>
+          <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" ></div>
           <div *ngIf="profile.image == undefined" id='dp'></div>
           <p id='username'>{{ profile.username }} </p>
           <p id='Posts'>{{ profile.total_posts }} Uploaded playlists</p>
@@ -53,22 +49,50 @@
   </div>
  <div id="bottomBar"></div>
 
- <div id="editProfile" *ngFor='let profile of ( results | async)'>
-    <div id="profile">
-        <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" ><div>Edit</div></div>
-        <div *ngIf="profile.image == undefined" id='dp'><div>Edit</div></div><br>
-        <span>Username: </span><br>
-        <input type="text" id="user_name" value="{{ profile.username }}" required><br><br>
-        <span>First Name: </span><br>
-        <input type="text" id="first_name" value="{{ profile.first_name }}" required><br><br>
-        <span>Last Name: </span><br>
-        <input type="text" id="last_name" value="{{ profile.last_name }}" required><br><br>
-        <span>Bio: </span><br>
-        <input type="text" id="bioInput" value="{{ profile.bio}}" required><br><br>
-        <ion-button (click)="updateProfile()">Save</ion-button>
-    </div>
+  <!--<div *ngFor='let profile of ( results | async)' id="editProfile">
+    <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" ><div>Edit</div></div>
+    <div *ngIf="profile.image == undefined" id='dp'><div>Edit</div></div><br>
+    <span>Username: </span><br>
+    <input type="text" id="user_name" value="{{ profile.username }}"></ion-input><br><br>
+    <span>First Name: </span><br>
+    <input type="text" id="first_name" value="{{ profile.first_name }}"></ion-input><br><br>
+    <span>Last Name: </span><br>
+    <input type="text" id="last_name" value="{{ profile.last_name }}"></ion-input><br><br>
+    <span>Bio: </span><br>
+    <input type="text" id="bioInput" value="{{ profile.bio}}"></ion-input><br><br>
+    <ion-button (click)="updateProfile()">Save</ion-button>
+  </div>-->
 
- </div>
+  <ion-card *ngFor='let profile of ( results | async)' id="editProfile">
+    <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" >
+      <div>Upload profile picture</div>
+      <ion-input type="file" id="uploadProfile" (change)="changeListener($event)" type="file" accept="image/*"></ion-input>
+    </div>
+    <div *ngIf="profile.image == undefined" id='dp'>
+      <div>Upload profile picture</div>
+      <ion-input type="file" id="uploadProfile" (change)="changeListener($event)" type="file" accept="image/*"></ion-input>
+    </div><br>
+    <ion-card-header>
+      <ion-card-title>{{ profile.username }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <span>Username: </span><br>
+      <ion-input type="text" id="user_name" placeholder="Add username" value="{{ profile.username }}"></ion-input><br><br>
+      <span>First Name: </span><br>
+      <ion-input type="text" id="first_name" placeholder="Add first name" value="{{ profile.first_name }}"></ion-input><br><br>
+      <span>Last Name: </span><br>
+      <ion-input type="text" id="last_name" placeholder="Add last name" value="{{ profile.last_name }}"></ion-input><br><br>
+      <span>Bio: </span><br>
+      <ion-input type="text" id="bioInput" placeholder="Add bio" value="{{ profile.bio}}"></ion-input><br><br>
+      <ion-button (click)="updateProfile()">Save</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+ <div id="Profileoverlay" (click)="closeProfile()"></div>
 
  <div id="closeMenu" (click)="closeMenu()"></div>
 </ion-content>
