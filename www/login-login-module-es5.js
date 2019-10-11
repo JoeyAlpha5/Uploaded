@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content id='content'>\n    \n    <div class='login'>\n        <img src='assets/Logo.jpg' alt='logo' class=\"logoImg\"><br/>\n        <h1 id='UploadedHeading'>Welcome to Uploaded</h1>\n        <p class='signInPrompt'>Sign in to continue</p>\n        <input type=\"email\" id='emailInput' placeholder=\"Email\" required/><br/>\n        <input type=\"password\" id='passwordInput' placeholder=\"Password\" required/><br/>\n        <ion-button expand=\"block\" size=\"default\" class='loginButton' color=\"primary\" (click) ='login()' >Sign in</ion-button>\n        <p class='bottomText'><span class='fgt'>Forgot password</span>  <span class='crt'>Create Account</span></p>\n    </div>\n\n</ion-content>\n"
+module.exports = "<ion-content id='content'>\n    \n    <div class='login'>\n        <img src='assets/Logo.jpg' alt='logo' class=\"logoImg\"><br/>\n        <h1 id='UploadedHeading'>Welcome to Uploaded</h1>\n        <p class='signInPrompt'>Sign in to continue</p>\n        <input type=\"email\" (blur)=\"enableBottom()\" (focus)=\"disableBottom()\" id='emailInput' placeholder=\"Email\" required/><br/>\n        <input type=\"password\" (blur)=\"enableBottom()\" (focus)=\"disableBottom()\" id='passwordInput' placeholder=\"Password\" required/><br/>\n        <ion-button expand=\"block\" size=\"default\" class='loginButton' color=\"primary\" (click) ='login()' >Sign in</ion-button>\n        <p class='bottomText' *ngIf=\"Bottom == true\"><span class='fgt'>Forgot password</span>  <span class='crt'>Create Account</span></p>\n    </div>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -107,9 +107,10 @@ var LoginPage = /** @class */ (function () {
         this.route = route;
         this.requests = requests;
         this.storage = storage;
+        this.Bottom = true;
         // let status bar overlay webview
         this.statusBar.overlaysWebView(false);
-        // set status bar to white
+        // // set status bar to white
         this.statusBar.backgroundColorByHexString('#ffffff');
     }
     LoginPage.prototype.ngOnInit = function () {
@@ -117,6 +118,9 @@ var LoginPage = /** @class */ (function () {
     LoginPage.prototype.ionViewDidEnter = function () {
         var _this = this;
         // Put here the code you want to execute
+        this.statusBar.overlaysWebView(false);
+        this.statusBar.backgroundColorByHexString('#ffffff');
+        this.statusBar.styleDefault();
         console.log('page has loaded');
         this.presentLoading();
         //check for stored credentials
@@ -130,6 +134,14 @@ var LoginPage = /** @class */ (function () {
                 _this.route.navigate(['/home/tabs/tab1']);
             }
         });
+    };
+    LoginPage.prototype.disableBottom = function () {
+        this.Bottom = false;
+        console.log("bottom disabled");
+    };
+    LoginPage.prototype.enableBottom = function () {
+        this.Bottom = true;
+        console.log("bottom enabled");
     };
     LoginPage.prototype.login = function () {
         var _this = this;

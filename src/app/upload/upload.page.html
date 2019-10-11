@@ -29,7 +29,7 @@
       </ion-select>
     </div>
 
-    <ion-input type="text" id="uploadDescription" placeholder="Upload description"></ion-input>
+    <ion-input type="text" (ionBlur)="enableBottom()" (ionFocus)="disableBottom()" id="uploadDescription" placeholder="Upload description"></ion-input>
 
     <div id="uploadBtnDiv"><ion-button id="uploadBtn" (click)="upload()">Publish video</ion-button></div>
 

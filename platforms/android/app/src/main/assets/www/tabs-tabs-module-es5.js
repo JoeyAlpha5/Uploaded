@@ -1,16 +1,5 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["tabs-tabs-module"],{
 
-/***/ "./node_modules/raw-loader/index.js!./src/app/tabs/tabs.page.html":
-/*!***************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/tabs/tabs.page.html ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<ion-tabs id=\"page\">\n    \n    <ion-tab-bar slot=\"bottom\" id=\"tabs\">\n          <ion-tab-button tab=\"tab1\" id=\"tab1\">\n            <ion-icon  name=\"home\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"tab2\" id=\"tab2\">\n            <ion-icon  name=\"search\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"upload\" id=\"tab2\" >\n            <ion-icon name=\"add-circle-outline\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"tab3\" id=\"tab3\">\n            <ion-icon  name=\"notifications\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"tab4\" id=\"tab4\">\n            <ion-icon  name=\"person\"></ion-icon>\n          </ion-tab-button>\n    </ion-tab-bar>\n\n    \n\n</ion-tabs>\n"
-
-/***/ }),
-
 /***/ "./src/app/tabs/tabs.module.ts":
 /*!*************************************!*\
   !*** ./src/app/tabs/tabs.module.ts ***!
@@ -56,49 +45,6 @@ var TabsPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/app/tabs/tabs.page.scss":
-/*!*************************************!*\
-  !*** ./src/app/tabs/tabs.page.scss ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "#tabs {\n  background: transparent;\n  position: absolute;\n  bottom: 0;\n  width: 100%;\n  height: 60px;\n}\n\n#tab-button-tab1, #tab-button-tab2, #tab-button-tab3, #tab-button-tab4 {\n  background: transparent;\n}\n\nion-tab-button#tab-button-upload {\n  background: transparent;\n}\n\n#navIcon {\n  color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hcHBsZS9EZXNrdG9wL1VwbG9hZGVkL1VwbG9hZGVkL3NyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLHVCQUFBO0VBQ0Esa0JBQUE7RUFDQSxTQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7QUNBSjs7QURJRTtFQUNFLHVCQUFBO0FDREo7O0FESUE7RUFDSSx1QkFBQTtBQ0RKOztBRElFO0VBQ0ksWUFBQTtBQ0ROIiwiZmlsZSI6InNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG4jdGFic3tcclxuICAgIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgYm90dG9tOiAwO1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBoZWlnaHQ6NjBweDtcclxuXHJcbiAgfVxyXG4gIFxyXG4gICN0YWItYnV0dG9uLXRhYjEsICN0YWItYnV0dG9uLXRhYjIsICN0YWItYnV0dG9uLXRhYjMsICN0YWItYnV0dG9uLXRhYjR7XHJcbiAgICBiYWNrZ3JvdW5kOnRyYW5zcGFyZW50O1xyXG4gIH1cclxuXHJcbmlvbi10YWItYnV0dG9uI3RhYi1idXR0b24tdXBsb2FkIHtcclxuICAgIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xyXG59XHJcblxyXG4gICNuYXZJY29ue1xyXG4gICAgICBjb2xvcjogd2hpdGU7XHJcbiAgfSIsIiN0YWJzIHtcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgYm90dG9tOiAwO1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiA2MHB4O1xufVxuXG4jdGFiLWJ1dHRvbi10YWIxLCAjdGFiLWJ1dHRvbi10YWIyLCAjdGFiLWJ1dHRvbi10YWIzLCAjdGFiLWJ1dHRvbi10YWI0IHtcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XG59XG5cbmlvbi10YWItYnV0dG9uI3RhYi1idXR0b24tdXBsb2FkIHtcbiAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XG59XG5cbiNuYXZJY29uIHtcbiAgY29sb3I6IHdoaXRlO1xufSJdfQ== */"
-
-/***/ }),
-
-/***/ "./src/app/tabs/tabs.page.ts":
-/*!***********************************!*\
-  !*** ./src/app/tabs/tabs.page.ts ***!
-  \***********************************/
-/*! exports provided: TabsPage */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabsPage", function() { return TabsPage; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-
-
-var TabsPage = /** @class */ (function () {
-    function TabsPage() {
-    }
-    TabsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-tabs',
-            template: __webpack_require__(/*! raw-loader!./tabs.page.html */ "./node_modules/raw-loader/index.js!./src/app/tabs/tabs.page.html"),
-            styles: [__webpack_require__(/*! ./tabs.page.scss */ "./src/app/tabs/tabs.page.scss")]
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
-    ], TabsPage);
-    return TabsPage;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/tabs/tabs.router.module.ts":
 /*!********************************************!*\
   !*** ./src/app/tabs/tabs.router.module.ts ***!
@@ -128,7 +74,7 @@ var routes = [
                     {
                         path: '',
                         loadChildren: function () {
-                            return Promise.all(/*! import() | tab1-tab1-module */[__webpack_require__.e("default~login-login-module~tab1-tab1-module~tab4-tab4-module~upload-upload-module"), __webpack_require__.e("tab1-tab1-module")]).then(__webpack_require__.bind(null, /*! ../tab1/tab1.module */ "./src/app/tab1/tab1.module.ts")).then(function (m) { return m.Tab1PageModule; });
+                            return Promise.all(/*! import() | tab1-tab1-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb"), __webpack_require__.e("tab1-tab1-module")]).then(__webpack_require__.bind(null, /*! ../tab1/tab1.module */ "./src/app/tab1/tab1.module.ts")).then(function (m) { return m.Tab1PageModule; });
                         }
                     }
                 ]
@@ -161,7 +107,7 @@ var routes = [
                     {
                         path: '',
                         loadChildren: function () {
-                            return Promise.all(/*! import() | tab4-tab4-module */[__webpack_require__.e("default~login-login-module~tab1-tab1-module~tab4-tab4-module~upload-upload-module"), __webpack_require__.e("tab4-tab4-module")]).then(__webpack_require__.bind(null, /*! ../tab4/tab4.module */ "./src/app/tab4/tab4.module.ts")).then(function (m) { return m.Tab4PageModule; });
+                            return Promise.all(/*! import() | tab4-tab4-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb"), __webpack_require__.e("tab4-tab4-module")]).then(__webpack_require__.bind(null, /*! ../tab4/tab4.module */ "./src/app/tab4/tab4.module.ts")).then(function (m) { return m.Tab4PageModule; });
                         }
                     }
                 ]
@@ -183,7 +129,51 @@ var routes = [
                     {
                         path: '',
                         loadChildren: function () {
-                            return Promise.all(/*! import() | upload-upload-module */[__webpack_require__.e("default~login-login-module~tab1-tab1-module~tab4-tab4-module~upload-upload-module"), __webpack_require__.e("upload-upload-module")]).then(__webpack_require__.bind(null, /*! ../upload/upload.module */ "./src/app/upload/upload.module.ts")).then(function (m) { return m.UploadPageModule; });
+                            return Promise.all(/*! import() | upload-upload-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb"), __webpack_require__.e("upload-upload-module")]).then(__webpack_require__.bind(null, /*! ../upload/upload.module */ "./src/app/upload/upload.module.ts")).then(function (m) { return m.UploadPageModule; });
+                        }
+                    }
+                ]
+            },
+            {
+                path: 'postView',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: function () {
+                            return Promise.all(/*! import() | post-view-post-view-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb"), __webpack_require__.e("common"), __webpack_require__.e("post-view-post-view-module")]).then(__webpack_require__.bind(null, /*! ../post-view/post-view.module */ "./src/app/post-view/post-view.module.ts")).then(function (m) { return m.PostViewPageModule; });
+                        }
+                    }
+                ]
+            },
+            {
+                path: 'messaging',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: function () {
+                            return Promise.all(/*! import() | messaging-messaging-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb"), __webpack_require__.e("messaging-messaging-module")]).then(__webpack_require__.bind(null, /*! ../messaging/messaging.module */ "./src/app/messaging/messaging.module.ts")).then(function (m) { return m.MessagingPageModule; });
+                        }
+                    }
+                ]
+            },
+            {
+                path: 'messaging-list',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: function () {
+                            return __webpack_require__.e(/*! import() | messaging-list-messaging-list-module */ "messaging-list-messaging-list-module").then(__webpack_require__.bind(null, /*! ../messaging-list/messaging-list.module */ "./src/app/messaging-list/messaging-list.module.ts")).then(function (m) { return m.MessagingListPageModule; });
+                        }
+                    }
+                ]
+            },
+            {
+                path: 'settings',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: function () {
+                            return Promise.all(/*! import() | settings-settings-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb"), __webpack_require__.e("settings-settings-module")]).then(__webpack_require__.bind(null, /*! ../settings/settings.module */ "./src/app/settings/settings.module.ts")).then(function (m) { return m.SettingsPageModule; });
                         }
                     }
                 ]

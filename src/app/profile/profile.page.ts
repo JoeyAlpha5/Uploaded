@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
 import { Storage } from '@ionic/storage';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -17,15 +18,20 @@ export class ProfilePage implements OnInit {
   video_url: string  =  "http://res.cloudinary.com/uploaded/video/upload/v1567818053/";
   profile_url =  'https://uploaded.herokuapp.com/users/users';
   //profile_url = 'http://127.0.0.1:8000/users/users'
-  constructor(private requests: RequestsService,private route: Router,private storage: Storage ) {}
+  constructor(private requests: RequestsService,private statusBar: StatusBar,private route: Router,private storage: Storage ) {
+    this.statusBar.overlaysWebView(false);
+    this.statusBar.styleDefault();    
+  }
 
   ngOnInit() {
   }
 
   ionViewDidEnter() {
-
+    this.statusBar.overlaysWebView(false);
+    this.statusBar.backgroundColorByHexString('#ffffff');
+    this.statusBar.styleDefault();
     // Put here the code you want to execute
-    this.storage.get('userProfileEmail').then((mail) => {
+    this.storage.get('mail').then((mail) => {
       console.log('Your email is', mail);
       // var profile_url =  'https://uploaded.herokuapp.com/users/users';
       if(mail == undefined){
@@ -37,8 +43,13 @@ export class ProfilePage implements OnInit {
           //   console.log("profile", profile);
           //   this.renderProfile(profile);
           // });
-          this.Playlists = this.requests.getProfilePlaylists(this.profile_url, mail);
+          console.log("profile to get", val);
+          console.log("user's email",mail);
+          this.storage.get('userProfileEmail').then((userProfileEmail) => {
+            this.Playlists = this.requests.getProfilePlaylists(this.profile_url, userProfileEmail);
 
+          });
+          
         });
       }
     });
@@ -51,6 +62,22 @@ export class ProfilePage implements OnInit {
         this.ionViewDidEnter();
       });
     });    
+  }
+
+
+  Message(first_name, last_name,username,id){
+    console.log(first_name, last_name,id)
+    this.storage.set("receiverName", first_name);
+    this.storage.set("receiverSName", last_name);
+    this.storage.set("receiverUsername", username);
+    this.storage.set("receiverID", id);
+    this.route.navigate(['/home/tabs/messaging']);
+  }
+
+  viewPost(post_id){
+    this.storage.set("post", post_id);
+    this.route.navigate(['/home/tabs/postView']);
+
   }
 
 }

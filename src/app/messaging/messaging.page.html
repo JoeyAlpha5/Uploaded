@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>messaging</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div id="chattingWith">{{ name }} {{ sname }}</div> 
+
+
+  <div id="chatsContainer" >
+    <div id="messageBox" *ngFor='let message of ( chatsRef$ | async)'>
+        <span id="sentByMe" *ngIf='message.sender == this_username'>{{ message.sender }}</span>
+        <p id="messageSentByMe" *ngIf='message.sender == this_username'>{{message.message }}</p>
+
+      <span id="notSentByMe" *ngIf='message.sender != this_username'>{{ message.sender }}</span>
+      <p id="messageNotSentByMe" *ngIf='message.sender != this_username'>{{message.message }}</p>
+    </div>
+  </div>
+
+  <div id="messageInput">
+    <input id="message" type="text" placeholder="Message...">
+    <ion-icon name="send" id="sendIcon" (click)="sendMessage()"></ion-icon>
+  </div>
+  <div id="bottomBar"></div>
+</ion-content>

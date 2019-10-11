@@ -68,6 +68,50 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'postView',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../post-view/post-view.module').then(m => m.PostViewPageModule)
+          }
+        ]
+      }
+      ,
+      {
+        path: 'messaging',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../messaging/messaging.module').then(m => m.MessagingPageModule)
+          }
+        ]
+      }
+      ,
+      {
+        path: 'messaging-list',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../messaging-list/messaging-list.module').then(m => m.MessagingListPageModule)
+          }
+        ]
+      }
+      ,
+      {
+        path: 'settings',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../settings/settings.module').then(m => m.SettingsPageModule)
+          }
+        ]
+      }
+      ,
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

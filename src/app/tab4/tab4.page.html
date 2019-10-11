@@ -3,10 +3,10 @@
       <ion-title id="profileName" *ngFor='let profile of ( results| async)'> 
           {{ profile.first_name }} {{ profile.last_name }}
       </ion-title>
+      <ion-icon id="message" name="text"></ion-icon>
       <p id="settings" (click)="showSettings()">
         Settings
       </p>
-
     </ion-toolbar>
   </ion-header>
   
@@ -41,7 +41,7 @@
       <div id="playlists">
         <div id="playlist"  *ngFor='let item of ( Playlists | async)'  [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
 
-          <div id="playlistPreview">
+          <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
             <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
           </div>
         </div> 

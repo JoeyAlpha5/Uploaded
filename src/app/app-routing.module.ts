@@ -10,7 +10,11 @@ const routes: Routes = [
   { path: 'tab4', loadChildren: './tab4/tab4.module#Tab4PageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
-  { path: 'upload', loadChildren: './upload/upload.module#UploadPageModule' }
+  { path: 'upload', loadChildren: './upload/upload.module#UploadPageModule' },
+  { path: 'post-view', loadChildren: './post-view/post-view.module#PostViewPageModule' },
+  { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
+  { path: 'messaging', loadChildren: './messaging/messaging.module#MessagingPageModule' },
+  { path: 'messaging-list', loadChildren: './messaging-list/messaging-list.module#MessagingListPageModule' }
 ];
 @NgModule({
   imports: [

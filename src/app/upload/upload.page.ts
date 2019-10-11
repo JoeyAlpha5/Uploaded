@@ -6,6 +6,7 @@ import { LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-upload',
@@ -14,7 +15,10 @@ import { ToastController } from '@ionic/angular';
 })
 export class UploadPage implements OnInit {
 
-  constructor(private requests: RequestsService,public toastController: ToastController,private route: Router, public loadingController: LoadingController,private storage: Storage ) { }
+  constructor(private requests: RequestsService,public toastController: ToastController,private statusBar: StatusBar,private route: Router, public loadingController: LoadingController,private storage: Storage ) { 
+    this.statusBar.overlaysWebView(false);
+    this.statusBar.styleDefault();
+  }
 
   ngOnInit() {
   }
@@ -24,7 +28,13 @@ export class UploadPage implements OnInit {
   // profile_url =  'http://127.0.0.1:8000/users/users';
   email: any;
   displayLoading: boolean = false;
+
+
+
   ionViewDidEnter() {
+    this.statusBar.overlaysWebView(false);
+    this.statusBar.backgroundColorByHexString('#ffffff');
+    this.statusBar.styleDefault();
     // Put here the code you want to execute
     var Email = this.storage.get('mail').then((val) => {
       console.log('Your email is', val);

@@ -31,12 +31,13 @@
         <p id='bio'>{{ profile.bio }}</p>
         <p *ngIf="profile.already_following == false" id='followBtn' (click)="Follow(profile.id)">Follow</p>
         <p *ngIf="profile.already_following == true" id='ufollowBtn' (click)="Follow(profile.id)">Unfollow</p>
+        <p *ngIf="profile.already_following == true" id='messageBtn' (click)="Message(profile.first_name, profile.last_name,profile.username,profile.id)">Message</p>
   
         <div id='uploadedHeading'>Uploaded playlists</div>
         <div id="playlists">
             <div id="playlist"  *ngFor='let item of ( Playlists | async)'  [ngStyle]="{ 'background': 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
     
-              <div id="playlistPreview">
+              <div id="playlistPreview" (click)="viewPost(item.id)">
                 <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
               </div>
             </div> 

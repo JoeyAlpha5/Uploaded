@@ -9,5 +9,9 @@
 
 <ion-content>
 
+  <ion-item *ngFor='let item of ( notificationssRef$ | async); let i = index'>
+    <span *ngIf="item.id == username">{{ item.notification }}</span>
+  </ion-item>
+
  <div id="bottomBar"></div>
 </ion-content>

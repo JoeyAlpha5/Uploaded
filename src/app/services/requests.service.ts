@@ -29,6 +29,15 @@ export class RequestsService {
     );
   }
 
+  GetPost(url,val,email){
+    return this.http.get(url, {params: {post: val, email:email, type: 'getPost'}}).pipe(
+      map(results => {
+        console.log("Post data",results);
+        return results["post"];
+      })
+    );
+  }
+
   getSearchResults(url, searchTerm, user_email): Observable<any> {
     return this.http.get(url, {params: {Term: searchTerm, type: 'search', email: user_email}}).pipe(
       map(results => {
@@ -127,5 +136,20 @@ export class RequestsService {
       })
     );
   }
+
+
+
+  //notifications
+  registerDevice(url,user_email,user_id){
+    return this.http.get(url, {params: {type: 'registerDevice', email: user_email,user_id:user_id}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results;
+      })
+    );
+  }
+  
+
+
 
 }

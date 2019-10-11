@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content id='content'>\n    \n    <div class='login'>\n        <img src='assets/Logo.jpg' alt='logo' class=\"logoImg\"><br/>\n        <h1 id='UploadedHeading'>Welcome to Uploaded</h1>\n        <p class='signInPrompt'>Sign in to continue</p>\n        <input type=\"email\" id='emailInput' placeholder=\"Email\" required/><br/>\n        <input type=\"password\" id='passwordInput' placeholder=\"Password\" required/><br/>\n        <ion-button expand=\"block\" size=\"default\" class='loginButton' color=\"primary\" (click) ='login()' >Sign in</ion-button>\n        <p class='bottomText'><span class='fgt'>Forgot password</span>  <span class='crt'>Create Account</span></p>\n    </div>\n\n</ion-content>\n"
+module.exports = "<ion-content id='content'>\n    \n    <div class='login'>\n        <img src='assets/Logo.jpg' alt='logo' class=\"logoImg\"><br/>\n        <h1 id='UploadedHeading'>Welcome to Uploaded</h1>\n        <p class='signInPrompt'>Sign in to continue</p>\n        <input type=\"email\" (blur)=\"enableBottom()\" (focus)=\"disableBottom()\" id='emailInput' placeholder=\"Email\" required/><br/>\n        <input type=\"password\" (blur)=\"enableBottom()\" (focus)=\"disableBottom()\" id='passwordInput' placeholder=\"Password\" required/><br/>\n        <ion-button expand=\"block\" size=\"default\" class='loginButton' color=\"primary\" (click) ='login()' >Sign in</ion-button>\n        <p class='bottomText' *ngIf=\"Bottom == true\"><span class='fgt'>Forgot password</span>  <span class='crt'>Create Account</span></p>\n    </div>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -104,15 +104,19 @@ let LoginPage = class LoginPage {
         this.route = route;
         this.requests = requests;
         this.storage = storage;
+        this.Bottom = true;
         // let status bar overlay webview
         this.statusBar.overlaysWebView(false);
-        // set status bar to white
+        // // set status bar to white
         this.statusBar.backgroundColorByHexString('#ffffff');
     }
     ngOnInit() {
     }
     ionViewDidEnter() {
         // Put here the code you want to execute
+        this.statusBar.overlaysWebView(false);
+        this.statusBar.backgroundColorByHexString('#ffffff');
+        this.statusBar.styleDefault();
         console.log('page has loaded');
         this.presentLoading();
         //check for stored credentials
@@ -126,6 +130,14 @@ let LoginPage = class LoginPage {
                 this.route.navigate(['/home/tabs/tab1']);
             }
         });
+    }
+    disableBottom() {
+        this.Bottom = false;
+        console.log("bottom disabled");
+    }
+    enableBottom() {
+        this.Bottom = true;
+        console.log("bottom enabled");
     }
     login() {
         const emailInput = jquery__WEBPACK_IMPORTED_MODULE_3__('#emailInput').val();

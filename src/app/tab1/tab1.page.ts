@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component , ViewChild} from '@angular/core';
+import * as $ from 'jquery';
 import { LoadingController } from '@ionic/angular';
 import { RequestsService } from '../services/requests.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import * as $ from 'jquery';
 import { Storage } from '@ionic/storage';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import { ToastController } from '@ionic/angular';
+import { ActionSheetController } from '@ionic/angular';
+import { IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -15,14 +18,33 @@ import { ToastController } from '@ionic/angular';
 })
 export class Tab1Page {
 
-
   results: Observable<any>;
   commentsRef$: Observable<any[]>;
   repostsRef$: Observable<any[]>;
+  commnentsTab: any;
+  @ViewChild('slider', {static: false}) slide: IonSlides;
 
-  constructor(public loadingController: LoadingController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage) {
+  constructor(public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage) {
     this.commentsRef$ = this.database.list("comments").valueChanges();
     // this.commentsRef$ = this.database.list("reposts").valueChanges();
+    this.statusBar.overlaysWebView(true);
+
+
+    this.commentsRef$.subscribe((val)=>{
+      console.log("Comments",val);
+      //load comments bottom
+      setTimeout(function(){ 
+        this.commnentsTab = document.getElementsByClassName("commentBox");  
+        //display the last comment added
+        for(let x = 0; x < this.commnentsTab.length; x++){
+          this.commnentsTab[x].scrollTop = this.commnentsTab[x].scrollHeight;
+          console.log("scroll top",this.commnentsTab[x].scrollTop);
+          console.log("scroll height",this.commnentsTab[x].scrollHeight);
+          //element.scrollTop = element.scrollHeight;
+        }
+      }, 10);
+
+    });
 
   }
 
@@ -33,6 +55,51 @@ export class Tab1Page {
 
     pass: any;
     email: any;
+
+
+    CommentsUp(){
+      this.statusBar.overlaysWebView(false);
+      console.log("Move comments up");
+    }
+
+    CommentsDown(){
+      this.statusBar.overlaysWebView(true);
+      console.log("Move comments down");
+    }
+
+
+    share(file){
+      this.presentActionSheet();
+    }
+
+    ionicSlide(){
+      this.slide.getActiveIndex().then((val) => { 
+        console.log(val);
+        this.playVideo(val);
+      });
+
+    }
+
+    ionViewWillLeave(){
+      this.slide.getActiveIndex().then((val) => { 
+        console.log("left slide ", val);
+        this.pauseVideo(val);
+      });
+      console.log("Leaving");
+    }
+
+    commentAdded(){
+      console.log("Comment added");
+      //get comments tabs
+      this.commnentsTab = document.getElementsByClassName("commentBox");  
+      //display the last comment added
+      for(let x = 0; x < this.commnentsTab.length; x++){
+        this.commnentsTab[x].scrollTop = this.commnentsTab[x].scrollHeight;
+        console.log("scroll top",this.commnentsTab[x].scrollTop);
+        console.log("scroll height",this.commnentsTab[x].scrollHeight);
+        //element.scrollTop = element.scrollHeight;
+      }
+    }
     
     playVideo(id){
       var video = <HTMLVideoElement> document.getElementById(id+"videobcg");
@@ -46,6 +113,15 @@ export class Tab1Page {
 
     }
 
+
+    pauseVideo(id){
+      var video = <HTMLVideoElement> document.getElementById(id+"videobcg");
+      console.log(id);
+      console.log("paused",video.paused);
+      video.pause();
+
+    }
+
     repost(post_id){
       console.log(post_id);
       var profile_url =  'https://uploaded.herokuapp.com/users/users';
@@ -53,7 +129,12 @@ export class Tab1Page {
       let repost = this.requests.Repost(profile_url,this.email, post_id);
       repost.subscribe(x =>{
         console.log(x);
-        this.presentToast("Post has been shared to your feed");
+        if(x == "Repost exists"){
+          this.presentToast("You've already reposted this post");
+        }else{
+          this.presentToast("Post has been shared to your feed");
+        }
+        
       });
 
     }
@@ -124,11 +205,9 @@ export class Tab1Page {
       });
     }
     
-    ionViewDidLoad(){
-      console.log("loaded")
-    }
 
     ionViewDidEnter() {
+      this.statusBar.overlaysWebView(true);
       this.storage.get('mail').then((val) => {
         console.log('Your email is', val);
         this.email = val;
@@ -139,15 +218,30 @@ export class Tab1Page {
           this.route.navigate(['/home/tabs/tab1']);
         }else{
             console.log(this.email);
-            this.results =  this.requests.getFeed(profile_url, this.email);   
-           
-
+            this.results =  this.requests.getFeed(profile_url, this.email); 
         }
       });
     }
 
-    swiped(){
+
+    async presentNotificationToast(msg){
+      const toast = await this.toastController.create({message: msg.body, duration: 3000});
+      toast.present();
+    }
+
+
+    swiped(id){
       console.log("left");
+      var video = <HTMLVideoElement> document.getElementById(id+"videobcg");
+      console.log(id);
+      console.log("paused",video.paused);
+      //video.pause();
+      if(video.paused == true){
+        //video.play();
+      }else{
+        video.pause();
+      }
+      
     }
 
     //loading component
@@ -163,4 +257,42 @@ export class Tab1Page {
       console.log('Loading dismissed!');
     }
     //
+
+
+
+    //present share options
+    async presentActionSheet() {
+      const actionSheet = await this.actionSheetController.create({
+        header: 'Share post',
+        buttons: [{
+          text: 'Facebook',
+          role: 'destructive',
+          icon: 'logo-facebook',
+          handler: () => {
+            console.log('Facebook');
+          }
+        }, {
+          text: 'Twitter',
+          icon: 'logo-twitter',
+          handler: () => {
+            console.log('Twitter');
+          }
+        }, 
+        {
+          text: 'WhatsApp',
+          icon: 'logo-whatsapp',
+          handler: () => {
+            console.log('WhatsApp');
+          }
+        }, {
+          text: 'Cancel',
+          icon: 'close',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }]
+      });
+      await actionSheet.present();
+    }
 }

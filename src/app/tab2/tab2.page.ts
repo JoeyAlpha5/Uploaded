@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RequestsService } from '../services/requests.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-tab2',
@@ -13,9 +14,16 @@ export class Tab2Page {
   results: Observable<any>;
   searchTerm = '';
   profile_url =  'https://uploaded.herokuapp.com/users/users';
-  constructor(private requests: RequestsService, private route: Router,private storage: Storage ) {}
+  constructor(private requests: RequestsService, private statusBar: StatusBar,private route: Router,private storage: Storage ) {
+    this.statusBar.overlaysWebView(false);
+    this.statusBar.styleDefault();
+
+  }
 
   ionViewDidEnter() {
+    this.statusBar.overlaysWebView(false);
+    this.statusBar.backgroundColorByHexString('#ffffff');
+    this.statusBar.styleDefault();
     this.storage.get('mail').then((val) => {
       if(val == undefined){
         this.route.navigate(['']);

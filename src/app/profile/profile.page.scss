@@ -131,6 +131,12 @@ div#uploadedHeading {
   text-align: -webkit-center;
 }
 
+p#messageBtn {
+  text-decoration: underline;
+  color: gray;
+  margin-bottom: 17px;
+  cursor: pointer;
+}
 
 
 
@@ -142,10 +148,11 @@ div#playlists {
   padding-bottom: 20px;
 
   div#playlist {
-    width: 33%;
+    width: 32%;
     height: 115px;
     float: left;
     background-size: cover !important;
+    margin-left:  1px;
 }
 }
 
@@ -170,7 +177,7 @@ span#metric {
 #bottomBar{
   background: #000000;
   bottom: 0;
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 57px;
 }

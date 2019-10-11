@@ -114,12 +114,12 @@ input.commentInput {
   text-align: left;
   padding-top: 9px;
   padding-bottom: 5px;
-  overflow: auto;
+  overflow: scroll;
   margin-top: 5px;
 }
 
 div#userinfo {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   color: white;
   font-size: 13px;
@@ -138,6 +138,19 @@ div#userinfo {
   }
 
 }
+
+
+div#streamIcon {
+  position: absolute;
+  top: 0;
+  margin-top: 20px;
+  background: #0000002e;
+  padding: 12px;
+  border-radius: 27px;
+  color: white;
+  font-size: 12px;
+  width: 100px;
+}
 .icon{
   margin-top: 12px;
 }
@@ -149,5 +162,16 @@ div#userinfo {
 
 #comment{
   font-size:13px;
+}
+
+
+#share {
+  position: absolute;
+  z-index: 999;
+  width: 54px;
+  right: 0;
+  margin-right: 25px;
+  top: 0;
+  margin-top: 50%;
 }
 

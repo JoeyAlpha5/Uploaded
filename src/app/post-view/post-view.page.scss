@@ -1,0 +1,187 @@
+.welcome-card img {
+    max-height: 35vh;
+    overflow: hidden;
+  }
+  
+  
+  img.logofont {
+    height: 23px;
+    filter: grayscale(1);
+  }
+  
+  ion-title {
+    text-align: -webkit-center;
+  }
+  
+  .homeUpload{
+    float: left;
+    font-size: 16px;
+    // margin-top: 7px;
+  }
+  
+  .homeSend{
+    float: right;
+    font-size: 16px;
+    transform: rotate(-49deg);
+    // margin-top: 7px;
+  
+  }
+  
+  div#Loader {
+    width: 50px;
+    height: 50px;
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #FF9800;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  
+  
+  .videobcg {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+    background: black;
+  }
+  
+  #slides{
+    width: 100%;
+    height: 100%;
+    position: fixed !important;
+    top: 0;
+  }
+  
+  p#postGenre {
+    font-weight: bold;
+  }
+  
+  div#PostData {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 15px;
+    margin-top: 20%;
+    color: white;
+    padding: 5px;
+    border-radius: 2px;
+    font-size: 45px;
+    z-index: 100;
+  
+    span {
+      font-size: 11px;
+    }
+  }
+  
+  
+  div#overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.17);
+    z-index: 1;
+  }
+  
+  input.commentInput {
+    color: white;
+    background: transparent;
+    border: 0px;
+    border-bottom: 1px solid grey;
+    width: 280px;
+    outline: 0;
+    padding: 5px;
+    height: 42px;
+    border: 1px solid gray;
+    border-radius: 12px;
+    padding-left: 15px;
+  }
+  
+  #commentBtn{
+    margin-left: 15px;
+    color: orange;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .commentBox {
+    width: 100%;
+    height: 100px;
+    text-align: left;
+    padding-top: 9px;
+    padding-bottom: 5px;
+    overflow: scroll;
+    margin-top: 5px;
+  }
+  
+  div#userinfo {
+    position: absolute;
+    bottom: 0;
+    color: white;
+    font-size: 13px;
+    left: 0;
+    margin-bottom: 100px;
+    margin-left: 15px;
+    z-index: 100;
+   
+    p {
+      margin: 0;
+      text-align: left;
+    }
+  
+    #postDescription{
+      font-weight: lighter;
+    }
+  
+  }
+  
+  
+  div#streamIcon {
+    position: absolute;
+    top: 0;
+    margin-top: 20px;
+    background: #0000002e;
+    padding: 12px;
+    border-radius: 27px;
+    color: white;
+    font-size: 12px;
+    width: 100px;
+  }
+  .icon{
+    margin-top: 12px;
+  }
+  
+  #userComment{
+    font-size: 11px;
+    color: #4CAF50;
+  }
+  
+  #comment{
+    font-size:13px;
+  }
+  
+
+  div#backDiv {
+    position: absolute;
+    color: white;
+    font-size: 30px;
+    z-index: 1000;
+    margin-top: 26px;
+    margin-left: 15px;
+}
+  
+  #share {
+    position: absolute;
+    z-index: 999;
+    width: 54px;
+    right: 0;
+    margin-right: 25px;
+    top: 0;
+    margin-top: 50%;
+  }
+  
+  

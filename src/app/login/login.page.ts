@@ -15,18 +15,22 @@ export class LoginPage implements OnInit {
   constructor(public loadingController: LoadingController, private statusBar: StatusBar,private route: Router, private requests: RequestsService,private storage: Storage ) {
     // let status bar overlay webview
     this.statusBar.overlaysWebView(false);
-
-    // set status bar to white
+    // // set status bar to white
     this.statusBar.backgroundColorByHexString('#ffffff');
-
   }
 
 
   ngOnInit() {
   }
 
+  
+  Bottom: boolean = true;
+
   ionViewDidEnter() {
     // Put here the code you want to execute
+    this.statusBar.overlaysWebView(false);
+    this.statusBar.backgroundColorByHexString('#ffffff');
+    this.statusBar.styleDefault();
     console.log('page has loaded');
     this.presentLoading();
     //check for stored credentials
@@ -40,6 +44,16 @@ export class LoginPage implements OnInit {
       }
     });
     
+  }
+
+  disableBottom(){
+    this.Bottom = false;
+    console.log("bottom disabled");
+  }
+
+  enableBottom(){
+    this.Bottom = true;
+    console.log("bottom enabled");    
   }
 
 
@@ -61,6 +75,7 @@ export class LoginPage implements OnInit {
           this.storage.set('mail', emailInput);
           this.storage.set('password', emailInput);
           this.storage.set('username', data.username);
+          this.storage.set('current_userID', data.id);
           $(".signInPrompt").text("Login successful");
           $("#UploadedHeading").text(JSON.stringify(emailInput));
           $("#UploadedHeading").css("color","#0d8479");

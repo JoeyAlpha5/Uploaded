@@ -10,21 +10,41 @@
 var map = {
 	"./login/login.module": [
 		"./src/app/login/login.module.ts",
-		"default~login-login-module~tab1-tab1-module~tab4-tab4-module~upload-upload-module",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb",
 		"login-login-module"
+	],
+	"./messaging-list/messaging-list.module": [
+		"./src/app/messaging-list/messaging-list.module.ts",
+		"messaging-list-messaging-list-module"
+	],
+	"./messaging/messaging.module": [
+		"./src/app/messaging/messaging.module.ts",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb",
+		"messaging-messaging-module"
+	],
+	"./post-view/post-view.module": [
+		"./src/app/post-view/post-view.module.ts",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb",
+		"common",
+		"post-view-post-view-module"
 	],
 	"./profile/profile.module": [
 		"./src/app/profile/profile.module.ts",
 		"profile-profile-module"
 	],
+	"./settings/settings.module": [
+		"./src/app/settings/settings.module.ts",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb",
+		"settings-settings-module"
+	],
 	"./tab4/tab4.module": [
 		"./src/app/tab4/tab4.module.ts",
-		"default~login-login-module~tab1-tab1-module~tab4-tab4-module~upload-upload-module",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb",
 		"tab4-tab4-module"
 	],
 	"./upload/upload.module": [
 		"./src/app/upload/upload.module.ts",
-		"default~login-login-module~tab1-tab1-module~tab4-tab4-module~upload-upload-module",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb",
 		"upload-upload-module"
 	]
 };
@@ -502,12 +522,16 @@ var routes = [
     { path: '', loadChildren: './login/login.module#LoginPageModule' },
     {
         path: 'home',
-        loadChildren: function () { return __webpack_require__.e(/*! import() | tabs-tabs-module */ "tabs-tabs-module").then(__webpack_require__.bind(null, /*! ./tabs/tabs.module */ "./src/app/tabs/tabs.module.ts")).then(function (m) { return m.TabsPageModule; }); }
+        loadChildren: function () { return Promise.all(/*! import() | tabs-tabs-module */[__webpack_require__.e("common"), __webpack_require__.e("tabs-tabs-module")]).then(__webpack_require__.bind(null, /*! ./tabs/tabs.module */ "./src/app/tabs/tabs.module.ts")).then(function (m) { return m.TabsPageModule; }); }
     },
     { path: 'tab4', loadChildren: './tab4/tab4.module#Tab4PageModule' },
     { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
     { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
-    { path: 'upload', loadChildren: './upload/upload.module#UploadPageModule' }
+    { path: 'upload', loadChildren: './upload/upload.module#UploadPageModule' },
+    { path: 'post-view', loadChildren: './post-view/post-view.module#PostViewPageModule' },
+    { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
+    { path: 'messaging', loadChildren: './messaging/messaging.module#MessagingPageModule' },
+    { path: 'messaging-list', loadChildren: './messaging-list/messaging-list.module#MessagingListPageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -550,27 +574,111 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
-/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
-/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! firebase */ "./node_modules/firebase/dist/index.cjs.js");
-/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _firebase_env__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./firebase-env */ "./src/app/firebase-env.ts");
+/* harmony import */ var _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/onesignal/ngx */ "./node_modules/@ionic-native/onesignal/ngx/index.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
+/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+/* harmony import */ var _services_requests_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/requests.service */ "./src/app/services/requests.service.ts");
+/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! angularfire2/database */ "./node_modules/angularfire2/database/index.js");
+/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(angularfire2_database__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
 
 
 
 
+// import * as firebase from 'firebase';
+// import { firebaseConfig } from "./firebase-env";
+
+
+
+
+// import { Observable } from 'rxjs';
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platform, splashScreen, statusBar) {
+    // notificationssRef$: Observable<any[]>;
+    function AppComponent(platform, splashScreen, statusBar, oneSignal, alertController, storage, requests, route, database) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
+        this.oneSignal = oneSignal;
+        this.alertController = alertController;
+        this.storage = storage;
+        this.requests = requests;
+        this.route = route;
+        this.database = database;
         this.initializeApp();
-        firebase__WEBPACK_IMPORTED_MODULE_5__["initializeApp"](_firebase_env__WEBPACK_IMPORTED_MODULE_6__["firebaseConfig"]);
+        // firebase.initializeApp(firebaseConfig);
+        if (this.platform.is("android")) {
+            this.setUpPush();
+        }
+        // this.notificationssRef$ = this.database.list("notifications").valueChanges();
     }
+    AppComponent.prototype.setUpPush = function () {
+        var _this = this;
+        var oneSignalAppID = "213117e1-5258-44df-9de4-7206c18669b9";
+        var oneSignalApiKey = "ODM2NDQ4MTQtYzNiZC00MDA4LWI3YTQtYmZiZGY0ZjhjOGJl";
+        var firebaseSenderID = "929396145480";
+        this.oneSignal.startInit(oneSignalAppID, firebaseSenderID);
+        //check the device is already registered
+        var device_id = this.storage.get("device_id").then(function (val) {
+            if (val == undefined) {
+                _this.oneSignal.getIds().then(function (id) {
+                    var device = id.userId;
+                    var url = 'https://uploaded.herokuapp.com/users/users';
+                    _this.storage.get('mail').then(function (mail) {
+                        _this.requests.registerDevice(url, mail, device).subscribe();
+                    });
+                });
+            }
+        });
+        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
+        this.oneSignal.handleNotificationReceived().subscribe(function (data) {
+            // do something when notification is received
+            var msg = data.payload.body;
+            var title = data.payload.title;
+            var additionalData = data.payload.additionalData;
+            _this.postNotification(data.payload.body);
+            _this.showAlert(title, msg, additionalData.task);
+        });
+        this.oneSignal.handleNotificationOpened().subscribe(function (data) {
+            // do something when a notification is opened
+            var additionalData = data.notification.payload.additionalData;
+            //post live notification
+            // this.postNotification({"title":"test", "msg":"test"});
+            _this.route.navigate(['/home/tabs/tab3']);
+        });
+        this.oneSignal.endInit();
+    };
+    AppComponent.prototype.postNotification = function (notification) {
+        var _this = this;
+        this.storage.get('username').then(function (val) {
+            _this.database.list("notifcation").push({ "notification": notification, "id": val });
+        });
+    };
+    AppComponent.prototype.showAlert = function (title, msg, additionalData) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var alert;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.alertController.create({
+                            header: title,
+                            subHeader: msg,
+                            // message: msg,
+                            buttons: ['OK']
+                        })];
+                    case 1:
+                        alert = _a.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     AppComponent.prototype.initializeApp = function () {
         var _this = this;
         this.platform.ready().then(function () {
@@ -579,9 +687,15 @@ var AppComponent = /** @class */ (function () {
         });
     };
     AppComponent.ctorParameters = function () { return [
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
-        { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
-        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
+        { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"] },
+        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"] },
+        { type: _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_2__["OneSignal"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
+        { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"] },
+        { type: _services_requests_service__WEBPACK_IMPORTED_MODULE_7__["RequestsService"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"] },
+        { type: angularfire2_database__WEBPACK_IMPORTED_MODULE_8__["AngularFireDatabase"] }
     ]; };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -589,9 +703,15 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/index.js!./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
-            _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
-            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
+            _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"],
+            _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"],
+            _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_2__["OneSignal"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
+            _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"],
+            _services_requests_service__WEBPACK_IMPORTED_MODULE_7__["RequestsService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"],
+            angularfire2_database__WEBPACK_IMPORTED_MODULE_8__["AngularFireDatabase"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -629,6 +749,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! hammerjs */ "./node_modules/hammerjs/hammer.js");
 /* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(hammerjs__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+/* harmony import */ var _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/onesignal/ngx */ "./node_modules/@ionic-native/onesignal/ngx/index.js");
+
 
 
 
@@ -650,7 +772,7 @@ var CustomHammerConfig = /** @class */ (function (_super) {
     function CustomHammerConfig() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.overrides = {
-            'swipe': { direction: hammerjs__WEBPACK_IMPORTED_MODULE_13__["DIRECTION_VERTICAL"] }
+            'swipe': { direction: hammerjs__WEBPACK_IMPORTED_MODULE_13__["DIRECTION_ALL"] }
         };
         return _this;
     }
@@ -673,7 +795,8 @@ var AppModule = /** @class */ (function () {
                 _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
                 _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] },
-                { provide: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["HAMMER_GESTURE_CONFIG"], useClass: CustomHammerConfig }
+                { provide: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["HAMMER_GESTURE_CONFIG"], useClass: CustomHammerConfig },
+                _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_15__["OneSignal"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
         })
@@ -705,6 +828,139 @@ var firebaseConfig = {
     appId: "1:929396145480:web:78172aa827a9b94ed2477d",
     measurementId: "G-13TJN9E9VM"
 };
+
+
+/***/ }),
+
+/***/ "./src/app/services/requests.service.ts":
+/*!**********************************************!*\
+  !*** ./src/app/services/requests.service.ts ***!
+  \**********************************************/
+/*! exports provided: RequestsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RequestsService", function() { return RequestsService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
+
+
+var RequestsService = /** @class */ (function () {
+    function RequestsService(http) {
+        this.http = http;
+    }
+    //get profile api
+    RequestsService.prototype.getProfile = function (url, email) {
+        return this.http.get(url, { params: { email: email, type: 'profile' } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.getProfilePlaylists = function (url, email) {
+        return this.http.get(url, { params: { email: email, type: 'profile' } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["posts"];
+        }));
+    };
+    RequestsService.prototype.GetPost = function (url, val, email) {
+        return this.http.get(url, { params: { post: val, email: email, type: 'getPost' } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Post data", results);
+            return results["post"];
+        }));
+    };
+    RequestsService.prototype.getSearchResults = function (url, searchTerm, user_email) {
+        return this.http.get(url, { params: { Term: searchTerm, type: 'search', email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.updateProfile = function (url, user_email, user_name, first_name, last_name, bio, file) {
+        var postData = new FormData();
+        postData.append('type', 'updateProfile');
+        postData.append('email', user_email);
+        postData.append('user_name', user_name);
+        postData.append('first_name', first_name);
+        postData.append('last_name', last_name);
+        postData.append('bio', bio);
+        postData.append('file', file);
+        return this.http.post(url, postData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.getFeed = function (url, user_email) {
+        return this.http.get(url, { params: { type: 'feed', email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.Repost = function (url, user_email, post_id) {
+        return this.http.get(url, { params: { type: 'repost', email: user_email, post: post_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Repost", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.getUserProfile = function (url, user_id, user_email) {
+        return this.http.get(url, { params: { type: 'getUser_UD', user_id: user_id, email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.Follow = function (url, user_id, user_email) {
+        return this.http.get(url, { params: { type: 'Follow', user_id: user_id, email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.Like = function (url, user_email, post_id) {
+        return this.http.get(url, { params: { type: 'like', email: user_email, post: post_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    };
+    RequestsService.prototype.Upload = function (url, user_email, file, description, genre, playlisted) {
+        var postData = new FormData();
+        postData.append('file', file);
+        postData.append('type', 'upload');
+        postData.append('email', user_email);
+        postData.append('description', description);
+        postData.append('genre', genre);
+        postData.append('playlisted', playlisted);
+        return this.http.post(url, postData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["newly created post_id"];
+        }));
+    };
+    RequestsService.prototype.Login = function (url, user_email, password) {
+        return this.http.get(url, { params: { type: 'login', email: user_email, password: password } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results;
+        }));
+    };
+    //notifications
+    RequestsService.prototype.registerDevice = function (url, user_email, user_id) {
+        return this.http.get(url, { params: { type: 'registerDevice', email: user_email, user_id: user_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results;
+        }));
+    };
+    RequestsService.ctorParameters = function () { return [
+        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }
+    ]; };
+    RequestsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
+    ], RequestsService);
+    return RequestsService;
+}());
+
 
 
 /***/ }),

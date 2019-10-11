@@ -1,0 +1,51 @@
+
+<ion-content>
+  <div id="backDiv" (click)="back()">
+    <ion-icon name="arrow-back"></ion-icon>
+  </div>
+    <ion-slides id="slides" [options]="slideOpts">
+    <ion-slide id='slider' *ngFor='let item of ( results | async); let i = index'>
+      <div id="streamIcon">Stream</div>
+      <video autoplay playsinline webkit-playsinline class="videobcg" id="{{i}}videobcg" poster="https://res.cloudinary.com/uploaded/video/upload/v1567818053/{{ item.file }}.jpg">
+        <source src="https://res.cloudinary.com/uploaded/video/upload/q_auto:low/{{ item.file }}.mp4" type="video/mp4">
+      </video>
+      <div id="PostData">
+          <ion-icon class="icon" *ngIf="item.liked == 0" name="heart" id="{{item.post_id}}likeIcon" (click)="like(item.post_id)"></ion-icon><span *ngIf="item.liked == 0" id="{{item.post_id}}likeCount">{{ item.like }}</span><br *ngIf="item.liked == 0">
+          <ion-icon class="icon" *ngIf="item.liked == 1" [ngStyle]="{color:'red'}" name="heart" id="{{item.post_id}}likeIcon" (click)="like(item.post_id)"></ion-icon><span *ngIf="item.liked == 1" id="{{item.post_id}}likeCount">{{ item.like }}</span><br *ngIf="item.liked == 1"/>
+          <ion-icon class="icon" (click)="repost(item.post_id)" name="share-alt" id="postIcon"></ion-icon><span id="{{item.reposts}}repostCount">{{ item.reposts }}</span><br>
+          <ion-icon class="icon"  (click)="share(item.file)" name="share" id="postIcon"></ion-icon><br>
+          <ion-icon class="icon" name="text" id="postIcon"></ion-icon>
+      </div>
+
+
+      <div id="userinfo" [ngStyle]="{'bottom': styleExp, 'top':styleTop, 'margin-top':styleMarginTop}">
+         <p>@{{ item.username }}</p>
+         <p id="postGenre">{{ item.genre }}</p>
+         <p id="postDescription">{{ item.description }}</p>
+         <div class="commentBox" id="{{item.post_id}}commentBox">
+
+            <span id="comment" *ngFor='let comment of commentsRef$ | async'>
+              <span *ngIf="item.post_id == comment.post">
+                <span id="userComment">@{{comment.user}}</span> {{ comment.comment }}<br><br>
+              </span>
+            </span>
+
+         </div>
+         <input type="text" (blur)="moveDownComments(item.post_idComments)" (focus)="moveUpComments()" class="commentInput" id="{{item.post_id}}commentInput" placeholder="Add Comment...">
+         <span (click)="postComment(item.post_id)" id="commentBtn">Post</span>
+      </div>
+
+
+
+
+      
+      <div id="overlay" (click)="playVideo(i)">
+      </div>
+
+
+
+      <div>{{ results.length }}</div>
+    </ion-slide>
+    
+  </ion-slides>
+</ion-content>

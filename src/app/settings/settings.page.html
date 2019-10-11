@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" *ngFor='let profile of ( results | async)'>
+    <ion-progress-bar *ngIf="displayLoading == true" id="uploadProgress" type="indeterminate"></ion-progress-bar>
+    <div id="uploadImage">
+      <ion-icon name="settings" id="uploadIcon"></ion-icon>
+      <p>Update settings</p>
+      <span>Edit app preferences below</span>
+    </div>
+    <p id="notifcationsHeading">Profile Setiings</p>
+    <ion-card *ngFor='let profile of ( results | async)' id="editProfile">
+    <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" >
+      <div>Edit</div>
+      <ion-input type="file" id="uploadProfile" (change)="changeListener($event)" type="file" accept="image/*"></ion-input>
+    </div>
+    <div *ngIf="profile.image == undefined" id='dp'>
+      <div>Edit</div>
+      <ion-input type="file" id="uploadProfile" (change)="changeListener($event)" type="file" accept="image/*"></ion-input>
+    </div><br><br>
+
+    <ion-card-content>
+      <span>Username: </span><br>
+      <ion-input type="text" id="user_name" placeholder="Add username" value="{{ profile.username }}"></ion-input><br>
+      <span>First Name: </span><br>
+      <ion-input type="text" id="first_name" placeholder="Add first name" value="{{ profile.first_name }}"></ion-input><br>
+      <span>Last Name: </span><br>
+      <ion-input type="text" id="last_name" placeholder="Add last name" value="{{ profile.last_name }}"></ion-input><br>
+      <span>Bio: </span><br>
+      <ion-input type="text" id="bioInput" placeholder="Add bio" value="{{ profile.bio}}"></ion-input><br>
+    </ion-card-content>
+    </ion-card>
+
+
+
+
+
+
+    <p id="notifcationsHeading">Notifications</p>
+   <div id="options" class="options">
+    <ion-label id="label">Like notifications</ion-label>
+    <ion-toggle id="toggle" checked (ionChange)="addPlaylist($event)" color="dark"></ion-toggle>
+  </div>
+  <div id="options" class="options">
+    <ion-label id="label">Repost notifications</ion-label>
+    <ion-toggle id="toggle" checked (ionChange)="addPlaylist($event)" color="dark"></ion-toggle>
+  </div>
+  <div id="options" class="options">
+    <ion-label id="label">Follow notifications</ion-label>
+    <ion-toggle id="toggle" checked (ionChange)="addPlaylist($event)" color="dark"></ion-toggle>
+  </div>
+  <div id="options" class="options">
+    <ion-label id="label">Post notifications</ion-label>
+    <ion-toggle id="toggle" checked (ionChange)="addPlaylist($event)" color="dark"></ion-toggle>
+  </div>
+
+  <div id="options" class="logout" (click)="logout()">
+    Logout
+  </div>
+
+  <div id="uploadBtnDiv"><ion-button id="uploadBtn" (click)="updateProfile()">Update</ion-button></div>
+
+    
+    
+
+  <div id="bottomBar" *ngIf="Bottom == true"></div>
+</ion-content>

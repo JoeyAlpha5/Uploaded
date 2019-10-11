@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { ActionSheetController } from '@ionic/angular';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
@@ -13,7 +15,10 @@ import { ToastController } from '@ionic/angular';
 })
 export class Tab4Page implements OnInit {
 
-  constructor(public loadingController: LoadingController,public toastController: ToastController, private requests: RequestsService,private storage: Storage,private route: Router  ) { }
+  constructor(public loadingController: LoadingController,private statusBar: StatusBar,public actionSheetController: ActionSheetController,public toastController: ToastController, private requests: RequestsService,private storage: Storage,private route: Router  ) { 
+    this.statusBar.overlaysWebView(false);
+    this.statusBar.styleDefault();
+  }
 
   ngOnInit() {
   }
@@ -26,6 +31,9 @@ export class Tab4Page implements OnInit {
 
   ionViewDidEnter() {
     // Put here the code you want to execute
+    this.statusBar.overlaysWebView(false);
+    this.statusBar.backgroundColorByHexString('#ffffff');
+    this.statusBar.styleDefault();
     this.storage.get('mail').then((val) => {
       let profile_url =  'https://uploaded.herokuapp.com/users/users';
       //profile_url = 'http://127.0.0.1:8000/users/users'
@@ -53,10 +61,21 @@ export class Tab4Page implements OnInit {
     }, 2000);
   }
 
+  Playlist(){
+    this.presentActionSheet();
+  }
+
+  viewPost(post_id){
+    this.storage.set("post", post_id);
+    this.route.navigate(['/home/tabs/postView']);
+
+  }
+
 
   showSettings(){
-    $("#Settings").show();
-    $("#closeMenu").show();
+    // $("#Settings").show();
+    // $("#closeMenu").show();
+    this.route.navigate(['/home/tabs/settings']);
   }
 
   closeMenu(){
@@ -109,10 +128,6 @@ export class Tab4Page implements OnInit {
     });
   }
 
-  logout(){
-    this.storage.clear();
-    this.ionViewDidEnter();
-  }
 
   async presentLoading(message) {
     const loading = await this.loadingController.create({
@@ -125,5 +140,37 @@ export class Tab4Page implements OnInit {
 
     console.log('Loading dismissed!');
   }
+
+
+
+      //present share options
+      async presentActionSheet() {
+        const actionSheet = await this.actionSheetController.create({
+          header: 'Post Actions',
+          buttons: [
+            {
+            text: 'Share',
+            icon: 'share',
+            handler: () => {
+              console.log('Share');
+            }
+          }, {
+            text: 'Delete',
+            icon: 'trash',
+            handler: () => {
+              console.log('Delete');
+            }
+          }, {
+            text: 'Cancel',
+            icon: 'close',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }]
+        });
+        await actionSheet.present();
+      }
+
 
 }

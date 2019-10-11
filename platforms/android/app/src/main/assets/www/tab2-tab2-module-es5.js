@@ -11,126 +11,6 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Search\n
 
 /***/ }),
 
-/***/ "./src/app/services/requests.service.ts":
-/*!**********************************************!*\
-  !*** ./src/app/services/requests.service.ts ***!
-  \**********************************************/
-/*! exports provided: RequestsService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RequestsService", function() { return RequestsService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-
-
-
-
-var RequestsService = /** @class */ (function () {
-    function RequestsService(http) {
-        this.http = http;
-    }
-    //get profile api
-    RequestsService.prototype.getProfile = function (url, email) {
-        return this.http.get(url, { params: { email: email, type: 'profile' } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
-            console.log("Results", results);
-            return results["Response"];
-        }));
-    };
-    RequestsService.prototype.getProfilePlaylists = function (url, email) {
-        return this.http.get(url, { params: { email: email, type: 'profile' } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
-            console.log("Results", results);
-            return results["posts"];
-        }));
-    };
-    RequestsService.prototype.getSearchResults = function (url, searchTerm, user_email) {
-        return this.http.get(url, { params: { Term: searchTerm, type: 'search', email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
-            console.log("Results", results);
-            return results["Response"];
-        }));
-    };
-    RequestsService.prototype.updateProfile = function (url, user_email, user_name, first_name, last_name, bio, file) {
-        var postData = new FormData();
-        postData.append('type', 'updateProfile');
-        postData.append('email', user_email);
-        postData.append('user_name', user_name);
-        postData.append('first_name', first_name);
-        postData.append('last_name', last_name);
-        postData.append('bio', bio);
-        postData.append('file', file);
-        return this.http.post(url, postData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
-            console.log("Results", results);
-            return results["Response"];
-        }));
-    };
-    RequestsService.prototype.getFeed = function (url, user_email) {
-        return this.http.get(url, { params: { type: 'feed', email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
-            console.log("Results", results);
-            return results["Response"];
-        }));
-    };
-    RequestsService.prototype.Repost = function (url, user_email, post_id) {
-        return this.http.get(url, { params: { type: 'repost', email: user_email, post: post_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
-            console.log("Repost", results);
-            return results["Response"];
-        }));
-    };
-    RequestsService.prototype.getUserProfile = function (url, user_id, user_email) {
-        return this.http.get(url, { params: { type: 'getUser_UD', user_id: user_id, email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
-            console.log("Results", results);
-            return results["Response"];
-        }));
-    };
-    RequestsService.prototype.Follow = function (url, user_id, user_email) {
-        return this.http.get(url, { params: { type: 'Follow', user_id: user_id, email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
-            console.log("Results", results);
-            return results["Response"];
-        }));
-    };
-    RequestsService.prototype.Like = function (url, user_email, post_id) {
-        return this.http.get(url, { params: { type: 'like', email: user_email, post: post_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
-            console.log("Results", results);
-            return results["Response"];
-        }));
-    };
-    RequestsService.prototype.Upload = function (url, user_email, file, description, genre, playlisted) {
-        var postData = new FormData();
-        postData.append('file', file);
-        postData.append('type', 'upload');
-        postData.append('email', user_email);
-        postData.append('description', description);
-        postData.append('genre', genre);
-        postData.append('playlisted', playlisted);
-        return this.http.post(url, postData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
-            console.log("Results", results);
-            return results["newly created post_id"];
-        }));
-    };
-    RequestsService.prototype.Login = function (url, user_email, password) {
-        return this.http.get(url, { params: { type: 'login', email: user_email, password: password } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
-            console.log("Results", results);
-            return results;
-        }));
-    };
-    RequestsService.ctorParameters = function () { return [
-        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }
-    ]; };
-    RequestsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-            providedIn: 'root'
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
-    ], RequestsService);
-    return RequestsService;
-}());
-
-
-
-/***/ }),
-
 /***/ "./src/app/tab2/tab2.module.ts":
 /*!*************************************!*\
   !*** ./src/app/tab2/tab2.module.ts ***!
@@ -201,22 +81,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_requests_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/requests.service */ "./src/app/services/requests.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+
 
 
 
 
 
 var Tab2Page = /** @class */ (function () {
-    function Tab2Page(requests, route, storage) {
+    function Tab2Page(requests, statusBar, route, storage) {
         this.requests = requests;
+        this.statusBar = statusBar;
         this.route = route;
         this.storage = storage;
         this.searchTerm = '';
         this.profile_url = 'https://uploaded.herokuapp.com/users/users';
+        this.statusBar.overlaysWebView(false);
+        this.statusBar.styleDefault();
     }
     Tab2Page.prototype.ionViewDidEnter = function () {
         var _this = this;
+        this.statusBar.overlaysWebView(false);
+        this.statusBar.backgroundColorByHexString('#ffffff');
+        this.statusBar.styleDefault();
         this.storage.get('mail').then(function (val) {
             if (val == undefined) {
                 _this.route.navigate(['']);
@@ -236,8 +124,9 @@ var Tab2Page = /** @class */ (function () {
     };
     Tab2Page.ctorParameters = function () { return [
         { type: _services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"] },
+        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-        { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"] }
+        { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"] }
     ]; };
     Tab2Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -245,7 +134,7 @@ var Tab2Page = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./tab2.page.html */ "./node_modules/raw-loader/index.js!./src/app/tab2/tab2.page.html"),
             styles: [__webpack_require__(/*! ./tab2.page.scss */ "./src/app/tab2/tab2.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_storage__WEBPACK_IMPORTED_MODULE_4__["Storage"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"]])
     ], Tab2Page);
     return Tab2Page;
 }());

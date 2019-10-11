@@ -7,6 +7,10 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
+
+  bottom: boolean = true;
+  
+
   constructor() {}
 
   // ionViewDidEnter() {

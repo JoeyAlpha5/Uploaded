@@ -233,6 +233,12 @@ div#uploadedHeading {
 }
 
 
+@media only screen and (max-height: 100px) {
+  #bottomBar{
+    display: none;
+  }
+}
+
 
 
 div#logoutBtn {
@@ -272,9 +278,10 @@ div#playlists {
   padding-bottom: 20px;
 
   div#playlist {
-    width: 33%;
+    width: 32%;
     height: 115px;
     float: left;
+    margin-left: 1px;
     background-size: cover !important;
 }
 }
@@ -304,3 +311,11 @@ span#metric {
   width: 100%;
   height: 60px;
 }
+
+ion-icon#message {
+  float: right;
+  margin-right: 15px;
+  margin-top: 10px;
+  font-size: 23px;
+}
+
