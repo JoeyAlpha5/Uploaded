@@ -630,29 +630,20 @@ let AppComponent = class AppComponent {
             let msg = data.payload.body;
             let title = data.payload.title;
             let additionalData = data.payload.additionalData;
-            this.postNotification(data.payload.body);
             this.showAlert(title, msg, additionalData.task);
         });
         this.oneSignal.handleNotificationOpened().subscribe((data) => {
             // do something when a notification is opened
-            let additionalData = data.notification.payload.additionalData;
-            //post live notification
-            // this.postNotification({"title":"test", "msg":"test"});
             this.route.navigate(['/home/tabs/tab3']);
         });
         this.oneSignal.endInit();
-    }
-    postNotification(notification) {
-        this.storage.get('username').then((val) => {
-            this.database.list("notifcation").push({ "notification": notification, "id": val });
-        });
     }
     showAlert(title, msg, additionalData) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
                 header: title,
                 subHeader: msg,
-                // message: msg,
+                message: additionalData,
                 buttons: ['OK']
             });
             yield alert.present();
@@ -912,9 +903,21 @@ let RequestsService = class RequestsService {
             return results;
         }));
     }
+    deletePost(url, post_id) {
+        return this.http.get(url, { params: { type: 'deletePost', id: post_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
+            console.log("Results", results);
+            return results;
+        }));
+    }
     //notifications
     registerDevice(url, user_email, user_id) {
         return this.http.get(url, { params: { type: 'registerDevice', email: user_email, user_id: user_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
+            console.log("Results", results);
+            return results;
+        }));
+    }
+    sendMessageNotification(url, to, sender, message) {
+        return this.http.get(url, { params: { type: 'sendMessageNotif', to: to, sender: sender, message: message } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
             console.log("Results", results);
             return results;
         }));

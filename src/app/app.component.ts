@@ -68,7 +68,6 @@ export class AppComponent {
     let msg = data.payload.body;
     let title = data.payload.title;
     let additionalData = data.payload.additionalData;
-    this.postNotification(data.payload.body);
     this.showAlert(title, msg, additionalData.task);
 
     });
@@ -77,9 +76,6 @@ export class AppComponent {
     
     this.oneSignal.handleNotificationOpened().subscribe((data) => {
       // do something when a notification is opened
-      let additionalData = data.notification.payload.additionalData;
-          //post live notification
-      // this.postNotification({"title":"test", "msg":"test"});
       this.route.navigate(['/home/tabs/tab3']);
     });
 
@@ -87,18 +83,11 @@ export class AppComponent {
   }
 
 
-
-  postNotification(notification){
-    this.storage.get('username').then((val) => {
-      this.database.list("notifcation").push({"notification":notification, "id":val});
-    });
-  }
-
   async showAlert(title, msg,additionalData) {
     const alert = await this.alertController.create({
       header: title,
       subHeader:msg,
-      // message: msg,
+      message: additionalData,
       buttons: ['OK']
     });
 

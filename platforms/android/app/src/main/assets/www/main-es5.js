@@ -640,23 +640,13 @@ var AppComponent = /** @class */ (function () {
             var msg = data.payload.body;
             var title = data.payload.title;
             var additionalData = data.payload.additionalData;
-            _this.postNotification(data.payload.body);
             _this.showAlert(title, msg, additionalData.task);
         });
         this.oneSignal.handleNotificationOpened().subscribe(function (data) {
             // do something when a notification is opened
-            var additionalData = data.notification.payload.additionalData;
-            //post live notification
-            // this.postNotification({"title":"test", "msg":"test"});
             _this.route.navigate(['/home/tabs/tab3']);
         });
         this.oneSignal.endInit();
-    };
-    AppComponent.prototype.postNotification = function (notification) {
-        var _this = this;
-        this.storage.get('username').then(function (val) {
-            _this.database.list("notifcation").push({ "notification": notification, "id": val });
-        });
     };
     AppComponent.prototype.showAlert = function (title, msg, additionalData) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -666,7 +656,7 @@ var AppComponent = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.alertController.create({
                             header: title,
                             subHeader: msg,
-                            // message: msg,
+                            message: additionalData,
                             buttons: ['OK']
                         })];
                     case 1:
@@ -942,9 +932,21 @@ var RequestsService = /** @class */ (function () {
             return results;
         }));
     };
+    RequestsService.prototype.deletePost = function (url, post_id) {
+        return this.http.get(url, { params: { type: 'deletePost', id: post_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results;
+        }));
+    };
     //notifications
     RequestsService.prototype.registerDevice = function (url, user_email, user_id) {
         return this.http.get(url, { params: { type: 'registerDevice', email: user_email, user_id: user_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results;
+        }));
+    };
+    RequestsService.prototype.sendMessageNotification = function (url, to, sender, message) {
+        return this.http.get(url, { params: { type: 'sendMessageNotif', to: to, sender: sender, message: message } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
             console.log("Results", results);
             return results;
         }));

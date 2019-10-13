@@ -157,6 +157,7 @@ let LoginPage = class LoginPage {
                     this.storage.set('mail', emailInput);
                     this.storage.set('password', emailInput);
                     this.storage.set('username', data.username);
+                    this.storage.set('current_userID', data.id);
                     jquery__WEBPACK_IMPORTED_MODULE_3__(".signInPrompt").text("Login successful");
                     jquery__WEBPACK_IMPORTED_MODULE_3__("#UploadedHeading").text(JSON.stringify(emailInput));
                     jquery__WEBPACK_IMPORTED_MODULE_3__("#UploadedHeading").css("color", "#0d8479");

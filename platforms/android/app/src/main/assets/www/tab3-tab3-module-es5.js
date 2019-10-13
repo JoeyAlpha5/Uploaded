@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Notifications\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n\n  <ion-item *ngFor='let item of ( notificationssRef$ | async); let i = index'>\n    <span *ngIf=\"item.id == username\">{{ item.notification }}</span>\n  </ion-item>\n\n <div id=\"bottomBar\"></div>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Notifications\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n\n\n  <ion-list id=\"notifs\">\n    <ion-item-sliding #item *ngFor='let notif of ( notificationssRef$ | async)?.slice().reverse(); let i = index'>\n      <ion-item id=\"actualNotif\" *ngIf=\"notif.the_receiver == username\">\n        <ion-icon  [ngStyle]=\"{ color:'#F44336' }\" name=\"heart\"></ion-icon>\n        <div *ngIf=\"notif.profile != 'none'\" id=\"dp\" [ngStyle]=\"{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + notif.profile+ '.jpg)'}\"></div>\n        <div *ngIf=\"notif.profile == 'none'\" id=\"dp\"></div>\n        <span>{{ notif.msg }}</span>\n      </ion-item>\n      <ion-item id=\"actualNotif\" *ngIf=\"notif.to == username\">\n        <ion-icon [ngStyle]=\"{ color:'#FF9800' }\" name=\"text\"></ion-icon>\n        <span id=\"msg\">{{ notif.msg }}</span>\n      </ion-item>\n      <ion-item id=\"actualNotif\" *ngIf=\"notif.type == 'follow'\">\n        <ion-icon [ngStyle]=\"{ color:'#FF9800' }\" name=\"person-add\"></ion-icon>\n        <span id=\"msg\">{{ notif.msg }}</span>\n      </ion-item>\n      <ion-item-options side=\"start\" id=\"options\">\n        <button ion-button id='viewUser'  (click)=\"viewUser(notif.userid)\"><ion-icon name=\"contact\"></ion-icon><br>User</button>\n        <button ion-button id='viewPost' *ngIf=\"notif.the_receiver == username\" (click)=\"viewPost(notif.post)\"><ion-icon name=\"videocam\"></ion-icon><br>Post</button>\n        <button ion-button id='viewChat' (click)=\"viewChat(notif.userid,notif.first_name,notif.last_name,notif,username)\"><ion-icon name=\"text\"></ion-icon><br>Chat</button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n\n <div id=\"bottomBar\"></div>\n</ion-content>\n"
 
 /***/ }),
 
@@ -63,7 +63,7 @@ var Tab3PageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#bottomBar {\n  background: #000000;\n  bottom: 0;\n  position: fixed;\n  width: 100%;\n  height: 60px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hcHBsZS9EZXNrdG9wL1VwbG9hZGVkL1VwbG9hZGVkL3NyYy9hcHAvdGFiMy90YWIzLnBhZ2Uuc2NzcyIsInNyYy9hcHAvdGFiMy90YWIzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLG1CQUFBO0VBQ0EsU0FBQTtFQUNBLGVBQUE7RUFDQSxXQUFBO0VBQ0EsWUFBQTtBQ0NKIiwiZmlsZSI6InNyYy9hcHAvdGFiMy90YWIzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIiNib3R0b21CYXJ7XG4gICAgYmFja2dyb3VuZDogIzAwMDAwMDtcbiAgICBib3R0b206IDA7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogNjBweDtcbn1cbiIsIiNib3R0b21CYXIge1xuICBiYWNrZ3JvdW5kOiAjMDAwMDAwO1xuICBib3R0b206IDA7XG4gIHBvc2l0aW9uOiBmaXhlZDtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogNjBweDtcbn0iXX0= */"
+module.exports = "#bottomBar {\n  background: #000000;\n  bottom: 0;\n  position: fixed;\n  width: 100%;\n  height: 60px;\n}\n\ndiv#dp {\n  width: 40px;\n  height: 40px;\n  background: rgba(0, 0, 0, 0.18);\n  border-radius: 5px;\n  margin-right: 10px;\n  margin-bottom: 10px;\n  background-size: cover !important;\n  margin-left: 10px;\n  margin-top: 10px;\n}\n\nion-item-options#options {\n  margin-top: 10px;\n}\n\n#viewUser {\n  background: #4CAF50;\n  color: white;\n  font-size: 14px;\n  padding: 15px;\n}\n\n#viewChat {\n  background: black;\n  color: white;\n  font-size: 14px;\n  padding: 15px;\n}\n\n#viewPost {\n  background: #607D8B;\n  color: white;\n  font-size: 14px;\n  padding: 15px;\n}\n\n#notifs {\n  background: #f7f7f7;\n}\n\n#notifs #actualNotif {\n  font-size: 13px;\n  margin-top: 10px;\n}\n\n#notifs #actualNotif #msg {\n  margin-left: 15px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hcHBsZS9EZXNrdG9wL1VwbG9hZGVkL1VwbG9hZGVkL3NyYy9hcHAvdGFiMy90YWIzLnBhZ2Uuc2NzcyIsInNyYy9hcHAvdGFiMy90YWIzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLG1CQUFBO0VBQ0EsU0FBQTtFQUNBLGVBQUE7RUFDQSxXQUFBO0VBQ0EsWUFBQTtBQ0NKOztBREdBO0VBQ0ksV0FBQTtFQUNBLFlBQUE7RUFDQSwrQkFBQTtFQUNBLGtCQUFBO0VBQ0Esa0JBQUE7RUFDQSxtQkFBQTtFQUNBLGlDQUFBO0VBQ0EsaUJBQUE7RUFDQSxnQkFBQTtBQ0FKOztBRElBO0VBQ0ksZ0JBQUE7QUNESjs7QURJQTtFQUNJLG1CQUFBO0VBQ0EsWUFBQTtFQUNBLGVBQUE7RUFDQSxhQUFBO0FDREo7O0FESUE7RUFDSSxpQkFBQTtFQUNBLFlBQUE7RUFDQSxlQUFBO0VBQ0EsYUFBQTtBQ0RKOztBRElBO0VBQ0ksbUJBQUE7RUFDQSxZQUFBO0VBQ0EsZUFBQTtFQUNBLGFBQUE7QUNESjs7QURJQTtFQUNJLG1CQUFBO0FDREo7O0FERUk7RUFDSSxlQUFBO0VBQ0EsZ0JBQUE7QUNBUjs7QURFUTtFQUNJLGlCQUFBO0FDQVoiLCJmaWxlIjoic3JjL2FwcC90YWIzL3RhYjMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI2JvdHRvbUJhcntcbiAgICBiYWNrZ3JvdW5kOiAjMDAwMDAwO1xuICAgIGJvdHRvbTogMDtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiA2MHB4O1xufVxuXG5cbmRpdiNkcCB7XG4gICAgd2lkdGg6IDQwcHg7XG4gICAgaGVpZ2h0OiA0MHB4O1xuICAgIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC4xOCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIG1hcmdpbi1yaWdodDogMTBweDtcbiAgICBtYXJnaW4tYm90dG9tOiAxMHB4O1xuICAgIGJhY2tncm91bmQtc2l6ZTogY292ZXIgIWltcG9ydGFudDtcbiAgICBtYXJnaW4tbGVmdDogMTBweDtcbiAgICBtYXJnaW4tdG9wOiAxMHB4O1xufVxuXG5cbmlvbi1pdGVtLW9wdGlvbnMjb3B0aW9ucyB7XG4gICAgbWFyZ2luLXRvcDogMTBweDtcbn1cblxuI3ZpZXdVc2Vye1xuICAgIGJhY2tncm91bmQ6ICM0Q0FGNTA7XG4gICAgY29sb3I6IHdoaXRlO1xuICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICBwYWRkaW5nOiAxNXB4O1xufVxuXG4jdmlld0NoYXR7XG4gICAgYmFja2dyb3VuZDogYmxhY2s7XG4gICAgY29sb3I6IHdoaXRlO1xuICAgIGZvbnQtc2l6ZTogMTRweDtcbiAgICBwYWRkaW5nOiAxNXB4O1xufVxuXG4jdmlld1Bvc3R7XG4gICAgYmFja2dyb3VuZDogIzYwN0Q4QjtcbiAgICBjb2xvcjogd2hpdGU7XG4gICAgZm9udC1zaXplOiAxNHB4O1xuICAgIHBhZGRpbmc6IDE1cHg7XG59XG5cbiNub3RpZnN7XG4gICAgYmFja2dyb3VuZDogI2Y3ZjdmNztcbiAgICAjYWN0dWFsTm90aWZ7XG4gICAgICAgIGZvbnQtc2l6ZTogMTNweDtcbiAgICAgICAgbWFyZ2luLXRvcDoxMHB4O1xuXG4gICAgICAgICNtc2d7XG4gICAgICAgICAgICBtYXJnaW4tbGVmdDogMTVweDtcbiAgICAgICAgfVxuICAgIH1cbn0iLCIjYm90dG9tQmFyIHtcbiAgYmFja2dyb3VuZDogIzAwMDAwMDtcbiAgYm90dG9tOiAwO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDYwcHg7XG59XG5cbmRpdiNkcCB7XG4gIHdpZHRoOiA0MHB4O1xuICBoZWlnaHQ6IDQwcHg7XG4gIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC4xOCk7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgbWFyZ2luLXJpZ2h0OiAxMHB4O1xuICBtYXJnaW4tYm90dG9tOiAxMHB4O1xuICBiYWNrZ3JvdW5kLXNpemU6IGNvdmVyICFpbXBvcnRhbnQ7XG4gIG1hcmdpbi1sZWZ0OiAxMHB4O1xuICBtYXJnaW4tdG9wOiAxMHB4O1xufVxuXG5pb24taXRlbS1vcHRpb25zI29wdGlvbnMge1xuICBtYXJnaW4tdG9wOiAxMHB4O1xufVxuXG4jdmlld1VzZXIge1xuICBiYWNrZ3JvdW5kOiAjNENBRjUwO1xuICBjb2xvcjogd2hpdGU7XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgcGFkZGluZzogMTVweDtcbn1cblxuI3ZpZXdDaGF0IHtcbiAgYmFja2dyb3VuZDogYmxhY2s7XG4gIGNvbG9yOiB3aGl0ZTtcbiAgZm9udC1zaXplOiAxNHB4O1xuICBwYWRkaW5nOiAxNXB4O1xufVxuXG4jdmlld1Bvc3Qge1xuICBiYWNrZ3JvdW5kOiAjNjA3RDhCO1xuICBjb2xvcjogd2hpdGU7XG4gIGZvbnQtc2l6ZTogMTRweDtcbiAgcGFkZGluZzogMTVweDtcbn1cblxuI25vdGlmcyB7XG4gIGJhY2tncm91bmQ6ICNmN2Y3Zjc7XG59XG4jbm90aWZzICNhY3R1YWxOb3RpZiB7XG4gIGZvbnQtc2l6ZTogMTNweDtcbiAgbWFyZ2luLXRvcDogMTBweDtcbn1cbiNub3RpZnMgI2FjdHVhbE5vdGlmICNtc2cge1xuICBtYXJnaW4tbGVmdDogMTVweDtcbn0iXX0= */"
 
 /***/ }),
 
@@ -96,8 +96,10 @@ var Tab3Page = /** @class */ (function () {
         this.statusBar = statusBar;
         this.storage = storage;
         this.route = route;
-        this.notificationssRef$ = this.database.list("notifcation").valueChanges();
-        this.notificationssRef$.subscribe(function (x) { console.log(x); });
+        this.notificationssRef$ = this.database.list("notification", function (ref) { return ref.orderByChild('date'); }).valueChanges();
+        this.notificationssRef$.subscribe(function (x) {
+            console.log(x);
+        });
     }
     Tab3Page.prototype.ionViewDidEnter = function () {
         var _this = this;
@@ -108,12 +110,31 @@ var Tab3Page = /** @class */ (function () {
         this.storage.get('username').then(function (val) {
             console.log('Your username is', val);
             _this.username = val;
-            _this.username = val;
             var profile_url = 'https://uploaded.herokuapp.com/users/users';
             if (_this.username == undefined) {
                 _this.route.navigate(['']);
             }
         });
+    };
+    Tab3Page.prototype.viewPost = function (post) {
+        console.log(post);
+        this.storage.set("post", post);
+        this.route.navigate(['/home/tabs/postView']);
+    };
+    Tab3Page.prototype.viewUser = function (userId, email) {
+        console.log(userId);
+        console.log("user", userId);
+        this.storage.set("user_id", userId);
+        this.storage.set("userProfileEmail", email);
+        this.route.navigate(['/home/tabs/profile']);
+    };
+    Tab3Page.prototype.viewChat = function (id, first_name, last_name, username) {
+        console.log(first_name, last_name, id);
+        this.storage.set("receiverName", first_name);
+        this.storage.set("receiverSName", last_name);
+        this.storage.set("receiverUsername", username);
+        this.storage.set("receiverID", id);
+        this.route.navigate(['/home/tabs/messaging']);
     };
     Tab3Page.ctorParameters = function () { return [
         { type: angularfire2_database__WEBPACK_IMPORTED_MODULE_3__["AngularFireDatabase"] },

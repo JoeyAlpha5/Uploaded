@@ -162,6 +162,7 @@ var LoginPage = /** @class */ (function () {
                     _this.storage.set('mail', emailInput);
                     _this.storage.set('password', emailInput);
                     _this.storage.set('username', data.username);
+                    _this.storage.set('current_userID', data.id);
                     jquery__WEBPACK_IMPORTED_MODULE_3__(".signInPrompt").text("Login successful");
                     jquery__WEBPACK_IMPORTED_MODULE_3__("#UploadedHeading").text(JSON.stringify(emailInput));
                     jquery__WEBPACK_IMPORTED_MODULE_3__("#UploadedHeading").css("color", "#0d8479");

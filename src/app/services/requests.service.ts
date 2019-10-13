@@ -138,10 +138,30 @@ export class RequestsService {
   }
 
 
+  deletePost(url,post_id){
+    return this.http.get(url, {params: {type: 'deletePost', id: post_id}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results;
+      })
+    );
+  }
+
+
 
   //notifications
   registerDevice(url,user_email,user_id){
     return this.http.get(url, {params: {type: 'registerDevice', email: user_email,user_id:user_id}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results;
+      })
+    );
+  }
+
+
+  sendMessageNotification(url,to,sender,message){
+    return this.http.get(url, {params: {type: 'sendMessageNotif', to:to,sender:sender,message:message}}).pipe(
       map(results => {
         console.log("Results",results);
         return results;

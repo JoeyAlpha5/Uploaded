@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { AngularFireDatabase} from 'angularfire2/database';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { RequestsService } from '../services/requests.service';
 import * as $ from 'jquery';
 
 
@@ -24,7 +25,7 @@ export class MessagingPage implements OnInit {
   receiverID: Observable<any>;
   this_userID: Observable<any>;
   this_username: Observable<any>;
-  constructor(private statusBar: StatusBar,private storage: Storage,private database:AngularFireDatabase,private route: Router) { 
+  constructor(private statusBar: StatusBar,private storage: Storage,private database:AngularFireDatabase,private route: Router, private requests: RequestsService) { 
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();
   }
@@ -99,7 +100,7 @@ export class MessagingPage implements OnInit {
       if(messageInput != ""){
         let message = { "sender":this.this_username, "to":this.receiverUsername, "message":messageInput };
         //send message notification
-        
+        this.sendMessageNotification(this.receiverUsername, messageInput,this.this_username);
         this.database.list("chats/"+chat_id).push(message);
         $("#message").val("");
         this.scroll();
@@ -113,6 +114,16 @@ export class MessagingPage implements OnInit {
       let objDiv = document.getElementById("chatsContainer");
       objDiv.scrollTop = objDiv.scrollHeight;
     },10);
+  }
+
+
+  //send notifcation of new message
+  sendMessageNotification(receiver,message, from){
+    let profile_url =  'https://uploaded.herokuapp.com/users/users';
+    let new_message = this.requests.sendMessageNotification(profile_url, receiver, from,message);
+    new_message.subscribe();
+
+
   }
 
 }

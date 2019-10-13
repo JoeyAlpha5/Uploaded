@@ -61,8 +61,8 @@ export class Tab4Page implements OnInit {
     }, 2000);
   }
 
-  Playlist(){
-    this.presentActionSheet();
+  Playlist(post_id){
+    this.presentActionSheet(post_id);
   }
 
   viewPost(post_id){
@@ -144,21 +144,19 @@ export class Tab4Page implements OnInit {
 
 
       //present share options
-      async presentActionSheet() {
+      async presentActionSheet(post_id) {
         const actionSheet = await this.actionSheetController.create({
           header: 'Post Actions',
-          buttons: [
+          buttons: [ 
             {
-            text: 'Share',
-            icon: 'share',
-            handler: () => {
-              console.log('Share');
-            }
-          }, {
             text: 'Delete',
             icon: 'trash',
             handler: () => {
-              console.log('Delete');
+              console.log(post_id);
+              let profile_url =  'https://uploaded.herokuapp.com/users/users';
+              this.requests.deletePost(profile_url,post_id).subscribe();
+              this.ionViewDidEnter();
+              
             }
           }, {
             text: 'Cancel',

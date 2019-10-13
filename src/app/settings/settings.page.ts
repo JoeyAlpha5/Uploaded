@@ -70,7 +70,7 @@ export class SettingsPage implements OnInit {
     let first_name = $("#first_name").val();
     let last_name = $("#last_name").val();
     let bio = $("#bioInput").val();
-
+    console.log(user_name,first_name);
     var profile_url =  'https://uploaded.herokuapp.com/users/users';
     //var profile_url = 'http://127.0.0.1:8000/users/users'
     this.storage.get('mail').then((Email) =>{

@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Search\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <!--<ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>-->\n\n  <!-- Searchbar with cancel button always shown -->\n  <!-- Animated Searchbar -->\n  <ion-searchbar [(ngModel)]=\"searchTerm\" animated (ionChange) = \"getSearchResults()\"></ion-searchbar>\n  <div id=\"searchTags\">\n      <span class=\"searchFilter\" id=\"selectedTag\">People</span>\n      <span class=\"searchFilter\">Videos</span>\n  </div>\n\n  <ion-item button *ngFor='let item of ( results | async)'>\n      <p (click)=\"viewProfile(item.id,item.email)\">{{ item.first_name + \" \"  + item.last_name }} </p>\n  </ion-item>\n\n  <div id=\"bottomBar\"></div>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Search\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <!--<ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>-->\n\n  <!-- Searchbar with cancel button always shown -->\n  <!-- Animated Searchbar -->\n  <ion-searchbar placeholder=\"Search artists..\" [(ngModel)]=\"searchTerm\" animated (ionChange) = \"getSearchResults()\"></ion-searchbar>\n  <div id=\"searchTags\">\n      <span class=\"searchFilter\" id=\"selectedTag\">Artists</span>\n     <!-- <span class=\"searchFilter\">Videos</span>-->\n  </div>\n\n  <ion-item button *ngFor='let item of ( results | async)'>\n      <p *ngIf=\"item.id != userID\" (click)=\"viewProfile(item.id,item.email)\">{{ item.first_name + \" \"  + item.last_name }} </p>\n  </ion-item>\n\n  <div id=\"bottomBar\"></div>\n</ion-content>\n"
 
 /***/ }),
 
@@ -80,6 +80,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
 
 
 
@@ -87,7 +89,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let Tab2Page = class Tab2Page {
-    constructor(requests, statusBar, route, storage) {
+    constructor(platform, requests, statusBar, route, storage) {
+        this.platform = platform;
         this.requests = requests;
         this.statusBar = statusBar;
         this.route = route;
@@ -96,6 +99,8 @@ let Tab2Page = class Tab2Page {
         this.profile_url = 'https://uploaded.herokuapp.com/users/users';
         this.statusBar.overlaysWebView(false);
         this.statusBar.styleDefault();
+        // this.platform.backButton.subscribe(() => {
+        // });
     }
     ionViewDidEnter() {
         this.statusBar.overlaysWebView(false);
@@ -104,6 +109,11 @@ let Tab2Page = class Tab2Page {
         this.storage.get('mail').then((val) => {
             if (val == undefined) {
                 this.route.navigate(['']);
+            }
+            else {
+                this.storage.get('current_userID').then((val) => {
+                    this.userID = val;
+                });
             }
         });
     }
@@ -120,6 +130,7 @@ let Tab2Page = class Tab2Page {
     }
 };
 Tab2Page.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Platform"] },
     { type: _services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
@@ -131,7 +142,7 @@ Tab2Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./tab2.page.html */ "./node_modules/raw-loader/index.js!./src/app/tab2/tab2.page.html"),
         styles: [__webpack_require__(/*! ./tab2.page.scss */ "./src/app/tab2/tab2.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Platform"], _services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"]])
 ], Tab2Page);
 
 

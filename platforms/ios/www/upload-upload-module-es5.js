@@ -1,0 +1,242 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["upload-upload-module"],{
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/upload/upload.page.html":
+/*!*******************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/upload/upload.page.html ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>Upload</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n    <ion-input (change)=\"changeListener($event)\" type=\"file\" accept=\"video/*\" id=\"uploadDesc\"></ion-input>\n    <ion-progress-bar *ngIf=\"displayLoading == true\" id=\"uploadProgress\" type=\"indeterminate\"></ion-progress-bar>\n    <div id=\"uploadImage\">\n      <ion-icon name=\"cloud-upload\" id=\"uploadIcon\"></ion-icon>\n      <p>Upload your video</p>\n      <span>Tap here to select a video from your device to</span>\n    </div>\n   <div id=\"options\" class=\"options\">\n    <ion-label id=\"label\">Add to your feed: </ion-label>\n    <ion-toggle id=\"toggle\" (ionChange)=\"addPlaylist($event)\" color=\"dark\"></ion-toggle>\n  </div>\n  <div id=\"options\">\n      <ion-label id=\"label\">Music Genre: </ion-label>\n      <ion-select id=\"Select\" okText=\"Okay\" cancelText=\"Dismiss\">\n        <ion-select-option value=\"HipHop\">HipHop</ion-select-option>\n        <ion-select-option value=\"House\">House</ion-select-option>\n        <ion-select-option value=\"Jazz\">Jazz</ion-select-option>\n        <ion-select-option value=\"Indie\">Indie</ion-select-option>\n        <ion-select-option value=\"Popp\">Popp</ion-select-option>\n        <ion-select-option value=\"Rock\">Rock</ion-select-option>\n      </ion-select>\n    </div>\n\n    <ion-input type=\"text\" (ionBlur)=\"enableBottom()\" (ionFocus)=\"disableBottom()\" id=\"uploadDescription\" placeholder=\"Upload description\"></ion-input>\n\n    <div id=\"uploadBtnDiv\"><ion-button id=\"uploadBtn\" (click)=\"upload()\">Publish video</ion-button></div>\n\n    \n    \n\n  <div id=\"bottomBar\"></div>\n</ion-content>\n"
+
+/***/ }),
+
+/***/ "./src/app/upload/upload.module.ts":
+/*!*****************************************!*\
+  !*** ./src/app/upload/upload.module.ts ***!
+  \*****************************************/
+/*! exports provided: UploadPageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UploadPageModule", function() { return UploadPageModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _upload_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./upload.page */ "./src/app/upload/upload.page.ts");
+
+
+
+
+
+
+
+var routes = [
+    {
+        path: '',
+        component: _upload_page__WEBPACK_IMPORTED_MODULE_6__["UploadPage"]
+    }
+];
+var UploadPageModule = /** @class */ (function () {
+    function UploadPageModule() {
+    }
+    UploadPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
+            ],
+            declarations: [_upload_page__WEBPACK_IMPORTED_MODULE_6__["UploadPage"]]
+        })
+    ], UploadPageModule);
+    return UploadPageModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/upload/upload.page.scss":
+/*!*****************************************!*\
+  !*** ./src/app/upload/upload.page.scss ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "#bottomBar {\n  background: #000000;\n  bottom: 0;\n  position: fixed;\n  width: 100%;\n  height: 60px;\n}\n\n#dp {\n  border-radius: 50%;\n  background-size: cover !important;\n  float: left;\n  width: 50px !important;\n  height: 50px !important;\n  margin-left: 15px;\n  margin-top: 15px;\n}\n\nion-input#uploadDesc {\n  width: 250px;\n  margin-left: 10px;\n  float: left;\n  margin-top: 26px;\n}\n\n#uploadDesc .native-input sc-ion-input-md {\n  width: 100%;\n  height: 100%;\n  padding: 0 !important;\n  margin: 0 !important;\n}\n\ndiv#uploadImage {\n  width: 100%;\n  height: 182px;\n  float: left;\n  background: #f7f7f7;\n  text-align: -webkit-center;\n}\n\nion-input#uploadDesc {\n  width: 100%;\n  position: absolute;\n  height: 182px;\n  opacity: 0;\n}\n\n#uploadDescription {\n  margin-top: 28px;\n  margin-bottom: 22px;\n  height: 80px;\n  margin-left: 15px;\n}\n\n#uploadBtnDiv {\n  width: 100%;\n  text-align: -webkit-center;\n}\n\n#uploadImage ion-icon.md.hydrated {\n  font-size: 76px;\n  margin-top: 18px;\n  color: #FF9800;\n}\n\n#uploadIcon {\n  font-size: 76px;\n  margin-top: 18px;\n  color: #FF9800;\n}\n\n#uploadImage p {\n  margin: 0;\n  margin-bottom: 7px;\n  font-weight: bold;\n}\n\ndiv#uploadImage span {\n  font-size: 13px;\n  opacity: 0.6;\n}\n\nion-label#FileInputabel {\n  text-align: left;\n  float: left;\n  margin-top: 20px;\n  margin-left: 15px;\n}\n\ndiv#options #label {\n  font-size: 13px;\n  margin-left: 15px;\n}\n\ndiv.options #label {\n  float: left;\n  margin-top: 20px;\n}\n\nion-toggle#toggle {\n  float: right;\n  margin-top: 8px;\n}\n\ndiv#options {\n  width: 100%;\n  height: 53px;\n  float: left;\n  background: rgba(0, 0, 0, 0.03);\n  margin-top: 11px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hcHBsZS9EZXNrdG9wL1VwbG9hZGVkL1VwbG9hZGVkL3NyYy9hcHAvdXBsb2FkL3VwbG9hZC5wYWdlLnNjc3MiLCJzcmMvYXBwL3VwbG9hZC91cGxvYWQucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksbUJBQUE7RUFDQSxTQUFBO0VBQ0EsZUFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0FDQ0o7O0FERUU7RUFDRSxrQkFBQTtFQUNBLGlDQUFBO0VBQ0EsV0FBQTtFQUNBLHNCQUFBO0VBQ0EsdUJBQUE7RUFDQSxpQkFBQTtFQUNBLGdCQUFBO0FDQ0o7O0FERUE7RUFDSSxZQUFBO0VBQ0EsaUJBQUE7RUFDQSxXQUFBO0VBQ0EsZ0JBQUE7QUNDSjs7QURFQTtFQUNFLFdBQUE7RUFDQSxZQUFBO0VBQ0EscUJBQUE7RUFDQSxvQkFBQTtBQ0NGOztBREVBO0VBQ0UsV0FBQTtFQUNBLGFBQUE7RUFDQSxXQUFBO0VBQ0EsbUJBQUE7RUFDQSwwQkFBQTtBQ0NGOztBREVBO0VBQ0UsV0FBQTtFQUNBLGtCQUFBO0VBQ0EsYUFBQTtFQUNBLFVBQUE7QUNDRjs7QURHQTtFQUNFLGdCQUFBO0VBQ0EsbUJBQUE7RUFDQSxZQUFBO0VBQ0EsaUJBQUE7QUNBRjs7QURHQTtFQUNFLFdBQUE7RUFDQSwwQkFBQTtBQ0FGOztBREdBO0VBQ0UsZUFBQTtFQUNBLGdCQUFBO0VBQ0EsY0FBQTtBQ0FGOztBREdBO0VBQ0UsZUFBQTtFQUNBLGdCQUFBO0VBQ0EsY0FBQTtBQ0FGOztBREdBO0VBQ0UsU0FBQTtFQUNBLGtCQUFBO0VBQ0EsaUJBQUE7QUNBRjs7QURHQTtFQUNFLGVBQUE7RUFDQSxZQUFBO0FDQUY7O0FER0E7RUFDRSxnQkFBQTtFQUNBLFdBQUE7RUFDQSxnQkFBQTtFQUNBLGlCQUFBO0FDQUY7O0FER0E7RUFDRSxlQUFBO0VBQ0EsaUJBQUE7QUNBRjs7QURHQTtFQUNFLFdBQUE7RUFDQSxnQkFBQTtBQ0FGOztBREdBO0VBQ0UsWUFBQTtFQUNBLGVBQUE7QUNBRjs7QURHQTtFQUNFLFdBQUE7RUFDQSxZQUFBO0VBQ0EsV0FBQTtFQUNBLCtCQUFBO0VBQ0EsZ0JBQUE7QUNBRiIsImZpbGUiOiJzcmMvYXBwL3VwbG9hZC91cGxvYWQucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiI2JvdHRvbUJhcntcbiAgICBiYWNrZ3JvdW5kOiAjMDAwMDAwO1xuICAgIGJvdHRvbTogMDtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgaGVpZ2h0OiA2MHB4O1xuICB9XG5cbiAgI2RwIHtcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XG4gICAgYmFja2dyb3VuZC1zaXplOmNvdmVyICFpbXBvcnRhbnQ7XG4gICAgZmxvYXQ6IGxlZnQ7XG4gICAgd2lkdGg6IDUwcHggIWltcG9ydGFudDtcbiAgICBoZWlnaHQ6IDUwcHggIWltcG9ydGFudDtcbiAgICBtYXJnaW4tbGVmdDogMTVweDtcbiAgICBtYXJnaW4tdG9wOiAxNXB4O1xuICB9XG5cbmlvbi1pbnB1dCN1cGxvYWREZXNjIHtcbiAgICB3aWR0aDogMjUwcHg7XG4gICAgbWFyZ2luLWxlZnQ6IDEwcHg7XG4gICAgZmxvYXQ6IGxlZnQ7XG4gICAgbWFyZ2luLXRvcDogMjZweDtcbn1cblxuI3VwbG9hZERlc2MgLm5hdGl2ZS1pbnB1dCBzYy1pb24taW5wdXQtbWQge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxMDAlO1xuICBwYWRkaW5nOiAwICFpbXBvcnRhbnQ7XG4gIG1hcmdpbjogMCAhaW1wb3J0YW50O1xufVxuXG5kaXYjdXBsb2FkSW1hZ2Uge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiAxODJweDtcbiAgZmxvYXQ6IGxlZnQ7XG4gIGJhY2tncm91bmQ6ICNmN2Y3Zjc7XG4gIHRleHQtYWxpZ246IC13ZWJraXQtY2VudGVyO1xufVxuXG5pb24taW5wdXQjdXBsb2FkRGVzY3tcbiAgd2lkdGg6IDEwMCU7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgaGVpZ2h0OiAxODJweDtcbiAgb3BhY2l0eTogMDtcbn1cblxuXG4jdXBsb2FkRGVzY3JpcHRpb257XG4gIG1hcmdpbi10b3A6IDI4cHg7XG4gIG1hcmdpbi1ib3R0b206IDIycHg7XG4gIGhlaWdodDogODBweDtcbiAgbWFyZ2luLWxlZnQ6IDE1cHg7XG59XG5cbiN1cGxvYWRCdG5EaXZ7XG4gIHdpZHRoOiAxMDAlO1xuICB0ZXh0LWFsaWduOiAtd2Via2l0LWNlbnRlcjtcbn1cblxuI3VwbG9hZEltYWdlIGlvbi1pY29uLm1kLmh5ZHJhdGVkIHtcbiAgZm9udC1zaXplOiA3NnB4O1xuICBtYXJnaW4tdG9wOiAxOHB4O1xuICBjb2xvcjogI0ZGOTgwMDtcbn1cblxuI3VwbG9hZEljb257XG4gIGZvbnQtc2l6ZTo3NnB4O1xuICBtYXJnaW4tdG9wOiAxOHB4O1xuICBjb2xvcjogI0ZGOTgwMDtcbn1cblxuI3VwbG9hZEltYWdlIHAge1xuICBtYXJnaW46IDA7XG4gIG1hcmdpbi1ib3R0b206IDdweDtcbiAgZm9udC13ZWlnaHQ6IGJvbGQ7XG59XG5cbmRpdiN1cGxvYWRJbWFnZSBzcGFuIHtcbiAgZm9udC1zaXplOiAxM3B4O1xuICBvcGFjaXR5OiAwLjY7XG59XG5cbmlvbi1sYWJlbCNGaWxlSW5wdXRhYmVsIHtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbiAgZmxvYXQ6IGxlZnQ7XG4gIG1hcmdpbi10b3A6IDIwcHg7XG4gIG1hcmdpbi1sZWZ0OiAxNXB4O1xufVxuXG5kaXYjb3B0aW9ucyAjbGFiZWwge1xuICBmb250LXNpemU6IDEzcHg7XG4gIG1hcmdpbi1sZWZ0OiAxNXB4O1xufVxuXG5kaXYub3B0aW9ucyAjbGFiZWwge1xuICBmbG9hdDogbGVmdDtcbiAgbWFyZ2luLXRvcDogMjBweDtcbn1cblxuaW9uLXRvZ2dsZSN0b2dnbGUge1xuICBmbG9hdDogcmlnaHQ7XG4gIG1hcmdpbi10b3A6IDhweDtcbn1cblxuZGl2I29wdGlvbnMge1xuICB3aWR0aDogMTAwJTtcbiAgaGVpZ2h0OiA1M3B4O1xuICBmbG9hdDogbGVmdDtcbiAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjAzKTtcbiAgbWFyZ2luLXRvcDogMTFweDtcbn0iLCIjYm90dG9tQmFyIHtcbiAgYmFja2dyb3VuZDogIzAwMDAwMDtcbiAgYm90dG9tOiAwO1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDYwcHg7XG59XG5cbiNkcCB7XG4gIGJvcmRlci1yYWRpdXM6IDUwJTtcbiAgYmFja2dyb3VuZC1zaXplOiBjb3ZlciAhaW1wb3J0YW50O1xuICBmbG9hdDogbGVmdDtcbiAgd2lkdGg6IDUwcHggIWltcG9ydGFudDtcbiAgaGVpZ2h0OiA1MHB4ICFpbXBvcnRhbnQ7XG4gIG1hcmdpbi1sZWZ0OiAxNXB4O1xuICBtYXJnaW4tdG9wOiAxNXB4O1xufVxuXG5pb24taW5wdXQjdXBsb2FkRGVzYyB7XG4gIHdpZHRoOiAyNTBweDtcbiAgbWFyZ2luLWxlZnQ6IDEwcHg7XG4gIGZsb2F0OiBsZWZ0O1xuICBtYXJnaW4tdG9wOiAyNnB4O1xufVxuXG4jdXBsb2FkRGVzYyAubmF0aXZlLWlucHV0IHNjLWlvbi1pbnB1dC1tZCB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDEwMCU7XG4gIHBhZGRpbmc6IDAgIWltcG9ydGFudDtcbiAgbWFyZ2luOiAwICFpbXBvcnRhbnQ7XG59XG5cbmRpdiN1cGxvYWRJbWFnZSB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDE4MnB4O1xuICBmbG9hdDogbGVmdDtcbiAgYmFja2dyb3VuZDogI2Y3ZjdmNztcbiAgdGV4dC1hbGlnbjogLXdlYmtpdC1jZW50ZXI7XG59XG5cbmlvbi1pbnB1dCN1cGxvYWREZXNjIHtcbiAgd2lkdGg6IDEwMCU7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgaGVpZ2h0OiAxODJweDtcbiAgb3BhY2l0eTogMDtcbn1cblxuI3VwbG9hZERlc2NyaXB0aW9uIHtcbiAgbWFyZ2luLXRvcDogMjhweDtcbiAgbWFyZ2luLWJvdHRvbTogMjJweDtcbiAgaGVpZ2h0OiA4MHB4O1xuICBtYXJnaW4tbGVmdDogMTVweDtcbn1cblxuI3VwbG9hZEJ0bkRpdiB7XG4gIHdpZHRoOiAxMDAlO1xuICB0ZXh0LWFsaWduOiAtd2Via2l0LWNlbnRlcjtcbn1cblxuI3VwbG9hZEltYWdlIGlvbi1pY29uLm1kLmh5ZHJhdGVkIHtcbiAgZm9udC1zaXplOiA3NnB4O1xuICBtYXJnaW4tdG9wOiAxOHB4O1xuICBjb2xvcjogI0ZGOTgwMDtcbn1cblxuI3VwbG9hZEljb24ge1xuICBmb250LXNpemU6IDc2cHg7XG4gIG1hcmdpbi10b3A6IDE4cHg7XG4gIGNvbG9yOiAjRkY5ODAwO1xufVxuXG4jdXBsb2FkSW1hZ2UgcCB7XG4gIG1hcmdpbjogMDtcbiAgbWFyZ2luLWJvdHRvbTogN3B4O1xuICBmb250LXdlaWdodDogYm9sZDtcbn1cblxuZGl2I3VwbG9hZEltYWdlIHNwYW4ge1xuICBmb250LXNpemU6IDEzcHg7XG4gIG9wYWNpdHk6IDAuNjtcbn1cblxuaW9uLWxhYmVsI0ZpbGVJbnB1dGFiZWwge1xuICB0ZXh0LWFsaWduOiBsZWZ0O1xuICBmbG9hdDogbGVmdDtcbiAgbWFyZ2luLXRvcDogMjBweDtcbiAgbWFyZ2luLWxlZnQ6IDE1cHg7XG59XG5cbmRpdiNvcHRpb25zICNsYWJlbCB7XG4gIGZvbnQtc2l6ZTogMTNweDtcbiAgbWFyZ2luLWxlZnQ6IDE1cHg7XG59XG5cbmRpdi5vcHRpb25zICNsYWJlbCB7XG4gIGZsb2F0OiBsZWZ0O1xuICBtYXJnaW4tdG9wOiAyMHB4O1xufVxuXG5pb24tdG9nZ2xlI3RvZ2dsZSB7XG4gIGZsb2F0OiByaWdodDtcbiAgbWFyZ2luLXRvcDogOHB4O1xufVxuXG5kaXYjb3B0aW9ucyB7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDUzcHg7XG4gIGZsb2F0OiBsZWZ0O1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuMDMpO1xuICBtYXJnaW4tdG9wOiAxMXB4O1xufSJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/upload/upload.page.ts":
+/*!***************************************!*\
+  !*** ./src/app/upload/upload.page.ts ***!
+  \***************************************/
+/*! exports provided: UploadPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UploadPage", function() { return UploadPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_requests_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/requests.service */ "./src/app/services/requests.service.ts");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+
+
+
+
+
+
+
+
+
+var UploadPage = /** @class */ (function () {
+    function UploadPage(requests, toastController, statusBar, route, loadingController, storage) {
+        this.requests = requests;
+        this.toastController = toastController;
+        this.statusBar = statusBar;
+        this.route = route;
+        this.loadingController = loadingController;
+        this.storage = storage;
+        this.profile_url = 'https://uploaded.herokuapp.com/users/users';
+        this.displayLoading = false;
+        this.addToPlaylist = false;
+        this.statusBar.overlaysWebView(false);
+        this.statusBar.styleDefault();
+    }
+    UploadPage.prototype.ngOnInit = function () {
+    };
+    UploadPage.prototype.ionViewDidEnter = function () {
+        var _this = this;
+        this.statusBar.overlaysWebView(false);
+        this.statusBar.backgroundColorByHexString('#ffffff');
+        this.statusBar.styleDefault();
+        // Put here the code you want to execute
+        var Email = this.storage.get('mail').then(function (val) {
+            console.log('Your email is', val);
+            _this.email = val;
+            var profile_url = 'https://uploaded.herokuapp.com/users/users';
+            if (_this.email == undefined) {
+                _this.route.navigate(['']);
+            }
+        });
+    };
+    UploadPage.prototype.changeListener = function ($event) {
+        this.file = $event.target.files[0];
+        this.presentToast("File selected: " + this.file.name);
+    };
+    UploadPage.prototype.addPlaylist = function ($event) {
+        console.log($event.target.checked);
+        this.addToPlaylist = $event.target.checked;
+        if (this.addToPlaylist == true) {
+            this.presentToast("Upload will be made available on your profile");
+        }
+    };
+    UploadPage.prototype.upload = function () {
+        var _this = this;
+        console.log("file ", this.file);
+        console.log("Add to playlist ", this.addToPlaylist);
+        console.log(jquery__WEBPACK_IMPORTED_MODULE_3__("#Select").val());
+        var genre = jquery__WEBPACK_IMPORTED_MODULE_3__("#Select").val();
+        var video_name;
+        var description = jquery__WEBPACK_IMPORTED_MODULE_3__("#uploadDescription").val();
+        var message = "";
+        if (this.file == undefined) {
+            message = "Please select file to upload";
+            this.presentLoadingWithOptions(message);
+        }
+        else if (description == undefined || description == "") {
+            message = "Please provide a description for your upload";
+            this.presentLoadingWithOptions(message);
+        }
+        else if (genre == "") {
+            message = "Please select a genre for your upload";
+            this.presentLoadingWithOptions(message);
+        }
+        else {
+            var user_email = this.email;
+            video_name = this.file.name;
+            this.displayLoading = true;
+            var upload = this.requests.Upload(this.profile_url, user_email, this.file, description, genre, this.addToPlaylist);
+            this.presentLoadingWithOptions("Uploading, please wait...");
+            upload.subscribe(function (x) {
+                _this.route.navigate(['/home/tabs/tab4']);
+                console.log(x);
+                _this.displayLoading = false;
+            });
+        }
+    };
+    UploadPage.prototype.presentToast = function (message) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var toast;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.toastController.create({
+                            message: message,
+                            duration: 2000
+                        })];
+                    case 1:
+                        toast = _a.sent();
+                        toast.present();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    //loading component
+    UploadPage.prototype.presentLoadingWithOptions = function (Message) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var loading;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.loadingController.create({
+                            spinner: null,
+                            duration: 1000,
+                            message: Message,
+                            translucent: true,
+                            cssClass: 'custom-class custom-loading'
+                        })];
+                    case 1:
+                        loading = _a.sent();
+                        return [4 /*yield*/, loading.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UploadPage.ctorParameters = function () { return [
+        { type: _services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"] },
+        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["LoadingController"] },
+        { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"] }
+    ]; };
+    UploadPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-upload',
+            template: __webpack_require__(/*! raw-loader!./upload.page.html */ "./node_modules/raw-loader/index.js!./src/app/upload/upload.page.html"),
+            styles: [__webpack_require__(/*! ./upload.page.scss */ "./src/app/upload/upload.page.scss")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["LoadingController"], _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"]])
+    ], UploadPage);
+    return UploadPage;
+}());
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=upload-upload-module-es5.js.map
