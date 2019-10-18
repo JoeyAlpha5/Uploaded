@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import * as $ from 'jquery';
 import { Storage } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { TabsPage } from '../tabs/tabs.page';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -18,9 +19,10 @@ export class ProfilePage implements OnInit {
   video_url: string  =  "http://res.cloudinary.com/uploaded/video/upload/v1567818053/";
   profile_url =  'https://uploaded.herokuapp.com/users/users';
   //profile_url = 'http://127.0.0.1:8000/users/users'
-  constructor(private requests: RequestsService,private statusBar: StatusBar,private route: Router,private storage: Storage ) {
+  constructor(private tabs: TabsPage,private requests: RequestsService,private statusBar: StatusBar,private route: Router,private storage: Storage ) {
     this.statusBar.overlaysWebView(false);
-    this.statusBar.styleDefault();    
+    this.statusBar.styleDefault();  
+    this.tabs.bgColor = '#000000';  
   }
 
   ngOnInit() {
@@ -30,6 +32,8 @@ export class ProfilePage implements OnInit {
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
     this.statusBar.styleDefault();
+    this.tabs.bgColor = '#000000';
+    this.tabs.bottom = true;
     // Put here the code you want to execute
     this.storage.get('mail').then((mail) => {
       console.log('Your email is', mail);
@@ -56,9 +60,10 @@ export class ProfilePage implements OnInit {
   }
 
 
-  Follow(user_id){
+  Follow(user_id,fl){
     this.storage.get('mail').then((mail) => {
       this.requests.Follow(this.profile_url,user_id,mail).subscribe(x => {
+        console.log(fl);
         this.ionViewDidEnter();
       });
     });    
@@ -77,6 +82,14 @@ export class ProfilePage implements OnInit {
   viewPost(post_id){
     this.storage.set("post", post_id);
     this.route.navigate(['/home/tabs/postView']);
+
+  }
+
+
+
+  viewUserFeed(username){
+    this.storage.set("uerFeedUsername", username);
+    this.route.navigate(['/home/tabs/userfeed']);
 
   }
 

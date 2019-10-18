@@ -13,7 +13,7 @@ import { firebaseConfig } from "./firebase-env";
 import * as Hammer from 'hammerjs';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import { IonicStorageModule } from '@ionic/storage';
-import { OneSignal } from '@ionic-native/onesignal/ngx';
+// import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { Tab3Page } from './tab3/tab3.page';
 
 export class CustomHammerConfig extends HammerGestureConfig {
@@ -35,7 +35,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
-    OneSignal
+    // OneSignal
   ],
   bootstrap: [AppComponent]
 })

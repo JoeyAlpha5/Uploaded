@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { RequestsService } from '../services/requests.service';
 import * as $ from 'jquery';
+import { TabsPage } from '../tabs/tabs.page';
 
 
 @Component({
@@ -25,20 +26,33 @@ export class MessagingPage implements OnInit {
   receiverID: Observable<any>;
   this_userID: Observable<any>;
   this_username: Observable<any>;
-  constructor(private statusBar: StatusBar,private storage: Storage,private database:AngularFireDatabase,private route: Router, private requests: RequestsService) { 
+  constructor(private tabs: TabsPage,private statusBar: StatusBar,private storage: Storage,private database:AngularFireDatabase,private route: Router, private requests: RequestsService) { 
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();
+    this.tabs.bgColor = '#000000';
   }
 
   ngOnInit() {
   }
 
 
+  notBottom(){
+    this.tabs.bottom = false;
+    $("#messageInput").css("margin-bottom","0px");
+  }
+
+
+  displayBottom(){
+    this.tabs.bottom = true;
+    $("#messageInput").css("margin-bottom","56px");
+  }
+
 
   ionViewDidEnter() {
     // Put here the code you want to execute
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
+    this.tabs.bgColor = '#000000';
     this.statusBar.styleDefault();
     this.storage.get('mail').then((val) => {
       let profile_url =  'https://uploaded.herokuapp.com/users/users';

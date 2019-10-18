@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import { TabsPage } from '../tabs/tabs.page';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.page.html',
@@ -15,9 +15,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class UploadPage implements OnInit {
 
-  constructor(private requests: RequestsService,public toastController: ToastController,private statusBar: StatusBar,private route: Router, public loadingController: LoadingController,private storage: Storage ) { 
+  constructor(private tabs: TabsPage,private requests: RequestsService,public toastController: ToastController,private statusBar: StatusBar,private route: Router, public loadingController: LoadingController,private storage: Storage ) { 
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();
+    this.tabs.bgColor = '#000000';
   }
 
   ngOnInit() {
@@ -30,11 +31,21 @@ export class UploadPage implements OnInit {
   displayLoading: boolean = false;
 
 
+  changeIconColors(){
+    this.tabs.tab1 = "white";
+    this.tabs.tab2 = "white";
+    this.tabs.tab3 = "#fc8700";
+    this.tabs.tab4 = "white";
+    this.tabs.tab5 = "white";
+  }
+
 
   ionViewDidEnter() {
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
     this.statusBar.styleDefault();
+    this.tabs.bgColor = '#000000';
+    this.changeIconColors();
     // Put here the code you want to execute
     var Email = this.storage.get('mail').then((val) => {
       console.log('Your email is', val);

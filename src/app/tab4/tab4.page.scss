@@ -45,6 +45,29 @@ div#Loader {
   background: rgba(128, 128, 128, 0.41);
   border-radius: 50%;
   background-size:cover !important;
+  position: absolute;
+  z-index: 1;
+}
+
+#circle{
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: white;
+  padding-top: 3px;
+  position: absolute;
+  z-index: 1;
+}
+
+
+#outerCircle{
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: -webkit-gradient(linear, left top, right top, from(#FFC107), to(#FF5722));
+  background: linear-gradient(to right, #FFC107, #FF5722);
+  padding-top: 4px;
+  margin-left: 15px;
 }
 
 p#settings {
@@ -83,7 +106,9 @@ div#Settings hr {
 div#profileBlock {
   width: 100%;
   height: auto;
-  margin-top: 10px;
+  background: transparent;
+  text-align: left;
+  margin-top: 44px;
 
   #Followers{
     font-size: 16px;
@@ -94,6 +119,7 @@ div#profileBlock {
     font-size: 20px;
     margin-bottom: 5px;
     font-size: 13px;
+    margin-left: 15px;
 
 
   }
@@ -104,7 +130,6 @@ div#profileBlock {
   height: 48px;
   text-align: -webkit-center;
   width: 100%;
-  padding-left: 27%;
   font-size: 13px;
 
   span {
@@ -171,6 +196,24 @@ div#closeMenu {
   display: none;
 }
 
+div#bannerPlaceholder {
+  width: 100%;
+  height: 100px;
+  background-color: #c7c6c6 !important;
+  position: absolute;
+  z-index: 1;
+  background-size: cover;
+  top:0;
+
+  span{
+    position: absolute;
+    margin-left: 137px;
+    margin-top: 32px;
+    color: gray;
+  }
+
+}
+
 div#dp div {
   width: 100%;
   height: 100%;
@@ -184,6 +227,7 @@ p#Posts {
   font-size: 13px;
   color: gray;
   margin: 0px;
+  margin-left: 15px;
 }
 
 
@@ -204,13 +248,20 @@ div#profile span {
 }
 
 p#bio {
-  text-align: -webkit-center;
+  text-align: left;
+  margin-left: 15px;
   color: gray;
   font-size: 13px;
 }
 
 #bioInput{
   height:57px;
+}
+
+ion-input#uploadDesc {
+  margin-left: 100px;
+  margin-top: 32px;
+  opacity: 0;
 }
 
 div#uploadedHeading {
@@ -283,7 +334,7 @@ div#playlists {
     float: left;
     margin-left: 1px;
     background-size: cover !important;
-}
+  }
 }
 
 
@@ -304,13 +355,6 @@ span#metric {
   margin-left: 5px;
 }
 
-#bottomBar{
-  background: #000000;
-  bottom: 0;
-  position: absolute;
-  width: 100%;
-  height: 60px;
-}
 
 ion-icon#message {
   float: right;

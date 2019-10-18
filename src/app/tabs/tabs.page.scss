@@ -1,7 +1,7 @@
 
 #tabs{
-    background: transparent;
-    position: absolute;
+    background: black;
+    position: fixed !important;
     bottom: 0;
     width: 100%;
     height:60px;
@@ -16,6 +16,10 @@ ion-tab-button#tab-button-upload {
     background: transparent;
 }
 
+
+
   #navIcon{
       color: white;
   }
+
+  

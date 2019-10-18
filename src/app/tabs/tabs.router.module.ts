@@ -98,6 +98,16 @@ const routes: Routes = [
               import('../messaging-list/messaging-list.module').then(m => m.MessagingListPageModule)
           }
         ]
+      },
+      {
+        path: 'userfeed',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../userfeed/userfeed.module').then(m => m.UserfeedPageModule)
+          }
+        ]
       }
       ,
       {

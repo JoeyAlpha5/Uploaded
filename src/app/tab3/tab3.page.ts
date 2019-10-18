@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { TabsPage } from '../tabs/tabs.page';
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -13,17 +14,27 @@ export class Tab3Page {
 
   notificationssRef$: Observable<any[]>;
   username: Observable<any>;
-  constructor(private database:AngularFireDatabase,private statusBar: StatusBar, private storage: Storage, private route: Router,) {
+  constructor(private tabs: TabsPage,private database:AngularFireDatabase,private statusBar: StatusBar, private storage: Storage, private route: Router,) {
     this.notificationssRef$ = this.database.list("notification", ref => ref.orderByChild('date')).valueChanges();
     this.notificationssRef$.subscribe((x)=>{
       console.log(x);
     });
   }
 
+  changeIconColors(){
+    this.tabs.tab1 = "white";
+    this.tabs.tab2 = "white";
+    this.tabs.tab3 = "white";
+    this.tabs.tab4 = "#fc8700";
+    this.tabs.tab5 = "white";
+  }
+
   ionViewDidEnter() {
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
     this.statusBar.styleDefault();
+    this.tabs.bgColor = '#000000';
+    this.changeIconColors();
     // Put here the code you want to execute
     this.storage.get('username').then((val) => {
       console.log('Your username is', val);

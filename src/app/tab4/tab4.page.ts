@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { TabsPage } from '../tabs/tabs.page';
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
@@ -15,9 +16,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class Tab4Page implements OnInit {
 
-  constructor(public loadingController: LoadingController,private statusBar: StatusBar,public actionSheetController: ActionSheetController,public toastController: ToastController, private requests: RequestsService,private storage: Storage,private route: Router  ) { 
+  constructor(private tabs: TabsPage,public loadingController: LoadingController,private statusBar: StatusBar,public actionSheetController: ActionSheetController,public toastController: ToastController, private requests: RequestsService,private storage: Storage,private route: Router  ) { 
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();
+    this.tabs.bgColor = '#000000';
   }
 
   ngOnInit() {
@@ -28,12 +30,28 @@ export class Tab4Page implements OnInit {
 
   results: Observable<any>;
   Playlists: Observable<any>;
+  displayLoading: boolean = false;
+  profile_url =  'https://uploaded.herokuapp.com/users/users';
+
+
+  
+  changeIconColors(){
+    this.tabs.tab1 = "white";
+    this.tabs.tab2 = "white";
+    this.tabs.tab3 = "white";
+    this.tabs.tab4 = "white";
+    this.tabs.tab5 = "#fc8700";
+  }
 
   ionViewDidEnter() {
     // Put here the code you want to execute
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
     this.statusBar.styleDefault();
+    this.tabs.bgColor = '#000000';
+    this.changeIconColors();
+    this.changeIconColors();
+    this.tabs.bottom = true;
     this.storage.get('mail').then((val) => {
       let profile_url =  'https://uploaded.herokuapp.com/users/users';
       //profile_url = 'http://127.0.0.1:8000/users/users'
@@ -101,6 +119,25 @@ export class Tab4Page implements OnInit {
   changeListener($event): void{
     this.file = $event.target.files[0];
     this.presentToast("File selected: "+ this.file.name);
+    this.displayLoading = true;
+    if(this.file == undefined){
+      let message = "Please select file to upload";
+      this.presentLoadingWithOptions(message)
+    this.displayLoading = false;
+    }else{
+      this.storage.get("mail").then((user_email)=>{
+        let upload = this.requests.UploadCoverImage(this.profile_url,user_email,this.file);
+        this.presentLoadingWithOptions("Uploading, please wait...");
+        upload.subscribe(x => {
+           this.route.navigate(['/home/tabs/tab4']);
+           console.log(x)
+           this.displayLoading = false;
+        
+        });
+      });
+    }
+
+
   }
 
   async presentToast(message) {
@@ -142,33 +179,50 @@ export class Tab4Page implements OnInit {
   }
 
 
+  viewUserFeed(username){
+    this.storage.set("uerFeedUsername", username);
+    this.route.navigate(['/home/tabs/userfeed']);
 
-      //present share options
-      async presentActionSheet(post_id) {
-        const actionSheet = await this.actionSheetController.create({
-          header: 'Post Actions',
-          buttons: [ 
-            {
-            text: 'Delete',
-            icon: 'trash',
-            handler: () => {
-              console.log(post_id);
-              let profile_url =  'https://uploaded.herokuapp.com/users/users';
-              this.requests.deletePost(profile_url,post_id).subscribe();
-              this.ionViewDidEnter();
-              
-            }
-          }, {
-            text: 'Cancel',
-            icon: 'close',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
-          }]
-        });
-        await actionSheet.present();
-      }
+  }
 
+
+  //present share options
+  async presentActionSheet(post_id) {
+    const actionSheet = await this.actionSheetController.create({
+      header: 'Post Actions',
+      buttons: [ 
+        {
+        text: 'Delete',
+        icon: 'trash',
+        handler: () => {
+          console.log(post_id);
+          let profile_url =  'https://uploaded.herokuapp.com/users/users';
+          this.requests.deletePost(profile_url,post_id).subscribe();
+          this.ionViewDidEnter();
+          
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+
+    //loading component
+    async presentLoadingWithOptions(Message) {
+      const loading = await this.loadingController.create({
+        spinner: null,
+        duration: 1000,
+        message: Message,
+        translucent: true,
+        cssClass: 'custom-class custom-loading'
+      });
+      return await loading.present();
+    }
 
 }

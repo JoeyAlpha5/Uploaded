@@ -12,6 +12,7 @@ import { ToastController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 import { Location } from '@angular/common';
 
+
 @Component({
   selector: 'app-post-view',
   templateUrl: './post-view.page.html',
@@ -37,7 +38,16 @@ export class PostViewPage implements OnInit {
     this.commentsRef$ = this.database.list("comments").valueChanges();
     // this.commentsRef$ = this.database.list("reposts").valueChanges();
     this.statusBar.overlaysWebView(true);
+    this.tabsPage.bgColor = '#000000';
+    this.displayComments();
 
+  }
+
+  ngOnInit() {
+  }
+
+
+  displayComments(){
     this.commentsRef$.subscribe((val)=>{
       console.log("Comments",val);
       //load comments bottom
@@ -49,19 +59,28 @@ export class PostViewPage implements OnInit {
           console.log("scroll top",this.commnentsTab[x].scrollTop);
           console.log("scroll height",this.commnentsTab[x].scrollHeight);
           //element.scrollTop = element.scrollHeight;
+
+          for(let c = 0; c < val.length; c++){
+            $("#"+val[c].post+"CommentsCount").text("0");
+          }
+          //get the number of comments for each post
+          for(let c = 0; c < val.length; c++){
+            //console.log("this comment belongs to post ", val[c].post);
+            let currentTotalComments = parseInt($("#"+val[c].post+"CommentsCount").text());
+            currentTotalComments += 1;
+            $("#"+val[c].post+"CommentsCount").text(currentTotalComments);
+          }
         }
-      }, 10);
+      }, 1000);
 
     });
-
-  }
-
-  ngOnInit() {
   }
 
   ionViewDidEnter() {
     this.statusBar.overlaysWebView(true);
     this.tabsPage.bottom = false;
+    this.tabsPage.bgColor = '#000000';
+    this.displayComments();
     // Put here the code you want to execute
     var Email = this.storage.get('mail').then((val) => {
       console.log('Your email is', val);
@@ -106,9 +125,15 @@ export class PostViewPage implements OnInit {
   }
   
   playVideo(id){
-    var video = <HTMLVideoElement> document.getElementById(id+"videobcg");
+    var video = <HTMLVideoElement> document.getElementById(id+"videobc");
     console.log(id);
     console.log("paused",video.paused);
+    let CommentsBox =  $(".allComments");
+    console.log(CommentsBox);
+    //close all comment boxes
+    for(let x = 0; x < CommentsBox.length; x++){
+      CommentsBox[x].style.display = 'none';
+    }
     if(video.paused == true){
       video.play();
     }else{
@@ -134,9 +159,24 @@ export class PostViewPage implements OnInit {
 
   }
 
+  showAllComments(post_id){
+    console.log(post_id);
+    $("#"+post_id+"allComments").show();
+    // this.commentsRef$.subscribe((com)=>{
+    //   console.log(com);
+    //   $("#"+post_id+"allComments").html("");
+    //   for(let c = 0; c < com.length; c++ ){
+    //     if(com[c].post == post_id){
+    //       $("#"+post_id+"allComments").append("<div><span>"+com[c].user+"</span><p>"+com[c].comment+"</p></div>");
+    //       console.log(com[c].user);
+    //     }
+    //   }
+    // });
+  }
 
 
-  like(post_id:any){
+
+  like(post_id:any,slideId){
     console.log(post_id);
     var profile_url =  'https://uploaded.herokuapp.com/users/users';
     var like =  this.requests.Like(profile_url, this.email, post_id);
@@ -145,9 +185,13 @@ export class PostViewPage implements OnInit {
       //if false meaning had not been liked, but now liked
       console.log(this.email);
       if(response == false){
-        $("#"+post_id+"likeIcon").css("color","#f44336");
+        $("#"+post_id+"likeIcon").css("color","#E91E63");
         var likes = JSON.parse($("#"+post_id+"likeCount").text());
         $("#"+post_id+"likeCount").text(likes += 1);
+        $("."+slideId+"heartAnimations").show();
+        setTimeout( function(){
+          $("."+slideId+"heartAnimations").hide();
+        }, 500 );
       }else{
         $("#"+post_id+"likeIcon").css("color","#ffffff");
         var likes = JSON.parse($("#"+post_id+"likeCount").text());
@@ -158,7 +202,7 @@ export class PostViewPage implements OnInit {
 
 
   postComment(post_id){
-    var commentMessage = $("#"+post_id+"commentInput").val();
+    var commentMessage = $("#"+post_id+"commentIn").val();
     var postedBy: any;
     this.storage.get('username').then((val) => {
       // console.log('Your age is', val);
@@ -166,12 +210,27 @@ export class PostViewPage implements OnInit {
       if(commentMessage != null && commentMessage != ""){
         var comment = {post: post_id,user: postedBy, comment: commentMessage};
         this.database.list("comments").push(comment);
-        $("#"+post_id+"commentInput").val("");
+        $("#"+post_id+"commentIn").val("");
       }
       console.log(commentMessage);
     });
   }
   
+
+  postComment2(post_id){
+    var commentMessage = $("#"+post_id+"commentInput2").val();
+    var postedBy: any;
+    this.storage.get('username').then((val) => {
+      // console.log('Your age is', val);
+      postedBy = val;
+      if(commentMessage != null && commentMessage != ""){
+        var comment = {post: post_id,user: postedBy, comment: commentMessage};
+        this.database.list("comments").push(comment);
+        $("#"+post_id+"commentInput2").val("");
+      }
+      console.log(commentMessage);
+    });
+  }
 
 
   moveUpComments(div){
@@ -181,6 +240,7 @@ export class PostViewPage implements OnInit {
     // this.styleMarginTop = "55%";
     this.statusBar.overlaysWebView(false);
     console.log("Move comments up");
+    $("#userinfo").css("margin-bottom", "0px");
   }
 
 
@@ -190,6 +250,7 @@ export class PostViewPage implements OnInit {
     // this.styleMarginTop = "unset";
     this.statusBar.overlaysWebView(true);
     console.log("Move comments down");
+    $("#userinfo").css("margin-bottom", "100px");
   }
 
 

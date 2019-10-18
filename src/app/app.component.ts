@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OneSignal } from '@ionic-native/onesignal/ngx';
+// import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -23,7 +23,7 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private oneSignal: OneSignal,
+    // private oneSignal: OneSignal,
     public alertController: AlertController,
     private storage: Storage,
     private requests: RequestsService,
@@ -34,14 +34,14 @@ export class AppComponent {
     this.initializeApp();
     // firebase.initializeApp(firebaseConfig);
 
-    if(this.platform.is("android")){
-      this.setUpPush();
-    }
+    // if(this.platform.is("android")){
+    //   this.setUpPush();
+    // }
 
     // this.notificationssRef$ = this.database.list("notifications").valueChanges();
   }
 
-  setUpPush(){
+  /*setUpPush(){
     let oneSignalAppID =  "213117e1-5258-44df-9de4-7206c18669b9";
     let oneSignalApiKey = "ODM2NDQ4MTQtYzNiZC00MDA4LWI3YTQtYmZiZGY0ZjhjOGJl";
     let firebaseSenderID =  "929396145480";
@@ -80,7 +80,7 @@ export class AppComponent {
     });
 
     this.oneSignal.endInit();
-  }
+  }*/
 
 
   async showAlert(title, msg,additionalData) {

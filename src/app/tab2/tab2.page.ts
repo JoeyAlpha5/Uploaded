@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
+import { TabsPage } from '../tabs/tabs.page';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -16,25 +17,39 @@ export class Tab2Page {
   searchTerm = '';
   profile_url =  'https://uploaded.herokuapp.com/users/users';
   userID: Observable<any>;
-  constructor(private platform: Platform,private requests: RequestsService, private statusBar: StatusBar,private route: Router,private storage: Storage ) {
+  searchContent: Observable<any>;
+  constructor(private tabs: TabsPage,private platform: Platform,private requests: RequestsService, private statusBar: StatusBar,private route: Router,private storage: Storage ) {
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();
+    this.tabs.bgColor = '#000000';
     // this.platform.backButton.subscribe(() => {
       
     // });
 
   }
 
+  changeIconColors(){
+    this.tabs.tab1 = "white";
+    this.tabs.tab2 = "#fc8700";
+    this.tabs.tab3 = "white";
+    this.tabs.tab4 = "white";
+    this.tabs.tab5 = "white";
+  }
+
   ionViewDidEnter() {
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
     this.statusBar.styleDefault();
+    this.tabs.bgColor = '#000000';
+    this.changeIconColors();
     this.storage.get('mail').then((val) => {
       if(val == undefined){
         this.route.navigate(['']);
       }else{
         this.storage.get('current_userID').then((val) => {
           this.userID = val;
+          this.searchContent =  this.requests.searchPage(this.profile_url);
+          this.searchContent.subscribe();
         });
       }
     })

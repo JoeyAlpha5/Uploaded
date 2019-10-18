@@ -10,7 +10,7 @@
 var map = {
 	"./login/login.module": [
 		"./src/app/login/login.module.ts",
-		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
 		"login-login-module"
 	],
 	"./messaging-list/messaging-list.module": [
@@ -19,33 +19,44 @@ var map = {
 	],
 	"./messaging/messaging.module": [
 		"./src/app/messaging/messaging.module.ts",
-		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
+		"common",
 		"messaging-messaging-module"
 	],
 	"./post-view/post-view.module": [
 		"./src/app/post-view/post-view.module.ts",
-		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
 		"common",
 		"post-view-post-view-module"
 	],
 	"./profile/profile.module": [
 		"./src/app/profile/profile.module.ts",
+		"common",
 		"profile-profile-module"
 	],
 	"./settings/settings.module": [
 		"./src/app/settings/settings.module.ts",
-		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
+		"common",
 		"settings-settings-module"
 	],
 	"./tab4/tab4.module": [
 		"./src/app/tab4/tab4.module.ts",
-		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
+		"common",
 		"tab4-tab4-module"
 	],
 	"./upload/upload.module": [
 		"./src/app/upload/upload.module.ts",
-		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
+		"common",
 		"upload-upload-module"
+	],
+	"./userfeed/userfeed.module": [
+		"./src/app/userfeed/userfeed.module.ts",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
+		"common",
+		"userfeed-userfeed-module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -525,7 +536,8 @@ const routes = [
     { path: 'post-view', loadChildren: './post-view/post-view.module#PostViewPageModule' },
     { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
     { path: 'messaging', loadChildren: './messaging/messaging.module#MessagingPageModule' },
-    { path: 'messaging-list', loadChildren: './messaging-list/messaging-list.module#MessagingListPageModule' }
+    { path: 'messaging-list', loadChildren: './messaging-list/messaging-list.module#MessagingListPageModule' },
+    { path: 'userfeed', loadChildren: './userfeed/userfeed.module#UserfeedPageModule' }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -602,9 +614,9 @@ let AppComponent = class AppComponent {
         this.database = database;
         this.initializeApp();
         // firebase.initializeApp(firebaseConfig);
-        /*if(this.platform.is("android")){
-          this.setUpPush();
-        }*/
+        // if(this.platform.is("android")){
+        //   this.setUpPush();
+        // }
         // this.notificationssRef$ = this.database.list("notifications").valueChanges();
     }
     /*setUpPush(){
@@ -913,6 +925,12 @@ let RequestsService = class RequestsService {
             return results;
         }));
     }
+    getUserFeed(url, username, email) {
+        return this.http.get(url, { params: { type: 'getUserFeed', username: username, "email": email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    }
     //notifications
     registerDevice(url, user_email, user_id) {
         return this.http.get(url, { params: { type: 'registerDevice', email: user_email, user_id: user_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
@@ -922,6 +940,16 @@ let RequestsService = class RequestsService {
     }
     sendMessageNotification(url, to, sender, message) {
         return this.http.get(url, { params: { type: 'sendMessageNotif', to: to, sender: sender, message: message } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
+            console.log("Results", results);
+            return results;
+        }));
+    }
+    UploadCoverImage(url, user_email, file) {
+        let postData = new FormData();
+        postData.append('file', file);
+        postData.append('type', 'uploadCover');
+        postData.append('email', user_email);
+        return this.http.post(url, postData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
             console.log("Results", results);
             return results;
         }));

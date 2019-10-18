@@ -10,6 +10,9 @@ import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import { ToastController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 import { IonSlides } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
+import { TabsPage } from '../tabs/tabs.page';
+
 
 @Component({
   selector: 'app-tab1',
@@ -24,32 +27,17 @@ export class Tab1Page {
   commnentsTab: any;
   @ViewChild('slider', {static: false}) slide: IonSlides;
 
-  constructor(public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage) {
+  constructor(private tabs: TabsPage,private platform: Platform,public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage) {
     this.commentsRef$ = this.database.list("comments").valueChanges();
     // this.commentsRef$ = this.database.list("reposts").valueChanges();
     this.statusBar.overlaysWebView(true);
-
-
-    this.commentsRef$.subscribe((val)=>{
-      console.log("Comments",val);
-      //load comments bottom
-      setTimeout(function(){ 
-        this.commnentsTab = document.getElementsByClassName("commentBox");  
-        //display the last comment added
-        for(let x = 0; x < this.commnentsTab.length; x++){
-          this.commnentsTab[x].scrollTop = this.commnentsTab[x].scrollHeight;
-          console.log("scroll top",this.commnentsTab[x].scrollTop);
-          console.log("scroll height",this.commnentsTab[x].scrollHeight);
-          //element.scrollTop = element.scrollHeight;
-        }
-      }, 10);
-
-    });
+    this.tabs.bgColor = 'transparent';
+    this.displayComments();
 
   }
 
     slideOpts = {
-      initialSlide: 1,
+      initialSlide: 0,
       speed: 400
     };
 
@@ -57,14 +45,60 @@ export class Tab1Page {
     email: any;
 
 
-    CommentsUp(){
-      this.statusBar.overlaysWebView(false);
-      console.log("Move comments up");
+    displayComments(){
+      this.commentsRef$.subscribe((val)=>{
+        console.log("Comments",val);
+        //load comments bottom
+        setTimeout(function(){ 
+          this.commnentsTab = document.getElementsByClassName("commentBox");  
+          //display the last comment added
+          for(let x = 0; x < this.commnentsTab.length; x++){
+            this.commnentsTab[x].scrollTop = this.commnentsTab[x].scrollHeight;
+            console.log("scroll top",this.commnentsTab[x].scrollTop);
+            console.log("scroll height",this.commnentsTab[x].scrollHeight);
+            //element.scrollTop = element.scrollHeight;
+          }
+          //reset the comments count for each post
+          for(let c = 0; c < val.length; c++){
+            $("#"+val[c].post+"CommentsCount").text("0");
+          }
+          //get the number of comments for each post
+          for(let c = 0; c < val.length; c++){
+            //console.log("this comment belongs to post ", val[c].post);
+            let currentTotalComments = parseInt($("#"+val[c].post+"CommentsCount").text());
+            currentTotalComments += 1;
+            $("#"+val[c].post+"CommentsCount").text(currentTotalComments);
+          }
+
+        }, 1000);
+
+      });
     }
 
-    CommentsDown(){
+
+    CommentsUp(i){
+      console.log("Move comments up");  
+      this.tabs.bottom = false; 
+      if(this.platform.is("ios")){
+        $("."+i+"userInfo").css("margin-bottom","80%");
+        $("."+i+"PostData").css("margin-top","-100%");
+      }else{
+        this.statusBar.overlaysWebView(false);
+        $("."+i+"userInfo").css("margin-bottom","0");
+      }
+      
+    }
+
+    CommentsDown(i){
       this.statusBar.overlaysWebView(true);
+      this.tabs.bottom = true; 
       console.log("Move comments down");
+      if(this.platform.is("ios")){
+        $("."+i+"userInfo").css("margin-bottom","100px");
+        $("."+i+"PostData").css("margin-top","20%");
+      }else{
+        $("."+i+"userInfo").css("margin-bottom","100px");
+      }
     }
 
 
@@ -103,12 +137,24 @@ export class Tab1Page {
     
     playVideo(id){
       var video = <HTMLVideoElement> document.getElementById(id+"videobcg");
+      let CommentsBox =  $(".allComments");
+      console.log(CommentsBox);
+      //close all comment boxes
+      for(let x = 0; x < CommentsBox.length; x++){
+          CommentsBox[x].style.display = 'none';
+      }
+
+      this.tabs.bottom = true;
       console.log(id);
       console.log("paused",video.paused);
       if(video.paused == true){
         video.play();
+        $("."+id+"userInfo").show();
+        $("."+id+"PostData").show();
       }else{
         video.pause();
+        $("."+id+"userInfo").show();
+        $("."+id+"PostData").show();
       }
 
     }
@@ -133,6 +179,7 @@ export class Tab1Page {
           this.presentToast("You've already reposted this post");
         }else{
           this.presentToast("Post has been shared to your feed");
+          
         }
         
       });
@@ -151,11 +198,12 @@ export class Tab1Page {
       toast.present();
     }
 
-    onSwipeUp(user_id, email){
+    onSwipeUp(user_id, email,i){
       console.log("swipe up");
       console.log(user_id, email);
       this.storage.set("user_id",user_id);
       this.storage.set("userProfileEmail",email);
+      this.pauseVideo(i);
       this.route.navigate(['/home/tabs/profile']);
     }
 
@@ -169,7 +217,7 @@ export class Tab1Page {
     }
 
 
-    like(post_id:any){
+    like(post_id:any, slideId){
       console.log(post_id);
       var profile_url =  'https://uploaded.herokuapp.com/users/users';
       var like =  this.requests.Like(profile_url, this.email, post_id);
@@ -178,13 +226,18 @@ export class Tab1Page {
         //if false meaning had not been liked, but now liked
         console.log(this.email);
         if(response == false){
-          $("#"+post_id+"likeIcon").css("color","#f44336");
+          $("#"+post_id+"likeIcon").css("color","#E91E63");
           var likes = JSON.parse($("#"+post_id+"likeCount").text());
           $("#"+post_id+"likeCount").text(likes += 1);
+          $("."+slideId+"heartAnimations").show();
+          setTimeout( function(){
+            $("."+slideId+"heartAnimations").hide();
+          }, 500 );
         }else{
           $("#"+post_id+"likeIcon").css("color","#ffffff");
           var likes = JSON.parse($("#"+post_id+"likeCount").text());
           $("#"+post_id+"likeCount").text(likes -= 1);
+          
         }
       });
     }
@@ -204,10 +257,55 @@ export class Tab1Page {
         console.log(commentMessage);
       });
     }
+
+    postComment2(post_id){
+      var commentMessage = $("#"+post_id+"commentInput2").val();
+      var postedBy: any;
+      this.storage.get('username').then((val) => {
+        // console.log('Your age is', val);
+        postedBy = val;
+        if(commentMessage != null && commentMessage != ""){
+          var comment = {post: post_id,user: postedBy, comment: commentMessage};
+          this.database.list("comments").push(comment);
+          $("#"+post_id+"commentInput2").val("");
+        }
+        console.log(commentMessage);
+      });
+    }
+
+    showAllComments(post_id){
+      console.log(post_id);
+      this.tabs.bottom = false;
+      $("#"+post_id+"allComments").show();
+      // this.commentsRef$.subscribe((com)=>{
+      //   console.log(com);
+      //   $("#"+post_id+"allComments").html("");
+      //   for(let c = 0; c < com.length; c++ ){
+      //     if(com[c].post == post_id){
+      //       $("#"+post_id+"allComments").append("<div><span>"+com[c].user+"</span><p>"+com[c].comment+"</p></div>");
+      //       console.log(com[c].user);
+      //     }
+      //   }
+      // });
+    }
     
+
+
+    changeIconColors(){
+      this.tabs.tab1 = "#fc8700";
+      this.tabs.tab2 = "white";
+      this.tabs.tab3 = "white";
+      this.tabs.tab4 = "white";
+      this.tabs.tab5 = "white";
+    }
+
 
     ionViewDidEnter() {
       this.statusBar.overlaysWebView(true);
+      this.tabs.bgColor = 'transparent';
+      this.displayComments();
+      //change icon colors
+      this.changeIconColors();
       this.storage.get('mail').then((val) => {
         console.log('Your email is', val);
         this.email = val;

@@ -148,6 +148,15 @@ export class RequestsService {
   }
 
 
+  getUserFeed(url, username,email){
+    return this.http.get(url, {params: {type: 'getUserFeed', username:username, "email":email}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results["Response"];
+      })
+    );
+  }
+
 
   //notifications
   registerDevice(url,user_email,user_id){
@@ -162,6 +171,29 @@ export class RequestsService {
 
   sendMessageNotification(url,to,sender,message){
     return this.http.get(url, {params: {type: 'sendMessageNotif', to:to,sender:sender,message:message}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results;
+      })
+    );
+  }
+
+  searchPage(url){
+    return this.http.get(url, {params: {type: 'searchPage'}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results["Response"];
+      })
+    );
+  }
+
+
+  UploadCoverImage(url,user_email,file){
+    let postData = new FormData();
+    postData.append('file', file);
+    postData.append('type', 'uploadCover');
+    postData.append('email', user_email);
+    return this.http.post(url, postData).pipe(
       map(results => {
         console.log("Results",results);
         return results;

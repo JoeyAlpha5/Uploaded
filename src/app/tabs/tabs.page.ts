@@ -9,6 +9,12 @@ export class TabsPage {
 
 
   bottom: boolean = true;
+  bgColor: string = "black";
+  tab1 = "white";
+  tab2 = "white";
+  tab3 = "white";
+  tab4 = "white";
+  tab5 = "white";
   
 
   constructor() {}

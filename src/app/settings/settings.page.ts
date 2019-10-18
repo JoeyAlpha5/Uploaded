@@ -7,6 +7,7 @@ import { RequestsService } from '../services/requests.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
+import { TabsPage } from '../tabs/tabs.page';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -18,9 +19,10 @@ export class SettingsPage implements OnInit {
   Bottom: boolean = true;
   results: Observable<any>;
 
-  constructor(private statusBar: StatusBar,public toastController: ToastController,private storage: Storage,private requests: RequestsService,private route: Router,public loadingController: LoadingController ) { 
+  constructor(private tabs: TabsPage,private statusBar: StatusBar,public toastController: ToastController,private storage: Storage,private requests: RequestsService,private route: Router,public loadingController: LoadingController ) { 
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();
+    this.tabs.bgColor = '#000000';
   }
 
   ngOnInit() {
@@ -33,6 +35,7 @@ export class SettingsPage implements OnInit {
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
     this.statusBar.styleDefault();
+    this.tabs.bgColor = '#000000';
     this.storage.get('mail').then((val) => {
       let profile_url =  'https://uploaded.herokuapp.com/users/users';
       //profile_url = 'http://127.0.0.1:8000/users/users'

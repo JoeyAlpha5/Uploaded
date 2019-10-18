@@ -20,8 +20,7 @@
   </div>
 
   <div id="messageInput">
-    <input id="message" type="text" placeholder="Message...">
+    <input id="message" (focus)="notBottom()" (blur)="displayBottom()" type="text" placeholder="Message...">
     <ion-icon name="send" id="sendIcon" (click)="sendMessage()"></ion-icon>
-  </div>
-  <div id="bottomBar"></div>
+  </div> 
 </ion-content>

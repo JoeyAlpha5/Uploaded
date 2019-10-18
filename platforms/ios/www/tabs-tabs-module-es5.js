@@ -74,7 +74,7 @@ var routes = [
                     {
                         path: '',
                         loadChildren: function () {
-                            return Promise.all(/*! import() | tab1-tab1-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb"), __webpack_require__.e("tab1-tab1-module")]).then(__webpack_require__.bind(null, /*! ../tab1/tab1.module */ "./src/app/tab1/tab1.module.ts")).then(function (m) { return m.Tab1PageModule; });
+                            return Promise.all(/*! import() | tab1-tab1-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("tab1-tab1-module")]).then(__webpack_require__.bind(null, /*! ../tab1/tab1.module */ "./src/app/tab1/tab1.module.ts")).then(function (m) { return m.Tab1PageModule; });
                         }
                     }
                 ]
@@ -107,7 +107,7 @@ var routes = [
                     {
                         path: '',
                         loadChildren: function () {
-                            return Promise.all(/*! import() | tab4-tab4-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb"), __webpack_require__.e("tab4-tab4-module")]).then(__webpack_require__.bind(null, /*! ../tab4/tab4.module */ "./src/app/tab4/tab4.module.ts")).then(function (m) { return m.Tab4PageModule; });
+                            return Promise.all(/*! import() | tab4-tab4-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("common"), __webpack_require__.e("tab4-tab4-module")]).then(__webpack_require__.bind(null, /*! ../tab4/tab4.module */ "./src/app/tab4/tab4.module.ts")).then(function (m) { return m.Tab4PageModule; });
                         }
                     }
                 ]
@@ -118,7 +118,7 @@ var routes = [
                     {
                         path: '',
                         loadChildren: function () {
-                            return __webpack_require__.e(/*! import() | profile-profile-module */ "profile-profile-module").then(__webpack_require__.bind(null, /*! ../profile/profile.module */ "./src/app/profile/profile.module.ts")).then(function (m) { return m.ProfilePageModule; });
+                            return Promise.all(/*! import() | profile-profile-module */[__webpack_require__.e("common"), __webpack_require__.e("profile-profile-module")]).then(__webpack_require__.bind(null, /*! ../profile/profile.module */ "./src/app/profile/profile.module.ts")).then(function (m) { return m.ProfilePageModule; });
                         }
                     }
                 ]
@@ -129,7 +129,7 @@ var routes = [
                     {
                         path: '',
                         loadChildren: function () {
-                            return Promise.all(/*! import() | upload-upload-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb"), __webpack_require__.e("upload-upload-module")]).then(__webpack_require__.bind(null, /*! ../upload/upload.module */ "./src/app/upload/upload.module.ts")).then(function (m) { return m.UploadPageModule; });
+                            return Promise.all(/*! import() | upload-upload-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("common"), __webpack_require__.e("upload-upload-module")]).then(__webpack_require__.bind(null, /*! ../upload/upload.module */ "./src/app/upload/upload.module.ts")).then(function (m) { return m.UploadPageModule; });
                         }
                     }
                 ]
@@ -140,7 +140,7 @@ var routes = [
                     {
                         path: '',
                         loadChildren: function () {
-                            return Promise.all(/*! import() | post-view-post-view-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb"), __webpack_require__.e("common"), __webpack_require__.e("post-view-post-view-module")]).then(__webpack_require__.bind(null, /*! ../post-view/post-view.module */ "./src/app/post-view/post-view.module.ts")).then(function (m) { return m.PostViewPageModule; });
+                            return Promise.all(/*! import() | post-view-post-view-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("common"), __webpack_require__.e("post-view-post-view-module")]).then(__webpack_require__.bind(null, /*! ../post-view/post-view.module */ "./src/app/post-view/post-view.module.ts")).then(function (m) { return m.PostViewPageModule; });
                         }
                     }
                 ]
@@ -151,7 +151,7 @@ var routes = [
                     {
                         path: '',
                         loadChildren: function () {
-                            return Promise.all(/*! import() | messaging-messaging-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb"), __webpack_require__.e("messaging-messaging-module")]).then(__webpack_require__.bind(null, /*! ../messaging/messaging.module */ "./src/app/messaging/messaging.module.ts")).then(function (m) { return m.MessagingPageModule; });
+                            return Promise.all(/*! import() | messaging-messaging-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("common"), __webpack_require__.e("messaging-messaging-module")]).then(__webpack_require__.bind(null, /*! ../messaging/messaging.module */ "./src/app/messaging/messaging.module.ts")).then(function (m) { return m.MessagingPageModule; });
                         }
                     }
                 ]
@@ -168,12 +168,23 @@ var routes = [
                 ]
             },
             {
+                path: 'userfeed',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: function () {
+                            return Promise.all(/*! import() | userfeed-userfeed-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("common"), __webpack_require__.e("userfeed-userfeed-module")]).then(__webpack_require__.bind(null, /*! ../userfeed/userfeed.module */ "./src/app/userfeed/userfeed.module.ts")).then(function (m) { return m.UserfeedPageModule; });
+                        }
+                    }
+                ]
+            },
+            {
                 path: 'settings',
                 children: [
                     {
                         path: '',
                         loadChildren: function () {
-                            return Promise.all(/*! import() | settings-settings-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~fe2d77cb"), __webpack_require__.e("settings-settings-module")]).then(__webpack_require__.bind(null, /*! ../settings/settings.module */ "./src/app/settings/settings.module.ts")).then(function (m) { return m.SettingsPageModule; });
+                            return Promise.all(/*! import() | settings-settings-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("common"), __webpack_require__.e("settings-settings-module")]).then(__webpack_require__.bind(null, /*! ../settings/settings.module */ "./src/app/settings/settings.module.ts")).then(function (m) { return m.SettingsPageModule; });
                         }
                     }
                 ]

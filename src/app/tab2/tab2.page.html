@@ -24,5 +24,13 @@
       <p *ngIf="item.id != userID" (click)="viewProfile(item.id,item.email)">{{ item.first_name + " "  + item.last_name }} </p>
   </ion-item>
 
-  <div id="bottomBar"></div>
+  <div *ngFor='let item of ( searchContent | async)'>
+    <div id="playlist"  [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.file + '.jpg)'}" >
+      <div id="playlistPreview" (click)="viewPost(item.post_id)" (press)="Playlist(item.post_id)">
+        <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
+      </div>
+    </div> 
+  </div>
+
+ 
 </ion-content>

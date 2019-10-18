@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: 'post-view', loadChildren: './post-view/post-view.module#PostViewPageModule' },
   { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
   { path: 'messaging', loadChildren: './messaging/messaging.module#MessagingPageModule' },
-  { path: 'messaging-list', loadChildren: './messaging-list/messaging-list.module#MessagingListPageModule' }
+  { path: 'messaging-list', loadChildren: './messaging-list/messaging-list.module#MessagingListPageModule' },
+  { path: 'userfeed', loadChildren: './userfeed/userfeed.module#UserfeedPageModule' }
 ];
 @NgModule({
   imports: [
