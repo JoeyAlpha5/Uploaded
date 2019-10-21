@@ -97,15 +97,27 @@ let Tab3Page = class Tab3Page {
         this.storage = storage;
         this.route = route;
         this.notificationssRef$ = this.database.list("notification", ref => ref.orderByChild('date')).valueChanges();
+        this.statusBar.overlaysWebView(false);
+        this.statusBar.backgroundColorByHexString('#ffffff');
+        this.statusBar.styleDefault();
+        this.tabs.bgColor = '#000000';
         this.notificationssRef$.subscribe((x) => {
             console.log(x);
         });
+    }
+    changeIconColors() {
+        this.tabs.tab1 = "white";
+        this.tabs.tab2 = "white";
+        this.tabs.tab3 = "white";
+        this.tabs.tab4 = "#fc8700";
+        this.tabs.tab5 = "white";
     }
     ionViewDidEnter() {
         this.statusBar.overlaysWebView(false);
         this.statusBar.backgroundColorByHexString('#ffffff');
         this.statusBar.styleDefault();
         this.tabs.bgColor = '#000000';
+        this.changeIconColors();
         // Put here the code you want to execute
         this.storage.get('username').then((val) => {
             console.log('Your username is', val);

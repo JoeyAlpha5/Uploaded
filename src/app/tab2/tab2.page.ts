@@ -28,6 +28,13 @@ export class Tab2Page {
 
   }
 
+  viewPost(post_id){
+    this.storage.set("post", post_id);
+    this.route.navigate(['/home/tabs/postView']);
+
+  }
+
+
   changeIconColors(){
     this.tabs.tab1 = "white";
     this.tabs.tab2 = "#fc8700";

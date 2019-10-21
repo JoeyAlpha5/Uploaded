@@ -16,6 +16,10 @@ export class Tab3Page {
   username: Observable<any>;
   constructor(private tabs: TabsPage,private database:AngularFireDatabase,private statusBar: StatusBar, private storage: Storage, private route: Router,) {
     this.notificationssRef$ = this.database.list("notification", ref => ref.orderByChild('date')).valueChanges();
+    this.statusBar.overlaysWebView(false);
+    this.statusBar.backgroundColorByHexString('#ffffff');
+    this.statusBar.styleDefault();
+    this.tabs.bgColor = '#000000';
     this.notificationssRef$.subscribe((x)=>{
       console.log(x);
     });

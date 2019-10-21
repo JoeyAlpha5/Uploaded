@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-// import { OneSignal } from '@ionic-native/onesignal/ngx';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -9,7 +9,7 @@ import { AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { RequestsService } from "./services/requests.service";
 import { AngularFireDatabase } from 'angularfire2/database';
-// import { Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
@@ -18,12 +18,12 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-  // notificationssRef$: Observable<any[]>;
+  notificationssRef$: Observable<any[]>;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    // private oneSignal: OneSignal,
+    private oneSignal: OneSignal,
     public alertController: AlertController,
     private storage: Storage,
     private requests: RequestsService,
@@ -34,21 +34,21 @@ export class AppComponent {
     this.initializeApp();
     // firebase.initializeApp(firebaseConfig);
 
-    // if(this.platform.is("android")){
-    //   this.setUpPush();
-    // }
+    if(this.platform.is("cordova")){
+      this.setUpPush();
+    }
 
-    // this.notificationssRef$ = this.database.list("notifications").valueChanges();
+    this.notificationssRef$ = this.database.list("notifications").valueChanges();
   }
 
-  /*setUpPush(){
+  setUpPush(){
     let oneSignalAppID =  "213117e1-5258-44df-9de4-7206c18669b9";
-    let oneSignalApiKey = "ODM2NDQ4MTQtYzNiZC00MDA4LWI3YTQtYmZiZGY0ZjhjOGJl";
+    // let oneSignalApiKey = "ODM2NDQ4MTQtYzNiZC00MDA4LWI3YTQtYmZiZGY0ZjhjOGJl";
     let firebaseSenderID =  "929396145480";
     this.oneSignal.startInit(oneSignalAppID,firebaseSenderID);
 
     //check the device is already registered
-    let device_id = this.storage.get("device_id").then((val)=>{
+    this.storage.get("device_id").then((val)=>{
       if(val == undefined){
         this.oneSignal.getIds().then((id)=>{
           let device = id.userId;
@@ -80,7 +80,7 @@ export class AppComponent {
     });
 
     this.oneSignal.endInit();
-  }*/
+  }
 
 
   async showAlert(title, msg,additionalData) {

@@ -26,6 +26,7 @@ export class PostViewPage implements OnInit {
   styleExp: string = "0";
   styleTop: string = "unset";
   styleMarginTop: string = "unset";
+  postViewsRef$: Observable<any[]>;
   commnentsTab: any;
   email: any;
 
@@ -36,6 +37,7 @@ export class PostViewPage implements OnInit {
 
   constructor(private location: Location,public actionSheetController: ActionSheetController,private database:AngularFireDatabase,private tabsPage: TabsPage,private requests: RequestsService,public toastController: ToastController,private statusBar: StatusBar,private route: Router, public loadingController: LoadingController,private storage: Storage ) { 
     this.commentsRef$ = this.database.list("comments").valueChanges();
+    this.postViewsRef$ = this.database.list("views").valueChanges();
     // this.commentsRef$ = this.database.list("reposts").valueChanges();
     this.statusBar.overlaysWebView(true);
     this.tabsPage.bgColor = '#000000';
@@ -74,6 +76,34 @@ export class PostViewPage implements OnInit {
       }, 1000);
 
     });
+
+    this.storage.get("current_userID").then((val)=>{
+      this.storage.get("post").then((post) =>{
+        console.log(post);
+        let current_post_id = JSON.stringify(post);
+        this.database.list("views/").remove(JSON.stringify(val+current_post_id))
+        this.database.object("views/"+JSON.stringify(val+current_post_id)).set({"user": val, "post_id":parseInt(current_post_id)});
+        //display views
+        this.postViewsRef$.subscribe((val)=>{
+          setTimeout(function(){
+            for(let c = 0; c < val.length; c++){
+              $("#viewCount").text("000");
+            }
+            for(let v =0; v < val.length; v++){
+              let post_id =  val[v].post_id;
+              console.log(post_id);
+              let current_views = parseInt($("#viewCount").text());
+              console.log(current_views);
+              current_views += 1;
+              $("#viewCount").text(current_views);
+            }
+          },1000);
+        });
+      });
+    });
+
+
+
   }
 
   ionViewDidEnter() {

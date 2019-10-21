@@ -25,10 +25,12 @@ export class Tab1Page {
   commentsRef$: Observable<any[]>;
   repostsRef$: Observable<any[]>;
   commnentsTab: any;
+  postViewsRef$: Observable<any[]>;
   @ViewChild('slider', {static: false}) slide: IonSlides;
 
   constructor(private tabs: TabsPage,private platform: Platform,public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage) {
     this.commentsRef$ = this.database.list("comments").valueChanges();
+    this.postViewsRef$ = this.database.list("views").valueChanges();
     // this.commentsRef$ = this.database.list("reposts").valueChanges();
     this.statusBar.overlaysWebView(true);
     this.tabs.bgColor = 'transparent';
@@ -50,7 +52,8 @@ export class Tab1Page {
         console.log("Comments",val);
         //load comments bottom
         setTimeout(function(){ 
-          this.commnentsTab = document.getElementsByClassName("commentBox");  
+          this.commnentsTab = document.getElementsByClassName("commentBox"); 
+          this.commnentsTab = document.getElementsByClassName("commentBox"); 
           //display the last comment added
           for(let x = 0; x < this.commnentsTab.length; x++){
             this.commnentsTab[x].scrollTop = this.commnentsTab[x].scrollHeight;
@@ -106,11 +109,13 @@ export class Tab1Page {
       this.presentActionSheet();
     }
 
-    ionicSlide(){
+    ionicSlide(direction){
       this.slide.getActiveIndex().then((val) => { 
         console.log(val);
         this.playVideo(val);
       });
+
+      
 
     }
 
@@ -151,6 +156,10 @@ export class Tab1Page {
         video.play();
         $("."+id+"userInfo").show();
         $("."+id+"PostData").show();
+
+        //add view count
+
+
       }else{
         video.pause();
         $("."+id+"userInfo").show();
@@ -328,8 +337,10 @@ export class Tab1Page {
     }
 
 
-    swiped(id){
+    swiped(id,post_id,direction){
+      console.log("post", post_id)
       console.log("left");
+      let idd = id - 1;
       var video = <HTMLVideoElement> document.getElementById(id+"videobcg");
       console.log(id);
       console.log("paused",video.paused);
@@ -339,8 +350,60 @@ export class Tab1Page {
       }else{
         video.pause();
       }
-      
+
+      console.log(direction);
+      if(direction == "left"){
+        let current_post_id = $("#"+parseInt(id+1)+"PostViews").text();
+        let prev_post_id = $("#"+id+"PostViews").text();
+        this.storage.get("current_userID").then((val)=>{
+          this.database.list("views/").remove(JSON.stringify(val+current_post_id))
+          this.database.list("views/").remove(JSON.stringify(val+prev_post_id))
+          this.database.object("views/"+JSON.stringify(val+current_post_id)).set({"user": val, "post_id":current_post_id});
+          //display views
+          this.postViewsRef$.subscribe((val)=>{
+            for(let c = 0; c < val.length; c++){
+              $("."+val[c].post_id+"viewCount").text("0");
+            }
+            for(let v =0; v < val.length; v++){
+              let key = Object.keys(val[v])[0];
+              console.log(key);
+              let post_id =  val[v].post_id;
+              console.log(post_id);
+              let current_views = parseInt($("."+post_id+"viewCount").text());
+              current_views += 1;
+              $("."+post_id+"viewCount").text(current_views);
+            }
+          });
+        });
+        console.log(current_post_id);
+      }else if(direction == "right"){
+        let current_post_id = $("#"+idd+"PostViews").text();
+        let prev_post_id = $("#"+parseInt(id)+"PostViews").text();
+        this.storage.get("current_userID").then((val)=>{
+          this.database.list("views/").remove(JSON.stringify(val+current_post_id));
+          this.database.list("views/").remove(JSON.stringify(val+prev_post_id));
+          this.database.object("views/"+JSON.stringify(val+current_post_id)).set({"user": val, "post_id":current_post_id});
+          this.postViewsRef$.subscribe((val)=>{
+            for(let c = 0; c < val.length; c++){
+              $("."+val[c].post_id+"viewCount").text("0");
+            }
+            for(let v =0; v < val.length; v++){
+              let key = Object.keys(val[v])[0];
+              console.log(key);
+              let post_id =  val[v].post_id;
+              console.log(post_id);
+              let current_views = parseInt($("."+post_id+"viewCount").text());
+              current_views += 1;
+              $("."+post_id+"viewCount").text(current_views);
+            }
+          });
+          
+        });
+      }
     }
+
+      
+  
 
     //loading component
     async presentLoading() {

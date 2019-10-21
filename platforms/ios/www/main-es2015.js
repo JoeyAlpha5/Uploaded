@@ -577,17 +577,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
-/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
-/* harmony import */ var _services_requests_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/requests.service */ "./src/app/services/requests.service.ts");
-/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! angularfire2/database */ "./node_modules/angularfire2/database/index.js");
-/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(angularfire2_database__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/onesignal/ngx */ "./node_modules/@ionic-native/onesignal/ngx/index.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
+/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
+/* harmony import */ var _services_requests_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/requests.service */ "./src/app/services/requests.service.ts");
+/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! angularfire2/database */ "./node_modules/angularfire2/database/index.js");
+/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(angularfire2_database__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 
 
-// import { OneSignal } from '@ionic-native/onesignal/ngx';
+
 
 
 
@@ -597,16 +598,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import { Observable } from 'rxjs';
 
 let AppComponent = class AppComponent {
-    // notificationssRef$: Observable<any[]>;
-    constructor(platform, splashScreen, statusBar, 
-    // private oneSignal: OneSignal,
-    alertController, storage, requests, route, database) {
+    constructor(platform, splashScreen, statusBar, oneSignal, alertController, storage, requests, route, database) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
+        this.oneSignal = oneSignal;
         this.alertController = alertController;
         this.storage = storage;
         this.requests = requests;
@@ -614,51 +612,42 @@ let AppComponent = class AppComponent {
         this.database = database;
         this.initializeApp();
         // firebase.initializeApp(firebaseConfig);
-        // if(this.platform.is("android")){
-        //   this.setUpPush();
-        // }
-        // this.notificationssRef$ = this.database.list("notifications").valueChanges();
-    }
-    /*setUpPush(){
-      let oneSignalAppID =  "213117e1-5258-44df-9de4-7206c18669b9";
-      let oneSignalApiKey = "ODM2NDQ4MTQtYzNiZC00MDA4LWI3YTQtYmZiZGY0ZjhjOGJl";
-      let firebaseSenderID =  "929396145480";
-      this.oneSignal.startInit(oneSignalAppID,firebaseSenderID);
-  
-      //check the device is already registered
-      let device_id = this.storage.get("device_id").then((val)=>{
-        if(val == undefined){
-          this.oneSignal.getIds().then((id)=>{
-            let device = id.userId;
-            let url = 'https://uploaded.herokuapp.com/users/users';
-            this.storage.get('mail').then((mail)=>{
-              this.requests.registerDevice(url, mail, device).subscribe();
-            });
-          });
+        if (this.platform.is("cordova")) {
+            this.setUpPush();
         }
-      });
-  
-  
-      this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
-  
-      this.oneSignal.handleNotificationReceived().subscribe((data) => {
-      // do something when notification is received
-      let msg = data.payload.body;
-      let title = data.payload.title;
-      let additionalData = data.payload.additionalData;
-      this.showAlert(title, msg, additionalData.task);
-  
-      });
-  
-  
-      
-      this.oneSignal.handleNotificationOpened().subscribe((data) => {
-        // do something when a notification is opened
-        this.route.navigate(['/home/tabs/tab3']);
-      });
-  
-      this.oneSignal.endInit();
-    }*/
+        this.notificationssRef$ = this.database.list("notifications").valueChanges();
+    }
+    setUpPush() {
+        let oneSignalAppID = "213117e1-5258-44df-9de4-7206c18669b9";
+        // let oneSignalApiKey = "ODM2NDQ4MTQtYzNiZC00MDA4LWI3YTQtYmZiZGY0ZjhjOGJl";
+        let firebaseSenderID = "929396145480";
+        this.oneSignal.startInit(oneSignalAppID, firebaseSenderID);
+        //check the device is already registered
+        this.storage.get("device_id").then((val) => {
+            if (val == undefined) {
+                this.oneSignal.getIds().then((id) => {
+                    let device = id.userId;
+                    let url = 'https://uploaded.herokuapp.com/users/users';
+                    this.storage.get('mail').then((mail) => {
+                        this.requests.registerDevice(url, mail, device).subscribe();
+                    });
+                });
+            }
+        });
+        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
+        this.oneSignal.handleNotificationReceived().subscribe((data) => {
+            // do something when notification is received
+            let msg = data.payload.body;
+            let title = data.payload.title;
+            let additionalData = data.payload.additionalData;
+            this.showAlert(title, msg, additionalData.task);
+        });
+        this.oneSignal.handleNotificationOpened().subscribe((data) => {
+            // do something when a notification is opened
+            this.route.navigate(['/home/tabs/tab3']);
+        });
+        this.oneSignal.endInit();
+    }
     showAlert(title, msg, additionalData) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
@@ -674,18 +663,20 @@ let AppComponent = class AppComponent {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
+            this.route.navigate(['/home/tabs/tab1']);
         });
     }
 };
 AppComponent.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
-    { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
-    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"] },
-    { type: _services_requests_service__WEBPACK_IMPORTED_MODULE_6__["RequestsService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"] },
-    { type: angularfire2_database__WEBPACK_IMPORTED_MODULE_7__["AngularFireDatabase"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
+    { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"] },
+    { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"] },
+    { type: _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_2__["OneSignal"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"] },
+    { type: _services_requests_service__WEBPACK_IMPORTED_MODULE_7__["RequestsService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"] },
+    { type: angularfire2_database__WEBPACK_IMPORTED_MODULE_8__["AngularFireDatabase"] }
 ];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -693,14 +684,15 @@ AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./app.component.html */ "./node_modules/raw-loader/index.js!./src/app/app.component.html"),
         styles: [__webpack_require__(/*! ./app.component.scss */ "./src/app/app.component.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
-        _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
-        _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"],
-        _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"],
-        _services_requests_service__WEBPACK_IMPORTED_MODULE_6__["RequestsService"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_8__["Router"],
-        angularfire2_database__WEBPACK_IMPORTED_MODULE_7__["AngularFireDatabase"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
+        _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"],
+        _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"],
+        _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_2__["OneSignal"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
+        _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"],
+        _services_requests_service__WEBPACK_IMPORTED_MODULE_7__["RequestsService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"],
+        angularfire2_database__WEBPACK_IMPORTED_MODULE_8__["AngularFireDatabase"]])
 ], AppComponent);
 
 
@@ -736,6 +728,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! hammerjs */ "./node_modules/hammerjs/hammer.js");
 /* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(hammerjs__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
+/* harmony import */ var _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/onesignal/ngx */ "./node_modules/@ionic-native/onesignal/ngx/index.js");
+
 
 
 
@@ -776,6 +770,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] },
             { provide: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["HAMMER_GESTURE_CONFIG"], useClass: CustomHammerConfig },
+            _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_15__["OneSignal"]
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
     })
@@ -942,6 +937,12 @@ let RequestsService = class RequestsService {
         return this.http.get(url, { params: { type: 'sendMessageNotif', to: to, sender: sender, message: message } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
             console.log("Results", results);
             return results;
+        }));
+    }
+    searchPage(url) {
+        return this.http.get(url, { params: { type: 'searchPage' } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
+            console.log("Results", results);
+            return results["Response"];
         }));
     }
     UploadCoverImage(url, user_email, file) {

@@ -24,11 +24,13 @@ export class UserfeedPage implements OnInit {
   results: Observable<any>;
   commentsRef$: Observable<any[]>;
   repostsRef$: Observable<any[]>;
+  postViewsRef$: Observable<any[]>;
   commnentsTab: any;
   email: any;
   @ViewChild('slider', {static: false}) slide: IonSlides;
   constructor(private database:AngularFireDatabase,public actionSheetController: ActionSheetController,private platform: Platform,private tabs: TabsPage,private requests: RequestsService,public toastController: ToastController,private statusBar: StatusBar,private route: Router, public loadingController: LoadingController,private storage: Storage ) { 
     this.commentsRef$ = this.database.list("comments").valueChanges();
+    this.postViewsRef$ = this.database.list("views").valueChanges();
     this.statusBar.overlaysWebView(true);
     this.statusBar.styleDefault();
     this.tabs.bgColor = 'transparent';

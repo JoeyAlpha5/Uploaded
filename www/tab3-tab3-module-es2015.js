@@ -97,6 +97,10 @@ let Tab3Page = class Tab3Page {
         this.storage = storage;
         this.route = route;
         this.notificationssRef$ = this.database.list("notification", ref => ref.orderByChild('date')).valueChanges();
+        this.statusBar.overlaysWebView(false);
+        this.statusBar.backgroundColorByHexString('#ffffff');
+        this.statusBar.styleDefault();
+        this.tabs.bgColor = '#000000';
         this.notificationssRef$.subscribe((x) => {
             console.log(x);
         });

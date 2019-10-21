@@ -122,6 +122,7 @@ var UserfeedPage = /** @class */ (function () {
         this.loadingController = loadingController;
         this.storage = storage;
         this.commentsRef$ = this.database.list("comments").valueChanges();
+        this.postViewsRef$ = this.database.list("views").valueChanges();
         this.statusBar.overlaysWebView(true);
         this.statusBar.styleDefault();
         this.tabs.bgColor = 'transparent';

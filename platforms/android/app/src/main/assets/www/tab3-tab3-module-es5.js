@@ -100,16 +100,28 @@ var Tab3Page = /** @class */ (function () {
         this.storage = storage;
         this.route = route;
         this.notificationssRef$ = this.database.list("notification", function (ref) { return ref.orderByChild('date'); }).valueChanges();
+        this.statusBar.overlaysWebView(false);
+        this.statusBar.backgroundColorByHexString('#ffffff');
+        this.statusBar.styleDefault();
+        this.tabs.bgColor = '#000000';
         this.notificationssRef$.subscribe(function (x) {
             console.log(x);
         });
     }
+    Tab3Page.prototype.changeIconColors = function () {
+        this.tabs.tab1 = "white";
+        this.tabs.tab2 = "white";
+        this.tabs.tab3 = "white";
+        this.tabs.tab4 = "#fc8700";
+        this.tabs.tab5 = "white";
+    };
     Tab3Page.prototype.ionViewDidEnter = function () {
         var _this = this;
         this.statusBar.overlaysWebView(false);
         this.statusBar.backgroundColorByHexString('#ffffff');
         this.statusBar.styleDefault();
         this.tabs.bgColor = '#000000';
+        this.changeIconColors();
         // Put here the code you want to execute
         this.storage.get('username').then(function (val) {
             console.log('Your username is', val);

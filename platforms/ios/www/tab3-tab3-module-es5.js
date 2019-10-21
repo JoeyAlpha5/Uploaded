@@ -100,6 +100,10 @@ var Tab3Page = /** @class */ (function () {
         this.storage = storage;
         this.route = route;
         this.notificationssRef$ = this.database.list("notification", function (ref) { return ref.orderByChild('date'); }).valueChanges();
+        this.statusBar.overlaysWebView(false);
+        this.statusBar.backgroundColorByHexString('#ffffff');
+        this.statusBar.styleDefault();
+        this.tabs.bgColor = '#000000';
         this.notificationssRef$.subscribe(function (x) {
             console.log(x);
         });

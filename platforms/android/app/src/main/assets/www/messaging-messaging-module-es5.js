@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>messaging</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <div id=\"chattingWith\">{{ name }} {{ sname }}</div> \n\n\n  <div id=\"chatsContainer\" >\n    <div id=\"messageBox\" *ngFor='let message of ( chatsRef$ | async)'>\n        <span id=\"sentByMe\" *ngIf='message.sender == this_username'>{{ message.sender }}</span>\n        <p id=\"messageSentByMe\" *ngIf='message.sender == this_username'>{{message.message }}</p>\n\n      <span id=\"notSentByMe\" *ngIf='message.sender != this_username'>{{ message.sender }}</span>\n      <p id=\"messageNotSentByMe\" *ngIf='message.sender != this_username'>{{message.message }}</p>\n    </div>\n  </div>\n\n  <div id=\"messageInput\">\n    <input id=\"message\" type=\"text\" placeholder=\"Message...\">\n    <ion-icon name=\"send\" id=\"sendIcon\" (click)=\"sendMessage()\"></ion-icon>\n  </div>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>messaging</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <div id=\"chattingWith\">{{ name }} {{ sname }}</div> \n\n\n  <div id=\"chatsContainer\" >\n    <div id=\"messageBox\" *ngFor='let message of ( chatsRef$ | async)'>\n        <span id=\"sentByMe\" *ngIf='message.sender == this_username'>{{ message.sender }}</span>\n        <p id=\"messageSentByMe\" *ngIf='message.sender == this_username'>{{message.message }}</p>\n\n      <span id=\"notSentByMe\" *ngIf='message.sender != this_username'>{{ message.sender }}</span>\n      <p id=\"messageNotSentByMe\" *ngIf='message.sender != this_username'>{{message.message }}</p>\n    </div>\n  </div>\n\n  <div id=\"messageInput\">\n    <input id=\"message\" (focus)=\"notBottom()\" (blur)=\"displayBottom()\" type=\"text\" placeholder=\"Message...\">\n    <ion-icon name=\"send\" id=\"sendIcon\" (click)=\"sendMessage()\"></ion-icon>\n  </div> \n</ion-content>\n"
 
 /***/ }),
 
@@ -116,6 +116,14 @@ var MessagingPage = /** @class */ (function () {
         this.tabs.bgColor = '#000000';
     }
     MessagingPage.prototype.ngOnInit = function () {
+    };
+    MessagingPage.prototype.notBottom = function () {
+        this.tabs.bottom = false;
+        jquery__WEBPACK_IMPORTED_MODULE_7__("#messageInput").css("margin-bottom", "0px");
+    };
+    MessagingPage.prototype.displayBottom = function () {
+        this.tabs.bottom = true;
+        jquery__WEBPACK_IMPORTED_MODULE_7__("#messageInput").css("margin-bottom", "56px");
     };
     MessagingPage.prototype.ionViewDidEnter = function () {
         var _this = this;

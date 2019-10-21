@@ -118,11 +118,19 @@ let UploadPage = class UploadPage {
     }
     ngOnInit() {
     }
+    changeIconColors() {
+        this.tabs.tab1 = "white";
+        this.tabs.tab2 = "white";
+        this.tabs.tab3 = "#fc8700";
+        this.tabs.tab4 = "white";
+        this.tabs.tab5 = "white";
+    }
     ionViewDidEnter() {
         this.statusBar.overlaysWebView(false);
         this.statusBar.backgroundColorByHexString('#ffffff');
         this.statusBar.styleDefault();
         this.tabs.bgColor = '#000000';
+        this.changeIconColors();
         // Put here the code you want to execute
         var Email = this.storage.get('mail').then((val) => {
             console.log('Your email is', val);

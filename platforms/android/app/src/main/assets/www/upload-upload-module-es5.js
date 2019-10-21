@@ -121,12 +121,20 @@ var UploadPage = /** @class */ (function () {
     }
     UploadPage.prototype.ngOnInit = function () {
     };
+    UploadPage.prototype.changeIconColors = function () {
+        this.tabs.tab1 = "white";
+        this.tabs.tab2 = "white";
+        this.tabs.tab3 = "#fc8700";
+        this.tabs.tab4 = "white";
+        this.tabs.tab5 = "white";
+    };
     UploadPage.prototype.ionViewDidEnter = function () {
         var _this = this;
         this.statusBar.overlaysWebView(false);
         this.statusBar.backgroundColorByHexString('#ffffff');
         this.statusBar.styleDefault();
         this.tabs.bgColor = '#000000';
+        this.changeIconColors();
         // Put here the code you want to execute
         var Email = this.storage.get('mail').then(function (val) {
             console.log('Your email is', val);

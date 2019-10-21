@@ -70,36 +70,14 @@ div#Loader {
   margin-left: 15px;
 }
 
-p#settings {
-  float: right;
-  margin-right: 30px;
-  font-size: 13px;
-  cursor: pointer;
-}
-
 div#Settings {
-  width: 100px;
-  height: 102px;
-  float: right;
-  background: white;
-  position: sticky;
-  right: 0;
-  top: 0;
+  position: absolute;
   z-index: 99999;
-  border-radius: 5px;
-  box-shadow: 1px 1px 1px 1px rgba(158, 158, 158, 0.53);
-  padding-top: 8px;
-  display: none;
-}
-
-div#Settings p {
+  right: 0px;
   font-size: 13px;
-  text-align: center;
-}
-
-div#Settings hr {
-  border: 1px dotted rgba(128, 128, 128, 0.05);
-  height: 0;
+  margin-top: 95px;
+  margin-right: 10px;
+  color: gray;
 }
 
 
