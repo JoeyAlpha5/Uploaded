@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as $ from 'jquery';
 import { LoadingController } from '@ionic/angular';
 import { RequestsService } from '../services/requests.service';
@@ -9,17 +9,33 @@ import { ToastController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TabsPage } from '../tabs/tabs.page';
+import { AngularCropperjsComponent } from 'angular-cropperjs';
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
   styleUrls: ['./tab4.page.scss'],
 })
 export class Tab4Page implements OnInit {
-
+  @ViewChild('angularCropper',{static: false}) public angularCropper: AngularCropperjsComponent;
+  cropperOptions: any;
+  croppedImage = null;
+  myImage = null;
+  scaleValX = 1;
+  scaleValY = 1;
   constructor(private tabs: TabsPage,public loadingController: LoadingController,private statusBar: StatusBar,public actionSheetController: ActionSheetController,public toastController: ToastController, private requests: RequestsService,private storage: Storage,private route: Router  ) { 
-    this.statusBar.overlaysWebView(false);
-    this.statusBar.styleDefault();
+    this.statusBar.overlaysWebView(true);
     this.tabs.bgColor = '#000000';
+    //cropper options
+    this.cropperOptions = {
+      dragMode: 'crop',
+      aspectRatio: 3,
+      autoCrop: true,
+      movable: true,
+      zoomable: false,
+      scalable: false,
+      autoCropArea: 1,
+    };
+
   }
 
   ngOnInit() {
@@ -34,6 +50,88 @@ export class Tab4Page implements OnInit {
   profile_url =  'https://uploaded.herokuapp.com/users/users';
 
 
+
+  cropImage(image){
+    this.myImage = 'https://res.cloudinary.com/uploaded/image/upload/v1567818053/'+image+'.png';
+  }
+
+  //crop options
+  reset() {
+    this.angularCropper.cropper.reset();
+  }
+ 
+  clear() {
+    this.angularCropper.cropper.clear();
+  }
+ 
+  rotate() {
+    this.angularCropper.cropper.rotate(90);
+  }
+ 
+  zoom(zoomIn: boolean) {
+    let factor = zoomIn ? 0.1 : -0.1;
+    this.angularCropper.cropper.zoom(factor);
+  }
+ 
+  scaleX() {
+    this.scaleValX = this.scaleValX * -1;
+    this.angularCropper.cropper.scaleX(this.scaleValX);
+  }
+ 
+  scaleY() {
+    this.scaleValY = this.scaleValY * -1;
+    this.angularCropper.cropper.scaleY(this.scaleValY);
+  }
+ 
+  move(x, y) {
+    this.angularCropper.cropper.move(x, y);
+  }
+
+
+  downloadImage(data, filename = 'untitled.jpeg'){
+    var a = document.createElement('a');
+    a.href = data;
+    a.download = filename;
+    this.storage.get("mail").then((user_email)=>{
+      let upload = this.requests.UploadCroppedCoverImage(this.profile_url,user_email,data.substring(23));
+       upload.subscribe(x => {
+         this.cropImage(x);
+          this.ionViewDidEnter();
+          console.log(x)
+          this.displayLoading = false;
+        });
+      });
+
+    // document.body.appendChild(a);
+    // a.click();
+  }
+
+  save() {
+      let croppedImgB64String: string = this.angularCropper.cropper.getCroppedCanvas().toDataURL('image/jpeg', (100 / 100));
+      this.croppedImage = croppedImgB64String;
+      console.log(this.croppedImage);
+
+      this.downloadImage(croppedImgB64String, 'my-canvas.jpeg');
+
+      // this.storage.get("mail").then((user_email)=>{
+      //   let upload = this.requests.UploadCroppedCoverImage(this.profile_url,user_email,croppedImgB64String);
+      //   upload.subscribe(x => {
+      //     this.cropImage(x);
+      //      this.ionViewDidEnter();
+      //      console.log(x)
+      //      this.displayLoading = false;
+        
+      //   });
+
+
+      // });
+      
+
+
+
+  }
+  //
+
   
   changeIconColors(){
     this.tabs.tab1 = "white";
@@ -45,9 +143,7 @@ export class Tab4Page implements OnInit {
 
   ionViewDidEnter() {
     // Put here the code you want to execute
-    this.statusBar.overlaysWebView(false);
-    this.statusBar.backgroundColorByHexString('#ffffff');
-    this.statusBar.styleDefault();
+    this.statusBar.overlaysWebView(true);
     this.tabs.bgColor = '#000000';
     this.changeIconColors();
     this.changeIconColors();
@@ -123,12 +219,13 @@ export class Tab4Page implements OnInit {
     if(this.file == undefined){
       let message = "Please select file to upload";
       this.presentLoadingWithOptions(message)
-    this.displayLoading = false;
+      this.displayLoading = false;
     }else{
       this.storage.get("mail").then((user_email)=>{
         let upload = this.requests.UploadCoverImage(this.profile_url,user_email,this.file);
-        this.presentLoadingWithOptions("Uploading, please wait...");
+        this.presentLoadingWithOptions("Loading, please wait...");
         upload.subscribe(x => {
+          //this.cropImage(x);
            this.route.navigate(['/home/tabs/tab4']);
            console.log(x)
            this.displayLoading = false;
@@ -184,6 +281,7 @@ export class Tab4Page implements OnInit {
     this.route.navigate(['/home/tabs/userfeed']);
 
   }
+
 
 
   //present share options

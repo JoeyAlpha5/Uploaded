@@ -86,6 +86,10 @@ export class ProfilePage implements OnInit {
   }
 
 
+  onDrag(){
+    console.log("dragged");
+  }
+
 
   viewUserFeed(username){
     this.storage.set("uerFeedUsername", username);

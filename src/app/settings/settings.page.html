@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>settings</ion-title>
+    <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [scrollEvents]="true" *ngFor='let profile of ( results | async)'>
     <ion-progress-bar *ngIf="displayLoading == true" id="uploadProgress" type="indeterminate"></ion-progress-bar>
     <div id="uploadImage">
-      <ion-icon name="settings" id="uploadIcon"></ion-icon>
-      <p>Update settings</p>
+      <ion-icon name="person" id="uploadIcon"></ion-icon>
+      <p>Update Profile</p>
       <span>Edit app preferences below</span>
     </div>
     <p id="notifcationsHeading">Profile Setiings</p>
@@ -25,12 +25,14 @@
     <ion-card-content>
       <span>Username: </span><br>
       <ion-input type="text" id="user_name" placeholder="Add username" value="{{ profile.username }}"></ion-input><br>
-      <span>First Name: </span><br>
+      <span>Name: </span><br>
       <ion-input type="text" id="first_name" placeholder="Add first name" value="{{ profile.first_name }}"></ion-input><br>
-      <span>Last Name: </span><br>
-      <ion-input type="text" id="last_name" placeholder="Add last name" value="{{ profile.last_name }}"></ion-input><br>
       <span>Bio: </span><br>
       <ion-input type="text" id="bioInput" placeholder="Add bio" value="{{ profile.bio}}"></ion-input><br>
+      <span>Website: </span><br>
+      <ion-input type="text" id="website" placeholder="Add website" value="{{ profile.website }}"></ion-input><br>
+      <span>Location: </span><br>
+      <ion-input type="text" id="location" placeholder="Add llocation" value="{{ profile.location }}"></ion-input><br>
     </ion-card-content>
     </ion-card>
 
@@ -39,7 +41,7 @@
 
 
 
-    <p id="notifcationsHeading">Notifications</p>
+  <!--<p id="notifcationsHeading">Notifications</p>
    <div id="options" class="options">
     <ion-label id="label">Like notifications</ion-label>
     <ion-toggle id="toggle" checked (ionChange)="addPlaylist($event)" color="dark"></ion-toggle>
@@ -55,7 +57,7 @@
   <div id="options" class="options">
     <ion-label id="label">Post notifications</ion-label>
     <ion-toggle id="toggle" checked (ionChange)="addPlaylist($event)" color="dark"></ion-toggle>
-  </div>
+  </div>-->
 
   <div id="options" class="logout" (click)="logout()">
     Logout

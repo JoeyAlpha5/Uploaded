@@ -18,6 +18,7 @@ export class Tab2Page {
   profile_url =  'https://uploaded.herokuapp.com/users/users';
   userID: Observable<any>;
   searchContent: Observable<any>;
+  oneSearchContent: Observable<any>;
   constructor(private tabs: TabsPage,private platform: Platform,private requests: RequestsService, private statusBar: StatusBar,private route: Router,private storage: Storage ) {
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();
@@ -56,6 +57,8 @@ export class Tab2Page {
         this.storage.get('current_userID').then((val) => {
           this.userID = val;
           this.searchContent =  this.requests.searchPage(this.profile_url);
+          this.oneSearchContent = this.requests.searchPageOneBig(this.profile_url);
+          this.oneSearchContent.subscribe();
           this.searchContent.subscribe();
         });
       }

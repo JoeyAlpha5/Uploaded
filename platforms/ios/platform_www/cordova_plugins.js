@@ -198,63 +198,100 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       ]
     },
     {
-      "id": "cordova-plugin-ionic-webview.IonicWebView",
-      "file": "plugins/cordova-plugin-ionic-webview/src/www/util.js",
-      "pluginId": "cordova-plugin-ionic-webview",
+      "id": "cordova-plugin-firebasex.FirebasePlugin",
+      "file": "plugins/cordova-plugin-firebasex/www/firebase.js",
+      "pluginId": "cordova-plugin-firebasex",
       "clobbers": [
-        "Ionic.WebView"
+        "FirebasePlugin"
       ]
     },
     {
-      "id": "cordova-plugin-ionic-webview.ios-wkwebview-exec",
-      "file": "plugins/cordova-plugin-ionic-webview/src/www/ios/ios-wkwebview-exec.js",
-      "pluginId": "cordova-plugin-ionic-webview",
+      "id": "cordova-plugin-media-capture.CaptureAudioOptions",
+      "file": "plugins/cordova-plugin-media-capture/www/CaptureAudioOptions.js",
+      "pluginId": "cordova-plugin-media-capture",
       "clobbers": [
-        "cordova.exec"
+        "CaptureAudioOptions"
       ]
     },
     {
-      "id": "cordova-plugin-splashscreen.SplashScreen",
-      "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-      "pluginId": "cordova-plugin-splashscreen",
+      "id": "cordova-plugin-media-capture.CaptureImageOptions",
+      "file": "plugins/cordova-plugin-media-capture/www/CaptureImageOptions.js",
+      "pluginId": "cordova-plugin-media-capture",
       "clobbers": [
-        "navigator.splashscreen"
+        "CaptureImageOptions"
       ]
     },
     {
-      "id": "cordova-plugin-statusbar.statusbar",
-      "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-      "pluginId": "cordova-plugin-statusbar",
+      "id": "cordova-plugin-media-capture.CaptureVideoOptions",
+      "file": "plugins/cordova-plugin-media-capture/www/CaptureVideoOptions.js",
+      "pluginId": "cordova-plugin-media-capture",
       "clobbers": [
-        "window.StatusBar"
+        "CaptureVideoOptions"
       ]
     },
     {
-      "id": "cordova-sqlite-storage.SQLitePlugin",
-      "file": "plugins/cordova-sqlite-storage/www/SQLitePlugin.js",
-      "pluginId": "cordova-sqlite-storage",
+      "id": "cordova-plugin-media-capture.CaptureError",
+      "file": "plugins/cordova-plugin-media-capture/www/CaptureError.js",
+      "pluginId": "cordova-plugin-media-capture",
       "clobbers": [
-        "SQLitePlugin"
+        "CaptureError"
       ]
     },
     {
-      "id": "onesignal-cordova-plugin.OneSignal",
-      "file": "plugins/onesignal-cordova-plugin/www/OneSignal.js",
-      "pluginId": "onesignal-cordova-plugin",
+      "id": "cordova-plugin-media-capture.MediaFileData",
+      "file": "plugins/cordova-plugin-media-capture/www/MediaFileData.js",
+      "pluginId": "cordova-plugin-media-capture",
       "clobbers": [
-        "OneSignal"
+        "MediaFileData"
+      ]
+    },
+    {
+      "id": "cordova-plugin-media-capture.MediaFile",
+      "file": "plugins/cordova-plugin-media-capture/www/MediaFile.js",
+      "pluginId": "cordova-plugin-media-capture",
+      "clobbers": [
+        "MediaFile"
+      ]
+    },
+    {
+      "id": "cordova-plugin-media-capture.helpers",
+      "file": "plugins/cordova-plugin-media-capture/www/helpers.js",
+      "pluginId": "cordova-plugin-media-capture",
+      "runs": true
+    },
+    {
+      "id": "cordova-plugin-media-capture.capture",
+      "file": "plugins/cordova-plugin-media-capture/www/capture.js",
+      "pluginId": "cordova-plugin-media-capture",
+      "clobbers": [
+        "navigator.device.capture"
+      ]
+    },
+    {
+      "id": "cordova-plugin-media.MediaError",
+      "file": "plugins/cordova-plugin-media/www/MediaError.js",
+      "pluginId": "cordova-plugin-media",
+      "clobbers": [
+        "window.MediaError"
+      ]
+    },
+    {
+      "id": "cordova-plugin-media.Media",
+      "file": "plugins/cordova-plugin-media/www/Media.js",
+      "pluginId": "cordova-plugin-media",
+      "clobbers": [
+        "window.Media"
       ]
     }
   ];
   module.exports.metadata = {
+    "cordova-plugin-androidx": "1.0.2",
+    "cordova-plugin-androidx-adapter": "1.1.0",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-file": "6.0.2",
     "cordova-plugin-file-transfer": "1.7.1",
-    "cordova-plugin-ionic-webview": "4.1.1",
-    "cordova-plugin-splashscreen": "5.0.2",
-    "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-whitelist": "1.3.3",
-    "cordova-sqlite-storage": "3.3.0",
-    "onesignal-cordova-plugin": "2.6.0"
+    "cordova-plugin-firebasex": "6.1.0",
+    "cordova-plugin-media-capture": "3.0.3",
+    "cordova-plugin-media": "5.0.3"
   };
 });

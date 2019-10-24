@@ -182,6 +182,7 @@ div#bannerPlaceholder {
   z-index: 1;
   background-size: cover;
   top:0;
+  background-position: center;;
 
   span{
     position: absolute;
@@ -190,6 +191,38 @@ div#bannerPlaceholder {
     color: gray;
   }
 
+}
+
+#link{
+  margin-left: 15px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+#globe{
+  color: black;
+}
+
+span#location {
+  font-size: 12px;
+  margin-left: 15px;
+  color: #FF9800;
+}
+
+div#croppImageDiv {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: black;
+  z-index: 999999;
+  top: 0;
+
+  p{
+    color: white;
+    margin-top: 40px;
+    width: 100%;
+    height: 40px; 
+  }
 }
 
 div#dp div {

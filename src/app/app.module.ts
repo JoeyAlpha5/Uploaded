@@ -8,14 +8,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularFireModule } from "angularfire2";
+import { AngularFirestoreModule } from "angularfire2/firestore";
 import { AngularFireDatabaseModule } from "angularfire2/database";
+import { AngularFireStorageModule } from "angularfire2/storage";
 import { firebaseConfig } from "./firebase-env";
 import * as Hammer from 'hammerjs';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import { IonicStorageModule } from '@ionic/storage';
-import { OneSignal } from '@ionic-native/onesignal/ngx';
-import { Tab3Page } from './tab3/tab3.page';
-
+import { FirebaseX } from  '@ionic-native/firebase-x/ngx';
+import { RequestsService } from './services/requests.service';
+import { MediaCapture, MediaFile, CaptureError,CaptureAudioOptions } from '@ionic-native/media-capture/ngx';
+import { Media } from '@ionic-native/media/ngx';
+import { AngularCropperjsModule } from 'angular-cropperjs';
 export class CustomHammerConfig extends HammerGestureConfig {
   overrides = {
     'swipe':{direction: Hammer.DIRECTION_ALL }
@@ -28,14 +32,19 @@ export class CustomHammerConfig extends HammerGestureConfig {
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
     IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    FirebaseX,
+    RequestsService,
+    MediaCapture,
+    Media,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
-    OneSignal
   ],
   bootstrap: [AppComponent]
 })

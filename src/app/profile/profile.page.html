@@ -12,7 +12,7 @@
     <div id="content" *ngFor='let profile of ( userProfile | async)'>
 
 
-        <div id="bannerPlaceholder" *ngIf="profile.cover == undefined">
+        <div id="bannerPlaceholder"  *ngIf="profile.cover == undefined">
         </div>
 
         <div id="bannerPlaceholder" *ngIf="profile.cover != undefined" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.cover+ '.jpg)'}">

@@ -5,6 +5,8 @@ import { LoadingController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { RequestsService } from '../services/requests.service';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -12,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  constructor(public loadingController: LoadingController, private statusBar: StatusBar,private route: Router, private requests: RequestsService,private storage: Storage ) {
+  constructor(public toast: ToastController,public loadingController: LoadingController, private statusBar: StatusBar,private route: Router, private requests: RequestsService,private storage: Storage ) {
     // let status bar overlay webview
     this.statusBar.overlaysWebView(false);
     // // set status bar to white
@@ -26,6 +28,15 @@ export class LoginPage implements OnInit {
   
   Bottom: boolean = true;
 
+
+  async Notifications(){
+    this.requests.listenNotifications().pipe(
+      tap(msg=>{
+        const toast = this.toast.create({ message: msg.body, duration:3000 }).then(alert=> alert.present());
+      })
+    ).subscribe();
+  }
+
   ionViewDidEnter() {
     // Put here the code you want to execute
     this.statusBar.overlaysWebView(false);
@@ -33,6 +44,12 @@ export class LoginPage implements OnInit {
     this.statusBar.styleDefault();
     console.log('page has loaded');
     this.presentLoading();
+
+    //get user token for push
+    this.requests.getToken();
+    //listen for notififcations
+    this.Notifications();
+
     //check for stored credentials
     this.storage.get('mail').then((val) => {
       let profile_url =  'https://uploaded.herokuapp.com/users/users';

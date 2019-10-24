@@ -92,6 +92,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _services_requests_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/requests.service */ "./src/app/services/requests.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+
+
 
 
 
@@ -101,7 +104,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var LoginPage = /** @class */ (function () {
-    function LoginPage(loadingController, statusBar, route, requests, storage) {
+    function LoginPage(toast, loadingController, statusBar, route, requests, storage) {
+        this.toast = toast;
         this.loadingController = loadingController;
         this.statusBar = statusBar;
         this.route = route;
@@ -115,6 +119,17 @@ var LoginPage = /** @class */ (function () {
     }
     LoginPage.prototype.ngOnInit = function () {
     };
+    LoginPage.prototype.Notifications = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                this.requests.listenNotifications().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["tap"])(function (msg) {
+                    var toast = _this.toast.create({ message: msg.body, duration: 3000 }).then(function (alert) { return alert.present(); });
+                })).subscribe();
+                return [2 /*return*/];
+            });
+        });
+    };
     LoginPage.prototype.ionViewDidEnter = function () {
         var _this = this;
         // Put here the code you want to execute
@@ -123,6 +138,10 @@ var LoginPage = /** @class */ (function () {
         this.statusBar.styleDefault();
         console.log('page has loaded');
         this.presentLoading();
+        //get user token for push
+        this.requests.getToken();
+        //listen for notififcations
+        this.Notifications();
         //check for stored credentials
         this.storage.get('mail').then(function (val) {
             var profile_url = 'https://uploaded.herokuapp.com/users/users';
@@ -222,6 +241,7 @@ var LoginPage = /** @class */ (function () {
         });
     };
     LoginPage.ctorParameters = function () { return [
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["LoadingController"] },
         { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"] },
@@ -234,7 +254,7 @@ var LoginPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./login.page.html */ "./node_modules/raw-loader/index.js!./src/app/login/login.page.html"),
             styles: [__webpack_require__(/*! ./login.page.scss */ "./src/app/login/login.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_4__["LoadingController"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"], _services_requests_service__WEBPACK_IMPORTED_MODULE_6__["RequestsService"], _ionic_storage__WEBPACK_IMPORTED_MODULE_2__["Storage"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["LoadingController"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"], _services_requests_service__WEBPACK_IMPORTED_MODULE_6__["RequestsService"], _ionic_storage__WEBPACK_IMPORTED_MODULE_2__["Storage"]])
     ], LoginPage);
     return LoginPage;
 }());

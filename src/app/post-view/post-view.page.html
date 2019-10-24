@@ -11,13 +11,12 @@
           <ion-icon class="icon" *ngIf="item.liked == 0" name="heart" id="{{item.post_id}}likeIcon" (click)="like(item.post_id,i)"></ion-icon><span *ngIf="item.liked == 0" id="{{item.post_id}}likeCount">{{ item.like }}</span><br *ngIf="item.liked == 0">
           <ion-icon class="icon" *ngIf="item.liked == 1" [ngStyle]="{color:'#E91E63'}" name="heart" id="{{item.post_id}}likeIcon" (click)="like(item.post_id,i)"></ion-icon><span *ngIf="item.liked == 1" id="{{item.post_id}}likeCount">{{ item.like }}</span><br *ngIf="item.liked == 1"/>
           <ion-icon class="icon" (click)="repost(item.post_id)" name="share-alt" id="postIcon"></ion-icon><span id="{{item.reposts}}repostCount">{{ item.reposts }}</span><br>
-          <ion-icon class="icon" name="eye" id="eye"></ion-icon><span id="viewCount">0</span><br>
           <ion-icon class="icon"  (click)="share(item.file)" name="share" id="postIcon"></ion-icon><br>
           <ion-icon class="icon" (click)="showAllComments(item.post_id)" name="text" id="postIcon"></ion-icon><span id="{{item.post_id}}CommentsCount">0</span>
           <div class="postViews"><span class="views">{{ item.post_id }}</span></div>
       </div>
 
-
+      <div id="eyeView"><ion-icon class="icon" name="eye" id="eye"></ion-icon><span id="viewCount">0</span><br></div>
       <div id="userinfo" [ngStyle]="{'bottom': styleExp, 'top':styleTop, 'margin-top':styleMarginTop}">
          <p>@{{ item.username }}</p>
          <p id="postDescription">{{ item.description }}</p>

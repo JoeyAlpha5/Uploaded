@@ -5,10 +5,9 @@ div#playlists {
     padding-bottom: 20px;
   
     div#playlist {
-      width: 32%;
+      width: 33.3%;
       height: 115px;
       float: left;
-      margin-left: 1px;
       background-size: cover !important;
   }
   }
@@ -26,14 +25,21 @@ div#playlists {
     padding-left: 7px;
     font-size: 13px;
   }
+
+  div#oneBigOne {
+    width: 100%;
+    height: 270px;
+    margin-bottom: 0.5px;
+  }
   
   span#metric {
     margin-left: 5px;
   }
 
   div#playlist {
-    width: 32%;
+    width: 33%;
     float: left;
+    margin-top: 1px;
     margin-left: 1px;
 }
 
@@ -45,4 +51,10 @@ div#searchTags span {
 
 #selectedTag{
     font-weight: bold;
+}
+
+div#bottomPadding {
+  bottom: 0px;
+  height: 268px;
+  width: 100%;
 }

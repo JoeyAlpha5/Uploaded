@@ -365,3 +365,18 @@ ion-icon#profileIocn {
       margin-top: 15px;
     }
   }
+
+  div#eyeView {
+  position: absolute;
+  top: 0;
+  margin-left: 75px;
+  margin-top: 15px;
+  font-size: 17px;
+  color: white;
+  border-radius: 26%;
+  padding: 4px;
+
+  span{
+    margin-left: 5px !important;
+  }
+}

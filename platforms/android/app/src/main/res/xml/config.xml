@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="uploaded.uploaded" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
@@ -10,6 +10,10 @@
     <allow-navigation href="cdvfile:*" />
     <feature name="FileTransfer">
         <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
+    </feature>
+    <feature name="FirebasePlugin">
+        <param name="android-package" value="org.apache.cordova.firebase.FirebasePlugin" />
+        <param name="onload" value="true" />
     </feature>
     <feature name="SplashScreen">
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
@@ -25,6 +29,12 @@
     </feature>
     <feature name="SQLitePlugin">
         <param name="android-package" value="io.sqlc.SQLitePlugin" />
+    </feature>
+    <feature name="Capture">
+        <param name="android-package" value="org.apache.cordova.mediacapture.Capture" />
+    </feature>
+    <feature name="Media">
+        <param name="android-package" value="org.apache.cordova.media.AudioHandler" />
     </feature>
     <allow-navigation href="http://localhost/*" />
     <allow-navigation href="https://localhost/*" />
@@ -44,6 +54,12 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="http://localhost:8100" sessionid="ce520f1c" />
+    <edit-config file="*-Info.plist" mode="merge" target="NSMicrophoneUsageDescription">
+        <string>We would like to access your microphone for recording</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
+        <string>need photo library access to get pictures from there</string>
+    </edit-config>
     <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
         <application android:networkSecurityConfig="@xml/network_security_config" />
     </edit-config>
@@ -78,7 +94,4 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="AllowInlineMediaPlayback" value="true" />
-    <feature name="OneSignalPush">
-        <param name="android-package" value="com.plugin.gcm.OneSignalPush" />
-    </feature>
 </widget>

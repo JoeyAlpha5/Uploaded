@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-
+import { AngularCropperjsComponent } from 'angular-cropperjs';
 import { Tab4Page } from './tab4.page';
 
 const routes: Routes = [
@@ -20,6 +20,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [Tab4Page]
+  exports: [
+    AngularCropperjsComponent,
+  ],
+  declarations: [Tab4Page, AngularCropperjsComponent]
 })
 export class Tab4PageModule {}

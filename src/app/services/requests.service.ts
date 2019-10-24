@@ -2,12 +2,16 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { FirebaseX } from  '@ionic-native/firebase-x/ngx';
+import { AngularFirestore } from "angularfire2/firestore";
+import { Platform } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
 export class RequestsService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private toast: ToastController, private http: HttpClient, public afs: AngularFirestore,public fs: FirebaseX, private platform: Platform) { }
 
   //get profile api
   getProfile(url, email): Observable<any> {
@@ -46,14 +50,15 @@ export class RequestsService {
       })
     );
   }
-
-  updateProfile(url,user_email,user_name, first_name, last_name, bio, file): Observable<any> {
+  // profile_url, Email, user_name, first_name, website, bio,location,this.file
+  updateProfile(url,user_email,user_name, first_name, website, bio,location, file): Observable<any> {
     let postData = new FormData();
     postData.append('type', 'updateProfile')
     postData.append('email', user_email);
     postData.append('user_name', user_name);
     postData.append('first_name', first_name);
-    postData.append('last_name', last_name);
+    postData.append('website', website);
+    postData.append('location', location);
     postData.append('bio', bio);
     postData.append('file', file);
     return this.http.post(url, postData).pipe(
@@ -187,6 +192,15 @@ export class RequestsService {
     );
   }
 
+  searchPageOneBig(url){
+    return this.http.get(url, {params: {type: 'searchPage'}}).pipe(
+      map(results => {
+        console.log("Results",results["One"]);
+        return results["One"];
+      })
+    );
+  }
+
 
   UploadCoverImage(url,user_email,file){
     let postData = new FormData();
@@ -196,11 +210,78 @@ export class RequestsService {
     return this.http.post(url, postData).pipe(
       map(results => {
         console.log("Results",results);
-        return results;
+        return results["Response"];
       })
     );
   }
+
+
+  UploadCroppedCoverImage(url,user_email,file){
+    let postData = new FormData();
+    postData.append('file', file);
+    postData.append('type', 'uploadCroppedCover');
+    postData.append('email', user_email);
+    return this.http.post(url, postData).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results["Response"];
+      })
+    );
+  }
+
+
+
+  //push services
+  async getToken(){
+
+    let token;
+    if(this.platform.is("android")){
+      token = await this.fs.getToken();
+      this.toast.create({ message: token, duration:3000 }).then(alert=> alert.present());
+    }
+
+    if(this.platform.is("ios")){
+      token = await this.fs.getToken();
+      await this.fs.grantPermission();
+    }
+
+    return this.saveToken(token);
+
+  }
+
+
+  private saveToken(token){
+    if(!token) {
+      return;
+    }
+    const devicesRef = this.afs.collection("devices");
+
+    const docData = {
+      token,
+      userId: "testUser",
+    }
+
+    return devicesRef.doc(token).set(docData);
+  }
+
   
+
+  listenNotifications(){
+    return this.fs.onMessageReceived();
+  }
+
+  UploadChatFile(url,filename,file){
+    let postData = new FormData();
+    postData.append('file', file);
+    postData.append('type', 'chatFileUpload');
+    postData.append('id', filename);
+    return this.http.post(url, postData).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results["Response"];
+      })
+    );
+  }
 
 
 

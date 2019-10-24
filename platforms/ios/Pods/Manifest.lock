@@ -1,16 +1,168 @@
 PODS:
-  - OneSignal (2.11.0)
+  - Crashlytics (3.12.0):
+    - Fabric (~> 1.9.0)
+  - Fabric (1.9.0)
+  - Firebase/Auth (6.3.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 6.1.2)
+  - Firebase/Core (6.3.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 6.0.2)
+  - Firebase/CoreOnly (6.3.0):
+    - FirebaseCore (= 6.0.3)
+  - Firebase/Messaging (6.3.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 4.1.0)
+  - Firebase/Performance (6.3.0):
+    - Firebase/CoreOnly
+    - FirebasePerformance (~> 3.1.0)
+  - Firebase/RemoteConfig (6.3.0):
+    - Firebase/CoreOnly
+    - FirebaseRemoteConfig (~> 4.1.0)
+  - FirebaseABTesting (3.0.0):
+    - FirebaseCore (~> 6.0)
+    - Protobuf (~> 3.5)
+  - FirebaseAnalytics (6.0.2):
+    - FirebaseCore (~> 6.0)
+    - FirebaseInstanceID (~> 4.2)
+    - GoogleAppMeasurement (= 6.0.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 0.3)
+  - FirebaseAnalyticsInterop (1.4.0)
+  - FirebaseAuth (6.1.2):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 6.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.2)
+    - GoogleUtilities/Environment (~> 6.2)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseAuthInterop (1.0.0)
+  - FirebaseCore (6.0.3):
+    - GoogleUtilities/Environment (~> 6.0)
+    - GoogleUtilities/Logger (~> 6.0)
+  - FirebaseInstanceID (4.2.5):
+    - FirebaseCore (~> 6.0)
+    - GoogleUtilities/Environment (~> 6.0)
+    - GoogleUtilities/UserDefaults (~> 6.0)
+  - FirebaseMessaging (4.1.1):
+    - FirebaseAnalyticsInterop (~> 1.1)
+    - FirebaseCore (~> 6.0)
+    - FirebaseInstanceID (~> 4.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.2)
+    - GoogleUtilities/Environment (~> 6.2)
+    - GoogleUtilities/Reachability (~> 6.2)
+    - GoogleUtilities/UserDefaults (~> 6.2)
+    - Protobuf (~> 3.1)
+  - FirebasePerformance (3.1.0):
+    - FirebaseCore (~> 6.0)
+    - FirebaseInstanceID (~> 4.2)
+    - FirebaseRemoteConfig (~> 4.1)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - GoogleUtilities/Environment (~> 6.0)
+    - GoogleUtilities/ISASwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+    - Protobuf (~> 3.5)
+  - FirebaseRemoteConfig (4.1.0):
+    - FirebaseABTesting (~> 3.0)
+    - FirebaseCore (~> 6.0)
+    - FirebaseInstanceID (~> 4.2)
+    - GoogleUtilities/Environment (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - Protobuf (~> 3.5)
+  - GoogleAppMeasurement (6.0.2):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 0.3)
+  - GoogleToolboxForMac/Defines (2.2.1)
+  - GoogleToolboxForMac/Logger (2.2.1):
+    - GoogleToolboxForMac/Defines (= 2.2.1)
+  - "GoogleToolboxForMac/NSData+zlib (2.2.1)":
+    - GoogleToolboxForMac/Defines (= 2.2.1)
+  - GoogleUtilities/AppDelegateSwizzler (6.3.1):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (6.3.1)
+  - GoogleUtilities/ISASwizzler (6.3.1)
+  - GoogleUtilities/Logger (6.3.1):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (6.3.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (6.3.1):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (6.3.1)"
+  - GoogleUtilities/Reachability (6.3.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (6.3.1):
+    - GoogleUtilities/Logger
+  - GTMSessionFetcher/Core (1.2.2)
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
+  - Protobuf (3.10.0)
 
 DEPENDENCIES:
-  - OneSignal (= 2.11.0)
+  - Crashlytics (= 3.12.0)
+  - Fabric (= 1.9.0)
+  - Firebase/Auth (= 6.3.0)
+  - Firebase/Core (= 6.3.0)
+  - Firebase/Messaging (= 6.3.0)
+  - Firebase/Performance (= 6.3.0)
+  - Firebase/RemoteConfig (= 6.3.0)
 
 SPEC REPOS:
-  trunk:
-    - OneSignal
+  https://github.com/CocoaPods/Specs.git:
+    - Crashlytics
+    - Fabric
+    - Firebase
+    - FirebaseABTesting
+    - FirebaseAnalytics
+    - FirebaseAnalyticsInterop
+    - FirebaseAuth
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseInstanceID
+    - FirebaseMessaging
+    - FirebasePerformance
+    - FirebaseRemoteConfig
+    - GoogleAppMeasurement
+    - GoogleToolboxForMac
+    - GoogleUtilities
+    - GTMSessionFetcher
+    - nanopb
+    - Protobuf
 
 SPEC CHECKSUMS:
-  OneSignal: 1e2ed98358f87cb755e7262412ddb2949b8e5c55
+  Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
+  Fabric: f988e33c97f08930a413e08123064d2e5f68d655
+  Firebase: 8432d732974498afd5987e9001a05f90f1a3d625
+  FirebaseABTesting: a32c488eb75089a61eb3d86db061dfb909d765db
+  FirebaseAnalytics: 470ddab7253b21ad5a40bebd4a9903d7ae19386a
+  FirebaseAnalyticsInterop: d48b6ab67bcf016a05e55b71fc39c61c0cb6b7f3
+  FirebaseAuth: 7fa2cc010b93770831a4e7a60651b52c3b8d111a
+  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
+  FirebaseCore: 68f8a7f50cdae542715d4e86afa37c4067217dcb
+  FirebaseInstanceID: 550df9be1f99f751d8fcde3ac342a1e21a0e6c42
+  FirebaseMessaging: 6bb0bdaf64c55fef7a219b7bb1e94e94a0855ced
+  FirebasePerformance: 1cf814c294cb0f6e0d36cde0760d09835b13c9ce
+  FirebaseRemoteConfig: 7c64ecec5ca63d7c6b304509c3a6f9a036d403d4
+  GoogleAppMeasurement: a35a645835bae31b6bdc0576396bc23908f12a22
+  GoogleToolboxForMac: b3553629623a3b1bff17f555e736cd5a6d95ad55
+  GoogleUtilities: f895fde57977df4e0233edda0dbeac490e3703b6
+  GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
 
-PODFILE CHECKSUM: 33fbe56ecd47394b3eac0edbfc7defa26a86dff3
+PODFILE CHECKSUM: fd58f937d1d76f98798a12cbd5f7115fcf3efc3e
 
 COCOAPODS: 1.8.4

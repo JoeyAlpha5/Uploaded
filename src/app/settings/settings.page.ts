@@ -68,16 +68,22 @@ export class SettingsPage implements OnInit {
   }
 
 
+  location(){
+    console.log("location")
+  }
+
+
   updateProfile(){
     let user_name = $("#user_name").val();
     let first_name = $("#first_name").val();
-    let last_name = $("#last_name").val();
+    let location = $("#location").val();
+    let website = $("#website").val();
     let bio = $("#bioInput").val();
     console.log(user_name,first_name);
     var profile_url =  'https://uploaded.herokuapp.com/users/users';
     //var profile_url = 'http://127.0.0.1:8000/users/users'
     this.storage.get('mail').then((Email) =>{
-      let update = this.requests.updateProfile(profile_url, Email, user_name, first_name, last_name, bio,this.file); 
+      let update = this.requests.updateProfile(profile_url, Email, user_name, first_name, website, bio,location,this.file); 
 
       update.subscribe(x => console.log(x) );
       this.ionViewDidEnter();

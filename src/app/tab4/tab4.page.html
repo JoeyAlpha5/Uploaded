@@ -17,20 +17,30 @@
       <ion-input (change)="changeListener($event)" placeholder="Upload Cover Image" type="file" accept="image/*" id="uploadDesc"></ion-input>
     </div>
 
-    <div id="bannerPlaceholder" *ngIf="profile.cover != undefined" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.cover+ '.jpg)'}">
+    <div id="bannerPlaceholder"*ngIf="profile.cover != undefined"  [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.cover+ '.jpg)'}">
       <ion-input (change)="changeListener($event)" placeholder="Upload Cover Image" type="file" accept="image/*" id="uploadDesc"></ion-input>
     </div>
 
+    <div id="croppImageDiv" *ngIf="myImage">
+      <angular-cropper #angularCropper [cropperOptions]="cropperOptions" [imageUrl]="myImage" *ngIf="myImage"></angular-cropper>
 
+      <p (click)="save()">Save</p>
+
+
+      <img *ngIf="croppedImage" [src]="croppedImage" />
+    </div>
 
       <div id='profileBlock'>
           <div id="outerCircle" (click)="viewUserFeed(profile.username)" *ngIf="profile.image != undefined"><div id="circle"> <div id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" ></div> </div></div>
           <div id="outerCircle" (click)="viewUserFeed(profile.username)" *ngIf="profile.image == undefined"><div id="circle"> <div id='dp'></div> </div></div>
           <p id='username'>{{ profile.username }} </p>
-          <p id='Posts'>{{ profile.total_posts }} Uploaded playlists</p>
+          <!--<p id='Posts'>{{ profile.total_posts }} Uploaded playlists</p>-->
+          <p id='bio'>{{ profile.bio }}</p>
+          <a *ngIf="profile.website != '' " href="{{ profile.website }}" id="link"><ion-icon name="globe" id="globe"></ion-icon> {{ profile.website }}</a>
+          <span id="location"><ion-icon name="pin" id="globe"></ion-icon>{{ profile.location }}</span>
           <p id='Following'> <span><b>Followers:</b><br/> <font id="Followers">{{ profile.followers }}</font></span>  <span><b>Following: </b><br/> <font id="Followings">{{ profile.following }}</font></span>  </p>
       </div>
-        <p id='bio'>{{ profile.bio }}</p>
+        
 
       <div id='uploadedHeading'>Uploaded playlists</div>
       <div id="playlists" *ngFor='let item of ( Playlists | async)' >

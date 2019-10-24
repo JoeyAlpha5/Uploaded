@@ -25,6 +25,7 @@ export class Tab1Page {
   commentsRef$: Observable<any[]>;
   repostsRef$: Observable<any[]>;
   commnentsTab: any;
+  commnentsTab2: any;
   postViewsRef$: Observable<any[]>;
   @ViewChild('slider', {static: false}) slide: IonSlides;
 
@@ -71,7 +72,24 @@ export class Tab1Page {
             let currentTotalComments = parseInt($("#"+val[c].post+"CommentsCount").text());
             currentTotalComments += 1;
             $("#"+val[c].post+"CommentsCount").text(currentTotalComments);
+
           }
+
+
+          //
+          //commentinput 2
+          this.commnentsTab2 = document.getElementsByClassName("scrollableComments"); 
+          this.commnentsTab2 = document.getElementsByClassName("scrollableComments"); 
+          //display the last comment added
+          for(let x = 0; x < this.commnentsTab2.length; x++){
+            this.commnentsTab2[x].scrollTop = this.commnentsTab2[x].scrollHeight;
+            console.log("scroll top2",this.commnentsTab2[x].scrollTop);
+            console.log("scroll height2",this.commnentsTab2[x].scrollHeight);
+            //element.scrollTop = element.scrollHeight;
+          }
+
+
+
 
         }, 1000);
 
@@ -109,7 +127,7 @@ export class Tab1Page {
       this.presentActionSheet();
     }
 
-    ionicSlide(direction){
+    ionicSlide(){
       this.slide.getActiveIndex().then((val) => { 
         console.log(val);
         this.playVideo(val);
@@ -142,12 +160,16 @@ export class Tab1Page {
     
     playVideo(id){
       var video = <HTMLVideoElement> document.getElementById(id+"videobcg");
+      this.tabs.bottom = true;
       let CommentsBox =  $(".allComments");
       console.log(CommentsBox);
       //close all comment boxes
       for(let x = 0; x < CommentsBox.length; x++){
           CommentsBox[x].style.display = 'none';
       }
+
+      // this.CommentsUp(id);
+      console.log("id", id);
 
       this.tabs.bottom = true;
       console.log(id);
@@ -286,17 +308,23 @@ export class Tab1Page {
       console.log(post_id);
       this.tabs.bottom = false;
       $("#"+post_id+"allComments").show();
-      // this.commentsRef$.subscribe((com)=>{
-      //   console.log(com);
-      //   $("#"+post_id+"allComments").html("");
-      //   for(let c = 0; c < com.length; c++ ){
-      //     if(com[c].post == post_id){
-      //       $("#"+post_id+"allComments").append("<div><span>"+com[c].user+"</span><p>"+com[c].comment+"</p></div>");
-      //       console.log(com[c].user);
-      //     }
-      //   }
-      // });
+      //commentinput 2
+      this.commnentsTab2 = document.getElementsByClassName("scrollableComments"); 
+      this.commnentsTab2 = document.getElementsByClassName("scrollableComments"); 
+      //display the last comment added
+      for(let x = 0; x < this.commnentsTab2.length; x++){
+        this.commnentsTab2[x].scrollTop = this.commnentsTab2[x].scrollHeight;
+        console.log("scroll top2",this.commnentsTab2[x].scrollTop);
+        console.log("scroll height2",this.commnentsTab2[x].scrollHeight);
+        //element.scrollTop = element.scrollHeight;
+      }
+
+      let totalComments = $("#"+post_id+"CommentsCount").text();
+      $("#"+post_id+"totalCOmments").text(totalComments + " Comments");
+      console.log("total comments", totalComments);
     }
+
+    
     
 
 
@@ -309,10 +337,15 @@ export class Tab1Page {
     }
 
 
+    playFirstVideo(){
+
+    }
+
     ionViewDidEnter() {
       this.statusBar.overlaysWebView(true);
       this.tabs.bgColor = 'transparent';
       this.displayComments();
+      this.playFirstVideo();
       //change icon colors
       this.changeIconColors();
       this.storage.get('mail').then((val) => {
