@@ -47,7 +47,7 @@ div#profileBlock {
   height: auto;
   background: transparent;
   text-align: left;
-  margin-top: 44px;
+  margin-top: 70px;
 
 
   #Followers{
@@ -119,7 +119,8 @@ p#Posts {
 }
 
 p#bio {
-  text-align: -webkit-center;
+  text-align: left;
+  margin-left: 15px;
   color: gray;
   font-size: 13px;
 }
@@ -135,6 +136,13 @@ div#uploadedHeading {
   font-size: 14px;
 }
 
+
+ion-icon#messageBtn {
+  font-size: 22px;
+  float: left;
+  margin-left: 15px;
+  margin-top: 10px;
+}
 
 #profileName{
   font-size: 15px;
@@ -200,10 +208,26 @@ ion-icon#profileIocn {
   color: white;
 }
 
+#link{
+  margin-left: 15px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+#globe{
+  color: black;
+}
+
+span#location {
+  font-size: 12px;
+  margin-left: 5px;
+  color: #FF9800;
+}
+
 
 div#bannerPlaceholder {
   width: 100%;
-  height: 100px;
+  height: 120px;
   background-color: #c7c6c6 !important;
   position: absolute;
   z-index: 1;

@@ -6,12 +6,13 @@ import { FirebaseX } from  '@ionic-native/firebase-x/ngx';
 import { AngularFirestore } from "angularfire2/firestore";
 import { Platform } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 @Injectable({
   providedIn: 'root'
 })
 export class RequestsService {
 
-  constructor(private toast: ToastController, private http: HttpClient, public afs: AngularFirestore,public fs: FirebaseX, private platform: Platform) { }
+  constructor(private storage: Storage,private toast: ToastController, private http: HttpClient, public afs: AngularFirestore,public fs: FirebaseX, private platform: Platform) { }
 
   //get profile api
   getProfile(url, email): Observable<any> {
@@ -78,11 +79,20 @@ export class RequestsService {
     );
   }
 
+  getPlaces(url,input): Observable<any> {
+    return this.http.get(url, {params: {type: 'places', input: input}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results["data"];
+      })
+    );
+  }
+
   Repost(url,user_email,post_id): Observable<any> {
     return this.http.get(url, {params: {type: 'repost', email: user_email,post:post_id}}).pipe(
       map(results => {
         console.log("Repost",results);
-        return results["Response"];
+        return results;
       })
     );
   }
@@ -164,8 +174,8 @@ export class RequestsService {
 
 
   //notifications
-  registerDevice(url,user_email,user_id){
-    return this.http.get(url, {params: {type: 'registerDevice', email: user_email,user_id:user_id}}).pipe(
+  registerDevice(url,userId,token){
+    return this.http.get(url, {params: {type: 'setToken', userId: userId,token:token}}).pipe(
       map(results => {
         console.log("Results",results);
         return results;
@@ -182,6 +192,36 @@ export class RequestsService {
       })
     );
   }
+
+  UpdateNotifications(url, user_id, type){
+    return this.http.get(url, {params: {type: 'updateNotifications', user: user_id, notificationInfo: type}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results;
+      })
+    );
+  }
+
+
+  UpdateIndividualNotifications(url, user_id, type, value){
+    return this.http.get(url, {params: {type: 'updateIndividualNotifications', user: user_id, notificationInfo: type, NotificationsValue: value}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results;
+      })
+    );
+  }
+
+
+  getNotificationSettings(url,user_id){
+    return this.http.get(url, {params: {type: 'getNotificationSettings', user: user_id}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results;
+      })
+    );
+  }
+  //
 
   searchPage(url){
     return this.http.get(url, {params: {type: 'searchPage'}}).pipe(
@@ -245,6 +285,8 @@ export class RequestsService {
       await this.fs.grantPermission();
     }
 
+
+    this.storage.set("token", token);
     return this.saveToken(token);
 
   }
@@ -254,14 +296,7 @@ export class RequestsService {
     if(!token) {
       return;
     }
-    const devicesRef = this.afs.collection("devices");
-
-    const docData = {
-      token,
-      userId: "testUser",
-    }
-
-    return devicesRef.doc(token).set(docData);
+    return token;
   }
 
   

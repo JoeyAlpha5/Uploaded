@@ -11,7 +11,6 @@
   
     <div id="content" *ngFor='let profile of ( userProfile | async)'>
 
-
         <div id="bannerPlaceholder"  *ngIf="profile.cover == undefined">
         </div>
 
@@ -22,13 +21,15 @@
              <div id="outerCircle" (click)="viewUserFeed(profile.username)" *ngIf="profile.image != undefined"><div id="circle"><div  id='dp' [ngStyle]="{ 'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/'+profile.image+'.jpg)'}" ></div></div></div>
              <div id="outerCircle" (click)="viewUserFeed(profile.username)" *ngIf="profile.image == undefined"><div id="circle"><div *ngIf="profile.image == undefined" id='dp'><ion-icon id="profileIocn" name="contact" *ngIf="profile.image == undefined"></ion-icon>  </div></div></div>
             <p id='username'>{{ profile.username }} </p>
-            <p id='Posts'>{{ profile.total_posts }} Uploaded playlists</p>
+            <!--<p id='Posts'>{{ profile.total_posts }} Uploaded playlists</p>-->
+            <p id='bio'>{{ profile.bio }}</p>
+            <a *ngIf="profile.website != '' " href="{{ profile.website }}" id="link"><ion-icon name="globe" id="globe"></ion-icon> {{ profile.website }}</a>
+            <span id="location" *ngIf="profile.location != '' " ><ion-icon name="pin" id="globe"></ion-icon>{{ profile.location }}</span>
             <p id='Following'> <span><b>Followers:</b><br/> <font id="Followers">{{ profile.followers }}</font></span>  <span><b>Following: </b><br/> <font id="Followings">{{ profile.following }}</font></span>  </p>
         </div>
-        <p id='bio'>{{ profile.bio }}</p>
-         <div id="followDiv" *ngIf="profile.already_following == false"><p id='followBtn' (click)="Follow(profile.id,'Follow')">Follow</p></div>
-        <div id="followDiv" *ngIf="profile.already_following == true"><p id='followBtn' (click)="Follow(profile.id,'Unfollow')">Unfollow</p></div>
-        <p *ngIf="profile.already_following == true" id='messageBtn' (click)="Message(profile.first_name, profile.last_name,profile.username,profile.id)">Message</p>
+         <div id="followDiv" *ngIf="profile.already_following == false"><p id='followBtn' (click)="Follow(profile.id,'Follow')">Follow</p>   <ion-icon name="mail" id='messageBtn' (click)="Message(profile.first_name, profile.last_name,profile.username,profile.id)">Message</ion-icon></div>
+        <div id="followDiv" *ngIf="profile.already_following == true"><p id='followBtn' (click)="Follow(profile.id,'Unfollow')">Unfollow</p> <ion-icon name="mail" id='messageBtn' (click)="Message(profile.first_name, profile.last_name,profile.username,profile.id)">Message</ion-icon></div>
+        
   
         <div id='uploadedHeading'>Uploaded playlists</div>
         <div id="playlists" *ngFor='let item of ( Playlists | async)'>

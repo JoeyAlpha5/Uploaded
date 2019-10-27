@@ -122,6 +122,14 @@ let Tab1Page = class Tab1Page {
         this.statusBar.overlaysWebView(true);
         this.tabs.bgColor = 'transparent';
         this.displayComments();
+        //savetoken
+        this.storage.get("current_userID").then(x => {
+            let url = 'https://uploaded.herokuapp.com/users/users';
+            this.storage.get("token").then(token => {
+                this.tokenReg = this.requests.registerDevice(url, x, token);
+                this.tokenReg.subscribe();
+            });
+        });
     }
     displayComments() {
         this.commentsRef$.subscribe((val) => {

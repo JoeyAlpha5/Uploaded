@@ -23,6 +23,14 @@ var map = {
 		"common",
 		"messaging-messaging-module"
 	],
+	"./notifications/notifications.module": [
+		"./src/app/notifications/notifications.module.ts",
+		"notifications-notifications-module"
+	],
+	"./notifyme/notifyme.module": [
+		"./src/app/notifyme/notifyme.module.ts",
+		"notifyme-notifyme-module"
+	],
 	"./post-view/post-view.module": [
 		"./src/app/post-view/post-view.module.ts",
 		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
@@ -543,7 +551,9 @@ var routes = [
     { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
     { path: 'messaging', loadChildren: './messaging/messaging.module#MessagingPageModule' },
     { path: 'messaging-list', loadChildren: './messaging-list/messaging-list.module#MessagingListPageModule' },
-    { path: 'userfeed', loadChildren: './userfeed/userfeed.module#UserfeedPageModule' }
+    { path: 'userfeed', loadChildren: './userfeed/userfeed.module#UserfeedPageModule' },
+    { path: 'notifications', loadChildren: './notifications/notifications.module#NotificationsPageModule' },
+    { path: 'notifyme', loadChildren: './notifyme/notifyme.module#NotifymePageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -782,6 +792,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! angularfire2/firestore */ "./node_modules/angularfire2/firestore/index.js");
 /* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+
 
 
 
@@ -791,7 +803,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var RequestsService = /** @class */ (function () {
-    function RequestsService(toast, http, afs, fs, platform) {
+    function RequestsService(storage, toast, http, afs, fs, platform) {
+        this.storage = storage;
         this.toast = toast;
         this.http = http;
         this.afs = afs;
@@ -823,13 +836,15 @@ var RequestsService = /** @class */ (function () {
             return results["Response"];
         }));
     };
-    RequestsService.prototype.updateProfile = function (url, user_email, user_name, first_name, last_name, bio, file) {
+    // profile_url, Email, user_name, first_name, website, bio,location,this.file
+    RequestsService.prototype.updateProfile = function (url, user_email, user_name, first_name, website, bio, location, file) {
         var postData = new FormData();
         postData.append('type', 'updateProfile');
         postData.append('email', user_email);
         postData.append('user_name', user_name);
         postData.append('first_name', first_name);
-        postData.append('last_name', last_name);
+        postData.append('website', website);
+        postData.append('location', location);
         postData.append('bio', bio);
         postData.append('file', file);
         return this.http.post(url, postData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
@@ -843,10 +858,16 @@ var RequestsService = /** @class */ (function () {
             return results["Response"];
         }));
     };
+    RequestsService.prototype.getPlaces = function (url, input) {
+        return this.http.get(url, { params: { type: 'places', input: input } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results["data"];
+        }));
+    };
     RequestsService.prototype.Repost = function (url, user_email, post_id) {
         return this.http.get(url, { params: { type: 'repost', email: user_email, post: post_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
             console.log("Repost", results);
-            return results["Response"];
+            return results;
         }));
     };
     RequestsService.prototype.getUserProfile = function (url, user_id, user_email) {
@@ -899,8 +920,8 @@ var RequestsService = /** @class */ (function () {
         }));
     };
     //notifications
-    RequestsService.prototype.registerDevice = function (url, user_email, user_id) {
-        return this.http.get(url, { params: { type: 'registerDevice', email: user_email, user_id: user_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+    RequestsService.prototype.registerDevice = function (url, userId, token) {
+        return this.http.get(url, { params: { type: 'setToken', userId: userId, token: token } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
             console.log("Results", results);
             return results;
         }));
@@ -911,10 +932,35 @@ var RequestsService = /** @class */ (function () {
             return results;
         }));
     };
+    RequestsService.prototype.UpdateNotifications = function (url, user_id, type) {
+        return this.http.get(url, { params: { type: 'updateNotifications', user: user_id, notificationInfo: type } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results;
+        }));
+    };
+    RequestsService.prototype.UpdateIndividualNotifications = function (url, user_id, type, value) {
+        return this.http.get(url, { params: { type: 'updateIndividualNotifications', user: user_id, notificationInfo: type, NotificationsValue: value } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results;
+        }));
+    };
+    RequestsService.prototype.getNotificationSettings = function (url, user_id) {
+        return this.http.get(url, { params: { type: 'getNotificationSettings', user: user_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results);
+            return results;
+        }));
+    };
+    //
     RequestsService.prototype.searchPage = function (url) {
         return this.http.get(url, { params: { type: 'searchPage' } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
             console.log("Results", results);
             return results["Response"];
+        }));
+    };
+    RequestsService.prototype.searchPageOneBig = function (url) {
+        return this.http.get(url, { params: { type: 'searchPage' } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
+            console.log("Results", results["One"]);
+            return results["One"];
         }));
     };
     RequestsService.prototype.UploadCoverImage = function (url, user_email, file) {
@@ -959,7 +1005,9 @@ var RequestsService = /** @class */ (function () {
                     case 4:
                         _a.sent();
                         _a.label = 5;
-                    case 5: return [2 /*return*/, this.saveToken(token)];
+                    case 5:
+                        this.storage.set("token", token);
+                        return [2 /*return*/, this.saveToken(token)];
                 }
             });
         });
@@ -968,12 +1016,7 @@ var RequestsService = /** @class */ (function () {
         if (!token) {
             return;
         }
-        var devicesRef = this.afs.collection("devices");
-        var docData = {
-            token: token,
-            userId: "testUser",
-        };
-        return devicesRef.doc(token).set(docData);
+        return token;
     };
     RequestsService.prototype.listenNotifications = function () {
         return this.fs.onMessageReceived();
@@ -989,6 +1032,7 @@ var RequestsService = /** @class */ (function () {
         }));
     };
     RequestsService.ctorParameters = function () { return [
+        { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_7__["Storage"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"] },
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
         { type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_5__["AngularFirestore"] },
@@ -999,7 +1043,7 @@ var RequestsService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], angularfire2_firestore__WEBPACK_IMPORTED_MODULE_5__["AngularFirestore"], _ionic_native_firebase_x_ngx__WEBPACK_IMPORTED_MODULE_4__["FirebaseX"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Platform"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_storage__WEBPACK_IMPORTED_MODULE_7__["Storage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], angularfire2_firestore__WEBPACK_IMPORTED_MODULE_5__["AngularFirestore"], _ionic_native_firebase_x_ngx__WEBPACK_IMPORTED_MODULE_4__["FirebaseX"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Platform"]])
     ], RequestsService);
     return RequestsService;
 }());

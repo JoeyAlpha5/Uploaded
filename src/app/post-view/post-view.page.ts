@@ -29,7 +29,7 @@ export class PostViewPage implements OnInit {
   postViewsRef$: Observable<any[]>;
   commnentsTab: any;
   email: any;
-
+  commnentsTab2: any;
   slideOpts = {
     initialSlide: 1,
     speed: 400
@@ -63,45 +63,33 @@ export class PostViewPage implements OnInit {
           //element.scrollTop = element.scrollHeight;
 
           for(let c = 0; c < val.length; c++){
-            $("#"+val[c].post+"CommentsCount").text("0");
+            $("#"+val[c].post+"CommentsCounts").text("0");
           }
           //get the number of comments for each post
           for(let c = 0; c < val.length; c++){
             //console.log("this comment belongs to post ", val[c].post);
-            let currentTotalComments = parseInt($("#"+val[c].post+"CommentsCount").text());
+            let currentTotalComments = parseInt($("#"+val[c].post+"CommentsCounts").text());
             currentTotalComments += 1;
-            $("#"+val[c].post+"CommentsCount").text(currentTotalComments);
+            $("#"+val[c].post+"CommentsCounts").text(currentTotalComments);
           }
+
+        //commentinput 2
+        this.commnentsTab2 = document.getElementsByClassName("scrollableComments"); 
+        this.commnentsTab2 = document.getElementsByClassName("scrollableComments"); 
+        //display the last comment added
+        for(let x = 0; x < this.commnentsTab2.length; x++){
+          this.commnentsTab2[x].scrollTop = this.commnentsTab2[x].scrollHeight;
+          console.log("scroll top2",this.commnentsTab2[x].scrollTop);
+          console.log("scroll height2",this.commnentsTab2[x].scrollHeight);
+          //element.scrollTop = element.scrollHeight;
+        }
+
+
+
         }
       }, 1000);
 
     });
-
-    this.storage.get("current_userID").then((val)=>{
-      this.storage.get("post").then((post) =>{
-        console.log(post);
-        let current_post_id = JSON.stringify(post);
-        this.database.list("views/").remove(JSON.stringify(val+current_post_id))
-        this.database.object("views/"+JSON.stringify(val+current_post_id)).set({"user": val, "post_id":parseInt(current_post_id)});
-        //display views
-        this.postViewsRef$.subscribe((val)=>{
-          setTimeout(function(){
-            for(let c = 0; c < val.length; c++){
-              $("#viewCount").text("000");
-            }
-            for(let v =0; v < val.length; v++){
-              let post_id =  val[v].post_id;
-              console.log(post_id);
-              let current_views = parseInt($("#viewCount").text());
-              console.log(current_views);
-              current_views += 1;
-              $("#viewCount").text(current_views);
-            }
-          },1000);
-        });
-      });
-    });
-
 
 
   }
@@ -191,17 +179,22 @@ export class PostViewPage implements OnInit {
 
   showAllComments(post_id){
     console.log(post_id);
+    // this.tabs.bottom = false;
     $("#"+post_id+"allComments").show();
-    // this.commentsRef$.subscribe((com)=>{
-    //   console.log(com);
-    //   $("#"+post_id+"allComments").html("");
-    //   for(let c = 0; c < com.length; c++ ){
-    //     if(com[c].post == post_id){
-    //       $("#"+post_id+"allComments").append("<div><span>"+com[c].user+"</span><p>"+com[c].comment+"</p></div>");
-    //       console.log(com[c].user);
-    //     }
-    //   }
-    // });
+    //commentinput 2
+    this.commnentsTab2 = document.getElementsByClassName("scrollableComments"); 
+    this.commnentsTab2 = document.getElementsByClassName("scrollableComments"); 
+    //display the last comment added
+    for(let x = 0; x < this.commnentsTab2.length; x++){
+      this.commnentsTab2[x].scrollTop = this.commnentsTab2[x].scrollHeight;
+      console.log("scroll top2",this.commnentsTab2[x].scrollTop);
+      console.log("scroll height2",this.commnentsTab2[x].scrollHeight);
+      //element.scrollTop = element.scrollHeight;
+    }
+
+    let totalComments = $("#"+post_id+"CommentsCount").text();
+    $("#"+post_id+"totalCOmments").text(totalComments + " Comments");
+    console.log("total comments", totalComments);
   }
 
 

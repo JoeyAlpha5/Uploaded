@@ -75,9 +75,20 @@ div#Settings {
   z-index: 99999;
   right: 0px;
   font-size: 13px;
-  margin-top: 95px;
+  margin-top: 113px;
   margin-right: 10px;
-  color: gray;
+  color: black;
+}
+
+
+ion-icon#settingsIcon {
+  position: absolute;
+  z-index: 99999;
+  right: 0;
+  margin-right: 10px;
+  color: white;
+  margin-top: 24px;
+  font-size: 23px;
 }
 
 
@@ -86,7 +97,7 @@ div#profileBlock {
   height: auto;
   background: transparent;
   text-align: left;
-  margin-top: 44px;
+  margin-top: 70px;
 
   #Followers{
     font-size: 16px;
@@ -176,7 +187,7 @@ div#closeMenu {
 
 div#bannerPlaceholder {
   width: 100%;
-  height: 100px;
+  height: 120px;
   background-color: #c7c6c6 !important;
   position: absolute;
   z-index: 1;
@@ -205,7 +216,7 @@ div#bannerPlaceholder {
 
 span#location {
   font-size: 12px;
-  margin-left: 15px;
+  margin-left: 5px;
   color: #FF9800;
 }
 

@@ -253,13 +253,13 @@ export class Tab4Page implements OnInit {
 
     var profile_url =  'https://uploaded.herokuapp.com/users/users';
     //var profile_url = 'http://127.0.0.1:8000/users/users'
-    this.storage.get('mail').then((Email) =>{
-      let update = this.requests.updateProfile(profile_url, Email, user_name, first_name, last_name, bio,this.file); 
+    // this.storage.get('mail').then((Email) =>{
+    //   let update = this.requests.updateProfile(profile_url, Email, user_name, first_name, last_name, bio,this.file); 
 
-      update.subscribe(x => console.log(x) );
-      this.closeProfile();
-      this.ionViewDidEnter();
-    });
+    //   update.subscribe(x => console.log(x) );
+    //   this.closeProfile();
+    //   this.ionViewDidEnter();
+    // });
   }
 
 
@@ -282,6 +282,10 @@ export class Tab4Page implements OnInit {
 
   }
 
+
+  notificationsPage(){
+    this.route.navigate(['/home/tabs/notifications']);
+  }
 
 
   //present share options

@@ -105,6 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var Tab1Page = /** @class */ (function () {
     function Tab1Page(tabs, platform, loadingController, statusBar, actionSheetController, toastController, requests, database, route, storage) {
+        var _this = this;
         this.tabs = tabs;
         this.platform = platform;
         this.loadingController = loadingController;
@@ -125,6 +126,14 @@ var Tab1Page = /** @class */ (function () {
         this.statusBar.overlaysWebView(true);
         this.tabs.bgColor = 'transparent';
         this.displayComments();
+        //savetoken
+        this.storage.get("current_userID").then(function (x) {
+            var url = 'https://uploaded.herokuapp.com/users/users';
+            _this.storage.get("token").then(function (token) {
+                _this.tokenReg = _this.requests.registerDevice(url, x, token);
+                _this.tokenReg.subscribe();
+            });
+        });
     }
     Tab1Page.prototype.displayComments = function () {
         this.commentsRef$.subscribe(function (val) {

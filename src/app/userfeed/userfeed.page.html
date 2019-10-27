@@ -53,12 +53,14 @@
 
 
     <div id="{{item.post_id}}allComments"  class="allComments animated fadeInUp">
-      <div *ngFor='let comment of (commentsRef$ | async)' id="{{item.post_id}}allComments">
-        <div id="allcomComment" *ngIf="item.post_id == comment.post"><span>@{{comment.user}}</span><p>{{ comment.comment }}</p></div>
+      <div id="scrollableComments" class="scrollableComments">
+        <div class="totalComments" id="{{item.post_id}}totalCOmments"></div>
+        <div *ngFor='let comment of (commentsRef$ | async)' id="{{item.post_id}}allComments">
+          <div id="allcomComment" *ngIf="item.post_id == comment.post"><span>@{{comment.user}}</span><p>{{ comment.comment }}</p></div>
+        </div>
       </div>
-
       <div id="fullComments">
-        <input type="text"  (focus)="CommentsUp(i)" (blur)="CommentsDown(i)" class="commentInput2" id="{{item.post_id}}commentInput2" placeholder="Add Comment...">
+        <input type="text"  class="commentInput2" id="{{item.post_id}}commentInput2" placeholder="Add Comment...">
         <span (click)="postComment2(item.post_id)" id="commentBtn">Post</span>
       </div>
     </div>

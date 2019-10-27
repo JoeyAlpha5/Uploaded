@@ -27,6 +27,7 @@ export class UserfeedPage implements OnInit {
   postViewsRef$: Observable<any[]>;
   commnentsTab: any;
   email: any;
+  commnentsTab2: any;
   @ViewChild('slider', {static: false}) slide: IonSlides;
   constructor(private database:AngularFireDatabase,public actionSheetController: ActionSheetController,private platform: Platform,private tabs: TabsPage,private requests: RequestsService,public toastController: ToastController,private statusBar: StatusBar,private route: Router, public loadingController: LoadingController,private storage: Storage ) { 
     this.commentsRef$ = this.database.list("comments").valueChanges();
@@ -65,6 +66,22 @@ export class UserfeedPage implements OnInit {
           currentTotalComments += 1;
           $("#"+val[c].post+"CommentsCount").text(currentTotalComments);
         }
+
+
+
+        //commentinput 2
+        this.commnentsTab2 = document.getElementsByClassName("scrollableComments"); 
+        this.commnentsTab2 = document.getElementsByClassName("scrollableComments"); 
+        //display the last comment added
+        for(let x = 0; x < this.commnentsTab2.length; x++){
+          this.commnentsTab2[x].scrollTop = this.commnentsTab2[x].scrollHeight;
+          console.log("scroll top2",this.commnentsTab2[x].scrollTop);
+          console.log("scroll height2",this.commnentsTab2[x].scrollHeight);
+          //element.scrollTop = element.scrollHeight;
+        }
+
+
+
 
       }, 1000);
 
@@ -260,17 +277,22 @@ export class UserfeedPage implements OnInit {
 
   showAllComments(post_id){
     console.log(post_id);
+    // this.tabs.bottom = false;
     $("#"+post_id+"allComments").show();
-    // this.commentsRef$.subscribe((com)=>{
-    //   console.log(com);
-    //   $("#"+post_id+"allComments").html("");
-    //   for(let c = 0; c < com.length; c++ ){
-    //     if(com[c].post == post_id){
-    //       $("#"+post_id+"allComments").append("<div><span>"+com[c].user+"</span><p>"+com[c].comment+"</p></div>");
-    //       console.log(com[c].user);
-    //     }
-    //   }
-    // });
+    //commentinput 2
+    this.commnentsTab2 = document.getElementsByClassName("scrollableComments"); 
+    this.commnentsTab2 = document.getElementsByClassName("scrollableComments"); 
+    //display the last comment added
+    for(let x = 0; x < this.commnentsTab2.length; x++){
+      this.commnentsTab2[x].scrollTop = this.commnentsTab2[x].scrollHeight;
+      console.log("scroll top2",this.commnentsTab2[x].scrollTop);
+      console.log("scroll height2",this.commnentsTab2[x].scrollHeight);
+      //element.scrollTop = element.scrollHeight;
+    }
+
+    let totalComments = $("#"+post_id+"CommentsCount").text();
+    $("#"+post_id+"totalCOmments").text(totalComments + " Comments");
+    console.log("total comments", totalComments);
   }
   
 

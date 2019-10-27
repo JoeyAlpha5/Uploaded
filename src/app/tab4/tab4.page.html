@@ -9,6 +9,7 @@
       <p (click)="showSettings()">Edit profile</p>
   </div>
 
+   <ion-icon name="settings" id="settingsIcon" (click)="notificationsPage()"></ion-icon>
 
   <div id="content" *ngFor='let profile of ( results | async)'>
 

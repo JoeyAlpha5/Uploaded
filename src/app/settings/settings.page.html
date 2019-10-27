@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar>
+    <ion-icon name="arrow-back" id="backBtn" (click)="back()"></ion-icon>
     <ion-title>Profile</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -24,15 +25,20 @@
 
     <ion-card-content>
       <span>Username: </span><br>
-      <ion-input type="text" id="user_name" placeholder="Add username" value="{{ profile.username }}"></ion-input><br>
+      <ion-input type="text" id="user_name" [(ngModel)]="username" placeholder="Add username" value="{{ profile.username }}"></ion-input><br>
       <span>Name: </span><br>
-      <ion-input type="text" id="first_name" placeholder="Add first name" value="{{ profile.first_name }}"></ion-input><br>
+      <ion-input type="text" id="first_name" [(ngModel)]="name" placeholder="Add first name" value="{{ profile.first_name }}"></ion-input><br>
       <span>Bio: </span><br>
-      <ion-input type="text" id="bioInput" placeholder="Add bio" value="{{ profile.bio}}"></ion-input><br>
+      <ion-input type="text" id="bioInput" [(ngModel)]="bio" placeholder="Add bio" value="{{ profile.bio}}"></ion-input><br>
       <span>Website: </span><br>
-      <ion-input type="text" id="website" placeholder="Add website" value="{{ profile.website }}"></ion-input><br>
+      <ion-input type="text" id="website" [(ngModel)]="website" placeholder="Add website" value="{{ profile.website }}"></ion-input><br>
       <span>Location: </span><br>
-      <ion-input type="text" id="location" placeholder="Add llocation" value="{{ profile.location }}"></ion-input><br>
+      <ion-input type="text"  (ionChange)="location()" [(ngModel)]="locations" id="location" placeholder="Add location" value="{{ profile.location }}"></ion-input><br>
+
+      <ion-item *ngFor='let place of ( places | async)' (click)="SetLocation(place.description)">
+        {{ place.description }}
+      </ion-item>
+
     </ion-card-content>
     </ion-card>
 

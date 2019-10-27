@@ -165,6 +165,24 @@ const routes = [
                 ]
             },
             {
+                path: 'notifications',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => __webpack_require__.e(/*! import() | notifications-notifications-module */ "notifications-notifications-module").then(__webpack_require__.bind(null, /*! ../notifications/notifications.module */ "./src/app/notifications/notifications.module.ts")).then(m => m.NotificationsPageModule)
+                    }
+                ]
+            },
+            {
+                path: 'notifyme',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => __webpack_require__.e(/*! import() | notifyme-notifyme-module */ "notifyme-notifyme-module").then(__webpack_require__.bind(null, /*! ../notifyme/notifyme.module */ "./src/app/notifyme/notifyme.module.ts")).then(m => m.NotifymePageModule)
+                    }
+                ]
+            },
+            {
                 path: '',
                 redirectTo: '/tabs/tab1',
                 pathMatch: 'full'

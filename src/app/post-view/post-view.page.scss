@@ -380,3 +380,20 @@ ion-icon#profileIocn {
     margin-left: 5px !important;
   }
 }
+
+div#scrollableComments {
+  width: 100%;
+  height: 200px;
+  overflow: scroll;
+}
+
+.totalComments{
+  width: 100%;
+  height: 26px;
+  font-weight: bold;
+  font-size: 13px;
+  padding-top: 10px;
+  position: fixed;
+  background: white;
+  padding-bottom: 10px;
+}

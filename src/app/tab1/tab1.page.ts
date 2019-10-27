@@ -27,6 +27,7 @@ export class Tab1Page {
   commnentsTab: any;
   commnentsTab2: any;
   postViewsRef$: Observable<any[]>;
+  tokenReg: Observable<any>;
   @ViewChild('slider', {static: false}) slide: IonSlides;
 
   constructor(private tabs: TabsPage,private platform: Platform,public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage) {
@@ -36,6 +37,15 @@ export class Tab1Page {
     this.statusBar.overlaysWebView(true);
     this.tabs.bgColor = 'transparent';
     this.displayComments();
+
+    //savetoken
+    this.storage.get("current_userID").then(x=>{
+      let url =  'https://uploaded.herokuapp.com/users/users';
+      this.storage.get("token").then(token =>{
+       this.tokenReg = this.requests.registerDevice(url,x,token);
+       this.tokenReg.subscribe();
+      });
+    });
 
   }
 

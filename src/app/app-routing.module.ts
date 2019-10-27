@@ -15,7 +15,9 @@ const routes: Routes = [
   { path: 'settings', loadChildren: './settings/settings.module#SettingsPageModule' },
   { path: 'messaging', loadChildren: './messaging/messaging.module#MessagingPageModule' },
   { path: 'messaging-list', loadChildren: './messaging-list/messaging-list.module#MessagingListPageModule' },
-  { path: 'userfeed', loadChildren: './userfeed/userfeed.module#UserfeedPageModule' }
+  { path: 'userfeed', loadChildren: './userfeed/userfeed.module#UserfeedPageModule' },
+  { path: 'notifications', loadChildren: './notifications/notifications.module#NotificationsPageModule' },
+  { path: 'notifyme', loadChildren: './notifyme/notifyme.module#NotifymePageModule' }
 ];
 @NgModule({
   imports: [

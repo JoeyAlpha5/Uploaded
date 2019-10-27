@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { TabsPage } from '../tabs/tabs.page';
+import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -18,16 +19,29 @@ export class SettingsPage implements OnInit {
   displayLoading: boolean = false;
   Bottom: boolean = true;
   results: Observable<any>;
+  places: Observable<any>;
+  locations: Observable<any>;
+  username: Observable<any>;
+  website: Observable<any>;
+  name: Observable<any>;
+  bio: Observable<any>;
 
-  constructor(private tabs: TabsPage,private statusBar: StatusBar,public toastController: ToastController,private storage: Storage,private requests: RequestsService,private route: Router,public loadingController: LoadingController ) { 
+  constructor(private platform: Platform,private tabs: TabsPage,private statusBar: StatusBar,public toastController: ToastController,private storage: Storage,private requests: RequestsService,private route: Router,public loadingController: LoadingController ) { 
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();
     this.tabs.bgColor = '#000000';
+    this.platform.backButton.subscribeWithPriority(0, ()=>{
+      this.route.navigate(['/home/tabs/tab4'])
+    });
   }
 
   ngOnInit() {
   }
 
+
+  back(){
+    this.route.navigate(['/home/tabs/tab4'])
+  }
 
 
   ionViewDidEnter() {
@@ -43,6 +57,14 @@ export class SettingsPage implements OnInit {
         this.route.navigate(['']);
       }else{
         this.results =  this.requests.getProfile(profile_url, val); 
+        this.results.subscribe(x =>{
+          console.log(x);
+          this.locations = x[0].location;
+          this.name = x[0].first_name;
+          this.website = x[0].website;
+          this.bio = x[0].bio;
+          this.username = x[0].username;
+        });
         // this.results.subscribe(profile => {
         //   console.log("profile", profile);
         //   this.renderProfile(profile);
@@ -69,17 +91,27 @@ export class SettingsPage implements OnInit {
 
 
   location(){
-    console.log("location")
+    var input = this.locations;
+    console.log(input);
+    var profile_url =  'https://uploaded.herokuapp.com/users/users';
+    this.places = this.requests.getPlaces(profile_url,input);
+    //this.places.subscribe();
   }
 
+  SetLocation(description){
+    console.log(description);
+    $("#location").val(description);
+    this.locations = description;
+    this.places = null;
+  }
 
   updateProfile(){
-    let user_name = $("#user_name").val();
-    let first_name = $("#first_name").val();
-    let location = $("#location").val();
-    let website = $("#website").val();
-    let bio = $("#bioInput").val();
-    console.log(user_name,first_name);
+    let user_name = this.username;
+    let first_name = this.name;
+    let location = this.locations;
+    let website = this.website;
+    let bio = this.bio;
+    console.log("username and first name ",user_name,first_name, location,bio,website);
     var profile_url =  'https://uploaded.herokuapp.com/users/users';
     //var profile_url = 'http://127.0.0.1:8000/users/users'
     this.storage.get('mail').then((Email) =>{

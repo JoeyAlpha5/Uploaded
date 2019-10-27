@@ -122,6 +122,27 @@ const routes: Routes = [
       }
       ,
       {
+        path: 'notifications',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../notifications/notifications.module').then(m => m.NotificationsPageModule)
+          }
+        ]
+      },
+      {
+        path: 'notifyme',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../notifyme/notifyme.module').then(m => m.NotifymePageModule)
+          }
+        ]
+      }
+      ,
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
