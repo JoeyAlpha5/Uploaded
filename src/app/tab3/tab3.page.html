@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Notifications
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+
+  <ion-list id="notifs">
+    <ion-item-sliding #item *ngFor='let notif of ( notificationssRef$ | async)?.slice().reverse(); let i = index'>
+      <ion-item id="actualNotif" *ngIf="notif.the_receiver == username">
+        <ion-icon  [ngStyle]="{ color:'#F44336' }" name="heart"></ion-icon>
+        <div *ngIf="notif.profile != 'none'" id="dp" [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + notif.profile+ '.jpg)'}"></div>
+        <div *ngIf="notif.profile == 'none'" id="dp"></div>
+        <span>{{ notif.msg }}</span>
+      </ion-item>
+      <ion-item id="actualNotif" *ngIf="notif.to == username">
+        <ion-icon [ngStyle]="{ color:'#FF9800' }" name="text"></ion-icon>
+        <span id="msg">{{ notif.msg }}</span>
+      </ion-item>
+      <ion-item id="actualNotif" *ngIf="notif.type == 'follow'">
+        <ion-icon [ngStyle]="{ color:'#FF9800' }" name="person-add"></ion-icon>
+        <span id="msg">{{ notif.msg }}</span>
+      </ion-item>
+      <ion-item-options side="start" id="options">
+        <button ion-button id='viewUser'  (click)="viewUser(notif.userid)"><ion-icon name="contact"></ion-icon><br>User</button>
+        <button ion-button id='viewPost' *ngIf="notif.the_receiver == username" (click)="viewPost(notif.post)"><ion-icon name="videocam"></ion-icon><br>Post</button>
+        <button ion-button id='viewChat' (click)="viewChat(notif.userid,notif.first_name,notif.last_name,notif,username)"><ion-icon name="text"></ion-icon><br>Chat</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

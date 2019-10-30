@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Upload</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-input (change)="changeListener($event)" type="file" accept="video/*" id="uploadDesc"></ion-input>
+    <ion-progress-bar *ngIf="displayLoading == true" id="uploadProgress" type="indeterminate"></ion-progress-bar>
+    <div id="uploadImage">
+      <ion-icon name="cloud-upload" id="uploadIcon"></ion-icon>
+      <p>Upload your video</p>
+      <span>Tap here to select a video from your device to</span>
+    </div>
+   <div id="options" class="options">
+    <ion-label id="label">Add to your feed: </ion-label>
+    <ion-toggle id="toggle" (ionChange)="addPlaylist($event)" color="dark"></ion-toggle>
+  </div>
+  <div id="options">
+      <ion-label id="label">Music Genre: </ion-label>
+      <ion-select id="Select" okText="Okay" cancelText="Dismiss">
+        <ion-select-option value="HipHop">HipHop</ion-select-option>
+        <ion-select-option value="House">House</ion-select-option>
+        <ion-select-option value="Jazz">Jazz</ion-select-option>
+        <ion-select-option value="Indie">Indie</ion-select-option>
+        <ion-select-option value="Popp">Popp</ion-select-option>
+        <ion-select-option value="Rock">Rock</ion-select-option>
+      </ion-select>
+    </div>
+
+    <ion-input type="text" (ionBlur)="enableBottom()" (ionFocus)="disableBottom()" id="uploadDescription" placeholder="Upload description"></ion-input>
+
+    <div id="uploadBtnDiv"><ion-button id="uploadBtn" (click)="upload()">Publish video</ion-button></div>
+
+    
+
+</ion-content>

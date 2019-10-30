@@ -1,0 +1,13 @@
+<ion-content id='content'>
+    
+    <div class='login'>
+        <img src='assets/Logo.jpg' alt='logo' class="logoImg"><br/>
+        <h1 id='UploadedHeading'>Welcome to Uploaded</h1>
+        <p class='signInPrompt'>Sign in to continue</p>
+        <input type="email" (blur)="enableBottom()" (focus)="disableBottom()" id='emailInput' placeholder="Email" required/><br/>
+        <input type="password" (blur)="enableBottom()" (focus)="disableBottom()" id='passwordInput' placeholder="Password" required/><br/>
+        <ion-button expand="block" size="default" class='loginButton' color="primary" (click) ='login()' >Sign in</ion-button>
+        <p class='bottomText' *ngIf="Bottom == true"><span class='fgt'>Forgot password</span>  <span class='crt'>Create Account</span></p>
+    </div>
+
+</ion-content>

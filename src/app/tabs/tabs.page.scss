@@ -1,0 +1,25 @@
+
+#tabs{
+    background: black;
+    position: fixed !important;
+    bottom: 0;
+    width: 100%;
+    height:60px;
+
+  }
+  
+  #tab-button-tab1, #tab-button-tab2, #tab-button-tab3, #tab-button-tab4{
+    background:transparent;
+  }
+
+ion-tab-button#tab-button-upload {
+    background: transparent;
+}
+
+
+
+  #navIcon{
+      color: white;
+  }
+
+  

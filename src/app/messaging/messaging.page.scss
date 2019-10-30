@@ -1,0 +1,184 @@
+  div#chattingWith {
+    width: 100%;
+    height: 52px;
+    background: #f7f7f7;
+    color: gray;
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
+
+ion-icon#sendIcon {
+  float: right;
+  margin-right: 15px;
+  font-size: 36px;
+  color: #000000;
+  margin-top: 10px;
+}
+
+span#sentByMe {
+  font-size: 12px;
+  color: gray;
+  float: right;
+  width: 100%;
+  text-align: right;
+  padding-right: 15px;
+}
+
+#messageSentByMe{
+  width: auto;
+  float: right;
+  text-align: right;
+  margin-right: 15px;
+  background: orange;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 3px 15px 22px;
+}
+
+
+span#notSentByMe {
+  font-size: 12px;
+  color: gray;
+  float: left;
+  width: 100%;
+  text-align: left;
+  padding-left: 15px;
+}
+
+#messageNotSentByMe{
+  width: auto;
+  float: left;
+  text-align: left;
+  margin-right: 15px;
+  background: black;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 3px 15px 22px;
+}
+
+div#messageBox {
+  width: 100%;
+  height: auto;
+  float: left;
+  margin-top: 10px;
+}
+
+div#chatsContainer {
+  width: 100%;
+  float: left;
+  padding-bottom: 100px;
+  height: 75%;
+  overflow: scroll;
+}
+
+#messageInput{
+  bottom: 0px;
+  position: fixed;
+  margin-bottom: 56px;
+  width: 100%;
+  background: white;
+  height: 71px;
+}
+
+input#message {
+  width: 75%;
+  margin-left: 15px;
+  height: 61px;
+  border: 1px solid rgba(128, 128, 128, 0.14);
+  border-radius: 15px;
+  padding-left: 10px;
+  outline: none;
+
+  input{
+    float: left;
+  }
+}
+
+
+ion-icon#fileIcon {
+  font-size: 28px;
+  position: absolute;
+  margin-left: 69%;
+  margin-top: 17px;
+  transform: rotate(30deg);
+  color: black;
+  z-index: 999;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+ion-input#uploadProfile {
+  position: absolute;
+  z-index: 99999;
+  width: 48px;
+  height: 59px;
+  margin-left: 64%;
+  opacity: 0;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+#rightImage{
+  width: 100%;
+  height: auto;
+  padding-bottom: 10px;
+  float: right;
+  img {
+    max-width: 31%;
+    border: 0;
+    float: right;
+    margin-right: 15px;
+    border-radius: 10px;
+  }
+}
+
+#leftImage{
+  width: 100%;
+  height: auto;
+  padding-bottom: 10px;
+  float: left;
+  img {
+    max-width: 31%;
+    border: 0;
+    float: right;
+    margin-left:15px;
+    border-radius: 10px;
+  }
+}
+
+div#imageBox {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: black;
+  top: 0;
+  z-index: 1000;
+  display: none;
+
+  img {
+    max-width: 100%;
+    border: 0;
+    margin-top: 30%;
+}
+}
+
+ion-icon#closeIcon {
+  font-size: 30px;
+  color: white;
+  float: right;
+  margin-right: 15px;
+  margin-top: 30px;
+}
+
+ion-icon#micIcon {
+  font-size: 27px;
+  position: absolute;
+  margin-left: 59%;
+  margin-top: 17px;
+  color: black;
+}

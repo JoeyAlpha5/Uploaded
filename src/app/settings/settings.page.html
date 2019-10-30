@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon name="arrow-back" id="backBtn" (click)="back()"></ion-icon>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" *ngFor='let profile of ( results | async)'>
+    <ion-progress-bar *ngIf="displayLoading == true" id="uploadProgress" type="indeterminate"></ion-progress-bar>
+    <p id="notifcationsHeading">Profile Setiings</p>
+    <ion-card *ngFor='let profile of ( results | async)' id="editProfile">
+    <div id="coverImg" *ngIf="profile.cover != undefined" [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.cover+ '.jpg)'}">
+       <ion-input (change)="changeImageListener($event)" placeholder="Upload Cover Image" type="file" accept="image/*" id="uploadDesc"></ion-input>
+    </div>
+    <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" >
+      <ion-icon name="camera" id="cameraIcon"></ion-icon>
+      <ion-input type="file" id="uploadProfile" (change)="changeListener($event)" type="file" accept="image/*"></ion-input>
+    </div>
+    <div *ngIf="profile.image == undefined" id='dp'>
+      <ion-icon name="camera" id="cameraIcon"></ion-icon>
+      <ion-input type="file" id="uploadProfile" (change)="changeListener($event)" type="file" accept="image/*"></ion-input>
+    </div><br><br>
+
+    <ion-card-content>
+      <span>Username: </span><br>
+      <ion-input type="text" id="user_name" [(ngModel)]="username" placeholder="Add username" value="{{ profile.username }}"></ion-input><br>
+      <span>Name: </span><br>
+      <ion-input type="text" id="first_name" [(ngModel)]="name" placeholder="Add first name" value="{{ profile.first_name }}"></ion-input><br>
+      <span>Bio: </span><br>
+      <ion-input type="text" id="bioInput" [(ngModel)]="bio" placeholder="Add bio" value="{{ profile.bio}}"></ion-input><br>
+      <span>Website: </span><br>
+      <ion-input type="text" id="website" [(ngModel)]="website" placeholder="Add website" value="{{ profile.website }}"></ion-input><br>
+      <span>Location: </span><br>
+      <ion-input type="text"  (ionChange)="location()" [(ngModel)]="locations" id="location" placeholder="Add location" value="{{ profile.location }}"></ion-input><br>
+
+      <ion-item *ngFor='let place of ( places | async)' (click)="SetLocation(place.description)">
+        {{ place.description }}
+      </ion-item>
+
+
+    <div id="croppImageDiv" *ngIf="myImage">
+      <angular-cropper #angularCropper [cropperOptions]="cropperOptions" [imageUrl]="myImage" *ngIf="myImage"></angular-cropper>
+      <p (click)="save()">Save</p>
+    </div>
+
+    </ion-card-content>
+    </ion-card>
+
+
+
+
+
+
+  <!--<p id="notifcationsHeading">Notifications</p>
+   <div id="options" class="options">
+    <ion-label id="label">Like notifications</ion-label>
+    <ion-toggle id="toggle" checked (ionChange)="addPlaylist($event)" color="dark"></ion-toggle>
+  </div>
+  <div id="options" class="options">
+    <ion-label id="label">Repost notifications</ion-label>
+    <ion-toggle id="toggle" checked (ionChange)="addPlaylist($event)" color="dark"></ion-toggle>
+  </div>
+  <div id="options" class="options">
+    <ion-label id="label">Follow notifications</ion-label>
+    <ion-toggle id="toggle" checked (ionChange)="addPlaylist($event)" color="dark"></ion-toggle>
+  </div>
+  <div id="options" class="options">
+    <ion-label id="label">Post notifications</ion-label>
+    <ion-toggle id="toggle" checked (ionChange)="addPlaylist($event)" color="dark"></ion-toggle>
+  </div>-->
+
+  <div id="options" class="logout" (click)="logout()">
+    Logout
+  </div>
+
+  <div id="uploadBtnDiv"><ion-button id="uploadBtn" (click)="updateProfile()">Update</ion-button></div>
+
+    
+</ion-content>

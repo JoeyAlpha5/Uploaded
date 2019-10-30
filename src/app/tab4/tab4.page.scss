@@ -1,0 +1,387 @@
+div#Loader {
+    width: 50px;
+    height: 50px;
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #FF9800;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  div#loaderHolder {
+    width: 100%;
+    text-align: -webkit-center;
+    position: absolute;
+    top: 50%;
+  }
+
+  div#videoPlaceholder {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1000000000;
+    display:none;
+    background: black;
+}
+
+#videobcg {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+  transform: scale(1.06); /* scale up to hide the edge blur */
+}
+
+#content{
+  text-align:-webkit-center;
+}
+
+#dp {
+  width: 80px;
+  height: 80px;
+  background: rgba(128, 128, 128, 0.41);
+  border-radius: 50%;
+  background-size:cover !important;
+  position: absolute;
+  z-index: 1;
+}
+
+#circle{
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: white;
+  padding-top: 3px;
+  position: absolute;
+  z-index: 1;
+}
+
+
+#outerCircle{
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: -webkit-gradient(linear, left top, right top, from(#FFC107), to(#FF5722));
+  background: linear-gradient(to right, #FFC107, #FF5722);
+  padding-top: 4px;
+  margin-left: 15px;
+}
+
+div#Settings {
+  position: absolute;
+  z-index: 99999;
+  right: 0px;
+  font-size: 13px;
+  margin-top: 113px;
+  margin-right: 10px;
+  color: black;
+}
+
+
+ion-icon#settingsIcon {
+  position: absolute;
+  z-index: 99999;
+  right: 0;
+  margin-right: 10px;
+  color: white;
+  margin-top: 24px;
+  font-size: 23px;
+}
+
+
+div#profileBlock {
+  width: 100%;
+  height: auto;
+  background: transparent;
+  text-align: left;
+  margin-top: 70px;
+
+  #Followers{
+    font-size: 16px;
+    margin-top: 0px;
+  }
+
+  #username{
+    font-size: 20px;
+    margin-bottom: 5px;
+    font-size: 13px;
+    margin-left: 15px;
+
+
+  }
+
+}
+
+#Following{
+  height: 48px;
+  text-align: -webkit-center;
+  width: 100%;
+  font-size: 13px;
+
+  span {
+    margin-left: 15px;
+    float: left;
+}
+
+}
+
+
+#editProfile {
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  text-align: -webkit-center;
+  overflow: scroll;
+  display: none;
+  width: 300px;
+  height: 435px;
+  background: white;
+  border-radius: 7px;
+  margin-top: 17%;
+  text-align: left;
+
+  #dp{
+    width: 100%;
+    height: 114px;
+    background: rgba(128, 128, 128, 0.41);
+    background-size: cover !important;
+    border-radius: 0 !important;
+
+    div{
+      width: 100%;
+      height: 100%;
+      color: white;
+      background: rgba(0, 0, 0, 0.36);
+      padding-top: 29px;
+      border-radius: 0 !important;
+      padding-left: 15px;
+  }
+
+  }
+
+}
+
+
+div#Profileoverlay{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.7607843137254902);
+  top: 0;
+  z-index: 9998;
+  text-align: -webkit-center;
+  display: none;
+}
+
+div#closeMenu {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: transparent;
+  top: 0;
+  display: none;
+}
+
+div#bannerPlaceholder {
+  width: 100%;
+  height: 120px;
+  background-color: #c7c6c6 !important;
+  position: absolute;
+  z-index: 1;
+  background-size: cover;
+  top:0;
+  background-position: center;;
+
+  span{
+    position: absolute;
+    margin-left: 137px;
+    margin-top: 32px;
+    color: gray;
+  }
+
+}
+
+#link{
+  margin-left: 15px;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+#globe{
+  color: black;
+}
+
+span#location {
+  font-size: 12px;
+  margin-left: 5px;
+  color: #FF9800;
+}
+
+div#croppImageDiv {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: black;
+  z-index: 999999;
+  top: 0;
+
+  p{
+    color: white;
+    margin-top: 40px;
+    width: 100%;
+    height: 40px; 
+  }
+}
+
+div#dp div {
+  width: 100%;
+  height: 100%;
+  color: white;
+  background: rgba(0, 0, 0, 0.36);
+  border-radius: 50%;
+  padding-top: 29px;
+}
+
+p#Posts {
+  font-size: 13px;
+  color: gray;
+  margin: 0px;
+  margin-left: 15px;
+}
+
+
+div#profile input {
+  height: 31px;
+  border-radius: 5px;
+  border: 1px solid #9e9e9e38;
+  padding-left: 5px;
+  font-size: 13px;
+  width: 180px;
+}
+
+div#profile span {
+  color: gray;
+  font-size: 12px;
+  float:left;
+  margin-left:62px;
+}
+
+p#bio {
+  text-align: left;
+  margin-left: 15px;
+  color: gray;
+  font-size: 13px;
+}
+
+#bioInput{
+  height:57px;
+}
+
+ion-input#uploadDesc {
+  margin-left: 100px;
+  margin-top: 32px;
+  opacity: 0;
+}
+
+div#uploadedHeading {
+  width: 100%;
+  height: 35px;
+  text-align: -webkit-center;
+  margin-top: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.09019607843137255);
+  padding-top: 10px;
+  font-size: 14px;
+}
+
+
+#profileName{
+  width: auto;
+  position: absolute;
+  font-size: 15px;
+  margin-top: 8px;
+  float: left;
+}
+
+
+@media only screen and (max-height: 100px) {
+  #bottomBar{
+    display: none;
+  }
+}
+
+
+
+div#logoutBtn {
+  border: 1px solid rgba(128, 128, 128, 0.25);
+  padding: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  top: 0;
+  float: right;
+  margin-right: 7px;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+
+#fileUpload {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  opacity: 0;
+}
+
+#progressDiv {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5098039215686274);
+  text-align: -webkit-center;
+  padding-top: 50%;
+  display: none;
+}
+
+div#playlists {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  padding-bottom: 20px;
+
+  div#playlist {
+    width: 32%;
+    height: 115px;
+    float: left;
+    margin-left: 1px;
+    background-size: cover !important;
+  }
+}
+
+
+#playlistPreview{
+  float: left;
+  color: white;
+  font-weight: lighter;
+  width: 100%;
+  height: 100%;
+  background: #0000003d;
+  padding-top: 67%;
+  text-align: left;
+  padding-left: 7px;
+  font-size: 13px;
+}
+
+span#metric {
+  margin-left: 5px;
+}
+
+
+ion-icon#message {
+  float: right;
+  margin-right: 15px;
+  margin-top: 10px;
+  font-size: 23px;
+}
+

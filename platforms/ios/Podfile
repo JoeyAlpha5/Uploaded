@@ -1,0 +1,4 @@
+platform :ios, '7.0'
+target 'Uploaded' do
+	pod 'Firebase/Core', '6.3.0'
+end

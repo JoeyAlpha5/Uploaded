@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Search
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!--<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>-->
+
+  <!-- Searchbar with cancel button always shown -->
+  <!-- Animated Searchbar -->
+  <ion-searchbar placeholder="Search artists.." [(ngModel)]="searchTerm" animated (ionChange) = "getSearchResults()"></ion-searchbar>
+  <div id="searchTags">
+     <!--  <span class="searchFilter" id="selectedTag">Artists</span>-->
+     <!-- <span class="searchFilter">Videos</span>-->
+  </div>
+
+  <ion-item button *ngFor='let item of ( results | async)'>
+      <p *ngIf="item.id != userID" (click)="viewProfile(item.id,item.email)">{{ item.first_name + " "  + item.last_name }} </p>
+  </ion-item>
+
+  <div id="oneBigOne" *ngFor='let one of ( oneSearchContent | async)' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + one.file + '.jpg)'}">
+    <div id="playlistPreview" (click)="viewPost(one.post_id)" (press)="Playlist(one.post_id)">
+      <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ one.likes }} likes</span>
+    </div>
+  </div>
+
+  <div id="playlist" *ngFor='let item of ( searchContent | async)'  [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.file + '.jpg)'}" >
+    <div id="playlistPreview" (click)="viewPost(item.post_id)" (press)="Playlist(item.post_id)">
+      <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
+    </div>
+  </div> 
+
+
+  <div id="bottomPadding"></div>
+ 
+</ion-content>
