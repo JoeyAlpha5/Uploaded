@@ -138,16 +138,16 @@ var LoginPage = /** @class */ (function () {
         this.statusBar.styleDefault();
         console.log('page has loaded');
         this.presentLoading();
-        //get user token for push
-        this.requests.getToken();
-        //listen for notififcations
-        this.Notifications();
         //check for stored credentials
         this.storage.get('mail').then(function (val) {
             var profile_url = 'https://uploaded.herokuapp.com/users/users';
             //profile_url = 'http://127.0.0.1:8000/users/users'
             if (val == undefined) {
                 jquery__WEBPACK_IMPORTED_MODULE_3__(".login").show();
+                //get user token for push
+                _this.requests.getToken();
+                //listen for notififcations
+                _this.Notifications();
             }
             else {
                 _this.route.navigate(['/home/tabs/tab1']);

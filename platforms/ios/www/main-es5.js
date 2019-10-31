@@ -618,7 +618,7 @@ var AppComponent = /** @class */ (function () {
         var _this = this;
         this.platform.ready().then(function () {
             _this.statusBar.styleDefault();
-            _this.splashScreen.hide();
+            //this.splashScreen.hide();
         });
     };
     AppComponent.ctorParameters = function () { return [

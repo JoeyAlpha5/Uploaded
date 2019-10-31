@@ -105,8 +105,8 @@ var ProfilePage = /** @class */ (function () {
         this.statusBar = statusBar;
         this.route = route;
         this.storage = storage;
-        this.images_url = "http://res.cloudinary.com/uploaded/image/upload/v1567818053/";
-        this.video_url = "http://res.cloudinary.com/uploaded/video/upload/v1567818053/";
+        this.images_url = "https://res.cloudinary.com/uploaded/image/upload/v1567818053/";
+        this.video_url = "https://res.cloudinary.com/uploaded/video/upload/v1567818053/";
         this.profile_url = 'https://uploaded.herokuapp.com/users/users';
         this.statusBar.overlaysWebView(false);
         this.statusBar.styleDefault();

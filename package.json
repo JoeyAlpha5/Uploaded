@@ -41,6 +41,7 @@
     "cordova-plugin-androidx-adapter": "^1.1.0",
     "cordova-plugin-cocoapod-support": "^1.6.2",
     "cordova-plugin-firebasex": "^6.1.0",
+    "cordova-plugin-ionic": "git+https://github.com/glebmachine/cordova-plugin-ionic.git#v4",
     "cordova-plugin-media": "^5.0.3",
     "cordova-plugin-media-capture": "^3.0.3",
     "cordova-sqlite-storage": "^3.3.0",

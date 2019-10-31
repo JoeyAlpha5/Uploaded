@@ -15,8 +15,8 @@ export class ProfilePage implements OnInit {
 
   userProfile: Observable<any>;
   Playlists: Observable<any>;
-  images_url: string  =  "http://res.cloudinary.com/uploaded/image/upload/v1567818053/";
-  video_url: string  =  "http://res.cloudinary.com/uploaded/video/upload/v1567818053/";
+  images_url: string  =  "https://res.cloudinary.com/uploaded/image/upload/v1567818053/";
+  video_url: string  =  "https://res.cloudinary.com/uploaded/video/upload/v1567818053/";
   profile_url =  'https://uploaded.herokuapp.com/users/users';
   //profile_url = 'http://127.0.0.1:8000/users/users'
   constructor(private tabs: TabsPage,private requests: RequestsService,private statusBar: StatusBar,private route: Router,private storage: Storage ) {

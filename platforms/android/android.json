@@ -190,22 +190,8 @@
       },
       "*-Info.plist": {
         "parents": {
-          "NSMicrophoneUsageDescription": [
-            {
-              "xml": "<string>We would like to access your microphone for recording</string>",
-              "count": 1,
-              "mode": "merge",
-              "id": "config.xml"
-            }
-          ],
-          "NSPhotoLibraryUsageDescription": [
-            {
-              "xml": "<string>need photo library access to get pictures from there</string>",
-              "count": 1,
-              "mode": "merge",
-              "id": "config.xml"
-            }
-          ]
+          "NSMicrophoneUsageDescription": [],
+          "NSPhotoLibraryUsageDescription": []
         }
       }
     }

@@ -42,12 +42,10 @@
   "cordova-plugin-ionic-webview": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-ionic-webview@^4.1.1"
+      "id": "cordova-plugin-ionic-webview@latest"
     },
     "is_top_level": true,
-    "variables": {
-      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
-    }
+    "variables": {}
   },
   "cordova-plugin-file": {
     "source": {
@@ -101,6 +99,14 @@
     "source": {
       "type": "registry",
       "id": "cordova-plugin-cocoapod-support"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-ionic": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/glebmachine/cordova-plugin-ionic.git#v4"
     },
     "is_top_level": true,
     "variables": {}
