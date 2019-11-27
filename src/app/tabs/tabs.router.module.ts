@@ -141,6 +141,16 @@ const routes: Routes = [
           }
         ]
       }
+      ,{
+        path: 'following',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../following/following.module').then(m => m.FollowingPageModule)
+          }
+        ]
+      }
       ,
       {
         path: '',

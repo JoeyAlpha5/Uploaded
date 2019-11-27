@@ -160,7 +160,7 @@ export class Tab4Page implements OnInit {
       let profile_url =  'https://uploaded.herokuapp.com/users/users';
       //profile_url = 'http://127.0.0.1:8000/users/users'
       if(val == undefined){
-        this.route.navigate(['']);
+        this.route.navigate(['login']);
       }else{
         this.results =  this.requests.getProfile(profile_url, val); 
         // this.results.subscribe(profile => {

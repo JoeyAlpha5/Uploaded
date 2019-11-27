@@ -1,61 +1,109 @@
-div#playlists {
-    width: 100%;
-    height: auto;
-    position: absolute;
-    padding-bottom: 20px;
-  
-    div#playlist {
-      width: 33.3%;
-      height: 115px;
-      float: left;
-      background-size: cover !important;
-  }
-  }
-  
-  
-  #playlistPreview{
-    float: left;
-    color: white;
-    font-weight: lighter;
-    width: 100%;
-    height: 100%;
-    background: #0000003d;
-    padding-top: 67%;
-    text-align: left;
-    padding-left: 7px;
-    font-size: 13px;
-  }
-
-  div#oneBigOne {
-    width: 99.4%;
-    height: 270px;
-    margin-bottom: 0.5px;
-    margin-left: 1px;
+@font-face{
+  font-family: 'helvetica';
+  src: url(../fonts/fonts/segoe-pro-cufonfonts/SegoePro-Regular.ttf);
 }
-  
-  span#metric {
-    margin-left: 5px;
-  }
+
+@font-face{
+  font-family: 'helveticaB';
+  src: url(../fonts/fonts/segoe-pro-cufonfonts/SegoeProDisplay-Semibold.ttf);
+}
+
+
+p, span, ion-label,ion-searchbar{
+    font-family: 'helvetica' !important;
+}
+
+div#playlists {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  padding-bottom: 20px;
 
   div#playlist {
-    width: 33%;
+    width: 33.3%;
+    height: 115px;
     float: left;
-    margin-top: 1px;
-    margin-left: 1px;
+    background-size: cover !important;
+  }
+}
+
+
+#playlistPreview {
+  float: left;
+  color: white;
+  font-weight: lighter;
+  width: 100%;
+  height: 100%;
+  background: #0000003d;
+  padding-top: 67%;
+  text-align: left;
+  padding-left: 7px;
+  font-size: 13px;
+}
+
+span#searchUsername {
+  font-size: 14px;
+  color: gray;
+}
+
+ion-item#searchItem {
+  height: 56px;
+}
+
+div#oneBigOne {
+  width: 99.4%;
+  height: 202px;
+  margin-bottom: 0.5px;
+  margin-left: 1px;
+}
+
+div#dp {
+  width: 30px;
+  height: 30px;
+  background: #d6d6d6;
+  border-radius: 100px;
+  margin-right: 10px;
+  background-size: cover;
+}
+
+span#metric {
+  margin-left: 5px;
+}
+
+div#playlist {
+  width: 33%;
+  float: left;
+  height: 100px;
+  margin-top: 1px;
+  margin-left: 1px;
 }
 
 div#searchTags span {
-    margin-left: 15px;
-    color: gray;
-    font-size: 12px;
+  margin-left: 15px;
+  color: gray;
+  font-size: 12px;
 }
 
-#selectedTag{
-    font-weight: bold;
+#selectedTag {
+  font-weight: bold;
 }
 
 div#bottomPadding {
   bottom: 0px;
   height: 268px;
   width: 100%;
+}
+
+div#playlist video {
+  width: 100%;
+  height: 100%;
+}
+
+#oneBigOne video {
+  width: 100%;
+  height: 100%;
+}
+
+video {
+  object-fit: cover;
 }

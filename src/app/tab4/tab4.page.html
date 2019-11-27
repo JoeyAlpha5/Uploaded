@@ -32,19 +32,35 @@
           <p id='bio'>{{ profile.bio }}</p>
           <a *ngIf="profile.website != '' " href="{{ profile.website }}" id="link"><ion-icon name="globe" id="globe"></ion-icon> {{ profile.website }}</a>
           <span id="location"><ion-icon name="pin" id="globe"></ion-icon>{{ profile.location }}</span>
-          <p id='Following'> <span><b>Followers:</b><br/> <font id="Followers">{{ profile.followers }}</font></span>  <span><b>Following: </b><br/> <font id="Followings">{{ profile.following }}</font></span>  </p>
+          <p id='Following'> <span>Followers:<br/><font id="Followers">{{ profile.followers }}</font></span>  <span>Following:<br/> <font id="Followings">{{ profile.following }}</font></span>  </p>
       </div>
         
 
-      <div id='uploadedHeading'>Uploaded playlists</div>
-      <div id="playlists" *ngFor='let item of ( Playlists | async)' >
-        <div id="playlist" *ngIf="item.playlisted == true"  [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
+      <div id='uploadedHeading'><span>Playlisted</span>  <span>Reposts</span> </div>
+        <ion-slides>
+            <ion-slide id="postCont"> 
+              <div id="playlists" *ngFor='let item of ( Playlists | async)' >
+                <div id="playlist" *ngIf="item.playlisted == true"  [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
+                  <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
+                    <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
+                  </div>
+                </div> 
+              </div>
+            </ion-slide>
 
-          <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
-            <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
-          </div>
-        </div> 
-      </div>
+            <ion-slide id="tagsCont">
+                <div id="playlists" *ngFor='let item of ( Playlists | async)' >
+                    <div id="playlist" *ngIf="item.reposted == true"  [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
+                      <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
+                        <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
+                      </div>
+                    </div> 
+                  </div>
+            </ion-slide>
+        </ion-slides>
+
+
+
   </div>
 
   <!--<div *ngFor='let profile of ( results | async)' id="editProfile">

@@ -1,8 +1,8 @@
 {
 	"pods": {
-		"Firebase/Core": {
-			"name": "Firebase/Core",
-			"spec": "6.3.0"
+		"OneSignal": {
+			"name": "OneSignal",
+			"spec": "2.11.2"
 		}
 	},
 	"sources": {},

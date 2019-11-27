@@ -16,51 +16,51 @@
 
   <div id="options" class="option">
     <ion-label id="label">New like: </ion-label>
-    <ion-toggle id="toggle" *ngIf="like == false" (ionChange)="updateNotification($event,'like', 'true')" color="dark"></ion-toggle>
-    <ion-toggle id="toggle" *ngIf="like == true" checked (ionChange)="updateNotification($event,'like', 'false')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="like == false" (ionChange)="updateNotification('like', 'true')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="like == true" checked (ionChange)="updateNotification('like', 'false')" color="dark"></ion-toggle>
   </div>
 
   <div id="options" class="option">
     <ion-label id="label">New follower: </ion-label>
-    <ion-toggle id="toggle" *ngIf="follow == false" (ionChange)="updateNotification($event,'follow', 'true')" color="dark"></ion-toggle>
-    <ion-toggle id="toggle" *ngIf="follow == true" checked (ionChange)="updateNotification($event,'follow', 'false')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="follow == false" (ionChange)="updateNotification('follow', 'true')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="follow == true" checked (ionChange)="updateNotification('follow', 'false')" color="dark"></ion-toggle>
   </div>
 
   <div id="options" class="option">
     <ion-label id="label">New comment: </ion-label>
-    <ion-toggle id="toggle" *ngIf="comment == false" (ionChange)="updateNotification($event,'comment', 'true')"  color="dark"></ion-toggle>
-    <ion-toggle id="toggle" *ngIf="comment == true" checked  (ionChange)="updateNotification($event,'comment', 'false')"  color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="comment == false" (ionChange)="updateNotification('comment', 'true')"  color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="comment == true" checked  (ionChange)="updateNotification('comment', 'false')"  color="dark"></ion-toggle>
   </div>
 
   <div id="options" class="option">
     <ion-label id="label">New repost: </ion-label>
-    <ion-toggle id="toggle" *ngIf="repost == false" (ionChange)="updateNotification($event,'repost', 'true')" color="dark"></ion-toggle>
-    <ion-toggle id="toggle" *ngIf="repost == true" checked (ionChange)="updateNotification($event,'repost', 'false')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="repost == false" (ionChange)="updateNotification('repost', 'true')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="repost == true" checked (ionChange)="updateNotification('repost', 'false')" color="dark"></ion-toggle>
   </div>
 
   <div id="options" class="option">
     <ion-label id="label">New upload: </ion-label>
-    <ion-toggle id="toggle" *ngIf="upload == false" (ionChange)="updateNotification($event,'upload', 'true')" color="dark"></ion-toggle>
-    <ion-toggle id="toggle" *ngIf="upload == true" checked (ionChange)="updateNotification($event,'upload', 'false')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="upload == false" (ionChange)="updateNotification('upload', 'true')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="upload == true" checked (ionChange)="updateNotification('upload', 'false')" color="dark"></ion-toggle>
   </div>
 
 
   <div id="options" class="option">
     <ion-label id="label">Tags: </ion-label>
-    <ion-toggle id="toggle" *ngIf="tag == false" (ionChange)="updateNotification($event,'tag', 'true')" color="dark"></ion-toggle>
-    <ion-toggle id="toggle" *ngIf="tag == true" checked (ionChange)="updateNotification($event,'tag', 'false')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="tag == false" (ionChange)="updateNotification('tag', 'true')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="tag == true" checked (ionChange)="updateNotification('tag', 'false')" color="dark"></ion-toggle>
   </div>
 
   <div id="options" class="option">
     <ion-label id="label">New app features: </ion-label>
-    <ion-toggle id="toggle" *ngIf="features == false" (ionChange)="updateNotification($event,'features', 'true')" color="dark"></ion-toggle>
-    <ion-toggle id="toggle" *ngIf="features == true" checked (ionChange)="updateNotification($event,'features', 'false')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="features == false" (ionChange)="updateNotification('features', 'true')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="features == true" checked (ionChange)="updateNotification('features', 'false')" color="dark"></ion-toggle>
   </div>
 
   <div id="options" class="option">
     <ion-label id="label">Direct messages: </ion-label>
-    <ion-toggle id="toggle" *ngIf="dm == false" (ionChange)="updateNotification($event,'dm', 'true')" color="dark"></ion-toggle>
-    <ion-toggle id="toggle" *ngIf="dm == true" checked (ionChange)="updateNotification($event,'dm', 'false')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="dm == false" (ionChange)="updateNotification('dm', 'true')" color="dark"></ion-toggle>
+    <ion-toggle id="toggle" *ngIf="dm == true" checked (ionChange)="updateNotification('dm', 'false')" color="dark"></ion-toggle>
   </div>
 
   <div id="bottom"></div>

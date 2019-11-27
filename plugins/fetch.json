@@ -45,7 +45,9 @@
       "id": "cordova-plugin-ionic-webview@latest"
     },
     "is_top_level": true,
-    "variables": {}
+    "variables": {
+      "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+    }
   },
   "cordova-plugin-file": {
     "source": {
@@ -71,14 +73,6 @@
     "is_top_level": false,
     "variables": {}
   },
-  "cordova-plugin-firebasex": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-firebasex@^6.1.0"
-    },
-    "is_top_level": true,
-    "variables": {}
-  },
   "cordova-plugin-media-capture": {
     "source": {
       "type": "registry",
@@ -93,15 +87,9 @@
       "id": "cordova-plugin-media@5.0.3"
     },
     "is_top_level": true,
-    "variables": {}
-  },
-  "cordova-plugin-cocoapod-support": {
-    "source": {
-      "type": "registry",
-      "id": "cordova-plugin-cocoapod-support"
-    },
-    "is_top_level": true,
-    "variables": {}
+    "variables": {
+      "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
+    }
   },
   "cordova-plugin-ionic": {
     "source": {
@@ -109,6 +97,62 @@
       "id": "https://github.com/glebmachine/cordova-plugin-ionic.git#v4"
     },
     "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-firebasex": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-firebasex@^6.1.0"
+    },
+    "is_top_level": true,
+    "variables": {
+      "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true",
+      "FIREBASE_PERFORMANCE_COLLECTION_ENABLED": "true",
+      "FIREBASE_CRASHLYTICS_COLLECTION_ENABLED": "true",
+      "ANDROID_ICON_ACCENT": "#FF00FFFF",
+      "ANDROID_PLAY_SERVICES_TAGMANAGER_VERSION": "17.0.0",
+      "ANDROID_FIREBASE_CORE_VERSION": "17.0.0",
+      "ANDROID_FIREBASE_MESSAGING_VERSION": "19.0.0",
+      "ANDROID_FIREBASE_CONFIG_VERSION": "18.0.0",
+      "ANDROID_FIREBASE_PERF_VERSION": "18.0.0",
+      "ANDROID_FIREBASE_AUTH_VERSION": "18.0.0",
+      "ANDROID_CRASHLYTICS_VERSION": "2.10.1",
+      "ANDROID_CRASHLYTICS_NDK_VERSION": "2.1.0",
+      "ANDROID_SHORTCUTBADGER_VERSION": "1.1.22"
+    }
+  },
+  "cordova-plugin-ionic-keyboard": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-ionic-keyboard@^2.2.0"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "onesignal-cordova-plugin": {
+    "source": {
+      "type": "registry",
+      "id": "onesignal-cordova-plugin"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-x-socialsharing": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-x-socialsharing"
+    },
+    "is_top_level": true,
+    "variables": {
+      "ANDROID_SUPPORT_V4_VERSION": "24.1.1+"
+    }
+  },
+  "es6-promise-plugin": {
+    "source": {
+      "type": "registry",
+      "id": "es6-promise-plugin@^4.1.0"
+    },
+    "is_top_level": false,
     "variables": {}
   }
 }

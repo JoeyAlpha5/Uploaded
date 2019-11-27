@@ -1,0 +1,54 @@
+@font-face{
+    font-family: 'main';
+    src: url(../fonts/fonts/futura/futuraheavy.ttf);
+  }
+
+#main{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #2d3436;
+    background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
+    text-align: -webkit-center;
+    text-align: -moz-center;
+    font-family: 'main';
+    color: white;
+}
+
+
+.createAcc{
+    margin-top: 50px;
+}
+
+
+.signInBtn{
+    margin-top: 20px;
+ 
+}
+
+#logo{
+    width: 150px;
+    height: 165px;
+    background: url(../assets/logo.png);
+    background-size: cover;
+    margin-top: 25%;
+}
+
+// #textLogo{
+//     width: 150px;
+//     height: 32px;
+//     background: url(../assets/textlogo.png);
+//     background-size: cover;
+// }
+
+p#infoText {
+    font-size: 22px;
+    margin-top: 93px;
+    line-height: 25px;
+    text-align: left;
+    margin-left: 10%;
+}
+
+#accountBtns{
+    width: 80%;
+}

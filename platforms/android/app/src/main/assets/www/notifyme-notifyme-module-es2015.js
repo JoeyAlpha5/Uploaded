@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n     <ion-icon name=\"arrow-back\" id=\"backBtn\" (click)=\"back()\"></ion-icon>\n    <ion-title>Notifications</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n\n  <div id=\"options\" class=\"options\">\n    <ion-label id=\"label\">Push notifications: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"pushAll == true\" checked (ionChange)=\"enableAllNotifications($event)\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"pushAll == false\"  (ionChange)=\"enableAllNotifications($event)\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">New like: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"like == false\" (ionChange)=\"updateNotification($event,'like', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"like == true\" checked (ionChange)=\"updateNotification($event,'like', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">New follower: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"follow == false\" (ionChange)=\"updateNotification($event,'follow', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"follow == true\" checked (ionChange)=\"updateNotification($event,'follow', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">New comment: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"comment == false\" (ionChange)=\"updateNotification($event,'comment', 'true')\"  color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"comment == true\" checked  (ionChange)=\"updateNotification($event,'comment', 'false')\"  color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">New repost: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"repost == false\" (ionChange)=\"updateNotification($event,'repost', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"repost == true\" checked (ionChange)=\"updateNotification($event,'repost', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">New upload: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"upload == false\" (ionChange)=\"updateNotification($event,'upload', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"upload == true\" checked (ionChange)=\"updateNotification($event,'upload', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">Tags: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"tag == false\" (ionChange)=\"updateNotification($event,'tag', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"tag == true\" checked (ionChange)=\"updateNotification($event,'tag', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">New app features: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"features == false\" (ionChange)=\"updateNotification($event,'features', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"features == true\" checked (ionChange)=\"updateNotification($event,'features', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">Direct messages: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"dm == false\" (ionChange)=\"updateNotification($event,'dm', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"dm == true\" checked (ionChange)=\"updateNotification($event,'dm', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"bottom\"></div>\n\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n     <ion-icon name=\"arrow-back\" id=\"backBtn\" (click)=\"back()\"></ion-icon>\n    <ion-title>Notifications</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n\n  <div id=\"options\" class=\"options\">\n    <ion-label id=\"label\">Push notifications: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"pushAll == true\" checked (ionChange)=\"enableAllNotifications($event)\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"pushAll == false\"  (ionChange)=\"enableAllNotifications($event)\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">New like: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"like == false\" (ionChange)=\"updateNotification('like', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"like == true\" checked (ionChange)=\"updateNotification('like', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">New follower: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"follow == false\" (ionChange)=\"updateNotification('follow', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"follow == true\" checked (ionChange)=\"updateNotification('follow', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">New comment: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"comment == false\" (ionChange)=\"updateNotification('comment', 'true')\"  color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"comment == true\" checked  (ionChange)=\"updateNotification('comment', 'false')\"  color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">New repost: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"repost == false\" (ionChange)=\"updateNotification('repost', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"repost == true\" checked (ionChange)=\"updateNotification('repost', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">New upload: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"upload == false\" (ionChange)=\"updateNotification('upload', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"upload == true\" checked (ionChange)=\"updateNotification('upload', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">Tags: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"tag == false\" (ionChange)=\"updateNotification('tag', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"tag == true\" checked (ionChange)=\"updateNotification('tag', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">New app features: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"features == false\" (ionChange)=\"updateNotification('features', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"features == true\" checked (ionChange)=\"updateNotification('features', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"options\" class=\"option\">\n    <ion-label id=\"label\">Direct messages: </ion-label>\n    <ion-toggle id=\"toggle\" *ngIf=\"dm == false\" (ionChange)=\"updateNotification('dm', 'true')\" color=\"dark\"></ion-toggle>\n    <ion-toggle id=\"toggle\" *ngIf=\"dm == true\" checked (ionChange)=\"updateNotification('dm', 'false')\" color=\"dark\"></ion-toggle>\n  </div>\n\n  <div id=\"bottom\"></div>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -180,7 +180,40 @@ let NotifymePage = class NotifymePage {
             });
         }
     }
-    updateNotification($event, type, value) {
+    updateNotification(type, value) {
+        console.log(type);
+        if (type == "like") {
+            this.like = JSON.parse(value);
+            console.log(this.like);
+        }
+        else if (type == "follow") {
+            this.follow = JSON.parse(value);
+            console.log(this.follow);
+        }
+        else if (type == "comment") {
+            this.comment = JSON.parse(value);
+            console.log(this.comment);
+        }
+        else if (type == "repost") {
+            this.repost = JSON.parse(value);
+            console.log(this.repost);
+        }
+        else if (type == "upload") {
+            this.upload = JSON.parse(value);
+            console.log(this.upload);
+        }
+        else if (type == "tag") {
+            this.tag = JSON.parse(value);
+            console.log(this.tag);
+        }
+        else if (type == "features") {
+            this.features = JSON.parse(value);
+            console.log(this.features);
+        }
+        else {
+            this.dm = JSON.parse(value);
+            console.log(this.dm);
+        }
         this.storage.get('current_userID').then((val) => {
             this.updateNotifications = this.requests.UpdateIndividualNotifications(this.profile_url, val, type, value);
             this.updateNotifications.subscribe(x => {

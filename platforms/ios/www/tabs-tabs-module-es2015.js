@@ -70,7 +70,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | tab1-tab1-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("tab1-tab1-module")]).then(__webpack_require__.bind(null, /*! ../tab1/tab1.module */ "./src/app/tab1/tab1.module.ts")).then(m => m.Tab1PageModule)
+                        loadChildren: () => Promise.all(/*! import() | tab1-tab1-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f"), __webpack_require__.e("default~post-view-post-view-module~tab1-tab1-module~userfeed-userfeed-module"), __webpack_require__.e("tab1-tab1-module")]).then(__webpack_require__.bind(null, /*! ../tab1/tab1.module */ "./src/app/tab1/tab1.module.ts")).then(m => m.Tab1PageModule)
                     }
                 ]
             },
@@ -88,7 +88,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => __webpack_require__.e(/*! import() | tab3-tab3-module */ "tab3-tab3-module").then(__webpack_require__.bind(null, /*! ../tab3/tab3.module */ "./src/app/tab3/tab3.module.ts")).then(m => m.Tab3PageModule)
+                        loadChildren: () => Promise.all(/*! import() | tab3-tab3-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f"), __webpack_require__.e("tab3-tab3-module")]).then(__webpack_require__.bind(null, /*! ../tab3/tab3.module */ "./src/app/tab3/tab3.module.ts")).then(m => m.Tab3PageModule)
                     }
                 ]
             },
@@ -97,7 +97,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | tab4-tab4-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("common"), __webpack_require__.e("tab4-tab4-module")]).then(__webpack_require__.bind(null, /*! ../tab4/tab4.module */ "./src/app/tab4/tab4.module.ts")).then(m => m.Tab4PageModule)
+                        loadChildren: () => Promise.all(/*! import() | tab4-tab4-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f"), __webpack_require__.e("common"), __webpack_require__.e("tab4-tab4-module")]).then(__webpack_require__.bind(null, /*! ../tab4/tab4.module */ "./src/app/tab4/tab4.module.ts")).then(m => m.Tab4PageModule)
                     }
                 ]
             },
@@ -115,7 +115,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | upload-upload-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("common"), __webpack_require__.e("upload-upload-module")]).then(__webpack_require__.bind(null, /*! ../upload/upload.module */ "./src/app/upload/upload.module.ts")).then(m => m.UploadPageModule)
+                        loadChildren: () => Promise.all(/*! import() | upload-upload-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f"), __webpack_require__.e("common"), __webpack_require__.e("upload-upload-module")]).then(__webpack_require__.bind(null, /*! ../upload/upload.module */ "./src/app/upload/upload.module.ts")).then(m => m.UploadPageModule)
                     }
                 ]
             },
@@ -124,7 +124,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | post-view-post-view-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("common"), __webpack_require__.e("post-view-post-view-module")]).then(__webpack_require__.bind(null, /*! ../post-view/post-view.module */ "./src/app/post-view/post-view.module.ts")).then(m => m.PostViewPageModule)
+                        loadChildren: () => Promise.all(/*! import() | post-view-post-view-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f"), __webpack_require__.e("default~post-view-post-view-module~tab1-tab1-module~userfeed-userfeed-module"), __webpack_require__.e("common"), __webpack_require__.e("post-view-post-view-module")]).then(__webpack_require__.bind(null, /*! ../post-view/post-view.module */ "./src/app/post-view/post-view.module.ts")).then(m => m.PostViewPageModule)
                     }
                 ]
             },
@@ -133,7 +133,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | messaging-messaging-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("common"), __webpack_require__.e("messaging-messaging-module")]).then(__webpack_require__.bind(null, /*! ../messaging/messaging.module */ "./src/app/messaging/messaging.module.ts")).then(m => m.MessagingPageModule)
+                        loadChildren: () => Promise.all(/*! import() | messaging-messaging-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f"), __webpack_require__.e("common"), __webpack_require__.e("messaging-messaging-module")]).then(__webpack_require__.bind(null, /*! ../messaging/messaging.module */ "./src/app/messaging/messaging.module.ts")).then(m => m.MessagingPageModule)
                     }
                 ]
             },
@@ -151,7 +151,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | userfeed-userfeed-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("common"), __webpack_require__.e("userfeed-userfeed-module")]).then(__webpack_require__.bind(null, /*! ../userfeed/userfeed.module */ "./src/app/userfeed/userfeed.module.ts")).then(m => m.UserfeedPageModule)
+                        loadChildren: () => Promise.all(/*! import() | userfeed-userfeed-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f"), __webpack_require__.e("default~post-view-post-view-module~tab1-tab1-module~userfeed-userfeed-module"), __webpack_require__.e("common"), __webpack_require__.e("userfeed-userfeed-module")]).then(__webpack_require__.bind(null, /*! ../userfeed/userfeed.module */ "./src/app/userfeed/userfeed.module.ts")).then(m => m.UserfeedPageModule)
                     }
                 ]
             },
@@ -160,7 +160,7 @@ const routes = [
                 children: [
                     {
                         path: '',
-                        loadChildren: () => Promise.all(/*! import() | settings-settings-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386"), __webpack_require__.e("common"), __webpack_require__.e("settings-settings-module")]).then(__webpack_require__.bind(null, /*! ../settings/settings.module */ "./src/app/settings/settings.module.ts")).then(m => m.SettingsPageModule)
+                        loadChildren: () => Promise.all(/*! import() | settings-settings-module */[__webpack_require__.e("default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f"), __webpack_require__.e("common"), __webpack_require__.e("settings-settings-module")]).then(__webpack_require__.bind(null, /*! ../settings/settings.module */ "./src/app/settings/settings.module.ts")).then(m => m.SettingsPageModule)
                     }
                 ]
             },
@@ -179,6 +179,15 @@ const routes = [
                     {
                         path: '',
                         loadChildren: () => __webpack_require__.e(/*! import() | notifyme-notifyme-module */ "notifyme-notifyme-module").then(__webpack_require__.bind(null, /*! ../notifyme/notifyme.module */ "./src/app/notifyme/notifyme.module.ts")).then(m => m.NotifymePageModule)
+                    }
+                ]
+            },
+            {
+                path: 'following',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: () => Promise.all(/*! import() | following-following-module */[__webpack_require__.e("common"), __webpack_require__.e("following-following-module")]).then(__webpack_require__.bind(null, /*! ../following/following.module */ "./src/app/following/following.module.ts")).then(m => m.FollowingPageModule)
                     }
                 ]
             },

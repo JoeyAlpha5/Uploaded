@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', loadChildren: './login/login.module#LoginPageModule' },
+  // { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   {
     path: 'home',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
@@ -17,7 +17,9 @@ const routes: Routes = [
   { path: 'messaging-list', loadChildren: './messaging-list/messaging-list.module#MessagingListPageModule' },
   { path: 'userfeed', loadChildren: './userfeed/userfeed.module#UserfeedPageModule' },
   { path: 'notifications', loadChildren: './notifications/notifications.module#NotificationsPageModule' },
-  { path: 'notifyme', loadChildren: './notifyme/notifyme.module#NotifymePageModule' }
+  { path: 'notifyme', loadChildren: './notifyme/notifyme.module#NotifymePageModule' },
+  { path: 'following', loadChildren: './following/following.module#FollowingPageModule' },
+  { path: '', loadChildren: './main/main.module#MainPageModule' }
 ];
 @NgModule({
   imports: [

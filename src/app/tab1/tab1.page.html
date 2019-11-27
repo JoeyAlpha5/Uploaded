@@ -1,82 +1,203 @@
-
-
 <ion-content>
-  <ion-refresher id="refresher" slot="fixed" (ionRefresh)="doRefresh($event)">
+  <!--<ion-refresher  *ngIf="refresh ==  true" id="refresher" slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  <ion-slides #slider (ionSlideTransitionEnd)="ionicSlide()" id="slides" [options]="slideOpts">
-    <ion-slide id='slider'  *ngFor='let item of ( results | async); let i = index' (swiperight)="swiped(i,item.post_id,'right')"  (swipeleft)="swiped(i,item.post_id,'left')"  (swipeup)="onSwipeUp( item.user_id,item.user_email,i )">
+  </ion-refresher>-->
+  <ion-slides #slider id="slides" (ionSlideDidChange)="currentSlideVideo()" (ionSlidesDidLoad)="setFirstViews()" [options]="slideOpts">
+    <ion-slide id='slider' *ngFor='let item of ( results | async); let i = index'
+      (swiperight)="swiped(i,item.post_id,'right')" (swipeleft)="swiped(i,item.post_id,'left')"
+      (swipeup)="onSwipeUp( item.user_id,item.user_email,i )">
+      <div id="liveDot"></div>
       <div id="streamIcon">Stream</div>
-      <video playsinline webkit-playsinline class="videobcg" id="{{i}}videobcg" poster="https://res.cloudinary.com/uploaded/video/upload/v1567818053/{{ item.file }}.jpg">
-        <source src="https://res.cloudinary.com/uploaded/video/upload/q_auto:low/{{ item.file }}.mp4" type="video/mp4">
+      <video playsinline webkit-playsinline class="videobcg" (ended)="getNext(item.username,i)" id="{{i}}videobcg"
+        poster="https://res.cloudinary.com/uploaded/video/upload/v1567818053/{{ item.file }}.jpg">
+        <source id="{{i}}videobsource"
+          src="https://res.cloudinary.com/uploaded/video/upload/q_auto:low/{{ item.file }}.mp4#t={{ item.start }}"
+          type="video/mp4">
       </video>
-      <div id="PostData" class="{{i}}PostData">
-          <ion-icon class="icon" *ngIf="item.liked == 0" name="heart" id="{{item.post_id}}likeIcon" (click)="like(item.post_id,i)"></ion-icon><span *ngIf="item.liked == 0" id="{{item.post_id}}likeCount">{{ item.like }}</span><br *ngIf="item.liked == 0">
-          <ion-icon class="icon" *ngIf="item.liked == 1" [ngStyle]="{color:'#E91E63'}" name="heart" id="{{item.post_id}}likeIcon" (click)="like(item.post_id,i)"></ion-icon><span *ngIf="item.liked == 1" id="{{item.post_id}}likeCount">{{ item.like }}</span><br *ngIf="item.liked == 1"/>
-          <ion-icon class="icon" (click)="repost(item.post_id)" name="share-alt" id="postIcon"></ion-icon><span id="{{item.reposts}}repostCount">{{ item.reposts }}</span><br>
-          <ion-icon class="icon"  (click)="share(item.file)" name="share" id="postIcon"></ion-icon><br>
-          <ion-icon class="icon" name="text" id="postIcon" (click)="showAllComments(item.post_id)"></ion-icon><span id="{{item.post_id}}CommentsCount">0</span>
-          <div class="postViews"><span class="{{ item.post_id }}views"  id="{{i}}PostViews">{{ item.post_id }}</span></div>
+      <div id="{{i}}FirstPostData" *ngIf="display_firsts == true">
+        <div id="PostData" class="{{i}}PostData">
+          <ion-icon class="icon" *ngIf="item.liked == 0" name="heart" id="{{item.post_id}}likeIcon"
+            (click)="like(item.post_id,i)"></ion-icon><span *ngIf="item.liked == 0"
+            id="{{item.post_id}}likeCount">{{ item.like }}</span>
+          <ion-icon class="icon" *ngIf="item.liked == 1" [ngStyle]="{color:'#fc8700'}" name="heart"
+            id="{{item.post_id}}likeIcon" (click)="like(item.post_id,i)"></ion-icon><span *ngIf="item.liked == 1"
+            id="{{item.post_id}}likeCount">{{ item.like }}</span>
+          <ion-icon class="icon" (click)="repost(item.post_id)" name="share-alt" id="{{i}}repostIcon"></ion-icon><span
+            id="{{item.post_id}}repostCount">{{ item.reposts }}</span>
+          <ion-icon class="icon" (click)="share(item.file)" name="share" id="{{i}}shareIcon"></ion-icon><br/>
+          <ion-icon class="icon" name="text" id="{{ i }}postIcon" (click)="showAllComments(item.post_id, i)"></ion-icon>
+          <span id="{{item.post_id}}CommentsCount">0</span>
+          <div class="postViews"><span class="{{ item.post_id }}views" id="{{i}}PostViews">{{ item.post_id }}</span>
+          </div>
+        </div>
+      </div>
+      
+      <div id="{{i}}newPostData" *ngFor="let post of ( nextPostData | async); let p = index">
+        <div *ngIf="post.username == item.username ">
+          <div id="PostData" class="{{p}}PostData">
+            <ion-icon class="icon" *ngIf="post.liked == 0" name="heart" id="{{post.post_id}}likeIcon"
+              (click)="like(post.post_id,i)"></ion-icon><span *ngIf="post.liked == 0"
+              id="{{post.post_id}}likeCount">{{ post.like }}</span>
+            <ion-icon class="icon" *ngIf="post.liked == 1" [ngStyle]="{color:'#fc8700'}" name="heart"
+              id="{{post.post_id}}likeIcon" (click)="like(post.post_id,i)"></ion-icon><span *ngIf="post.liked == 1"
+              id="{{post.post_id}}likeCount">{{ post.like }}</span>
+            <ion-icon class="icon" (click)="repost(post.post_id)" name="share-alt" id="{{i}}repostIcon"></ion-icon><span
+              id="{{post.post_id}}repostCount">{{ post.reposts }}</span>
+            <ion-icon class="icon" (click)="share(post.file)" name="share" id="{{i}}shareIcon"></ion-icon><br/>
+            <ion-icon class="icon" name="text" id="{{ i }}postIcon" (click)="showAllComments(post.post_id,i)">
+            </ion-icon><span id="{{post.post_id}}CommentsCount">0</span>
+            <div class="postViews"><span class="{{ post.post_id }}views" id="{{i}}PostViews">{{ post.post_id }}</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div id="eyeView"><ion-icon class="icon" name="eye" id="eye"></ion-icon><span class="{{item.post_id}}viewCount">0</span><br></div>
+      
+      <div id="eyeView">
+        <ion-icon class="icon" name="eye" id="eye"></ion-icon><span id="{{i}}viewCount" class="{{item.post_id}}viewCount ">0</span><br>
+        <div class="postViews"><span class="{{ item.post_id }}views" id="{{i}}ReservedPostViews">{{ item.post_id }}</span></div>
+      </div>
 
-      <div id="userinfo" class="{{i}}userInfo">
-         <!--<p id="postGenre">{{ item.genre }}</p>-->
-         <p id="postDescription">{{ item.description }}</p>
-         <span id="commentsHeading">Comments</span><br/>
-         <div class="commentBox" id="{{item.post_id}}commentBox">
+      <div id="userinfo" class="{{i}}userInfo" *ngIf="userInfo ==  true">
+        <!--<p id="postGenre">{{ item.genre }}</p>-->
+        <p id="postDescription" class="{{i}}PostDescription">{{ item.description }}</p>
+        <span id="commentsHeading">Comments</span><br />
+        <div *ngIf="display_firsts == true" class="{{i}}oldPostComments" id="{{ item.post_id }}actualCommnents">
+          <div class="commentBox" id="{{i}}commentBox">
             <span id="comment" *ngFor='let comment of (commentsRef$ | async); let x = index'>
-              <span *ngIf="item.post_id == comment.post" id="userComment">
-                <span>@{{comment.user}}</span><span> {{ comment.comment }}</span><br><br>
+              <span *ngIf="item.post_id == comment.post" class="{{i}}commentSection" id="userComment">
+                <span id="userCommenter">@{{comment.user}}</span><span> {{ comment.comment }}</span><br><br>
               </span>
             </span>
-
-         </div>
-         <input type="text"  (focus)="CommentsUp(i)" (blur)="CommentsDown(i)" class="commentInput" id="{{item.post_id}}commentInput" placeholder="Add Comment...">
-         <span (click)="postComment(item.post_id)" id="commentBtn">Post</span>
+          </div>
+      </div>
+        <div id="{{i}}nextPostComments" *ngFor="let post of ( nextPostData | async); let p = index">
+          <div id="{{ post.post_id }}actualCommnents">
+          <div *ngIf="post.username == item.username " class="commentBox" id="{{i}}commentBoxNew">
+            <span id="comment" *ngFor='let comment of (commentsRef$ | async); let x = index'>
+              <span *ngIf="post.post_id == comment.post" class="{{i}}commentSection" id="userComment">
+                <span id="userCommenter">@{{comment.user}}</span><span> {{ comment.comment }}</span><br><br>
+              </span>
+            </span>
+          </div>
+          </div>
+        </div>
+        <!--<input type="text"  (focus)="CommentsUp(i)" (blur)="CommentsDown(i)"*/ class="commentInput" id="{{item.post_id}}commentInput" placeholder="Add Comment...">-->
+        <input type="text" (focus)="CommentsUp(i)" class="commentInput" id="{{i}}commentInput"
+          placeholder="Add Comment...">
+        <label class="{{i}}CommentLabel" for="{{i}}commentInput" id="commentBtn"><span
+            (click)="postComment(i)">Post</span></label>
       </div>
 
 
 
       <div id="profileImage" *ngIf="item.image">
-        <div (click)="onSwipeUp( item.user_id,item.user_email,i )" id="image" [ngStyle]= "{'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/'+ item.image +'.jpg)'}"><ion-icon id="profileIocn" name="contact" *ngIf="item.image == 'none'"></ion-icon></div>
+        <svg class="_18eSE" width="60" height="60" viewBox="0 0 104 104">
+          <circle id="{{i}}Circle" cx="52" cy="52" r="50" fill="transparent" stroke-linecap="round" stroke-width="4" stroke-dashoffset="387.69908169872417" class="_3yudO" stroke="white" stroke-width="3"></circle>
+        </svg>
+        <div class="circle" (click)="onSwipeUp( item.user_id,item.user_email,i )" id="image"
+          [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/'+ item.image +'.jpg)'}">
+          <ion-icon id="profileIocn" name="contact" *ngIf="item.image == 'none'"></ion-icon>
+        </div>
         <span (click)="onSwipeUp( item.user_id,item.user_email,i )">@{{ item.username }}</span>
       </div>
 
-      <div  class="{{i}}heartAnimations"  id="heartAnimations">
-        <ion-icon class="icon"  class="animated infinite fadeOutUp 2s" name="heart" id="animation1"></ion-icon><br>
-        <ion-icon class="icon"  class="animated infinite fadeOutUp 2s" name="heart" id="animation2"></ion-icon><br>
-        <ion-icon class="icon"  class="animated infinite fadeOutUp 2s" name="heart" id="animation3"></ion-icon><br>
-        <ion-icon class="icon"  class="animated infinite fadeOutUp 2s" name="heart" id="animation4"></ion-icon>
-      </div>
-      
-      <div id="overlay" (click)="playVideo(i, item.post_id)">
+      <div class="{{i}}heartAnimations" id="heartAnimations">
+        <ion-icon class="icon" class="animated infinite fadeOutUp 2s" name="heart" id="animation1"></ion-icon><br>
+        <ion-icon class="icon" class="animated infinite fadeOutUp 2s" name="heart" id="animation2"></ion-icon><br>
+        <ion-icon class="icon" class="animated infinite fadeOutUp 2s" name="heart" id="animation3"></ion-icon><br>
+        <ion-icon class="icon" class="animated infinite fadeOutUp 2s" name="heart" id="animation4"></ion-icon>
       </div>
 
+      <div id="overlay" class="{{item.post_id}}Overlay" (click)="removeItems(i, item.post_id)">
+      </div>
 
-    <div id="{{item.post_id}}allComments"  class="allComments animated fadeInUp">
-      <div id="scrollableComments" class="scrollableComments">
-        <div class="totalComments" id="{{item.post_id}}totalCOmments"></div>
-        <div *ngFor='let comment of (commentsRef$ | async)' id="{{item.post_id}}allComments">
-          <div id="allcomComment" *ngIf="item.post_id == comment.post"><span>@{{comment.user}}</span><p>{{ comment.comment }}</p></div>
+      <div id="newPostOverlay" *ngFor="let post of ( nextPostData | async); let p = index">
+        <div *ngIf="post.username == item.username" id="overlay" (click)="removeItems(i, post.post_id)">
         </div>
       </div>
-      
-      <div id="fullComments">
-        <input type="text" (focus)="attchKeyBoard()" (blur)="dettchKeyBoard()"  class="commentInput2" id="{{item.post_id}}commentInput2" placeholder="Add Comment...">
-        <span (click)="postComment2(item.post_id)" id="commentBtn">Post</span>
+
+      <div *ngIf="display_firsts == true" id="playPause" class="{{i}}playPauseDiv {{i}}playPauseBtn2">
+          <ion-icon class="playPauseIcon" id="{{i}}playPause" (click)="playVideo(i, item.post_id)" name="pause"></ion-icon>
       </div>
-    </div>
+
+
+      <circle-progress id="ngCircle" class="{{i}}videoProgress"
+      [percent]="percent"
+      [radius]="25"
+      [outerStrokeWidth]="2"
+      [innerStrokeWidth]="2"
+      [outerStrokeColor]="'#fc8700'"
+      [innerStrokeColor]="'#ffffff'"
+      [animation]="true"
+      [animationDuration]="300"
+      [showTitle]="false"
+      [showSubtitle]="false"
+      [showUnits]="false"
+      [startFromZero]="false"
+    ></circle-progress>
+      <div id="playPause" class="{{i}}playPauseDiv {{i}}playPauseDiv2" *ngFor="let post of ( nextPostData | async); let p = index">
+          <ion-icon class="playPauseIcon" *ngIf="post.username == item.username" (click)="playVideo(i, post.post_id)" id="{{i}}playPause2" name="pause"></ion-icon>
+      </div>
+
+      <div id="{{item.post_id}}allComments" class="allComments animated fadeInUp">
+        <div id="scrollableComments" class="scrollableComments">
+          <div class="totalComments" id="{{item.post_id}}totalCOmments"></div>
+          <div *ngFor='let comment of (commentsRef$ | async),let c = index' id="{{item.post_id}}allComments">
+            <div id="allcomComment" *ngIf="item.post_id == comment.post"><span>@{{comment.user}}</span>
+              <p>{{ comment.comment }}</p>
+              <ion-icon class="{{c}}likeComment" id="likeComment" name="heart-empty" (click)="likeComment(c)">
+              </ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <ion-footer keyboard-attach class="bar-assertive">
+          <div id="fullComments">
+            <input type="text" (focus)="attchKeyBoard()" (blur)="dettchKeyBoard()" class="commentInput2"
+              id="{{item.post_id}}commentInput2" placeholder="Add Comment...">
+            <label for="{{item.post_id}}commentInput2" id="commentBtn"><span (click)="postComment2(item.post_id)"
+                id="commentBtn">Post</span></label>
+          </div>
+        </ion-footer>
+      </div>
+
+
+
+      <div *ngFor="let post of ( nextPostData | async); let p = index" id="{{post.post_id}}allComments"
+        class="allComments animated fadeInUp">
+        <div id="scrollableComments" class="scrollableComments">
+          <div class="totalComments" id="{{post.post_id}}totalCOmments"></div>
+          <div *ngFor='let comment of (commentsRef$ | async),let c = index' id="{{post.post_id}}allComments">
+            <div id="allcomComment" *ngIf="post.post_id == comment.post"><span>@{{comment.user}}</span>
+              <p>{{ comment.comment }}</p>
+              <ion-icon class="{{c}}likeComment" id="likeComment" name="heart-empty" (click)="likeComment(c)">
+              </ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <ion-footer keyboard-attach class="bar-assertive">
+          <div id="fullComments">
+            <input type="text" (focus)="attchKeyBoard()" (blur)="dettchKeyBoard()" class="commentInput2"
+              id="{{post.post_id}}commentInput2" placeholder="Add Comment...">
+            <label for="{{post.post_id}}commentInput2" id="commentBtn"><span (click)="postComment2(post.post_id)"
+                id="commentBtn">Post</span></label>
+          </div>
+        </ion-footer>
+      </div>
+
+      <div id="disapearingComment" class="{{i}}LatestComment animated fadeInUp" *ngIf="latest_comment.post == item.post_id">
+         <p><span>@{{latest_comment.user}}</span> {{ latest_comment.comment }}</p>
+      </div>
 
       <div>{{ results.length }}</div>
+
+      <ion-spinner name="crescent" id="spinner" class="{{i}}Spinner"></ion-spinner>
     </ion-slide>
-    
+
   </ion-slides>
 
 
 
 </ion-content>
-
-
-

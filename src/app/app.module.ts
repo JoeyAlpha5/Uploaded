@@ -15,11 +15,15 @@ import { firebaseConfig } from "./firebase-env";
 import * as Hammer from 'hammerjs';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import { IonicStorageModule } from '@ionic/storage';
-import { FirebaseX } from  '@ionic-native/firebase-x/ngx';
 import { RequestsService } from './services/requests.service';
 import { MediaCapture, MediaFile, CaptureError,CaptureAudioOptions } from '@ionic-native/media-capture/ngx';
 import { Media } from '@ionic-native/media/ngx';
-import { AngularCropperjsModule } from 'angular-cropperjs';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
+//import { AngularCropperjsModule } from 'angular-cropperjs';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
+// Import ng-circle-progress
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+
 export class CustomHammerConfig extends HammerGestureConfig {
   overrides = {
     'swipe':{direction: Hammer.DIRECTION_ALL }
@@ -34,15 +38,17 @@ export class CustomHammerConfig extends HammerGestureConfig {
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    FirebaseX,
     RequestsService,
     MediaCapture,
     Media,
+    Keyboard,
+    OneSignal,
+    SocialSharing ,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
   ],

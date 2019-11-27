@@ -15,10 +15,17 @@ import { TabsPage } from '../tabs/tabs.page';
 })
 export class UploadPage implements OnInit {
 
+  todayDate: any;
+  Time: any;
+  search_request: Observable<any[]>;
+  Tags: any;
   constructor(private tabs: TabsPage,private requests: RequestsService,public toastController: ToastController,private statusBar: StatusBar,private route: Router, public loadingController: LoadingController,private storage: Storage ) { 
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();
     this.tabs.bgColor = '#000000';
+    this.todayDate = new Date().toISOString();
+    this.Time = new Date().toISOString();
+    this.Tags = "Tagged users: ";
   }
 
   ngOnInit() {
@@ -52,7 +59,7 @@ export class UploadPage implements OnInit {
       this.email= val;
       var profile_url =  'https://uploaded.herokuapp.com/users/users';
       if(this.email == undefined){
-        this.route.navigate(['']);
+        this.route.navigate(['login']);
       }
     });
   }
@@ -61,6 +68,19 @@ export class UploadPage implements OnInit {
   changeListener($event): void{
     this.file = $event.target.files[0];
     this.presentToast("File selected: "+ this.file.name);
+    //get video duration
+    // var vid = <HTMLVideoElement>document.getElementById("videoPlaceHolder");
+    // var videoElem = $("#placeholderSrc");
+    // var URL = window.URL || window.webkitURL;
+    // var src = URL.createObjectURL( this.file );
+
+    // videoElem.attr("src", src)
+    // vid.load();
+    // console.log(vid, vid.duration);
+    
+    //
+
+    //
   }
 
   addToPlaylist: boolean = false;
@@ -82,6 +102,18 @@ export class UploadPage implements OnInit {
     let video_name: any;
     let description = $("#uploadDescription").val();
     let message = "";
+    let selectedMonthDay = this.todayDate;
+    let selectedTime = this.Time;
+
+    let post_day = new Date(selectedMonthDay).getDate();
+    let post_month = new Date(selectedMonthDay).getMonth();
+    let selectedHours = new Date(selectedTime).getHours();
+    let selectedMinutes = new Date(selectedTime).getMinutes();
+
+    let publish_date = post_day+"/"+(post_month+1)+"/"+selectedHours+":"+selectedMinutes
+
+    console.log(publish_date, selectedTime)
+
     if(this.file == undefined){
       message = "Please select file to upload";
       this.presentLoadingWithOptions(message)
@@ -96,12 +128,14 @@ export class UploadPage implements OnInit {
       var user_email = this.email;
       video_name = this.file.name;
       this.displayLoading = true;
-      let upload = this.requests.Upload(this.profile_url,user_email,this.file, description,genre,this.addToPlaylist);
+      let upload = this.requests.Upload(this.profile_url,user_email,this.file, description,genre,this.addToPlaylist,publish_date,this.tagged_ids);
       this.presentLoadingWithOptions("Uploading, please wait...");
+      this.Time = new Date().toISOString();
       upload.subscribe(x => {
+        this.displayLoading = false;
          this.route.navigate(['/home/tabs/tab4']);
          console.log(x)
-         this.displayLoading = false;
+         
       
       });
     }
@@ -116,6 +150,36 @@ export class UploadPage implements OnInit {
     toast.present();
   }
 
+  getUsers(){
+    this.storage.get("mail").then(val=>{
+      let input_text = $("#uploadTag").val();
+      this.search_request = this.requests.getSearchResults(this.profile_url,input_text,val);
+      this.search_request.subscribe(result=>{
+        console.log(result);
+        console.log(input_text);
+      });
+      
+    });
+  }
+
+  tagged_users = [];
+  tagged_ids = [];
+  SetTag(id,first_name){
+    if(this.tagged_users.includes(first_name) == false){
+      if(this.Tags == "Tagged users: "){
+        this.Tags =  this.Tags + first_name;
+        this.tagged_users.push(first_name);
+        this.tagged_ids.push(id);
+      }else{
+        this.Tags =  this.Tags + ","+first_name;
+        this.tagged_users.push(first_name);
+        this.tagged_ids.push(id);
+      }
+    }  
+    
+    console.log(first_name);
+    console.log(this.tagged_users);
+  }
 
   //loading component
   async presentLoadingWithOptions(Message) {

@@ -8,10 +8,19 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./following/following.module": [
+		"./src/app/following/following.module.ts",
+		"common",
+		"following-following-module"
+	],
 	"./login/login.module": [
 		"./src/app/login/login.module.ts",
-		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f",
 		"login-login-module"
+	],
+	"./main/main.module": [
+		"./src/app/main/main.module.ts",
+		"main-main-module"
 	],
 	"./messaging-list/messaging-list.module": [
 		"./src/app/messaging-list/messaging-list.module.ts",
@@ -19,7 +28,7 @@ var map = {
 	],
 	"./messaging/messaging.module": [
 		"./src/app/messaging/messaging.module.ts",
-		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f",
 		"common",
 		"messaging-messaging-module"
 	],
@@ -33,7 +42,8 @@ var map = {
 	],
 	"./post-view/post-view.module": [
 		"./src/app/post-view/post-view.module.ts",
-		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f",
+		"default~post-view-post-view-module~tab1-tab1-module~userfeed-userfeed-module",
 		"common",
 		"post-view-post-view-module"
 	],
@@ -44,25 +54,26 @@ var map = {
 	],
 	"./settings/settings.module": [
 		"./src/app/settings/settings.module.ts",
-		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f",
 		"common",
 		"settings-settings-module"
 	],
 	"./tab4/tab4.module": [
 		"./src/app/tab4/tab4.module.ts",
-		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f",
 		"common",
 		"tab4-tab4-module"
 	],
 	"./upload/upload.module": [
 		"./src/app/upload/upload.module.ts",
-		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f",
 		"common",
 		"upload-upload-module"
 	],
 	"./userfeed/userfeed.module": [
 		"./src/app/userfeed/userfeed.module.ts",
-		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~94fb1386",
+		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f",
+		"default~post-view-post-view-module~tab1-tab1-module~userfeed-userfeed-module",
 		"common",
 		"userfeed-userfeed-module"
 	]
@@ -532,7 +543,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [
-    { path: '', loadChildren: './login/login.module#LoginPageModule' },
+    // { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
     {
         path: 'home',
         loadChildren: () => Promise.all(/*! import() | tabs-tabs-module */[__webpack_require__.e("common"), __webpack_require__.e("tabs-tabs-module")]).then(__webpack_require__.bind(null, /*! ./tabs/tabs.module */ "./src/app/tabs/tabs.module.ts")).then(m => m.TabsPageModule)
@@ -547,7 +558,9 @@ const routes = [
     { path: 'messaging-list', loadChildren: './messaging-list/messaging-list.module#MessagingListPageModule' },
     { path: 'userfeed', loadChildren: './userfeed/userfeed.module#UserfeedPageModule' },
     { path: 'notifications', loadChildren: './notifications/notifications.module#NotificationsPageModule' },
-    { path: 'notifyme', loadChildren: './notifyme/notifyme.module#NotifymePageModule' }
+    { path: 'notifyme', loadChildren: './notifyme/notifyme.module#NotifymePageModule' },
+    { path: 'following', loadChildren: './following/following.module#FollowingPageModule' },
+    { path: '', loadChildren: './main/main.module#MainPageModule' }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -590,6 +603,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/onesignal/ngx */ "./node_modules/@ionic-native/onesignal/ngx/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! angularfire2/database */ "./node_modules/angularfire2/database/index.js");
+/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(angularfire2_database__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
+
+
+
+
 
 
 
@@ -597,18 +619,54 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-    constructor(platform, splashScreen, statusBar, alertController) {
+    constructor(platform, splashScreen, statusBar, oneSignal, alertController, route, database, storage) {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
+        this.oneSignal = oneSignal;
         this.alertController = alertController;
+        this.route = route;
+        this.database = database;
+        this.storage = storage;
         this.initializeApp();
         // firebase.initializeApp(firebaseConfig);
     }
     initializeApp() {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
-            //this.splashScreen.hide();
+            this.splashScreen.hide();
+            this.setupPush();
+        });
+    }
+    setupPush() {
+        this.oneSignal.startInit("213117e1-5258-44df-9de4-7206c18669b9", "929396145480");
+        this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+        this.oneSignal.handleNotificationOpened().subscribe(() => {
+            // do something when a notification is opened
+            //got to notifications page
+            this.route.navigate(['/home/tabs/tab3']);
+        });
+        this.oneSignal.handleNotificationReceived().subscribe(() => {
+            this.storage.get("current_userID").then(val => {
+                this.database.object("userReceivedNotification/" + val).set(true);
+            });
+            // do something when notification is received
+            // let msg = data.payload.body;
+            // let title = data.payload.title;
+            // let additionalData = data.payload.additionalData;
+            // this.presentAlert(title,msg,additionalData)
+        });
+        this.oneSignal.endInit();
+    }
+    presentAlert(title, msg, additionalData) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: title,
+                subHeader: msg,
+                message: additionalData,
+                buttons: ['OK']
+            });
+            yield alert.present();
         });
     }
 };
@@ -616,7 +674,11 @@ AppComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
+    { type: _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_5__["OneSignal"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] },
+    { type: angularfire2_database__WEBPACK_IMPORTED_MODULE_7__["AngularFireDatabase"] },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_8__["Storage"] }
 ];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -627,7 +689,11 @@ AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
         _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
         _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
+        _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_5__["OneSignal"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"],
+        angularfire2_database__WEBPACK_IMPORTED_MODULE_7__["AngularFireDatabase"],
+        _ionic_storage__WEBPACK_IMPORTED_MODULE_8__["Storage"]])
 ], AppComponent);
 
 
@@ -667,10 +733,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! hammerjs */ "./node_modules/hammerjs/hammer.js");
 /* harmony import */ var hammerjs__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(hammerjs__WEBPACK_IMPORTED_MODULE_15__);
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
-/* harmony import */ var _ionic_native_firebase_x_ngx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @ionic-native/firebase-x/ngx */ "./node_modules/@ionic-native/firebase-x/ngx/index.js");
-/* harmony import */ var _services_requests_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/requests.service */ "./src/app/services/requests.service.ts");
-/* harmony import */ var _ionic_native_media_capture_ngx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @ionic-native/media-capture/ngx */ "./node_modules/@ionic-native/media-capture/ngx/index.js");
-/* harmony import */ var _ionic_native_media_ngx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @ionic-native/media/ngx */ "./node_modules/@ionic-native/media/ngx/index.js");
+/* harmony import */ var _services_requests_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./services/requests.service */ "./src/app/services/requests.service.ts");
+/* harmony import */ var _ionic_native_media_capture_ngx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @ionic-native/media-capture/ngx */ "./node_modules/@ionic-native/media-capture/ngx/index.js");
+/* harmony import */ var _ionic_native_media_ngx__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @ionic-native/media/ngx */ "./node_modules/@ionic-native/media/ngx/index.js");
+/* harmony import */ var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @ionic-native/keyboard/ngx */ "./node_modules/@ionic-native/keyboard/ngx/index.js");
+/* harmony import */ var _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @ionic-native/onesignal/ngx */ "./node_modules/@ionic-native/onesignal/ngx/index.js");
+/* harmony import */ var _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @ionic-native/social-sharing/ngx */ "./node_modules/@ionic-native/social-sharing/ngx/index.js");
 
 
 
@@ -692,6 +760,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+//import { AngularCropperjsModule } from 'angular-cropperjs';
+
+// Import ng-circle-progress
 
 class CustomHammerConfig extends _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["HammerGestureConfig"] {
     constructor() {
@@ -712,15 +784,17 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             angularfire2_database__WEBPACK_IMPORTED_MODULE_12__["AngularFireDatabaseModule"],
             angularfire2_firestore__WEBPACK_IMPORTED_MODULE_11__["AngularFirestoreModule"],
             angularfire2_storage__WEBPACK_IMPORTED_MODULE_13__["AngularFireStorageModule"],
-            _ionic_storage__WEBPACK_IMPORTED_MODULE_16__["IonicStorageModule"].forRoot()
+            _ionic_storage__WEBPACK_IMPORTED_MODULE_16__["IonicStorageModule"].forRoot(),
         ],
         providers: [
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_6__["StatusBar"],
             _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_5__["SplashScreen"],
-            _ionic_native_firebase_x_ngx__WEBPACK_IMPORTED_MODULE_17__["FirebaseX"],
-            _services_requests_service__WEBPACK_IMPORTED_MODULE_18__["RequestsService"],
-            _ionic_native_media_capture_ngx__WEBPACK_IMPORTED_MODULE_19__["MediaCapture"],
-            _ionic_native_media_ngx__WEBPACK_IMPORTED_MODULE_20__["Media"],
+            _services_requests_service__WEBPACK_IMPORTED_MODULE_17__["RequestsService"],
+            _ionic_native_media_capture_ngx__WEBPACK_IMPORTED_MODULE_18__["MediaCapture"],
+            _ionic_native_media_ngx__WEBPACK_IMPORTED_MODULE_19__["Media"],
+            _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_20__["Keyboard"],
+            _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_21__["OneSignal"],
+            _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_22__["SocialSharing"],
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] },
             { provide: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["HAMMER_GESTURE_CONFIG"], useClass: CustomHammerConfig },
         ],
@@ -770,12 +844,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _ionic_native_firebase_x_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/firebase-x/ngx */ "./node_modules/@ionic-native/firebase-x/ngx/index.js");
-/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! angularfire2/firestore */ "./node_modules/angularfire2/firestore/index.js");
-/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
-
+/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! angularfire2/firestore */ "./node_modules/angularfire2/firestore/index.js");
+/* harmony import */ var angularfire2_firestore__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(angularfire2_firestore__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
 
 
 
@@ -785,12 +857,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let RequestsService = class RequestsService {
-    constructor(storage, toast, http, afs, fs, platform) {
+    constructor(storage, toast, http, afs, platform) {
         this.storage = storage;
         this.toast = toast;
         this.http = http;
         this.afs = afs;
-        this.fs = fs;
         this.platform = platform;
     }
     //get profile api
@@ -814,6 +885,18 @@ let RequestsService = class RequestsService {
     }
     getSearchResults(url, searchTerm, user_email) {
         return this.http.get(url, { params: { Term: searchTerm, type: 'search', email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    }
+    getSearchPlacesResult(url, searchTerm, user_email) {
+        return this.http.get(url, { params: { Term: searchTerm, type: 'searchPlaces', email: user_email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
+            console.log("Results", results);
+            return results["Response"];
+        }));
+    }
+    getFollowing(url, username) {
+        return this.http.get(url, { params: { type: 'getFollowing', username: username } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
             console.log("Results", results);
             return results["Response"];
         }));
@@ -870,7 +953,7 @@ let RequestsService = class RequestsService {
             return results["Response"];
         }));
     }
-    Upload(url, user_email, file, description, genre, playlisted) {
+    Upload(url, user_email, file, description, genre, playlisted, publishDay, tags) {
         let postData = new FormData();
         postData.append('file', file);
         postData.append('type', 'upload');
@@ -878,6 +961,8 @@ let RequestsService = class RequestsService {
         postData.append('description', description);
         postData.append('genre', genre);
         postData.append('playlisted', playlisted);
+        postData.append('publish', publishDay);
+        postData.append("tags", tags);
         return this.http.post(url, postData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
             console.log("Results", results);
             return results["newly created post_id"];
@@ -902,14 +987,20 @@ let RequestsService = class RequestsService {
         }));
     }
     //notifications
-    registerDevice(url, userId, token) {
-        return this.http.get(url, { params: { type: 'setToken', userId: userId, token: token } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
+    registerDevice(url, userId, email) {
+        return this.http.get(url, { params: { type: 'registerDevice', userId: userId, email: email } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
             console.log("Results", results);
             return results;
         }));
     }
     sendMessageNotification(url, to, sender, message) {
         return this.http.get(url, { params: { type: 'sendMessageNotif', to: to, sender: sender, message: message } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
+            console.log("Results", results);
+            return results;
+        }));
+    }
+    sendCommentNotification(url, post_id, sender, message) {
+        return this.http.get(url, { params: { type: 'sendCommentNotification', post: post_id, sender: sender, message: message } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
             console.log("Results", results);
             return results;
         }));
@@ -945,6 +1036,18 @@ let RequestsService = class RequestsService {
             return results["One"];
         }));
     }
+    getDuration(url, post_id) {
+        return this.http.get(url, { params: { type: 'getDuration', post: post_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
+            console.log("Results", results);
+            return results['Response'];
+        }));
+    }
+    resetPost(url, post_id) {
+        return this.http.get(url, { params: { type: 'resetPost', post: post_id } }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(results => {
+            console.log("Results", results);
+            return results['Response'];
+        }));
+    }
     UploadCoverImage(url, user_email, file) {
         let postData = new FormData();
         postData.append('file', file);
@@ -965,31 +1068,6 @@ let RequestsService = class RequestsService {
             return results["Response"];
         }));
     }
-    //push services
-    getToken() {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            let token;
-            if (this.platform.is("android")) {
-                token = yield this.fs.getToken();
-                this.toast.create({ message: token, duration: 3000 }).then(alert => alert.present());
-            }
-            if (this.platform.is("ios")) {
-                token = yield this.fs.getToken();
-                yield this.fs.grantPermission();
-            }
-            this.storage.set("token", token);
-            return this.saveToken(token);
-        });
-    }
-    saveToken(token) {
-        if (!token) {
-            return;
-        }
-        return token;
-    }
-    listenNotifications() {
-        return this.fs.onMessageReceived();
-    }
     UploadChatFile(url, filename, file) {
         let postData = new FormData();
         postData.append('file', file);
@@ -1002,18 +1080,17 @@ let RequestsService = class RequestsService {
     }
 };
 RequestsService.ctorParameters = () => [
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_7__["Storage"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"] },
+    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"] },
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
-    { type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_5__["AngularFirestore"] },
-    { type: _ionic_native_firebase_x_ngx__WEBPACK_IMPORTED_MODULE_4__["FirebaseX"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Platform"] }
+    { type: angularfire2_firestore__WEBPACK_IMPORTED_MODULE_4__["AngularFirestore"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["Platform"] }
 ];
 RequestsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_storage__WEBPACK_IMPORTED_MODULE_7__["Storage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ToastController"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], angularfire2_firestore__WEBPACK_IMPORTED_MODULE_5__["AngularFirestore"], _ionic_native_firebase_x_ngx__WEBPACK_IMPORTED_MODULE_4__["FirebaseX"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Platform"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ToastController"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], angularfire2_firestore__WEBPACK_IMPORTED_MODULE_4__["AngularFirestore"], _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["Platform"]])
 ], RequestsService);
 
 

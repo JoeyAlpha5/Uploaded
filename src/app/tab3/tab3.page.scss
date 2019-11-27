@@ -1,9 +1,24 @@
 
+@font-face{
+    font-family: 'helvetica';
+    src: url(../fonts/fonts/segoe-pro-cufonfonts/SegoePro-Regular.ttf);
+  }
+  
+  @font-face{
+    font-family: 'helveticaB';
+    src: url(../fonts/fonts/segoe-pro-cufonfonts/SegoeProDisplay-Semibold.ttf);
+  }
+
+
+  p, span{
+      font-family: 'helvetica' !important;
+  }
+
 div#dp {
     width: 40px;
     height: 40px;
     background: rgba(0, 0, 0, 0.18);
-    border-radius: 5px;
+    border-radius: 100%;
     margin-right: 10px;
     margin-bottom: 10px;
     background-size: cover !important;
@@ -30,6 +45,24 @@ ion-item-options#options {
     padding: 15px;
 }
 
+.datePlaceholder {
+    font-size: 12px;
+    color: gray;
+    margin-left: 4px;
+}
+
+div#postCover {
+    width: 40px;
+    height: 40px;
+    float: right;
+    background: #f7f7f7;
+    right: 0;
+    position: absolute;
+    margin-right: 30px;
+    border-radius: 5px;
+    background-size: cover !important;
+}
+
 #viewPost{
     background: #607D8B;
     color: white;
@@ -44,7 +77,10 @@ ion-item-options#options {
         margin-top:10px;
 
         #msg{
-            margin-left: 15px;
+            margin-left: 2px;
+            width: 189px;
+            margin-bottom: 14px;
+            padding-top: 10px;
         }
     }
 }

@@ -6,7 +6,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { RequestsService } from '../services/requests.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { tap } from 'rxjs/operators';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -29,14 +28,6 @@ export class LoginPage implements OnInit {
   Bottom: boolean = true;
 
 
-  async Notifications(){
-    this.requests.listenNotifications().pipe(
-      tap(msg=>{
-        const toast = this.toast.create({ message: msg.body, duration:3000 }).then(alert=> alert.present());
-      })
-    ).subscribe();
-  }
-
   ionViewDidEnter() {
     // Put here the code you want to execute
     this.statusBar.overlaysWebView(false);
@@ -51,10 +42,6 @@ export class LoginPage implements OnInit {
       //profile_url = 'http://127.0.0.1:8000/users/users'
       if(val == undefined){
         $(".login").show();
-        //get user token for push
-        this.requests.getToken();
-        //listen for notififcations
-        this.Notifications();
       }else{
         this.route.navigate(['/home/tabs/tab1']);
         

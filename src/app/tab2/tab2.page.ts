@@ -19,6 +19,12 @@ export class Tab2Page {
   userID: Observable<any>;
   searchContent: Observable<any>;
   oneSearchContent: Observable<any>;
+  displaySearchVideos:boolean = true;
+  default: boolean = false;
+  artists: boolean = true;
+  places: boolean = false;
+  tags: boolean = false;
+  places_results: Observable<any>; 
   constructor(private tabs: TabsPage,private platform: Platform,private requests: RequestsService, private statusBar: StatusBar,private route: Router,private storage: Storage ) {
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();
@@ -29,9 +35,29 @@ export class Tab2Page {
 
   }
 
-  viewPost(post_id){
-    this.storage.set("post", post_id);
-    this.route.navigate(['/home/tabs/postView']);
+
+  setSearchFilter(filter){
+    console.log(filter);
+    if(filter == "artists"){
+      this.artists = true;
+      console.log(this.artists);
+      this.places = false;
+      this.tags = false;
+    }
+    else if(filter == "places"){
+      this.artists = false;
+      this.places = true;
+      this.tags = false;
+    }else{
+      this.artists = false;
+      this.places = false;
+      this.tags = true;
+    }
+  }
+
+  viewPost(username){
+    this.storage.set("uerFeedUsername", username);
+    this.route.navigate(['/home/tabs/userfeed']);
 
   }
 
@@ -52,7 +78,7 @@ export class Tab2Page {
     this.changeIconColors();
     this.storage.get('mail').then((val) => {
       if(val == undefined){
-        this.route.navigate(['']);
+        this.route.navigate(['login']);
       }else{
         this.storage.get('current_userID').then((val) => {
           this.userID = val;
@@ -61,15 +87,36 @@ export class Tab2Page {
           this.oneSearchContent.subscribe();
           this.searchContent.subscribe();
         });
+
+        this.restartVideos()
       }
     })
+  }
+
+  restartVideos(){
+    //restart videos after every 5sec
+    setInterval(()=>{
+      let videos = document.getElementsByClassName("searchVids");
+      for(let i =0; i < videos.length; i++){
+        let ivideo = <HTMLVideoElement>videos[i];
+        ivideo.currentTime = 0;
+        // ivideo.load();
+      }
+    },20000);
   }
 
 
   getSearchResults(){
     console.log(this.searchTerm);
     var user_email = JSON.parse(localStorage.getItem('email'));
-    this.results = this.requests.getSearchResults(this.profile_url, this.searchTerm, user_email); 
+    this.results = this.requests.getSearchResults(this.profile_url, this.searchTerm, user_email);
+    // this.places_results = this.requests.getSearchPlacesResult(this.profile_url,this.searchTerm,user_email) 
+    if(this.searchTerm != ""){
+      this.displaySearchVideos = false;
+    }else{
+      this.displaySearchVideos =  true;
+    }
+    
   }
 
   viewProfile(user_id,email){

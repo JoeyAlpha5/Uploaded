@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { FirebaseX } from  '@ionic-native/firebase-x/ngx';
 import { AngularFirestore } from "angularfire2/firestore";
 import { Platform } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
@@ -12,7 +11,7 @@ import { Storage } from '@ionic/storage';
 })
 export class RequestsService {
 
-  constructor(private storage: Storage,private toast: ToastController, private http: HttpClient, public afs: AngularFirestore,public fs: FirebaseX, private platform: Platform) { }
+  constructor(private storage: Storage,private toast: ToastController, private http: HttpClient, public afs: AngularFirestore, private platform: Platform) { }
 
   //get profile api
   getProfile(url, email): Observable<any> {
@@ -45,6 +44,26 @@ export class RequestsService {
 
   getSearchResults(url, searchTerm, user_email): Observable<any> {
     return this.http.get(url, {params: {Term: searchTerm, type: 'search', email: user_email}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results["Response"];
+      })
+    );
+  }
+
+
+  getSearchPlacesResult(url, searchTerm, user_email): Observable<any> {
+    return this.http.get(url, {params: {Term: searchTerm, type: 'searchPlaces', email: user_email}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results["Response"];
+      })
+    );
+  }
+
+
+  getFollowing(url, username): Observable<any> {
+    return this.http.get(url, {params: {type: 'getFollowing', username: username}}).pipe(
       map(results => {
         console.log("Results",results);
         return results["Response"];
@@ -126,7 +145,7 @@ export class RequestsService {
   }
 
 
-  Upload(url,user_email,file, description,genre,playlisted): Observable<any> {
+  Upload(url,user_email,file, description,genre,playlisted,publishDay,tags): Observable<any> {
     let postData = new FormData();
     postData.append('file', file);
     postData.append('type', 'upload');
@@ -134,6 +153,8 @@ export class RequestsService {
     postData.append('description', description);
     postData.append('genre', genre);
     postData.append('playlisted', playlisted);
+    postData.append('publish', publishDay);
+    postData.append("tags", tags);
     return this.http.post(url, postData).pipe(
       map(results => {
         console.log("Results",results);
@@ -163,7 +184,7 @@ export class RequestsService {
   }
 
 
-  getUserFeed(url, username,email){
+  getUserFeed(url, username,email): Observable<any>{
     return this.http.get(url, {params: {type: 'getUserFeed', username:username, "email":email}}).pipe(
       map(results => {
         console.log("Results",results);
@@ -174,8 +195,8 @@ export class RequestsService {
 
 
   //notifications
-  registerDevice(url,userId,token){
-    return this.http.get(url, {params: {type: 'setToken', userId: userId,token:token}}).pipe(
+  registerDevice(url,userId,email){
+    return this.http.get(url, {params: {type: 'registerDevice', userId: userId,email:email}}).pipe(
       map(results => {
         console.log("Results",results);
         return results;
@@ -186,6 +207,15 @@ export class RequestsService {
 
   sendMessageNotification(url,to,sender,message){
     return this.http.get(url, {params: {type: 'sendMessageNotif', to:to,sender:sender,message:message}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results;
+      })
+    );
+  }
+
+  sendCommentNotification(url,post_id,sender,message){
+    return this.http.get(url, {params: {type: 'sendCommentNotification', post:post_id,sender:sender,message:message}}).pipe(
       map(results => {
         console.log("Results",results);
         return results;
@@ -241,6 +271,24 @@ export class RequestsService {
     );
   }
 
+  getDuration(url,post_id){
+    return this.http.get(url, {params: {type: 'getDuration', post:post_id}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results['Response'];
+      })
+    );
+  }
+
+  resetPost(url,post_id){
+    return this.http.get(url, {params: {type: 'resetPost', post:post_id}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results['Response'];
+      })
+    );
+  }
+
 
   UploadCoverImage(url,user_email,file){
     let postData = new FormData();
@@ -267,42 +315,6 @@ export class RequestsService {
         return results["Response"];
       })
     );
-  }
-
-
-
-  //push services
-  async getToken(){
-
-    let token;
-    if(this.platform.is("android")){
-      token = await this.fs.getToken();
-      this.toast.create({ message: token, duration:3000 }).then(alert=> alert.present());
-    }
-
-    if(this.platform.is("ios")){
-      token = await this.fs.getToken();
-      await this.fs.grantPermission();
-    }
-
-
-    this.storage.set("token", token);
-    return this.saveToken(token);
-
-  }
-
-
-  private saveToken(token){
-    if(!token) {
-      return;
-    }
-    return token;
-  }
-
-  
-
-  listenNotifications(){
-    return this.fs.onMessageReceived();
   }
 
   UploadChatFile(url,filename,file){

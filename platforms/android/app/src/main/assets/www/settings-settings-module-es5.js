@@ -4142,38 +4142,43 @@ var SettingsPage = /** @class */ (function () {
     SettingsPage.prototype.move = function (x, y) {
         this.angularCropper.cropper.move(x, y);
     };
-    SettingsPage.prototype.downloadImage = function (data, filename) {
-        var _this = this;
-        if (filename === void 0) { filename = 'untitled.jpeg'; }
-        var a = document.createElement('a');
-        a.href = data;
-        a.download = filename;
-        this.storage.get("mail").then(function (user_email) {
-            var upload = _this.requests.UploadCroppedCoverImage(_this.profile_url, user_email, data.substring(23));
-            upload.subscribe(function (x) {
-                _this.cropImage(x);
-                _this.ionViewDidEnter();
-                console.log(x);
-                _this.displayLoading = false;
-            });
-        });
-        // document.body.appendChild(a);
-        // a.click();
-    };
+    // downloadImage(data, filename = 'untitled.jpeg'){
+    //   var a = document.createElement('a');
+    //   a.href = data;
+    //   a.download = filename;
+    //   this.storage.get("mail").then((user_email)=>{
+    //     let upload = this.requests.UploadCroppedCoverImage(this.profile_url,user_email,data.substring(23));
+    //      upload.subscribe(x => {
+    //        this.cropImage(x);
+    //         this.ionViewDidEnter();
+    //         console.log(x)
+    //         this.displayLoading = false;
+    //       });
+    //     });
+    //   // document.body.appendChild(a);
+    //   // a.click();
+    // }
     SettingsPage.prototype.save = function () {
         var croppedImgB64String = this.angularCropper.cropper.getCroppedCanvas().toDataURL('image/jpeg', (100 / 100));
         this.croppedImage = croppedImgB64String;
         console.log(this.croppedImage);
-        this.downloadImage(croppedImgB64String, 'my-canvas.jpeg');
+        // this.downloadImage(croppedImgB64String, 'my-canvas.jpeg');
         this.dataURLtoFile(croppedImgB64String, 'my-canvas.jpeg');
     };
     SettingsPage.prototype.dataURLtoFile = function (dataurl, filename) {
         var _this = this;
-        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1], bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-        while (n--) {
-            u8arr[n] = bstr.charCodeAt(n);
+        // var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        //     bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        // while(n--){
+        //     u8arr[n] = bstr.charCodeAt(n);
+        // }
+        var blobBin = atob(dataurl.split(',')[1]);
+        var array = [];
+        for (var i = 0; i < blobBin.length; i++) {
+            array.push(blobBin.charCodeAt(i));
         }
-        var file = new File([u8arr], filename, { type: mime });
+        var file = new Blob([new Uint8Array(array)], { type: 'image/png' });
+        // let file  = new File([u8arr], filename, {type:mime});
         this.storage.get("mail").then(function (user_email) {
             var upload = _this.requests.UploadCroppedCoverImage(_this.profile_url, user_email, file);
             upload.subscribe(function (x) {

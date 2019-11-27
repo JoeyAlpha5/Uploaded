@@ -29,13 +29,36 @@
     <feature name="FileTransfer">
         <param name="ios-package" value="CDVFileTransfer" />
     </feature>
-    <feature name="FirebasePlugin">
-        <param name="ios-package" value="FirebasePlugin" />
-        <param name="onload" value="true" />
+    <feature name="CDVIonicKeyboard">
+        <param name="ios-package" onload="true" value="CDVIonicKeyboard" />
     </feature>
     <allow-navigation href="ionic://*" />
     <feature name="IonicWebView">
         <param name="ios-package" value="CDVWKWebViewEngine" />
+    </feature>
+    <feature name="Media">
+        <param name="ios-package" value="CDVSound" />
+    </feature>
+    <feature name="Capture">
+        <param name="ios-package" value="CDVCapture" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="ios-package" value="CDVSplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="SQLitePlugin">
+        <param name="ios-package" value="SQLitePlugin" />
+    </feature>
+    <feature name="OneSignalPush">
+        <param name="ios-package" value="OneSignalPush" />
+    </feature>
+    <feature name="SocialSharing">
+        <param name="ios-package" value="SocialSharing" />
+        <param name="onload" value="true" />
     </feature>
     <name>Uploaded</name>
     <description>Breaking New Boundaries For Artists</description>
@@ -101,7 +124,7 @@
     <splash height="1242" src="resources/ios/splash/Default-Landscape-2688h~iphone.png" width="2688" />
     <splash height="1792" src="resources/ios/splash/Default-1792h~iphone.png" width="828" />
     <splash height="828" src="resources/ios/splash/Default-Landscape-1792h~iphone.png" width="1792" />
-    <pod name="Firebase/Core" spec="6.3.0" />
+    <pod name="OneSignal" spec="2.11.2" />
     <preference name="AllowInlineMediaPlayback" value="true" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="DisallowOverscroll" value="false" />
@@ -117,16 +140,21 @@
     <preference name="PaginationMode" value="unpaginated" />
     <preference name="deployment-target" value="11.0" />
     <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
+    <preference name="KeepAVAudioSessionAlwaysActive" value="NO" />
+    <preference name="StatusBarOverlaysWebView" value="true" />
+    <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="SplashScreen" value="screen" />
     <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="SplashScreenDelay" value="70000" />
-    <preference name="FadeSplashScreenDuration" value="70000" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="FadeSplashScreenDuration" value="1000" />
     <preference name="ShowSplashScreen" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="FadeSplashScreen" value="true" />
     <preference name="loadUrlTimeoutValue" value="700000" />
+    <preference name="KeyboardResize" value="true" />
+    <preference name="KeyboardStyle" value="dark" />
 </widget>

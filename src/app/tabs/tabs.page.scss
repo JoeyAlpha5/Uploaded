@@ -16,7 +16,17 @@ ion-tab-button#tab-button-upload {
     background: transparent;
 }
 
+  #notificationIcon{
+    height: 10px;
+    border-radius: 100%;
+    margin-top: 6px;
+    padding: 0;
+}
 
+#notificationIcon span {
+  opacity: 0;
+  visibility: hidden;
+}
 
   #navIcon{
       color: white;

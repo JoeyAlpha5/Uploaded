@@ -18,6 +18,8 @@ export class ProfilePage implements OnInit {
   images_url: string  =  "https://res.cloudinary.com/uploaded/image/upload/v1567818053/";
   video_url: string  =  "https://res.cloudinary.com/uploaded/video/upload/v1567818053/";
   profile_url =  'https://uploaded.herokuapp.com/users/users';
+  following: boolean;
+
   //profile_url = 'http://127.0.0.1:8000/users/users'
   constructor(private tabs: TabsPage,private requests: RequestsService,private statusBar: StatusBar,private route: Router,private storage: Storage ) {
     this.statusBar.overlaysWebView(false);
@@ -28,10 +30,18 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
   }
 
+
+  follow(username,num){
+    console.log(username, num);
+    this.storage.set("profileUserName", username);
+    this.storage.set("followingNum",num);
+    this.route.navigate(['/home/tabs/following']);
+
+
+  }
+
   ionViewDidEnter() {
-    this.statusBar.overlaysWebView(false);
-    this.statusBar.backgroundColorByHexString('#ffffff');
-    this.statusBar.styleDefault();
+    this.statusBar.overlaysWebView(true);
     this.tabs.bgColor = '#000000';
     this.tabs.bottom = true;
     // Put here the code you want to execute
@@ -39,10 +49,14 @@ export class ProfilePage implements OnInit {
       console.log('Your email is', mail);
       // var profile_url =  'https://uploaded.herokuapp.com/users/users';
       if(mail == undefined){
-        this.route.navigate(['']);
+        this.route.navigate(['login']);
       }else{
         this.storage.get("user_id").then((val) =>{
           this.userProfile = this.requests.getUserProfile(this.profile_url,val,mail);
+          this.userProfile.subscribe(u=>{
+            console.log(u);
+            this.following = u[0].already_following;
+          });
           // this.userProfile.subscribe(profile => {
           //   console.log("profile", profile);
           //   this.renderProfile(profile);
@@ -64,7 +78,12 @@ export class ProfilePage implements OnInit {
     this.storage.get('mail').then((mail) => {
       this.requests.Follow(this.profile_url,user_id,mail).subscribe(x => {
         console.log(fl);
-        this.ionViewDidEnter();
+        if(x == true){
+          this.following = true
+        }else{
+          this.following = false;
+        }
+        // this.ionViewDidEnter();
       });
     });    
   }

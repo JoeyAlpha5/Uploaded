@@ -484,7 +484,7 @@ var openURL = function (url, ev, direction) { return tslib__WEBPACK_IMPORTED_MOD
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-tabs id=\"page\">\n    \n    <ion-tab-bar [ngStyle]=\"{'background':bgColor}\" slot=\"bottom\" id=\"tabs\" *ngIf=\"bottom == true\">\n\n          <ion-tab-button tab=\"tab1\" id=\"tab1\">\n            <ion-icon  name=\"home\" [ngStyle]=\"{'color':tab1 }\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"tab2\" id=\"tab2\">\n            <ion-icon  name=\"search\" [ngStyle]=\"{'color':tab2 }\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"upload\" id=\"tab3\" >\n            <ion-icon name=\"add-circle-outline\" [ngStyle]=\"{'color':tab3 }\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"tab3\" id=\"tab4\">\n            <ion-icon  name=\"notifications\" [ngStyle]=\"{'color':tab4 }\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"tab4\" id=\"tab5\">\n            <ion-icon  name=\"person\" [ngStyle]=\"{'color':tab5 }\"></ion-icon>\n          </ion-tab-button>\n    </ion-tab-bar>\n\n    \n\n</ion-tabs>\n"
+module.exports = "<ion-tabs id=\"page\">\n    \n    <ion-tab-bar [ngStyle]=\"{'background':bgColor}\" slot=\"bottom\" id=\"tabs\" *ngIf=\"bottom == true\">\n\n          <ion-tab-button tab=\"tab1\" id=\"tab1\">\n            <ion-icon  name=\"home\" [ngStyle]=\"{'color':tab1 }\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"tab2\" id=\"tab2\">\n            <ion-icon  name=\"search\" [ngStyle]=\"{'color':tab2 }\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"upload\" id=\"tab3\" >\n            <ion-icon name=\"add-circle-outline\" [ngStyle]=\"{'color':tab3 }\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"tab3\" id=\"tab4\">\n            <ion-badge *ngIf=\"notifBadge == true\" id=\"notificationIcon\" color=\"primary\"> <span>0</span> </ion-badge>\n            <ion-icon  name=\"notifications\" [ngStyle]=\"{'color':tab4 }\"></ion-icon>\n          </ion-tab-button>\n\n          <ion-tab-button tab=\"tab4\" id=\"tab5\">\n            <ion-icon  name=\"person\" [ngStyle]=\"{'color':tab5 }\"></ion-icon>\n          </ion-tab-button>\n    </ion-tab-bar>\n\n    \n\n</ion-tabs>\n"
 
 /***/ }),
 
@@ -495,7 +495,7 @@ module.exports = "<ion-tabs id=\"page\">\n    \n    <ion-tab-bar [ngStyle]=\"{'b
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#tabs {\n  background: black;\n  position: fixed !important;\n  bottom: 0;\n  width: 100%;\n  height: 60px;\n}\n\n#tab-button-tab1, #tab-button-tab2, #tab-button-tab3, #tab-button-tab4 {\n  background: transparent;\n}\n\nion-tab-button#tab-button-upload {\n  background: transparent;\n}\n\n#navIcon {\n  color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hcHBsZS9EZXNrdG9wL1VwbG9hZGVkL1VwbG9hZGVkL3NyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLGlCQUFBO0VBQ0EsMEJBQUE7RUFDQSxTQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7QUNBSjs7QURJRTtFQUNFLHVCQUFBO0FDREo7O0FESUE7RUFDSSx1QkFBQTtBQ0RKOztBRE1FO0VBQ0ksWUFBQTtBQ0hOIiwiZmlsZSI6InNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG4jdGFic3tcclxuICAgIGJhY2tncm91bmQ6IGJsYWNrO1xyXG4gICAgcG9zaXRpb246IGZpeGVkICFpbXBvcnRhbnQ7XHJcbiAgICBib3R0b206IDA7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGhlaWdodDo2MHB4O1xyXG5cclxuICB9XHJcbiAgXHJcbiAgI3RhYi1idXR0b24tdGFiMSwgI3RhYi1idXR0b24tdGFiMiwgI3RhYi1idXR0b24tdGFiMywgI3RhYi1idXR0b24tdGFiNHtcclxuICAgIGJhY2tncm91bmQ6dHJhbnNwYXJlbnQ7XHJcbiAgfVxyXG5cclxuaW9uLXRhYi1idXR0b24jdGFiLWJ1dHRvbi11cGxvYWQge1xyXG4gICAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XHJcbn1cclxuXHJcblxyXG5cclxuICAjbmF2SWNvbntcclxuICAgICAgY29sb3I6IHdoaXRlO1xyXG4gIH1cclxuXHJcbiAgIiwiI3RhYnMge1xuICBiYWNrZ3JvdW5kOiBibGFjaztcbiAgcG9zaXRpb246IGZpeGVkICFpbXBvcnRhbnQ7XG4gIGJvdHRvbTogMDtcbiAgd2lkdGg6IDEwMCU7XG4gIGhlaWdodDogNjBweDtcbn1cblxuI3RhYi1idXR0b24tdGFiMSwgI3RhYi1idXR0b24tdGFiMiwgI3RhYi1idXR0b24tdGFiMywgI3RhYi1idXR0b24tdGFiNCB7XG4gIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xufVxuXG5pb24tdGFiLWJ1dHRvbiN0YWItYnV0dG9uLXVwbG9hZCB7XG4gIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xufVxuXG4jbmF2SWNvbiB7XG4gIGNvbG9yOiB3aGl0ZTtcbn0iXX0= */"
+module.exports = "#tabs {\n  background: black;\n  position: fixed !important;\n  bottom: 0;\n  width: 100%;\n  height: 60px;\n}\n\n#tab-button-tab1, #tab-button-tab2, #tab-button-tab3, #tab-button-tab4 {\n  background: transparent;\n}\n\nion-tab-button#tab-button-upload {\n  background: transparent;\n}\n\n#notificationIcon {\n  height: 10px;\n  border-radius: 100%;\n  margin-top: 6px;\n  padding: 0;\n}\n\n#notificationIcon span {\n  opacity: 0;\n  visibility: hidden;\n}\n\n#navIcon {\n  color: white;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9hcHBsZS9EZXNrdG9wL1VwbG9hZGVkL1VwbG9hZGVkL3NyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLGlCQUFBO0VBQ0EsMEJBQUE7RUFDQSxTQUFBO0VBQ0EsV0FBQTtFQUNBLFlBQUE7QUNBSjs7QURJRTtFQUNFLHVCQUFBO0FDREo7O0FESUE7RUFDSSx1QkFBQTtBQ0RKOztBRElFO0VBQ0UsWUFBQTtFQUNBLG1CQUFBO0VBQ0EsZUFBQTtFQUNBLFVBQUE7QUNESjs7QURJQTtFQUNFLFVBQUE7RUFDQSxrQkFBQTtBQ0RGOztBRElFO0VBQ0ksWUFBQTtBQ0ROIiwiZmlsZSI6InNyYy9hcHAvdGFicy90YWJzLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG4jdGFic3tcclxuICAgIGJhY2tncm91bmQ6IGJsYWNrO1xyXG4gICAgcG9zaXRpb246IGZpeGVkICFpbXBvcnRhbnQ7XHJcbiAgICBib3R0b206IDA7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGhlaWdodDo2MHB4O1xyXG5cclxuICB9XHJcbiAgXHJcbiAgI3RhYi1idXR0b24tdGFiMSwgI3RhYi1idXR0b24tdGFiMiwgI3RhYi1idXR0b24tdGFiMywgI3RhYi1idXR0b24tdGFiNHtcclxuICAgIGJhY2tncm91bmQ6dHJhbnNwYXJlbnQ7XHJcbiAgfVxyXG5cclxuaW9uLXRhYi1idXR0b24jdGFiLWJ1dHRvbi11cGxvYWQge1xyXG4gICAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XHJcbn1cclxuXHJcbiAgI25vdGlmaWNhdGlvbkljb257XHJcbiAgICBoZWlnaHQ6IDEwcHg7XHJcbiAgICBib3JkZXItcmFkaXVzOiAxMDAlO1xyXG4gICAgbWFyZ2luLXRvcDogNnB4O1xyXG4gICAgcGFkZGluZzogMDtcclxufVxyXG5cclxuI25vdGlmaWNhdGlvbkljb24gc3BhbiB7XHJcbiAgb3BhY2l0eTogMDtcclxuICB2aXNpYmlsaXR5OiBoaWRkZW47XHJcbn1cclxuXHJcbiAgI25hdkljb257XHJcbiAgICAgIGNvbG9yOiB3aGl0ZTtcclxuICB9XHJcblxyXG4gICIsIiN0YWJzIHtcbiAgYmFja2dyb3VuZDogYmxhY2s7XG4gIHBvc2l0aW9uOiBmaXhlZCAhaW1wb3J0YW50O1xuICBib3R0b206IDA7XG4gIHdpZHRoOiAxMDAlO1xuICBoZWlnaHQ6IDYwcHg7XG59XG5cbiN0YWItYnV0dG9uLXRhYjEsICN0YWItYnV0dG9uLXRhYjIsICN0YWItYnV0dG9uLXRhYjMsICN0YWItYnV0dG9uLXRhYjQge1xuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcbn1cblxuaW9uLXRhYi1idXR0b24jdGFiLWJ1dHRvbi11cGxvYWQge1xuICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcbn1cblxuI25vdGlmaWNhdGlvbkljb24ge1xuICBoZWlnaHQ6IDEwcHg7XG4gIGJvcmRlci1yYWRpdXM6IDEwMCU7XG4gIG1hcmdpbi10b3A6IDZweDtcbiAgcGFkZGluZzogMDtcbn1cblxuI25vdGlmaWNhdGlvbkljb24gc3BhbiB7XG4gIG9wYWNpdHk6IDA7XG4gIHZpc2liaWxpdHk6IGhpZGRlbjtcbn1cblxuI25hdkljb24ge1xuICBjb2xvcjogd2hpdGU7XG59Il19 */"
 
 /***/ }),
 
@@ -511,10 +511,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TabsPage", function() { return TabsPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! angularfire2/database */ "./node_modules/angularfire2/database/index.js");
+/* harmony import */ var angularfire2_database__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(angularfire2_database__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
+
+
 
 
 var TabsPage = /** @class */ (function () {
-    function TabsPage() {
+    function TabsPage(database, storage) {
+        var _this = this;
+        this.database = database;
+        this.storage = storage;
         this.bottom = true;
         this.bgColor = "black";
         this.tab1 = "white";
@@ -522,14 +530,32 @@ var TabsPage = /** @class */ (function () {
         this.tab3 = "white";
         this.tab4 = "white";
         this.tab5 = "white";
+        this.notifBadge = false;
+        this.storage.get("current_userID").then(function (val) {
+            _this.userNotif = _this.database.object("userReceivedNotification/" + val).valueChanges();
+            _this.userNotif.subscribe(function (x) {
+                console.log("user to receive live notifications", x);
+                if (x == true) {
+                    _this.notifBadge = true;
+                }
+                else {
+                    _this.notifBadge = false;
+                }
+            });
+        });
     }
+    TabsPage.ctorParameters = function () { return [
+        { type: angularfire2_database__WEBPACK_IMPORTED_MODULE_2__["AngularFireDatabase"] },
+        { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["Storage"] }
+    ]; };
     TabsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-tabs',
             template: __webpack_require__(/*! raw-loader!./tabs.page.html */ "./node_modules/raw-loader/index.js!./src/app/tabs/tabs.page.html"),
             styles: [__webpack_require__(/*! ./tabs.page.scss */ "./src/app/tabs/tabs.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [angularfire2_database__WEBPACK_IMPORTED_MODULE_2__["AngularFireDatabase"],
+            _ionic_storage__WEBPACK_IMPORTED_MODULE_3__["Storage"]])
     ], TabsPage);
     return TabsPage;
 }());

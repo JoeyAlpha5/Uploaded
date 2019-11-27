@@ -1,3 +1,19 @@
+  
+@font-face{
+  font-family: 'helvetica';
+  src: url(../fonts/fonts/segoe-pro-cufonfonts/SegoePro-Regular.ttf);
+}
+
+@font-face{
+  font-family: 'helveticaB';
+  src: url(../fonts/fonts/segoe-pro-cufonfonts/SegoeProDisplay-Semibold.ttf);
+}
+
+
+p, span,ion-label,input{
+  font-family: 'helvetica' !important;
+}
+  
   #dp {
     border-radius: 50%;
     background-size:cover !important;
@@ -42,12 +58,21 @@ ion-input#uploadDesc{
   margin-top: 28px;
   margin-bottom: 22px;
   height: 80px;
-  margin-left: 15px;
+  background: #f7f7f7;
+  padding-left: 10px !important;
+  border-top: 8px solid white;
 }
 
 #uploadBtnDiv{
   width: 100%;
+  margin-bottom: 100px;
   text-align: -webkit-center;
+}
+
+ion-label#scheduleText {
+  margin-left: 15px;
+  font-size: 13px;
+  color: black;
 }
 
 #uploadImage ion-icon.md.hydrated {
@@ -93,6 +118,16 @@ div.options #label {
 ion-toggle#toggle {
   float: right;
   margin-top: 8px;
+}
+
+.schedulePostFor{
+  width: 100%;
+  margin-top: 20px;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+#publishPrompt{
+  font-size: 11px;
 }
 
 div#options {

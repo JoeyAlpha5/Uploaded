@@ -6,33 +6,57 @@
 
 <ion-content>
 
-    <ion-input (change)="changeListener($event)" type="file" accept="video/*" id="uploadDesc"></ion-input>
-    <ion-progress-bar *ngIf="displayLoading == true" id="uploadProgress" type="indeterminate"></ion-progress-bar>
-    <div id="uploadImage">
-      <ion-icon name="cloud-upload" id="uploadIcon"></ion-icon>
-      <p>Upload your video</p>
-      <span>Tap here to select a video from your device to</span>
-    </div>
-   <div id="options" class="options">
+  <ion-input (change)="changeListener($event)" type="file" accept="video/*" id="uploadDesc"></ion-input>
+  <ion-progress-bar *ngIf="displayLoading == true" id="uploadProgress" type="indeterminate"></ion-progress-bar>
+  <div id="uploadImage">
+    <ion-icon name="cloud-upload" id="uploadIcon"></ion-icon>
+    <p>Upload your video</p>
+    <span>Tap here to select a video from your device to</span>
+  </div>
+  <div id="options" class="options">
     <ion-label id="label">Add to your feed: </ion-label>
     <ion-toggle id="toggle" (ionChange)="addPlaylist($event)" color="dark"></ion-toggle>
   </div>
+  <ion-label id="scheduleText">Schedule Upload:</ion-label>
+  <div id="schedule">
+    <ion-item>
+      <ion-label id="publishPrompt">MMMM DD h:mm</ion-label>
+      <ion-datetime id="selectedMonthDay" displayFormat="MMMM DD" [(ngModel)]="todayDate" min="{{todayDate}}" placeholder="Select Date"></ion-datetime>
+      <ion-datetime id="selectedTime" displayFormat="h:mm A" [(ngModel)]="Time" placeholder="Select Time"></ion-datetime>
+    </ion-item>
+  </div>
   <div id="options">
-      <ion-label id="label">Music Genre: </ion-label>
-      <ion-select id="Select" okText="Okay" cancelText="Dismiss">
-        <ion-select-option value="HipHop">HipHop</ion-select-option>
-        <ion-select-option value="House">House</ion-select-option>
-        <ion-select-option value="Jazz">Jazz</ion-select-option>
-        <ion-select-option value="Indie">Indie</ion-select-option>
-        <ion-select-option value="Popp">Popp</ion-select-option>
-        <ion-select-option value="Rock">Rock</ion-select-option>
-      </ion-select>
-    </div>
+    <ion-label id="label">Music Genre: </ion-label>
+    <ion-select id="Select" okText="Okay" cancelText="Dismiss">
+      <ion-select-option value="HipHop">HipHop</ion-select-option>
+      <ion-select-option value="House">House</ion-select-option>
+      <ion-select-option value="Jazz">Jazz</ion-select-option>
+      <ion-select-option value="Indie">Indie</ion-select-option>
+      <ion-select-option value="Popp">Popp</ion-select-option>
+      <ion-select-option value="Rock">Rock</ion-select-option>
+    </ion-select>
+  </div>
 
-    <ion-input type="text" (ionBlur)="enableBottom()" (ionFocus)="disableBottom()" id="uploadDescription" placeholder="Upload description"></ion-input>
+  <ion-input type="text"  id="uploadDescription"
+    placeholder="Song Title"></ion-input>
 
-    <div id="uploadBtnDiv"><ion-button id="uploadBtn" (click)="upload()">Publish video</ion-button></div>
+  
+  <div id="taggedUsers">
+    <ion-chip>
+      <ion-label>{{ Tags }}</ion-label>
+    </ion-chip>
+  </div>
 
-    
+  <ion-input type="text" id="uploadTag" (ionChange)="getUsers()" placeholder="Tag a friend"></ion-input>
+  <ion-item button  *ngFor='let item of ( search_request | async)' (click)="SetTag(item.id,item.first_name)">
+    {{ item.first_name }}  {{ item.last_name }}
+  </ion-item>
+
+  
+  <div id="uploadBtnDiv">
+    <ion-button id="uploadBtn" (click)="upload()">Publish video</ion-button>
+  </div>
+
+
 
 </ion-content>

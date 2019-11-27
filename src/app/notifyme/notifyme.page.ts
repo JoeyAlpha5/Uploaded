@@ -103,7 +103,33 @@ export class NotifymePage implements OnInit {
     }
   }
 
-  updateNotification($event, type, value){
+  updateNotification(type, value){
+    console.log(type)
+    if(type == "like"){
+      this.like = JSON.parse(value);
+      console.log(this.like);
+    }else if(type == "follow"){
+      this.follow = JSON.parse(value);
+      console.log(this.follow);
+    } else if(type == "comment"){
+      this.comment = JSON.parse(value);
+      console.log(this.comment);
+    }else if(type == "repost"){
+      this.repost = JSON.parse(value);
+      console.log(this.repost);
+    }else if(type == "upload"){
+      this.upload = JSON.parse(value);
+      console.log(this.upload);
+    }else if(type == "tag"){
+      this.tag = JSON.parse(value);
+      console.log(this.tag);
+    }else if(type == "features"){
+      this.features = JSON.parse(value);
+      console.log(this.features);
+    }else{
+      this.dm = JSON.parse(value);
+      console.log(this.dm);
+    }
     this.storage.get('current_userID').then((val) => {
       this.updateNotifications = this.requests.UpdateIndividualNotifications(this.profile_url, val, type, value);
       this.updateNotifications.subscribe(x =>{

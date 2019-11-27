@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-icon name="arrow-back" id="backBtn" (click)="back()"></ion-icon>
+    <ion-title>{{ username }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+    <div id="followFollowing"> <div>Following</div>  <div>Followers</div> </div>
+
+    <div id="slideContent">
+
+      <ion-slides #slider [options]="slideOpts">
+
+          <ion-slide id="followingSlide"> 
+              <div *ngFor='let item of ( results | async)'>
+                  <ion-item  id="searchItem" (click)="viewProfile(item.id,item.email)" *ngIf="item.follower == false" button>
+                    <div id="dp" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + item.profile_image+ '.jpg)'}"></div>
+                    <p>{{ item.first_name + " "  + item.last_name }}<br/><span id="searchUsername">@{{ item.username }}</span> </p>
+                  </ion-item>
+                </div>
+          </ion-slide>
+
+
+          <ion-slide id="followingSlide"> 
+
+              <div *ngFor='let item of ( results | async)'>
+                  <ion-item  id="searchItem" (click)="viewProfile(item.id,item.email)" *ngIf="item.follower == true" button>
+                    <div id="dp" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + item.profile_image+ '.jpg)'}"></div>
+                    <p>{{ item.first_name + " "  + item.last_name }}<br/><span id="searchUsername">@{{ item.username }}</span> </p>
+                  </ion-item>
+                </div>
+
+
+          </ion-slide>
+
+      </ion-slides>
+
+    </div>
+</ion-content>

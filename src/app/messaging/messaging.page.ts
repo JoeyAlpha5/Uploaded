@@ -11,6 +11,8 @@ import * as $ from 'jquery';
 import { TabsPage } from '../tabs/tabs.page';
 import { MediaCapture, MediaFile, CaptureError,CaptureAudioOptions } from '@ionic-native/media-capture/ngx';
 import { Media } from '@ionic-native/media/ngx';
+import { Location } from '@angular/common';
+
 
 
 @Component({
@@ -31,7 +33,7 @@ export class MessagingPage implements OnInit {
   this_userID: Observable<any>;
   this_username: Observable<any>;
   chatUpload: Observable<any[]>;
-  constructor(private media: Media,private mediaCapture: MediaCapture,private fstorage: AngularFireStorage,private tabs: TabsPage,public toastController: ToastController,private statusBar: StatusBar,private storage: Storage,private database:AngularFireDatabase,private route: Router, private requests: RequestsService) { 
+  constructor(private location: Location,private media: Media,private mediaCapture: MediaCapture,private fstorage: AngularFireStorage,private tabs: TabsPage,public toastController: ToastController,private statusBar: StatusBar,private storage: Storage,private database:AngularFireDatabase,private route: Router, private requests: RequestsService) { 
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();
     this.tabs.bgColor = '#000000';
@@ -53,6 +55,9 @@ export class MessagingPage implements OnInit {
   }
 
 
+
+
+
   ionViewDidEnter() {
     // Put here the code you want to execute
     this.statusBar.overlaysWebView(false);
@@ -63,7 +68,7 @@ export class MessagingPage implements OnInit {
       let profile_url =  'https://uploaded.herokuapp.com/users/users';
       //profile_url = 'http://127.0.0.1:8000/users/users'
       if(val == undefined){
-        this.route.navigate(['']);
+        this.route.navigate(['login']);
       }else{
         this.storage.get('username').then((val)=>{
           this.this_username = val;
@@ -151,6 +156,10 @@ export class MessagingPage implements OnInit {
     },10);
   }
 
+  back(){
+    // this.tabs.bottom = true;
+    this.location.back();
+  }
 
   //send notifcation of new message
   sendMessageNotification(receiver,message, from){

@@ -24,8 +24,11 @@
     "@ionic-native/chooser": "^5.13.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/firebase-x": "^5.15.1",
+    "@ionic-native/keyboard": "^5.16.0",
     "@ionic-native/media": "^5.15.1",
     "@ionic-native/media-capture": "^5.15.1",
+    "@ionic-native/onesignal": "^5.16.0",
+    "@ionic-native/social-sharing": "^5.17.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.14.0",
     "@ionic/angular": "^4.8.1",
@@ -35,17 +38,17 @@
     "angularfire2": "^5.2.1",
     "cordova": "^9.0.0",
     "cordova-android": "8.1.0",
-    "cordova-browser": "6.0.0",
     "cordova-ios": "^5.0.1",
     "cordova-plugin-androidx": "^1.0.2",
     "cordova-plugin-androidx-adapter": "^1.1.0",
-    "cordova-plugin-cocoapod-support": "^1.6.2",
     "cordova-plugin-firebasex": "^6.1.0",
-    "cordova-plugin-ionic": "git+https://github.com/glebmachine/cordova-plugin-ionic.git#v4",
+    "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-media": "^5.0.3",
     "cordova-plugin-media-capture": "^3.0.3",
+    "cordova-plugin-x-socialsharing": "^5.6.2",
     "cordova-sqlite-storage": "^3.3.0",
     "core-js": "^2.5.4",
+    "es6-promise-plugin": "^4.2.2",
     "firebase": "^7.0.0",
     "hammerjs": "^2.0.8",
     "ionic": "^5.4.1",
@@ -53,6 +56,8 @@
     "ios-deploy": "^1.9.4",
     "jquery": "^3.4.1",
     "lab": "^18.0.2",
+    "ng-circle-progress": "^1.5.1",
+    "onesignal-cordova-plugin": "^2.7.0",
     "rxjs": "^6.5.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
@@ -101,16 +106,20 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-firebasex": {},
       "cordova-plugin-media-capture": {},
       "cordova-plugin-media": {
         "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
       },
-      "cordova-plugin-cocoapod-support": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-x-socialsharing": {
+        "ANDROID_SUPPORT_V4_VERSION": "24.1.1+",
+        "PHOTO_LIBRARY_ADD_USAGE_DESCRIPTION": "This app requires photo library access to function properly.",
+        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "This app requires photo library access to function properly."
+      }
     },
     "platforms": [
-      "browser",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

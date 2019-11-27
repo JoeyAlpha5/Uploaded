@@ -25,21 +25,34 @@
             <p id='bio'>{{ profile.bio }}</p>
             <a *ngIf="profile.website != '' " href="{{ profile.website }}" id="link"><ion-icon name="globe" id="globe"></ion-icon> {{ profile.website }}</a>
             <span id="location" *ngIf="profile.location != '' " ><ion-icon name="pin" id="globe"></ion-icon>{{ profile.location }}</span>
-            <p id='Following'> <span><b>Followers:</b><br/> <font id="Followers">{{ profile.followers }}</font></span>  <span><b>Following: </b><br/> <font id="Followings">{{ profile.following }}</font></span>  </p>
+            <p id='Following'> <span (click)="follow(profile.username,1)"><b>Followers:</b><br/> <font id="Followers">{{ profile.followers }}</font></span>  <span (click)="follow(profile.username,0)"><b>Following: </b><br/> <font id="Followings">{{ profile.following }}</font></span>  </p>
         </div>
-         <div id="followDiv" *ngIf="profile.already_following == false"><p id='followBtn' (click)="Follow(profile.id,'Follow')">Follow</p>   <ion-icon name="mail" id='messageBtn' (click)="Message(profile.first_name, profile.last_name,profile.username,profile.id)">Message</ion-icon></div>
-        <div id="followDiv" *ngIf="profile.already_following == true"><p id='followBtn' (click)="Follow(profile.id,'Unfollow')">Unfollow</p> <ion-icon name="mail" id='messageBtn' (click)="Message(profile.first_name, profile.last_name,profile.username,profile.id)">Message</ion-icon></div>
+         <div id="followDiv" *ngIf="following == false"><p id='followBtn' (click)="Follow(profile.id,'Follow')">Follow</p>   <ion-icon name="mail" id='messageBtn' (click)="Message(profile.first_name, profile.last_name,profile.username,profile.id)">Message</ion-icon></div>
+        <div id="followDiv" *ngIf="following == true"><p id='followBtn' (click)="Follow(profile.id,'Unfollow')">Unfollow</p> <ion-icon name="mail" id='messageBtn' (click)="Message(profile.first_name, profile.last_name,profile.username,profile.id)">Message</ion-icon></div>
         
   
-        <div id='uploadedHeading'>Uploaded playlists</div>
-        <div id="playlists" *ngFor='let item of ( Playlists | async)'>
-            <div id="playlist" *ngIf="item.playlisted == true" [ngStyle]="{ 'background': 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
-    
-              <div id="playlistPreview" (click)="viewPost(item.id)">
-                <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
+        <div id='uploadedHeading'><span>Playlisted</span>  <span>Reposts</span> </div>
+        <ion-slides>
+            <ion-slide id="postCont"> 
+              <div id="playlists" *ngFor='let item of ( Playlists | async)' >
+                <div id="playlist" *ngIf="item.playlisted == true"  [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
+                  <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
+                    <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
+                  </div>
+                </div> 
               </div>
-            </div> 
-        </div>
+            </ion-slide>
+
+            <ion-slide id="tagsCont">
+                <div id="playlists" *ngFor='let item of ( Playlists | async)' >
+                    <div id="playlist" *ngIf="item.reposted == true"  [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
+                      <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
+                        <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
+                      </div>
+                    </div> 
+                  </div>
+            </ion-slide>
+        </ion-slides>
     </div>
    
   </ion-content>

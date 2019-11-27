@@ -89,8 +89,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _services_requests_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/requests.service */ "./src/app/services/requests.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
-
 
 
 
@@ -116,13 +114,6 @@ let LoginPage = class LoginPage {
     }
     ngOnInit() {
     }
-    Notifications() {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            this.requests.listenNotifications().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["tap"])(msg => {
-                const toast = this.toast.create({ message: msg.body, duration: 3000 }).then(alert => alert.present());
-            })).subscribe();
-        });
-    }
     ionViewDidEnter() {
         // Put here the code you want to execute
         this.statusBar.overlaysWebView(false);
@@ -136,10 +127,6 @@ let LoginPage = class LoginPage {
             //profile_url = 'http://127.0.0.1:8000/users/users'
             if (val == undefined) {
                 jquery__WEBPACK_IMPORTED_MODULE_3__(".login").show();
-                //get user token for push
-                this.requests.getToken();
-                //listen for notififcations
-                this.Notifications();
             }
             else {
                 this.route.navigate(['/home/tabs/tab1']);

@@ -81,6 +81,21 @@ div#followDiv {
 
 }
 
+div#uploadedHeading span {
+  width: 50%;
+  float: left;
+  border-right: 1px solid #c7c6c6;
+}
+
+
+#postCont{
+  display: block;
+}
+
+div#playlists:empty {
+  display: none;
+}
+
 p#followBtn {
   margin: 0px;
   padding: 0px;
@@ -157,22 +172,26 @@ p#messageBtn {
   cursor: pointer;
 }
 
-
+#tagsCont{
+  display: block;
+}
 
 
 div#playlists {
-  width: 100%;
+  width: 33%;
   height: auto;
-  position: absolute;
   padding-bottom: 20px;
+  top: 0;
+  float: left;
+  left: 0;
+
 
   div#playlist {
-    width: 32%;
+    width: 100%;
     height: 115px;
-    float: left;
     background-size: cover !important;
-    margin-left:  1px;
-}
+    left: 0;
+  }
 }
 
 
