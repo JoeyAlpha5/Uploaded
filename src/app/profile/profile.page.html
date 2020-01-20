@@ -14,11 +14,11 @@
         <div id="bannerPlaceholder"  *ngIf="profile.cover == undefined">
         </div>
 
-        <div id="bannerPlaceholder" *ngIf="profile.cover != undefined" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.cover+ '.jpg)'}">
+        <div id="bannerPlaceholder" *ngIf="profile.cover != undefined" [ngStyle]="{'background-image': 'url(https://uploadedstream.storage.googleapis.com/' + profile.cover+ ')'}">
         </div>
   
         <div id='profileBlock'>
-             <div id="outerCircle" (click)="viewUserFeed(profile.username)" *ngIf="profile.image != undefined"><div id="circle"><div  id='dp' [ngStyle]="{ 'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/'+profile.image+'.jpg)'}" ></div></div></div>
+             <div id="outerCircle" (click)="viewUserFeed(profile.username)" *ngIf="profile.image != undefined"><div id="circle"><div  id='dp' [ngStyle]="{ 'background-image': 'url(https://uploadedstream.storage.googleapis.com/'+profile.image+')'}" ></div></div></div>
              <div id="outerCircle" (click)="viewUserFeed(profile.username)" *ngIf="profile.image == undefined"><div id="circle"><div *ngIf="profile.image == undefined" id='dp'><ion-icon id="profileIocn" name="contact" *ngIf="profile.image == undefined"></ion-icon>  </div></div></div>
             <p id='username'>{{ profile.username }} </p>
             <!--<p id='Posts'>{{ profile.total_posts }} Uploaded playlists</p>-->
@@ -35,7 +35,7 @@
         <ion-slides>
             <ion-slide id="postCont"> 
               <div id="playlists" *ngFor='let item of ( Playlists | async)' >
-                <div id="playlist" *ngIf="item.playlisted == true"  [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
+                <div id="playlist" *ngIf="item.playlisted == true"  [ngStyle]="{ background: 'url(https://uploadedstream.storage.googleapis.com/' + item.post_file + ')'}" >
                   <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
                     <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
                   </div>
@@ -45,7 +45,7 @@
 
             <ion-slide id="tagsCont">
                 <div id="playlists" *ngFor='let item of ( Playlists | async)' >
-                    <div id="playlist" *ngIf="item.reposted == true"  [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
+                    <div id="playlist" *ngIf="item.reposted == true"  [ngStyle]="{ background: 'url(https://uploadedstream.storage.googleapis.com/' + item.post_file + ')'}" >
                       <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
                         <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
                       </div>

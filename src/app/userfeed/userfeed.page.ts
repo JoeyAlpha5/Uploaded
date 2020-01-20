@@ -200,7 +200,7 @@ export class UserfeedPage {
             console.log(users_post);
             let post_id = users_post[0].post_id;
             console.log(post_id);
-            let video_file =  "https://res.cloudinary.com/uploaded/video/upload/q_auto:low/"+users_post[0].file+".mp4#t="+users_post[0].start+"";
+            let video_file =  "https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/"+users_post[0].file+"?alt=media#t="+users_post[0].start+"";
             let post_description = users_post[0].description;
 
             $("#"+slideNum+"videobsourcef").attr("src",video_file);

@@ -18,10 +18,6 @@ var map = {
 		"default~login-login-module~messaging-messaging-module~post-view-post-view-module~settings-settings-m~b824623f",
 		"login-login-module"
 	],
-	"./main/main.module": [
-		"./src/app/main/main.module.ts",
-		"main-main-module"
-	],
 	"./messaging-list/messaging-list.module": [
 		"./src/app/messaging-list/messaging-list.module.ts",
 		"messaging-list-messaging-list-module"
@@ -549,6 +545,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var routes = [
+    { path: '', loadChildren: './login/login.module#LoginPageModule' },
     // { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
     {
         path: 'home',
@@ -566,7 +563,6 @@ var routes = [
     { path: 'notifications', loadChildren: './notifications/notifications.module#NotificationsPageModule' },
     { path: 'notifyme', loadChildren: './notifyme/notifyme.module#NotifymePageModule' },
     { path: 'following', loadChildren: './following/following.module#FollowingPageModule' },
-    { path: '', loadChildren: './main/main.module#MainPageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -761,6 +757,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @ionic-native/keyboard/ngx */ "./node_modules/@ionic-native/keyboard/ngx/index.js");
 /* harmony import */ var _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @ionic-native/onesignal/ngx */ "./node_modules/@ionic-native/onesignal/ngx/index.js");
 /* harmony import */ var _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @ionic-native/social-sharing/ngx */ "./node_modules/@ionic-native/social-sharing/ngx/index.js");
+/* harmony import */ var _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @ionic-native/http/ngx */ "./node_modules/@ionic-native/http/ngx/index.js");
+/* harmony import */ var _ionic_native_Camera_ngx__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @ionic-native/Camera/ngx */ "./node_modules/@ionic-native/Camera/ngx/index.js");
+/* harmony import */ var _ionic_native_File_ngx__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @ionic-native/File/ngx */ "./node_modules/@ionic-native/File/ngx/index.js");
+/* harmony import */ var _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @ionic-native/ionic-webview/ngx */ "./node_modules/@ionic-native/ionic-webview/ngx/index.js");
+/* harmony import */ var _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @ionic-native/file-path/ngx */ "./node_modules/@ionic-native/file-path/ngx/index.js");
 
 
 
@@ -786,6 +787,11 @@ __webpack_require__.r(__webpack_exports__);
 //import { AngularCropperjsModule } from 'angular-cropperjs';
 
 // Import ng-circle-progress
+
+
+
+
+
 
 var CustomHammerConfig = /** @class */ (function (_super) {
     tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](CustomHammerConfig, _super);
@@ -822,6 +828,12 @@ var AppModule = /** @class */ (function () {
                 _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_20__["Keyboard"],
                 _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_21__["OneSignal"],
                 _ionic_native_social_sharing_ngx__WEBPACK_IMPORTED_MODULE_22__["SocialSharing"],
+                { provide: angularfire2_storage__WEBPACK_IMPORTED_MODULE_13__["StorageBucket"], useValue: 'gs://uploaded-9719b.appspot.com/' },
+                _ionic_native_http_ngx__WEBPACK_IMPORTED_MODULE_23__["HTTP"],
+                _ionic_native_Camera_ngx__WEBPACK_IMPORTED_MODULE_24__["Camera"],
+                _ionic_native_File_ngx__WEBPACK_IMPORTED_MODULE_25__["File"],
+                _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_26__["WebView"],
+                _ionic_native_file_path_ngx__WEBPACK_IMPORTED_MODULE_27__["FilePath"],
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicRouteStrategy"] },
                 { provide: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["HAMMER_GESTURE_CONFIG"], useClass: CustomHammerConfig },
             ],
@@ -982,9 +994,9 @@ var RequestsService = /** @class */ (function () {
             return results["Response"];
         }));
     };
-    RequestsService.prototype.Upload = function (url, user_email, file, description, genre, playlisted, publishDay, tags) {
+    RequestsService.prototype.Upload = function (url, user_email, file_name, description, genre, playlisted, publishDay, tags, duration) {
         var postData = new FormData();
-        postData.append('file', file);
+        postData.append('file', file_name);
         postData.append('type', 'upload');
         postData.append('email', user_email);
         postData.append('description', description);
@@ -992,6 +1004,7 @@ var RequestsService = /** @class */ (function () {
         postData.append('playlisted', playlisted);
         postData.append('publish', publishDay);
         postData.append("tags", tags);
+        postData.append("duration", duration);
         return this.http.post(url, postData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (results) {
             console.log("Results", results);
             return results["newly created post_id"];

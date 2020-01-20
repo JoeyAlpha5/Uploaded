@@ -30,7 +30,7 @@
   <div *ngIf="artists == true">
     <div *ngFor='let item of ( results | async)'>
       <ion-item  id="searchItem" button *ngIf="item.id != userID" (click)="viewProfile(item.id,item.email)">
-        <div id="dp" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + item.image+ '.jpg)'}"></div>
+        <div id="dp" [ngStyle]="{'background-image': 'url(https://uploadedstream.storage.googleapis.com/' + item.image+ ')'}"></div>
         <p>{{ item.first_name + " "  + item.last_name }}<br/><span id="searchUsername">@{{ item.username }}</span> </p>
       </ion-item>
     </div>
@@ -47,13 +47,13 @@
   <ion-content *ngIf="displaySearchVideos == true">
     <div id="oneBigOne" (click)="viewPost(one.username)"  *ngFor='let one of ( oneSearchContent | async)'>
       <video class="searchVids" playsinline webkit-playsinline loop [muted]="true"  autoplay>
-        <source src="https://res.cloudinary.com/uploaded/video/upload/v1567818053/{{one.file}}.mp4" type="video/mp4">
+        <source src="https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{one.file}}?alt=media" type="video/mp4">
       </video>
     </div>
 
     <div id="playlist" (click)="viewPost(item.username)" *ngFor='let item of ( searchContent | async)'>
       <video class="searchVids" playsinline webkit-playsinline loop [muted]="true"  autoplay>
-        <source src="https://res.cloudinary.com/uploaded/video/upload/v1567818053/{{item.file }}.mp4" type="video/mp4">
+        <source src="https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{item.file }}?alt=media" type="video/mp4">
       </video>
     </div> 
   </ion-content>

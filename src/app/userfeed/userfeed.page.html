@@ -8,10 +8,9 @@
         (swipeup)="onSwipeUp( item.user_id,item.user_email,i )">
         <div id="liveDot"></div>
         <div id="streamIcon">Stream</div>
-        <video playsinline webkit-playsinline class="videobcg" (ended)="getNext(item.username,i)" id="{{i}}videobcgf"
-          poster="https://res.cloudinary.com/uploaded/video/upload/v1567818053/{{ item.file }}.jpg">
+        <video playsinline webkit-playsinline class="videobcg" (ended)="getNext(item.username,i)" id="{{i}}videobcgf">
           <source id="{{i}}videobsource"
-            src="https://res.cloudinary.com/uploaded/video/upload/q_auto:low/{{ item.file }}.mp4#t={{ item.start }}"
+            src="https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{ item.file }}?alt=media#t={{ item.start }}"
             type="video/mp4">
         </video>
         <div id="{{i}}FirstPostData" *ngIf="display_firsts == true">
@@ -96,7 +95,7 @@
             <circle id="{{i}}Circle" cx="52" cy="52" r="50" fill="transparent" stroke-linecap="round" stroke-width="4" stroke-dashoffset="387.69908169872417" class="_3yudO" stroke="white" stroke-width="3"></circle>
           </svg>
           <div class="circle" (click)="onSwipeUp( item.user_id,item.user_email,i )" id="image"
-            [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/'+ item.image +'.jpg)'}">
+            [ngStyle]="{'background-image': 'url(https://uploadedstream.storage.googleapis.com/'+ item.image +')'}">
             <ion-icon id="profileIocn" name="contact" *ngIf="item.image == 'none'"></ion-icon>
           </div>
           <span (click)="onSwipeUp( item.user_id,item.user_email,i )">@{{ item.username }}</span>

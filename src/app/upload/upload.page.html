@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Upload</ion-title>
+    <ion-title>Upload Video</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
-  <ion-input (change)="changeListener($event)" type="file" accept="video/*" id="uploadDesc"></ion-input>
-  <ion-progress-bar *ngIf="displayLoading == true" id="uploadProgress" type="indeterminate"></ion-progress-bar>
-  <div id="uploadImage">
+  <ion-progress-bar id="progressBar" value="{{progress}}"></ion-progress-bar>
+  <ion-input (change)="changeListener($event)" type="file"  id="uploadDesc" accept="video/*"></ion-input>
+  <!-- <div id="uploadImage" (click)="selectVideo()"> -->
+    <div id="uploadImage">
     <ion-icon name="cloud-upload" id="uploadIcon"></ion-icon>
     <p>Upload your video</p>
     <span>Tap here to select a video from your device to</span>
@@ -47,16 +47,31 @@
     </ion-chip>
   </div>
 
-  <ion-input type="text" id="uploadTag" (ionChange)="getUsers()" placeholder="Tag a friend"></ion-input>
+  <ion-input type="text" id="uploadTag" (ionChange)="getUsers()" placeholder="Tag friends"></ion-input>
   <ion-item button  *ngFor='let item of ( search_request | async)' (click)="SetTag(item.id,item.first_name)">
     {{ item.first_name }}  {{ item.last_name }}
   </ion-item>
 
   
   <div id="uploadBtnDiv">
-    <ion-button id="uploadBtn" (click)="upload()">Publish video</ion-button>
+
+      <ion-item *ngFor="let img of videos_array; index as pos" text-wrap>
+        <ion-label>
+            Publish upload
+        </ion-label>
+        <ion-button slot="end" fill="clear" (click)="startUpload(img,pos)">
+          <ion-icon slot="icon-only" name="cloud-upload"></ion-icon>
+        </ion-button>
+        <ion-button slot="end" fill="clear" (click)="deleteImage(img, pos)">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
+    <!-- <ion-button id="uploadBtn" (click)="upload()">Publish video</ion-button> -->
   </div>
 
+  <div id="videoToUpload">
 
+  </div>
+  
 
 </ion-content>

@@ -16,7 +16,7 @@
     <div id="bannerPlaceholder" *ngIf="profile.cover == undefined">
     </div>
 
-    <div id="bannerPlaceholder"*ngIf="profile.cover != undefined"  [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.cover+ '.jpg)'}">
+    <div id="bannerPlaceholder"*ngIf="profile.cover != undefined"  [ngStyle]="{'background-image': 'url(https://uploadedstream.storage.googleapis.com/' + profile.cover+ ')'}">
     </div>
 
 <!--    <div id="croppImageDiv" *ngIf="myImage">
@@ -25,7 +25,7 @@
     </div>-->
 
       <div id='profileBlock'>
-          <div id="outerCircle" (click)="viewUserFeed(profile.username)" *ngIf="profile.image != undefined"><div id="circle"> <div id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" ></div> </div></div>
+          <div id="outerCircle" (click)="viewUserFeed(profile.username)" *ngIf="profile.image != undefined"><div id="circle"> <div id='dp' [ngStyle]="{ background: 'url(https://uploadedstream.storage.googleapis.com/' + profile.image+ ')'}" ></div> </div></div>
           <div id="outerCircle" (click)="viewUserFeed(profile.username)" *ngIf="profile.image == undefined"><div id="circle"> <div id='dp'></div> </div></div>
           <p id='username'>{{ profile.username }} </p>
           <!--<p id='Posts'>{{ profile.total_posts }} Uploaded playlists</p>-->
@@ -40,7 +40,7 @@
         <ion-slides>
             <ion-slide id="postCont"> 
               <div id="playlists" *ngFor='let item of ( Playlists | async)' >
-                <div id="playlist" *ngIf="item.playlisted == true"  [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
+                <div id="playlist" *ngIf="item.playlisted == true"  [ngStyle]="{ background: 'url(https://res.cloudinary.com/drm3otayc/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
                   <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
                     <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
                   </div>
@@ -50,7 +50,7 @@
 
             <ion-slide id="tagsCont">
                 <div id="playlists" *ngFor='let item of ( Playlists | async)' >
-                    <div id="playlist" *ngIf="item.reposted == true"  [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
+                    <div id="playlist" *ngIf="item.reposted == true"  [ngStyle]="{ background: 'url(https://res.cloudinary.com/drm3otayc/video/upload/v1567818053/' + item.post_file + '.jpg)'}" >
                       <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
                         <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
                       </div>
@@ -64,7 +64,7 @@
   </div>
 
   <!--<div *ngFor='let profile of ( results | async)' id="editProfile">
-    <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" ><div>Edit</div></div>
+    <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/drm3otayc/image/upload/v1567818053/' + profile.image+ '.jpg)'}" ><div>Edit</div></div>
     <div *ngIf="profile.image == undefined" id='dp'><div>Edit</div></div><br>
     <span>Username: </span><br>
     <input type="text" id="user_name" value="{{ profile.username }}"></ion-input><br><br>
@@ -78,7 +78,7 @@
   </div>-->
 
   <ion-card *ngFor='let profile of ( results | async)' id="editProfile">
-    <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" >
+    <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/drm3otayc/image/upload/v1567818053/' + profile.image+ '.jpg)'}" >
       <div>Upload profile picture</div>
       <ion-input type="file" id="uploadProfile" (change)="changeListener($event)" type="file" accept="image/*"></ion-input>
     </div>

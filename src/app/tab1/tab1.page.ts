@@ -179,7 +179,7 @@ export class Tab1Page {
             console.log(users_post);
             let post_id = users_post[0].post_id;
             console.log(post_id);
-            let video_file =  "https://res.cloudinary.com/uploaded/video/upload/q_auto:low/"+users_post[0].file+".mp4#t="+users_post[0].start+"";
+            let video_file =  "https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/"+users_post[0].file+"?alt=media#t="+users_post[0].start+"";
             let post_description = users_post[0].description;
 
             $("#"+slideNum+"videobsource").attr("src",video_file);
@@ -709,6 +709,13 @@ export class Tab1Page {
         }else{
             console.log(this.email);
             this.results =  this.requests.getFeed(profile_url, this.email); 
+            this.results.subscribe(x=>{
+              console.log("feed result", x.length);
+              if(x.length == 0){
+                this.tabs.bgColor = 'black';
+                $("#tab1Content").append("<p style='font-size:15px; color:grey;text-align:-webkit-center;margin-top:20%;'>Feed looks empty, follow others to start seeing content<br><ion-icon name='eye' style='margin-top:16px;font-size:30px;'></ion-icon></p>");
+              }
+            });
             this.setFirstViews();
             //listend for page load to display video count
             let lstLoad = this.ListenLoad;

@@ -9,10 +9,10 @@
     <ion-progress-bar *ngIf="displayLoading == true" id="uploadProgress" type="indeterminate"></ion-progress-bar>
     <p id="notifcationsHeading">Profile Setiings</p>
     <ion-card *ngFor='let profile of ( results | async)' id="editProfile">
-    <div id="coverImg" *ngIf="profile.cover != undefined" [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.cover+ '.jpg)'}">
+    <div id="coverImg" *ngIf="profile.cover != undefined" [ngStyle]="{ background: 'url(https://res.cloudinary.com/drm3otayc/image/upload/v1567818053/' + profile.cover+ '.jpg)'}">
        <ion-input (change)="changeImageListener($event)" placeholder="Upload Cover Image" type="file" accept="image/*" id="uploadDesc"></ion-input>
     </div>
-    <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + profile.image+ '.jpg)'}" >
+    <div *ngIf="profile.image != undefined" id='dp' [ngStyle]="{ background: 'url(https://res.cloudinary.com/drm3otayc/image/upload/v1567818053/' + profile.image+ '.jpg)'}" >
       <ion-icon name="camera" id="cameraIcon"></ion-icon>
       <ion-input type="file" id="uploadProfile" (change)="changeListener($event)" type="file" accept="image/*"></ion-input>
     </div>

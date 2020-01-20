@@ -15,7 +15,7 @@
           <ion-slide id="followingSlide"> 
               <div *ngFor='let item of ( results | async)'>
                   <ion-item  id="searchItem" (click)="viewProfile(item.id,item.email)" *ngIf="item.follower == false" button>
-                    <div id="dp" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + item.profile_image+ '.jpg)'}"></div>
+                    <div id="dp" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/drm3otayc/image/upload/v1567818053/' + item.profile_image+ '.jpg)'}"></div>
                     <p>{{ item.first_name + " "  + item.last_name }}<br/><span id="searchUsername">@{{ item.username }}</span> </p>
                   </ion-item>
                 </div>
@@ -26,7 +26,7 @@
 
               <div *ngFor='let item of ( results | async)'>
                   <ion-item  id="searchItem" (click)="viewProfile(item.id,item.email)" *ngIf="item.follower == true" button>
-                    <div id="dp" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/uploaded/image/upload/v1567818053/' + item.profile_image+ '.jpg)'}"></div>
+                    <div id="dp" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/drm3otayc/image/upload/v1567818053/' + item.profile_image+ '.jpg)'}"></div>
                     <p>{{ item.first_name + " "  + item.last_name }}<br/><span id="searchUsername">@{{ item.username }}</span> </p>
                   </ion-item>
                 </div>

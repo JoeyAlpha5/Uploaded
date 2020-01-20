@@ -13,7 +13,19 @@
 p, span,ion-label,input{
   font-family: 'helvetica' !important;
 }
-  
+
+div#videoToUpload {
+  height: 50px;
+  overflow: hidden;
+  opacity: 0;
+}
+ion-progress-bar#progressBar {
+  position: fixed;
+  top: 0;
+  margin-top: 55px;
+}
+
+
   #dp {
     border-radius: 50%;
     background-size:cover !important;

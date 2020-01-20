@@ -11,7 +11,7 @@
 
   <div id="imageBox">
     <ion-icon name="close" id="closeIcon" (click)="closeImage()"></ion-icon>
-    <img src="https://res.cloudinary.com/uploaded/image/upload/v1567818053/{{ imageToView }}"/>
+    <img src="https://res.cloudinary.com/drm3otayc/image/upload/v1567818053/{{ imageToView }}"/>
   </div>
 
   <div id="chatsContainer" >
@@ -19,13 +19,13 @@
         <span id="sentByMe" *ngIf='message.sender == this_username'>{{ message.sender }}</span>
         <p id="messageSentByMe" *ngIf='message.sender == this_username'>{{message.message }}</p>
         <div id="rightImage" *ngIf='message.sender == this_username'>
-          <img *ngIf='message.file' (click)="viewImage(message.file)" src="https://res.cloudinary.com/uploaded/image/upload/v1567818053/{{ message.file }}" />
+          <img *ngIf='message.file' (click)="viewImage(message.file)" src="https://res.cloudinary.com/drm3otayc/image/upload/v1567818053/{{ message.file }}" />
         </div>
 
       <span id="notSentByMe" *ngIf='message.sender != this_username'>{{ message.sender }}</span>
       <p id="messageNotSentByMe" *ngIf='message.sender != this_username'>{{message.message }}</p>
       <div id="leftImage" *ngIf='message.sender != this_username'>
-        <img *ngIf='message.file' (click)="viewImage(message.file)" src="https://res.cloudinary.com/uploaded/image/upload/v1567818053/{{ message.file }}" />
+        <img *ngIf='message.file' (click)="viewImage(message.file)" src="https://res.cloudinary.com/drm3otayc/image/upload/v1567818053/{{ message.file }}" />
       </div>
     </div>
   </div>

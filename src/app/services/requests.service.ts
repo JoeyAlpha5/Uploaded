@@ -145,9 +145,10 @@ export class RequestsService {
   }
 
 
-  Upload(url,user_email,file, description,genre,playlisted,publishDay,tags): Observable<any> {
+
+  Upload(url,user_email,file_name, description,genre,playlisted,publishDay,tags,duration): Observable<any> {
     let postData = new FormData();
-    postData.append('file', file);
+    postData.append('file', file_name);
     postData.append('type', 'upload');
     postData.append('email', user_email);
     postData.append('description', description);
@@ -155,6 +156,7 @@ export class RequestsService {
     postData.append('playlisted', playlisted);
     postData.append('publish', publishDay);
     postData.append("tags", tags);
+    postData.append("duration", duration);
     return this.http.post(url, postData).pipe(
       map(results => {
         console.log("Results",results);
