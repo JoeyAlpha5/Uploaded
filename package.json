@@ -39,7 +39,6 @@
     "@ionic/angular": "^4.8.1",
     "@ionic/lab": "^2.0.10",
     "@ionic/storage": "^2.2.0",
-    "angular-cropperjs": "^0.1.5",
     "angularfire2": "^5.2.1",
     "cordova": "^9.0.0",
     "cordova-android": "8.1.0",

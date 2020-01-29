@@ -9,7 +9,7 @@ import { ToastController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { TabsPage } from '../tabs/tabs.page';
 import { Platform } from '@ionic/angular';
-import { AngularCropperjsComponent } from 'angular-cropperjs';
+// import { AngularCropperjsComponent } from 'angular-cropperjs';
 
 
 
@@ -31,12 +31,12 @@ export class SettingsPage implements OnInit {
   bio: Observable<any>;
   profile_url =  'https://uploaded.herokuapp.com/users/users';
 
-  @ViewChild('angularCropper',{static: false}) public angularCropper: AngularCropperjsComponent;
-  cropperOptions: any;
-  croppedImage = null;
-  myImage = null;
-  scaleValX = 1;
-  scaleValY = 1;
+  // @ViewChild('angularCropper',{static: false}) public angularCropper: AngularCropperjsComponent;
+  // cropperOptions: any;
+  // croppedImage = null;
+  // myImage = null;
+  // scaleValX = 1;
+  // scaleValY = 1;
 
   constructor(private platform: Platform,private tabs: TabsPage,private statusBar: StatusBar,public toastController: ToastController,private storage: Storage,private requests: RequestsService,private route: Router,public loadingController: LoadingController ) { 
     this.statusBar.overlaysWebView(false);
@@ -46,15 +46,15 @@ export class SettingsPage implements OnInit {
       this.route.navigate(['/home/tabs/tab4'])
     });
 
-    this.cropperOptions = {
-      dragMode: 'crop',
-      aspectRatio: 3,
-      autoCrop: true,
-      movable: true,
-      zoomable: false,
-      scalable: false,
-      autoCropArea: 1,
-    };
+    // this.cropperOptions = {
+    //   dragMode: 'crop',
+    //   aspectRatio: 3,
+    //   autoCrop: true,
+    //   movable: true,
+    //   zoomable: false,
+    //   scalable: false,
+    //   autoCropArea: 1,
+    // };
   }
 
   ngOnInit() {
@@ -87,11 +87,7 @@ export class SettingsPage implements OnInit {
           this.bio = x[0].bio;
           this.username = x[0].username;
         });
-        // this.results.subscribe(profile => {
-        //   console.log("profile", profile);
-        //   this.renderProfile(profile);
-  
-        // });
+
       }
     });
   }
@@ -117,7 +113,6 @@ export class SettingsPage implements OnInit {
     console.log(input);
     var profile_url =  'https://uploaded.herokuapp.com/users/users';
     this.places = this.requests.getPlaces(profile_url,input);
-    //this.places.subscribe();
   }
 
   SetLocation(description){
@@ -135,7 +130,6 @@ export class SettingsPage implements OnInit {
     let bio = this.bio;
     console.log("username and first name ",user_name,first_name, location,bio,website);
     var profile_url =  'https://uploaded.herokuapp.com/users/users';
-    //var profile_url = 'http://127.0.0.1:8000/users/users'
     this.storage.get('mail').then((Email) =>{
       let update = this.requests.updateProfile(profile_url, Email, user_name, first_name, website, bio,location,this.file); 
 
@@ -156,8 +150,6 @@ export class SettingsPage implements OnInit {
     });
     await loading.present();
 
-   // const { role, data } = await loading.onDidDismiss();
-
     console.log('Loading dismissed!');
   }
 
@@ -174,10 +166,8 @@ export class SettingsPage implements OnInit {
     }else{
       this.storage.get("mail").then((user_email)=>{
         let upload = this.requests.UploadCoverImage(this.profile_url,user_email,this.fil);
-        //this.presentLoading("Loading, please wait...");
         upload.subscribe(x => {
-          this.cropImage(x);
-          //  this.route.navigate(['/home/tabs/tab4']);
+          // this.cropImage(x);
            console.log(x)
            this.displayLoading = false;
         
@@ -196,99 +186,77 @@ export class SettingsPage implements OnInit {
 
 
   //cropping
-  cropImage(image){
-    this.myImage = 'https://res.cloudinary.com/uploaded/image/upload/v1567818053/'+image+'.png';
-  }
-
-  //crop options
-  reset() {
-    this.angularCropper.cropper.reset();
-  }
- 
-  clear() {
-    this.angularCropper.cropper.clear();
-  }
- 
-  rotate() {
-    this.angularCropper.cropper.rotate(90);
-  }
- 
-  zoom(zoomIn: boolean) {
-    let factor = zoomIn ? 0.1 : -0.1;
-    this.angularCropper.cropper.zoom(factor);
-  }
- 
-  scaleX() {
-    this.scaleValX = this.scaleValX * -1;
-    this.angularCropper.cropper.scaleX(this.scaleValX);
-  }
- 
-  scaleY() {
-    this.scaleValY = this.scaleValY * -1;
-    this.angularCropper.cropper.scaleY(this.scaleValY);
-  }
- 
-  move(x, y) {
-    this.angularCropper.cropper.move(x, y);
-  }
-
-
-  // downloadImage(data, filename = 'untitled.jpeg'){
-  //   var a = document.createElement('a');
-  //   a.href = data;
-  //   a.download = filename;
-  //   this.storage.get("mail").then((user_email)=>{
-  //     let upload = this.requests.UploadCroppedCoverImage(this.profile_url,user_email,data.substring(23));
-  //      upload.subscribe(x => {
-  //        this.cropImage(x);
-  //         this.ionViewDidEnter();
-  //         console.log(x)
-  //         this.displayLoading = false;
-  //       });
-  //     });
-
-  //   // document.body.appendChild(a);
-  //   // a.click();
+  // cropImage(image){
+  //   this.myImage = 'https://res.cloudinary.com/uploaded/image/upload/v1567818053/'+image+'.png';
   // }
 
-  save() {
-      let croppedImgB64String: string = this.angularCropper.cropper.getCroppedCanvas().toDataURL('image/jpeg', (100 / 100));
-      this.croppedImage = croppedImgB64String;
-      console.log(this.croppedImage);
+  // //crop options
+  // reset() {
+  //   this.angularCropper.cropper.reset();
+  // }
+ 
+  // clear() {
+  //   this.angularCropper.cropper.clear();
+  // }
+ 
+  // rotate() {
+  //   this.angularCropper.cropper.rotate(90);
+  // }
+ 
+  // zoom(zoomIn: boolean) {
+  //   let factor = zoomIn ? 0.1 : -0.1;
+  //   this.angularCropper.cropper.zoom(factor);
+  // }
+ 
+  // scaleX() {
+  //   this.scaleValX = this.scaleValX * -1;
+  //   this.angularCropper.cropper.scaleX(this.scaleValX);
+  // }
+ 
+  // scaleY() {
+  //   this.scaleValY = this.scaleValY * -1;
+  //   this.angularCropper.cropper.scaleY(this.scaleValY);
+  // }
+ 
+  // move(x, y) {
+  //   this.angularCropper.cropper.move(x, y);
+  // }
 
-      // this.downloadImage(croppedImgB64String, 'my-canvas.jpeg');
-      this.dataURLtoFile(croppedImgB64String, 'my-canvas.jpeg');
-  }
 
-  dataURLtoFile(dataurl, filename) {
-    // var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-    //     bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    // while(n--){
-    //     u8arr[n] = bstr.charCodeAt(n);
-    // }
-    var blobBin = atob(dataurl.split(',')[1]);
-    var array = [];
-    for(var i = 0; i < blobBin.length; i++) {
-        array.push(blobBin.charCodeAt(i));
-    }
-    var file=new Blob([new Uint8Array(array)], {type: 'image/png'});
 
-    // let file  = new File([u8arr], filename, {type:mime});
-    this.storage.get("mail").then((user_email)=>{
-      let upload = this.requests.UploadCroppedCoverImage(this.profile_url,user_email,file);
-      upload.subscribe(x => {
-        this.cropImage(x);
-         this.ionViewDidEnter();
-         console.log(x)
-         this.displayLoading = false;
-         this.myImage = null;
+  // save() {
+  //     let croppedImgB64String: string = this.angularCropper.cropper.getCroppedCanvas().toDataURL('image/jpeg', (100 / 100));
+  //     this.croppedImage = croppedImgB64String;
+  //     console.log(this.croppedImage);
+
+  //     // this.downloadImage(croppedImgB64String, 'my-canvas.jpeg');
+  //     this.dataURLtoFile(croppedImgB64String, 'my-canvas.jpeg');
+  // }
+
+  // dataURLtoFile(dataurl, filename) {
+  //   var blobBin = atob(dataurl.split(',')[1]);
+  //   var array = [];
+  //   for(var i = 0; i < blobBin.length; i++) {
+  //       array.push(blobBin.charCodeAt(i));
+  //   }
+  //   var file=new Blob([new Uint8Array(array)], {type: 'image/png'});
+
+  //   // let file  = new File([u8arr], filename, {type:mime});
+  //   this.storage.get("mail").then((user_email)=>{
+  //     let upload = this.requests.UploadCroppedCoverImage(this.profile_url,user_email,file);
+  //     upload.subscribe(x => {
+  //       this.cropImage(x);
+  //        this.ionViewDidEnter();
+  //        console.log(x)
+  //        this.displayLoading = false;
+  //        this.myImage = null;
      
-      });
+  //     });
 
 
-    });
-    console.log(file);
-  }
+  //   });
+  //   console.log(file);
+  // }
 
 
 }

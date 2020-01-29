@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { AngularCropperjsComponent } from 'angular-cropperjs';
+// import { AngularCropperjsComponent } from 'angular-cropperjs';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -23,8 +23,11 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   exports: [
-    AngularCropperjsComponent,
+    // AngularCropperjsComponent,
   ],
-  declarations: [SettingsPage, AngularCropperjsComponent]
+  declarations: [
+    SettingsPage,
+    // AngularCropperjsComponent
+  ]
 })
 export class SettingsPageModule {}

@@ -19,7 +19,6 @@ import { RequestsService } from './services/requests.service';
 import { MediaCapture, MediaFile, CaptureError,CaptureAudioOptions } from '@ionic-native/media-capture/ngx';
 import { Media } from '@ionic-native/media/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
-//import { AngularCropperjsModule } from 'angular-cropperjs';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 // Import ng-circle-progress
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';

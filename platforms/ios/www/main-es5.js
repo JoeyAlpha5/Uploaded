@@ -784,7 +784,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-//import { AngularCropperjsModule } from 'angular-cropperjs';
 
 // Import ng-circle-progress
 
