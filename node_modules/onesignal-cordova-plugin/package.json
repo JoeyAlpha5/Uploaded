@@ -1,8 +1,8 @@
 {
   "_from": "onesignal-cordova-plugin",
-  "_id": "onesignal-cordova-plugin@2.7.0",
+  "_id": "onesignal-cordova-plugin@2.8.2",
   "_inBundle": false,
-  "_integrity": "sha512-ZkvF9uus+WdX+9Nh2p0OlZ6gUJHqKI88IQz78wW1Dat0kPmQvi8bYFi+MI8LYTkg2IFza6W0IbVVkEw7ye58cw==",
+  "_integrity": "sha512-T9SuN9YhCQtEm3rFsg7UFIHA9E4dOQxEpkKQq4ww07lXtRV1zLWFxBfwmrG23hOLlnzgJwGMdIMWIUYp9YExtw==",
   "_location": "/onesignal-cordova-plugin",
   "_phantomChildren": {},
   "_requested": {
@@ -19,8 +19,8 @@
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/onesignal-cordova-plugin/-/onesignal-cordova-plugin-2.7.0.tgz",
-  "_shasum": "53e368a66d56f453ee104a0dbb527ff155a55a24",
+  "_resolved": "https://registry.npmjs.org/onesignal-cordova-plugin/-/onesignal-cordova-plugin-2.8.2.tgz",
+  "_shasum": "11e394fb55dd23afcc6d48977e0a7830c4113fde",
   "_spec": "onesignal-cordova-plugin",
   "_where": "/Users/apple/Desktop/Uploaded/Uploaded",
   "author": {
@@ -92,5 +92,5 @@
     "type": "git",
     "url": "git+https://github.com/onesignal/OneSignal-Cordova-SDK.git"
   },
-  "version": "2.7.0"
+  "version": "2.8.2"
 }

@@ -26,17 +26,17 @@ export class TabsPage {
     private storage: Storage
   ) {
 
-    this.storage.get("current_userID").then(val=>{
-      this.userNotif = this.database.object("userReceivedNotification/"+val).valueChanges();
-      this.userNotif.subscribe(x=>{
-        console.log("user to receive live notifications", x);
-        if(x == true){
-          this.notifBadge = true;
-        }else{
-          this.notifBadge = false;
-        }
-      });
-    });
+    // this.storage.get("current_userID").then(val=>{
+    //   this.userNotif = this.database.object("userReceivedNotification/"+val).valueChanges();
+    //   this.userNotif.subscribe(x=>{
+    //     console.log("user to receive live notifications", x);
+    //     if(x == true){
+    //       this.notifBadge = true;
+    //     }else{
+    //       this.notifBadge = false;
+    //     }
+    //   });
+    // });
   }
 
   // ionViewDidEnter() {

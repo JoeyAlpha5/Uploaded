@@ -35,7 +35,7 @@
   
         
         <div id="eyeView">
-          <ion-icon class="icon" name="eye" id="eye"></ion-icon><span id="{{i}}viewCount" class="{{item.post_id}}viewCount ">0</span><br>
+          <!-- <ion-icon class="icon" name="eye" id="eye"></ion-icon><span id="{{i}}viewCount" class="{{item.post_id}}viewCount ">0</span><br> -->
           <div class="postViews"><span class="{{ item.post_id }}views" id="{{i}}ReservedPostViews">{{ item.post_id }}</span></div>
         </div>
   
@@ -47,7 +47,7 @@
             <div class="commentBox" id="{{i}}commentBox">
               <span id="comment" *ngFor='let comment of (commentsRef$ | async); let x = index'>
                 <span *ngIf="item.post_id == comment.post" class="{{i}}commentSection" id="userComment">
-                  <span id="userCommenter">@{{comment.user}}</span><span> {{ comment.comment }}</span><br><br>
+                  <span id="userCommenter">@{{comment.user}}</span><span> {{ comment.comment }}</span>
                 </span>
               </span>
             </div>
@@ -80,6 +80,16 @@
         </div>
   
         <div id="overlay" class="{{item.post_id}}Overlay" (click)="removeItems(i, item.post_id)">
+        </div>
+
+        <div id="{{i}}videoControlOverlay" class="videoControlOverlay">
+          <div id="backButton" (click)="videoBack(i,item.post_id)">
+            <ion-icon id="rewindIcon" [ngStyle]="{color:'#ffffff'}" name="rewind"></ion-icon>
+          </div>
+          <div id="middleButton" (click)="removeItems(i, item.post_id)"></div>
+          <div id="forwardButton" (click)="videoForward(i,item.post_id)">
+            <ion-icon id="fowardIcon" [ngStyle]="{color:'#ffffff'}" name="fastforward"></ion-icon>
+          </div>
         </div>
 
   

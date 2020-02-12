@@ -8,6 +8,8 @@
         (swipeup)="onSwipeUp( item.user_id,item.user_email,i )">
         <div id="liveDot"></div>
         <div id="streamIcon">Stream</div>
+        <ion-icon id="backIcon" (click)="back()" name="close"></ion-icon>
+        <!-- <ion-icon id="reportIcon" (click)="report(item.post_id)" name="information-circle-outline"></ion-icon> -->
         <video playsinline webkit-playsinline class="videobcg" (ended)="getNext(item.username,i)" id="{{i}}videobcgf">
           <source id="{{i}}videobsource"
             src="https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{ item.file }}?alt=media#t={{ item.start }}"
@@ -53,7 +55,7 @@
   
         
         <div id="eyeView">
-          <ion-icon class="icon" name="eye" id="eye"></ion-icon><span id="{{i}}viewCount" class="{{item.post_id}}viewCount ">0</span><br>
+          <!-- <ion-icon class="icon" name="eye" id="eye"></ion-icon><span id="{{i}}viewCount" class="{{item.post_id}}viewCount ">0</span><br> -->
           <div class="postViews"><span class="{{ item.post_id }}views" id="{{i}}ReservedPostViews">{{ item.post_id }}</span></div>
         </div>
   
@@ -65,7 +67,7 @@
             <div class="commentBox" id="{{i}}commentBox">
               <span id="comment" *ngFor='let comment of (commentsRef$ | async); let x = index'>
                 <span *ngIf="item.post_id == comment.post" class="{{i}}commentSection" id="userComment">
-                  <span id="userCommenter">@{{comment.user}}</span><span> {{ comment.comment }}</span><br><br>
+                  <span id="userCommenter">@{{comment.user}}</span><span> {{ comment.comment }}</span>
                 </span>
               </span>
             </div>
@@ -75,7 +77,7 @@
             <div *ngIf="post.username == item.username " class="commentBox" id="{{i}}commentBoxNew">
               <span id="comment" *ngFor='let comment of (commentsRef$ | async); let x = index'>
                 <span *ngIf="post.post_id == comment.post" class="{{i}}commentSection" id="userComment">
-                  <span id="userCommenter">@{{comment.user}}</span><span> {{ comment.comment }}</span><br><br>
+                  <span id="userCommenter">@{{comment.user}}</span><span> {{ comment.comment }}</span>
                 </span>
               </span>
             </div>
@@ -110,11 +112,21 @@
   
         <div id="overlay" class="{{item.post_id}}Overlay" (click)="removeItems(i, item.post_id)">
         </div>
-  
-        <div id="newPostOverlay" *ngFor="let post of ( nextPostData | async); let p = index">
-          <div *ngIf="post.username == item.username" id="overlay" (click)="removeItems(i, post.post_id)">
+
+        <div id="{{i}}videoControlOverlay" class="videoControlOverlay">
+          <div id="backButton" (click)="videoBack(i,item.post_id)">
+            <ion-icon id="rewindIcon" [ngStyle]="{color:'#ffffff'}" name="rewind"></ion-icon>
+          </div>
+          <div id="middleButton" (click)="removeItems(i, item.post_id)"></div>
+          <div id="forwardButton" (click)="videoForward(i,item.post_id)">
+            <ion-icon id="fowardIcon" [ngStyle]="{color:'#ffffff'}" name="fastforward"></ion-icon>
           </div>
         </div>
+  
+        <!-- <div id="newPostOverlay" *ngFor="let post of ( nextPostData | async); let p = index">
+          <div *ngIf="post.username == item.username" id="overlay" (click)="removeItems(i, post.post_id)">
+          </div>
+        </div> -->
   
         <div *ngIf="display_firsts == true" id="playPause" class="{{i}}playPauseDiv {{i}}playPauseBtn2">
             <ion-icon class="playPauseIcon" id="{{i}}playPause" (click)="playVideo(i, item.post_id)" name="pause"></ion-icon>
@@ -163,7 +175,7 @@
   
   
   
-        <div *ngFor="let post of ( nextPostData | async); let p = index" id="{{post.post_id}}allComments"
+        <!-- <div *ngFor="let post of ( nextPostData | async); let p = index" id="{{post.post_id}}allComments"
           class="allComments animated fadeInUp">
           <div id="scrollableComments" class="scrollableComments">
             <div class="totalComments" id="{{post.post_id}}totalCOmments"></div>
@@ -184,7 +196,7 @@
                   id="commentBtn">Post</span></label>
             </div>
           </ion-footer>
-        </div>
+        </div> -->
   
         <div id="disapearingComment" class="{{i}}LatestComment animated fadeInUp" *ngIf="latest_comment.post == item.post_id">
            <p><span>@{{latest_comment.user}}</span> {{ latest_comment.comment }}</p>

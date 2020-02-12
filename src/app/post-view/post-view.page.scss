@@ -195,7 +195,7 @@ input.commentInput {
 
 .commentBox {
   width: 280px;
-  height: 135px;
+  height: 100px;
   text-align: left;
   padding-top: 9px;
   padding-bottom: 5px;
@@ -351,6 +351,9 @@ div#streamIcon {
 
 #userComment{
   font-size: 13px;
+  display: inline-block;
+  height: 30px;
+  width:100%;
 }
 
 #userCommenter{
@@ -538,6 +541,51 @@ svg._18eSE {
     left: 0;
     margin-left: 11px;
     margin-top: 11.4%;
+}
+
+.videoControlOverlay {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  display: none;
+  z-index: 999999;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+div#backButton {
+  width: 30%;
+  height: 100%;
+  float: left;
+  display: flex;
+  align-items: center;
+  
+}
+
+div#middleButton {
+  width: 40%;
+  height: 100%;
+  float: left;
+}
+
+div#forwardButton {
+  width: 30%;
+  height: 100%;
+  float: right;
+  display: flex;
+  align-items: center;
+}
+
+#fowardIcon{
+  margin-left: 50%;
+  font-size: 35px;
+  opacity: 0.3;
+}
+
+#rewindIcon{
+  margin-left: 30%;
+  font-size: 35px;
+  opacity: 0.3;
 }
 
 @media (max-width:361px){

@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n  <ion-icon name=\"arrow-back\" id=\"backBtn\" (click)=\"back()\"></ion-icon>\n    <ion-title>Settings</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n<ion-item (click)=\"navigateToNotifications()\" button tappable>\n  <ion-label>\n    Notifications\n  </ion-label>\n</ion-item>\n\n\n<ion-item button tappable>\n  <ion-label>\n    Privacy\n  </ion-label>\n</ion-item>\n\n<ion-item button tappable>\n  <ion-label>\n    Security\n  </ion-label>\n</ion-item>\n\n\n<ion-item button tappable>\n  <ion-label>\n    Video Resolution\n  </ion-label>\n</ion-item>\n\n<ion-item button tappable>\n  <ion-label>\n    Terms of Use\n  </ion-label>\n</ion-item>\n\n<ion-item button tappable>\n  <ion-label>\n    Privacy policy\n  </ion-label>\n</ion-item>\n\n<ion-item button tappable>\n  <ion-label>\n    Feedback\n  </ion-label>\n</ion-item>\n\n\n<ion-label>\n  <div id=\"logout\">\n    Logout\n  </div>\n</ion-label>\n\n    \n\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n  <ion-icon name=\"arrow-back\" id=\"backBtn\" (click)=\"back()\"></ion-icon>\n    <ion-title>Settings</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n<ion-item (click)=\"navigateToNotifications()\" button tappable>\n  <ion-label>\n    Notifications\n  </ion-label>\n</ion-item>\n\n\n<ion-item button tappable>\n  <ion-label>\n    Privacy\n  </ion-label>\n</ion-item>\n\n<ion-item button tappable>\n  <ion-label>\n    Security\n  </ion-label>\n</ion-item>\n\n\n<ion-item button tappable>\n  <ion-label>\n    Video Resolution\n  </ion-label>\n</ion-item>\n\n<ion-item button tappable (click)=\"openTermsOfService()\">\n  <ion-label>\n    Terms of service\n  </ion-label>\n</ion-item>\n\n<ion-item button tappable (click)=\"openPrivacyPolicy()\">\n  <ion-label>\n    Privacy policy\n  </ion-label>\n</ion-item>\n\n<ion-item button tappable>\n  <ion-label>\n    Feedback\n  </ion-label>\n</ion-item>\n\n\n<ion-label>\n  <div id=\"logout\">\n    Logout\n  </div>\n</ion-label>\n\n    \n\n</ion-content>\n"
 
 /***/ }),
 
@@ -88,17 +88,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
+/* harmony import */ var _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/in-app-browser/ngx */ "./node_modules/@ionic-native/in-app-browser/ngx/index.js");
+
 
 
 
 
 
 var NotificationsPage = /** @class */ (function () {
-    function NotificationsPage(route, platform, statusBar) {
+    function NotificationsPage(route, platform, statusBar, iab) {
         var _this = this;
         this.route = route;
         this.platform = platform;
         this.statusBar = statusBar;
+        this.iab = iab;
         this.statusBar.overlaysWebView(false);
         this.statusBar.styleDefault();
         this.platform.backButton.subscribeWithPriority(0, function () {
@@ -109,6 +112,14 @@ var NotificationsPage = /** @class */ (function () {
     };
     NotificationsPage.prototype.back = function () {
         this.route.navigate(['/home/tabs/tab4']);
+    };
+    NotificationsPage.prototype.openTermsOfService = function () {
+        var browser = this.iab.create('http://uploadedstream.com/Terms%20of%20Service%20for%20uploaded.pdf', '_system');
+        browser.show();
+    };
+    NotificationsPage.prototype.openPrivacyPolicy = function () {
+        var browser = this.iab.create('http://uploadedstream.com/Privacy%20Policy%20for%20Uploaded.pdf', '_system');
+        browser.show();
     };
     NotificationsPage.prototype.ionViewDidEnter = function () {
         this.statusBar.overlaysWebView(false);
@@ -121,7 +132,8 @@ var NotificationsPage = /** @class */ (function () {
     NotificationsPage.ctorParameters = function () { return [
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
-        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] }
+        { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
+        { type: _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_5__["InAppBrowser"] }
     ]; };
     NotificationsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -129,7 +141,7 @@ var NotificationsPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./notifications.page.html */ "./node_modules/raw-loader/index.js!./src/app/notifications/notifications.page.html"),
             styles: [__webpack_require__(/*! ./notifications.page.scss */ "./src/app/notifications/notifications.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _ionic_native_in_app_browser_ngx__WEBPACK_IMPORTED_MODULE_5__["InAppBrowser"]])
     ], NotificationsPage);
     return NotificationsPage;
 }());

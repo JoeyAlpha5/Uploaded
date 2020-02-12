@@ -35,10 +35,13 @@
         <ion-slides>
             <ion-slide id="postCont"> 
               <div id="playlists" *ngFor='let item of ( Playlists | async)' >
-                <div id="playlist" *ngIf="item.playlisted == true"  [ngStyle]="{ background: 'url(https://uploadedstream.storage.googleapis.com/' + item.post_file + ')'}" >
-                  <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
+                <div id="playlist" *ngIf="item.playlisted == true">
+                  <video class="searchVids" playsinline webkit-playsinline loop autoplay [muted]="true" (click)="viewPost(item.id)" >
+                    <source src="https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{item.post_file}}?alt=media" type="video/mp4">
+                  </video>
+                  <!-- <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
                     <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
-                  </div>
+                  </div> -->
                 </div> 
               </div>
             </ion-slide>
@@ -46,9 +49,9 @@
             <ion-slide id="tagsCont">
                 <div id="playlists" *ngFor='let item of ( Playlists | async)' >
                     <div id="playlist" *ngIf="item.reposted == true"  [ngStyle]="{ background: 'url(https://uploadedstream.storage.googleapis.com/' + item.post_file + ')'}" >
-                      <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
+                      <!-- <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
                         <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>
-                      </div>
+                      </div> -->
                     </div> 
                   </div>
             </ion-slide>

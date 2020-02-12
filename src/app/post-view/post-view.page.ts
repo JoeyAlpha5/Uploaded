@@ -199,11 +199,11 @@ export class PostViewPage {
       }
 
       if(this.platform.is("ios")){
-        $("."+i+"userInfo").css("margin-bottom","100px");
+        $("."+i+"userInfo").css("margin-bottom","71px");
         $("."+i+"PostData").css("margin-top","20%");
         $("."+i+"playPauseDiv").show();
       }else{
-        $("."+i+"userInfo").css("margin-bottom","100px");
+        $("."+i+"userInfo").css("margin-bottom","71px");
       }
     }
 
@@ -388,6 +388,7 @@ export class PostViewPage {
           $("#"+i+"shareIcon").hide();
           $("#"+post_id+"CommentsCount").hide();
           $("#"+i+"postIcon").hide();
+          $("#"+i+"videoControlOverlay").show();
         }else{
           $("."+i+"userInfo").css("display", "block");
           $("#"+i+"repostIcon").show();
@@ -395,6 +396,7 @@ export class PostViewPage {
           $("#"+i+"shareIcon").show();
           $("#"+post_id+"CommentsCount").show();
           $("#"+i+"postIcon").show();
+          $("#"+i+"videoControlOverlay").hide();
         }
       }
 
@@ -590,13 +592,13 @@ export class PostViewPage {
                   console.log("post id is ", val);
                   this.results = this.requests.GetPost(profile_url,post,val);
         
-                  this.results.subscribe((x) =>{
-                    console.log(x);
-                    let lstLoad = this.ListenLoad;
-                    window.addEventListener('load', function () {
-                      lstLoad();
-                    });
-                  })
+                  // this.results.subscribe((x) =>{
+                  //   console.log(x);
+                  //   let lstLoad = this.ListenLoad;
+                  //   window.addEventListener('load', function () {
+                  //     lstLoad();
+                  //   });
+                  // })
                   
                 }).catch();
               }
@@ -608,19 +610,19 @@ export class PostViewPage {
     }
 
 
-    ListenLoad(){
-      this.results.subscribe((x)=>{
-        if(document.readyState == "complete"){
-          for(let a =0; a < x.length; a++){
-            let circ =  JSON.stringify(this.circle_circum/x[a].post_count);
-            console.log(circ);
+    // ListenLoad(){
+    //   this.results.subscribe((x)=>{
+    //     if(document.readyState == "complete"){
+    //       for(let a =0; a < x.length; a++){
+    //         let circ =  JSON.stringify(this.circle_circum/x[a].post_count);
+    //         console.log(circ);
             
             
-            $("#"+a+"Circle").css("stroke-dasharray", circ+", 10");
-          } 
-        }
-      });
-    }
+    //         $("#"+a+"Circle").css("stroke-dasharray", circ+", 10");
+    //       } 
+    //     }
+    //   });
+    // }
 
     async presentNotificationToast(msg){
       const toast = await this.toastController.create({message: msg.body, duration: 3000});
@@ -647,7 +649,7 @@ export class PostViewPage {
 
     async setFirstViews(){
         console.log("hello world started");
-        this.ListenLoad();
+        // this.ListenLoad();
         await this.slide.getActiveIndex().then((index)=>{
           console.log("current index is", index);
           this.results.subscribe((val)=>{
@@ -656,107 +658,22 @@ export class PostViewPage {
       
               let post_id = JSON.stringify(val[0].post_id);
               this.storage.get("current_userID").then((val)=>{
-                this.database.list("views/").remove(JSON.stringify(val+post_id));
-                this.database.object("views/"+JSON.stringify(val+post_id)).set({"user": val, "post_id":post_id});
+                // this.database.list("views/").remove(JSON.stringify(val+post_id));
+                // this.database.object("views/"+JSON.stringify(val+post_id)).set({"user": val, "post_id":post_id});
                 //display views
                 this.slide.getActiveIndex().then((val) => { 
                   console.log(val);
                   this.playVideo(val,post_id);
                 });
-                this.postViewsRef$.subscribe((val)=>{
-                  for(let c = 0; c < val.length; c++){
-                    $("."+val[c].post_id+"viewCount").text("0");
-                  }
-                  for(let v =0; v < val.length; v++){
-                    let key = Object.keys(val[v])[0];
-                    console.log(key);
-                    let post_id =  val[v].post_id;
-                    console.log(post_id);
-                    let current_views = parseInt($("."+post_id+"viewCount").text());
-                    current_views += 1;
-                    $("."+post_id+"viewCount").text(current_views);
-                    console.log(current_views);
-                  }
-                });
-
-
-
-
               });
-            
-          });
         });
+
+      });
     }
 
     //handles the number of live viewer
     async swiped(id,post_id,direction){
 
-      //
-      console.log("post", post_id)
-      console.log("left");
-      let idd = id - 1;
-      this.current_post_id = post_id;
-      var video = <HTMLVideoElement> document.getElementById(id+"videobcgP");
-      console.log(id);
-      console.log("paused",video.paused);
-
-      console.log(direction);
-      if(direction == "left"){
-        let current_post_id = $("#"+parseInt(id+1)+"PostViews").text();
-        let prev_post_id = $("#"+id+"PostViews").text();
-        this.storage.get("current_userID").then((val)=>{
-          this.database.list("views/").remove(JSON.stringify(val+current_post_id))
-          this.database.list("views/").remove(JSON.stringify(val+prev_post_id))
-          this.database.object("views/"+JSON.stringify(val+current_post_id)).set({"user": val, "post_id":current_post_id});
-          //display views
-          // this.slide.getActiveIndex().then((val) => { 
-          //   console.log(val);
-          //   this.playVideo(val,post_id);
-          // });
-          this.postViewsRef$.subscribe((val)=>{
-            for(let c = 0; c < val.length; c++){
-              $("."+val[c].post_id+"viewCount").text("0");
-            }
-            for(let v =0; v < val.length; v++){
-              let key = Object.keys(val[v])[0];
-              console.log(key);
-              let post_id =  val[v].post_id;
-              console.log(post_id);
-              let current_views = parseInt($("."+post_id+"viewCount").text());
-              current_views += 1;
-              $("."+post_id+"viewCount").text(current_views);
-            }
-          });
-        });
-        console.log(current_post_id);
-      }else if(direction == "right"){
-        let current_post_id = $("#"+idd+"PostViews").text();
-        let prev_post_id = $("#"+parseInt(id)+"PostViews").text();
-        this.storage.get("current_userID").then((val)=>{
-          this.database.list("views/").remove(JSON.stringify(val+current_post_id));
-          this.database.list("views/").remove(JSON.stringify(val+prev_post_id));
-          this.database.object("views/"+JSON.stringify(val+current_post_id)).set({"user": val, "post_id":current_post_id});
-          // this.slide.getActiveIndex().then((val) => { 
-          //   console.log(val);
-          //   this.playVideo(val,post_id);
-          // });
-          this.postViewsRef$.subscribe((val)=>{
-            for(let c = 0; c < val.length; c++){
-              $("."+val[c].post_id+"viewCount").text("0");
-            }
-            for(let v =0; v < val.length; v++){
-              let key = Object.keys(val[v])[0];
-              console.log(key);
-              let post_id =  val[v].post_id;
-              console.log(post_id);
-              let current_views = parseInt($("."+post_id+"viewCount").text());
-              current_views += 1;
-              $("."+post_id+"viewCount").text(current_views);
-            }
-          });
-          
-        });
-      }
     }
 
 
@@ -797,6 +714,32 @@ export class PostViewPage {
     //
 
 
+    //video fast forward and rewind
+    videoBack(i,post_id){
+      console.log("video rewind");
+      var video = <HTMLVideoElement> document.getElementById(i+"videobcgP");
+      console.log("current time of video",video.currentTime);
+      if(video.currentTime <10){
+        this.displayVideoDuration(video,0,video.duration,i);
+        video.currentTime = 0;
+      }else{
+        this.displayVideoDuration(video,video.currentTime-10,video.duration,i);
+        video.currentTime = video.currentTime-10;
+      }
+    }
+
+    videoForward(i,post_id){
+      console.log("video forward");
+      var video = <HTMLVideoElement> document.getElementById(i+"videobcgP");
+      console.log("current time of video",video.currentTime);
+      if(video.currentTime == video.duration){
+        this.displayVideoDuration(video,0,video.duration,i);
+        video.currentTime = 0;
+      }else{
+        this.displayVideoDuration(video,video.currentTime+10,video.duration,i);
+        video.currentTime = video.currentTime+10;
+      }
+    }
 
     //present share options
     async presentActionSheet() {

@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { RequestsService } from '../services/requests.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -13,7 +14,8 @@ import { ToastController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  constructor(public toast: ToastController,public loadingController: LoadingController, private statusBar: StatusBar,private route: Router, private requests: RequestsService,private storage: Storage ) {
+  checked = false;
+  constructor(public toast: ToastController,public loadingController: LoadingController, private statusBar: StatusBar,private route: Router, private requests: RequestsService,private storage: Storage,private iab: InAppBrowser ) {
     // let status bar overlay webview
     this.statusBar.overlaysWebView(false);
     // // set status bar to white
@@ -27,6 +29,21 @@ export class LoginPage implements OnInit {
   
   Bottom: boolean = true;
 
+
+  showTermsOfService(){
+    //open terms of services
+    const browser = this.iab.create('http://uploadedstream.com/Terms%20of%20Service%20for%20uploaded.pdf','_system');
+    browser.show()
+  }
+
+  changeCheck($event){
+    if(this.checked == false){
+      this.checked = true;
+    }else{
+      this.checked = false;
+    }
+    console.log(this.checked);
+  }
 
   ionViewDidEnter() {
     // Put here the code you want to execute
@@ -64,15 +81,16 @@ export class LoginPage implements OnInit {
   login() {
     const emailInput = $('#emailInput').val();
     const passwordInput = $('#passwordInput').val();
+    const mobileInput = $('#mobileInput').val();
     var message = 'Please fill in all fields';
-    if ( emailInput === '' || passwordInput === '' ) {
+    if ( emailInput === '' || passwordInput === ''|| mobileInput === '' || this.checked == false) {
       console.log('Error in loggin in');
       this.presentLoadingWithOptions(message);
     }
     else {
       let url = 'https://uploaded.herokuapp.com/users/users';
       this.presentLoading();
-      let login = this.requests.Login(url,emailInput,passwordInput);
+      let login = this.requests.Login(url,emailInput,passwordInput,mobileInput);
       login.subscribe(data =>{
         console.log(data.data);
         if(data.data == "Authentication test passed") {

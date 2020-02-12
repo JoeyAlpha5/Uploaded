@@ -15,6 +15,8 @@ import { TabsPage } from '../tabs/tabs.page';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { Location } from '@angular/common';
+import { AlertController } from '@ionic/angular';
+
 
 
 
@@ -44,7 +46,7 @@ export class UserfeedPage {
   circle_circum = 294.159265359;
   @ViewChild('slider', {static: false}) slide: IonSlides;
 
-  constructor(private location: Location,private keyboard: Keyboard,private tabs: TabsPage,private platform: Platform,public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage,private oneSignal: OneSignal) {
+  constructor(private location: Location,public alertController: AlertController,private keyboard: Keyboard,private tabs: TabsPage,private platform: Platform,public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage,private oneSignal: OneSignal) {
     this.commentsRef$ = this.database.list("comments").valueChanges();
     this.postViewsRef$ = this.database.list("views").valueChanges();
     this.likedComments = this.database.list("comment_likes").valueChanges();
@@ -59,7 +61,7 @@ export class UserfeedPage {
         this.statusBar.overlaysWebView(true);
         this.slide.getActiveIndex().then(i=>{
           document.getElementById(i+"commentInput").blur();
-          this.CommentsDown(i);
+          this.CommentsDown(i,true);
         });
         
       }
@@ -157,7 +159,7 @@ export class UserfeedPage {
 
 
     //set the video length
-    displayVideoDuration(current_lenght,video_length,current_slide ){
+    async displayVideoDuration(current_lenght,video_length,current_slide ){
       let video_percent = Math.round((current_lenght/video_length)*100);
       this.percent = video_percent;
       console.log("video duration at ", video_percent +"%")
@@ -173,76 +175,77 @@ export class UserfeedPage {
     } 
 
     async getNext(username,slideNum){
-      console.log("user "+ username);
-      $("#"+slideNum+"playPause").remove();
-      console.log("ended");
-      $("#"+slideNum+"commentBox").remove();
-      $("#"+slideNum+"FirstPostData").remove();
-      $("#"+slideNum+"oldCommentsInput").remove();
-      let profile_url = 'https://uploaded.herokuapp.com/users/users';
-      $("."+slideNum+"Spinner").show();
-      $("."+slideNum+"videobcg").css("display","none");
-      this.stopOtherVids();
-      this.storage.get("mail").then((email)=>{
-        let user_post: Observable <any>;
-        let req = this.requests;
-        let com = this.commentsRef$;
-        this.nextPostData = this.requests.getUserFeed(profile_url, username,email);
-        this.nextPostData.subscribe();
-        //disable the firsts
-        this.display_firsts = false;
-        //
-        $("#"+slideNum+"FirstPostData").remove();
-        setTimeout(async function(){
-          console.log("fetching video");
-          user_post = await req.getUserFeed(profile_url, username,email);
-          user_post.subscribe((users_post)=>{
-            console.log(users_post);
-            let post_id = users_post[0].post_id;
-            console.log(post_id);
-            let video_file =  "https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/"+users_post[0].file+"?alt=media#t="+users_post[0].start+"";
-            let post_description = users_post[0].description;
+      this.slide.slideNext();
+      // console.log("user "+ username);
+      // $("#"+slideNum+"playPause").remove();
+      // console.log("ended");
+      // $("#"+slideNum+"commentBox").remove();
+      // $("#"+slideNum+"FirstPostData").remove();
+      // $("#"+slideNum+"oldCommentsInput").remove();
+      // let profile_url = 'https://uploaded.herokuapp.com/users/users';
+      // $("."+slideNum+"Spinner").show();
+      // $("."+slideNum+"videobcg").css("display","none");
+      // this.stopOtherVids();
+      // this.storage.get("mail").then((email)=>{
+      //   let user_post: Observable <any>;
+      //   let req = this.requests;
+      //   let com = this.commentsRef$;
+      //   this.nextPostData = this.requests.getUserFeed(profile_url, username,email);
+      //   this.nextPostData.subscribe();
+      //   //disable the firsts
+      //   this.display_firsts = false;
+      //   //
+      //   $("#"+slideNum+"FirstPostData").remove();
+      //   setTimeout(async function(){
+      //     console.log("fetching video");
+      //     user_post = await req.getUserFeed(profile_url, username,email);
+      //     user_post.subscribe((users_post)=>{
+      //       console.log(users_post);
+      //       let post_id = users_post[0].post_id;
+      //       console.log(post_id);
+      //       let video_file =  "https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/"+users_post[0].file+"?alt=media#t="+users_post[0].start+"";
+      //       let post_description = users_post[0].description;
 
-            $("#"+slideNum+"videobsourcef").attr("src",video_file);
-            let new_vid = <HTMLVideoElement>document.getElementById(slideNum+"videobcgf");
+      //       $("#"+slideNum+"videobsourcef").attr("src",video_file);
+      //       let new_vid = <HTMLVideoElement>document.getElementById(slideNum+"videobcgf");
 
-            $("."+slideNum+"PostDescription").text(post_description);
-            let comments_array = [];
-            com.subscribe((comment)=>{
-              console.log(comment);
-              // $("."+slideNum+"commentSection").html("");
-              for (var c = 0; c < comment.length; c ++){
-                if(comment[c].post == post_id){
-                  console.log(comment[c].post == post_id);
-                  console.log(comment[c].post, post_id);
-                  comments_array.push(comment[c]);
-                }
-                // {{post.post_id}}CommentsCount
-                $("#"+post_id+"CommentsCount").text(comments_array.length)
-              }
+      //       $("."+slideNum+"PostDescription").text(post_description);
+      //       let comments_array = [];
+      //       com.subscribe((comment)=>{
+      //         console.log(comment);
+      //         // $("."+slideNum+"commentSection").html("");
+      //         for (var c = 0; c < comment.length; c ++){
+      //           if(comment[c].post == post_id){
+      //             console.log(comment[c].post == post_id);
+      //             console.log(comment[c].post, post_id);
+      //             comments_array.push(comment[c]);
+      //           }
+      //           // {{post.post_id}}CommentsCount
+      //           $("#"+post_id+"CommentsCount").text(comments_array.length)
+      //         }
 
-              // $("."+slideNum+"CommentLabel").html("<span (click)='postComment("+post_id+","+slideNum+")'>Post</span>");
+      //         // $("."+slideNum+"CommentLabel").html("<span (click)='postComment("+post_id+","+slideNum+")'>Post</span>");
 
-              console.log(comments_array);
-            });
-            console.log(com);
-            new_vid.load();
-            // this.stopOtherVids();
-            let a = document.getElementsByTagName("video");
-            console.log("videos", a);
-            for(let b = 0; b < a.length; b++){a[b].pause() }
-            //
-            new_vid.play();
-            $("."+slideNum+"videobcg").css("display","block");
-            $("."+slideNum+"Spinner").hide();
-            $("#"+slideNum+"playPause2").attr("name", "pause");
+      //         console.log(comments_array);
+      //       });
+      //       console.log(com);
+      //       new_vid.load();
+      //       // this.stopOtherVids();
+      //       let a = document.getElementsByTagName("video");
+      //       console.log("videos", a);
+      //       for(let b = 0; b < a.length; b++){a[b].pause() }
+      //       //
+      //       new_vid.play();
+      //       $("."+slideNum+"videobcg").css("display","block");
+      //       $("."+slideNum+"Spinner").hide();
+      //       $("#"+slideNum+"playPause2").attr("name", "pause");
 
             
   
-          });
-        },2000);
-        // return this.requests;
-      });
+      //     });
+      //   },2000);
+      //   // return this.requests;
+      // });
     }
 
     CommentsUp(i){
@@ -264,7 +267,7 @@ export class UserfeedPage {
       
     }
  
-    CommentsDown(i){
+    CommentsDown(i,move_bottom_bar){
       this.statusBar.overlaysWebView(true);
       this.tabs.bottom = true; 
       console.log("Move comments down");
@@ -274,11 +277,13 @@ export class UserfeedPage {
       }
 
       if(this.platform.is("ios")){
-        $("."+i+"userInfo").css("margin-bottom","100px");
+        if(move_bottom_bar != false){
+          $("."+i+"userInfo").css("margin-bottom","71px");
+        }
         $("."+i+"PostData").css("margin-top","20%");
         $("."+i+"playPauseDiv").show();
       }else{
-        $("."+i+"userInfo").css("margin-bottom","100px");
+        $("."+i+"userInfo").css("margin-bottom","71px");
       }
     }
 
@@ -331,7 +336,7 @@ export class UserfeedPage {
       let CommentsBox =  $(".allComments");
       console.log(CommentsBox);
       //close all comment boxes
-      this.CommentsDown(id);
+      this.CommentsDown(id,true);
       this.refresh =  true;
       this.userInfo = true;
       this.slide.lockSwipes(false);
@@ -385,44 +390,11 @@ export class UserfeedPage {
           current_post_exits = false;
         }
         var video = <HTMLVideoElement> document.getElementById(currentSlide+"videobcgf");
-        this.videoDuration =  this.requests.getDuration('https://uploaded.herokuapp.com/users/users', current_post);
-        this.videoDuration.subscribe((duration)=>{
+        // this.videoDuration =  this.requests.getDuration('https://uploaded.herokuapp.com/users/users', current_post);
+        // this.videoDuration.subscribe((duration)=>{
           let video_length = video.duration;
-          console.log(duration, video_length);
-          video.currentTime = parseFloat(duration[0]);
-          console.log("post username ", duration[2]);
-          console.log(duration[1] == duration[3]);
-          video.currentTime = parseFloat(duration[0]);
-          if(duration[3] == duration[1] ){
-            video.currentTime = parseFloat(duration[0]);
-            this.displayVideoDuration(duration[0],video_length,currentSlide );
-            if(current_post_exits == false){
-              let profile_url = 'https://uploaded.herokuapp.com/users/users';
-              this.storage.get("mail").then((email)=>{
-                this.nextPostData = this.requests.getUserFeed(profile_url, duration[2],email);
-                this.nextPostData.subscribe();
-              });
-            }
-            this.stopOtherVids();
-            video.play(); 
-            console.log(document.getElementsByClassName(currentSlide+"playPauseDiv2")[0]);
-            if(document.getElementsByClassName(currentSlide+"playPauseDiv2")[0] != undefined){
-              if(document.getElementsByClassName(currentSlide+"playPauseDiv2")[0].children.length <= 0){
-                $("."+currentSlide+"playPauseBtn2").hide();
-              }else{
-                $("."+currentSlide+"playPauseBtn2").show();
-              }
-            }else{
-              $("."+currentSlide+"playPauseBtn2").show();
-            }
-
-
-          }else{
-            this.getNext(duration[2],currentSlide);
-          }
-
-        }); 
-
+          this.displayVideoDuration(video.currentTime,video_length,currentSlide );
+          video.play(); 
       });
     }
 
@@ -468,7 +440,7 @@ export class UserfeedPage {
       if(this.keyboard.isVisible == true || $("."+"allComments").css("display") == "block"){
         this.tabs.bottom = true;
         this.statusBar.overlaysWebView(true);
-        this.CommentsDown(i);
+        this.CommentsDown(i,true);
         $("."+"allComments").hide();
         this.slide.lockSwipes(false);
         
@@ -483,6 +455,7 @@ export class UserfeedPage {
           $("#"+i+"shareIcon").hide();
           $("#"+post_id+"CommentsCount").hide();
           $("#"+i+"postIcon").hide();
+          $("#"+i+"videoControlOverlay").show();
         }else{
           $("."+i+"userInfo").css("display", "block");
           $("#"+i+"repostIcon").show();
@@ -490,6 +463,7 @@ export class UserfeedPage {
           $("#"+i+"shareIcon").show();
           $("#"+post_id+"CommentsCount").show();
           $("#"+i+"postIcon").show();
+          $("#"+i+"videoControlOverlay").hide();
         }
       }
 
@@ -500,8 +474,33 @@ export class UserfeedPage {
       // }
     }
 
-    // images_url: string  =  "http://res.cloudinary.com/uploaded/image/upload/v1567818053/";
-    // video_url: string  =  "http://res.cloudinary.com/uploaded/video/upload/v1567818053/";
+
+    //video fast forward and rewind
+    videoBack(i,post_id){
+      console.log("video rewind");
+      var video = <HTMLVideoElement> document.getElementById(i+"videobcgf");
+      console.log("current time of video",video.currentTime);
+      if(video.currentTime <10){
+        this.displayVideoDuration(0,video.duration,i);
+        video.currentTime = 0;
+      }else{
+        this.displayVideoDuration(video.currentTime-10,video.duration,i);
+        video.currentTime = video.currentTime-10;
+      }
+    }
+
+    videoForward(i,post_id){
+      console.log("video forward");
+      var video = <HTMLVideoElement> document.getElementById(i+"videobcgf");
+      console.log("current time of video",video.currentTime);
+      if(video.currentTime == video.duration){
+        this.displayVideoDuration(0,video.duration,i);
+        video.currentTime = 0;
+      }else{
+        this.displayVideoDuration(video.currentTime+10,video.duration,i);
+        video.currentTime = video.currentTime+10;
+      }
+    }
 
     
 
@@ -733,7 +732,6 @@ export class UserfeedPage {
 
 
     async setFirstViews(){
-        console.log("hello world started");
         this.ListenLoad();
         await this.slide.getActiveIndex().then((index)=>{
           console.log("current index is", index);
@@ -743,32 +741,13 @@ export class UserfeedPage {
       
               let post_id = JSON.stringify(val[0].post_id);
               this.storage.get("current_userID").then((val)=>{
-                this.database.list("views/").remove(JSON.stringify(val+post_id));
-                this.database.object("views/"+JSON.stringify(val+post_id)).set({"user": val, "post_id":post_id});
+                // this.database.list("views/").remove(JSON.stringify(val+post_id));
+                // this.database.object("views/"+JSON.stringify(val+post_id)).set({"user": val, "post_id":post_id});
                 //display views
                 this.slide.getActiveIndex().then((val) => { 
                   console.log(val);
                   this.playVideo(val,post_id);
                 });
-                this.postViewsRef$.subscribe((val)=>{
-                  for(let c = 0; c < val.length; c++){
-                    $("."+val[c].post_id+"viewCount").text("0");
-                  }
-                  for(let v =0; v < val.length; v++){
-                    let key = Object.keys(val[v])[0];
-                    console.log(key);
-                    let post_id =  val[v].post_id;
-                    console.log(post_id);
-                    let current_views = parseInt($("."+post_id+"viewCount").text());
-                    current_views += 1;
-                    $("."+post_id+"viewCount").text(current_views);
-                    console.log(current_views);
-                  }
-                });
-
-
-
-
               });
             
           });
@@ -800,20 +779,20 @@ export class UserfeedPage {
           //   console.log(val);
           //   this.playVideo(val,post_id);
           // });
-          this.postViewsRef$.subscribe((val)=>{
-            for(let c = 0; c < val.length; c++){
-              $("."+val[c].post_id+"viewCount").text("0");
-            }
-            for(let v =0; v < val.length; v++){
-              let key = Object.keys(val[v])[0];
-              console.log(key);
-              let post_id =  val[v].post_id;
-              console.log(post_id);
-              let current_views = parseInt($("."+post_id+"viewCount").text());
-              current_views += 1;
-              $("."+post_id+"viewCount").text(current_views);
-            }
-          });
+          // this.postViewsRef$.subscribe((val)=>{
+          //   for(let c = 0; c < val.length; c++){
+          //     $("."+val[c].post_id+"viewCount").text("0");
+          //   }
+          //   for(let v =0; v < val.length; v++){
+          //     let key = Object.keys(val[v])[0];
+          //     console.log(key);
+          //     let post_id =  val[v].post_id;
+          //     console.log(post_id);
+          //     let current_views = parseInt($("."+post_id+"viewCount").text());
+          //     current_views += 1;
+          //     $("."+post_id+"viewCount").text(current_views);
+          //   }
+          // });
         });
         console.log(current_post_id);
       }else if(direction == "right"){
@@ -827,20 +806,20 @@ export class UserfeedPage {
           //   console.log(val);
           //   this.playVideo(val,post_id);
           // });
-          this.postViewsRef$.subscribe((val)=>{
-            for(let c = 0; c < val.length; c++){
-              $("."+val[c].post_id+"viewCount").text("0");
-            }
-            for(let v =0; v < val.length; v++){
-              let key = Object.keys(val[v])[0];
-              console.log(key);
-              let post_id =  val[v].post_id;
-              console.log(post_id);
-              let current_views = parseInt($("."+post_id+"viewCount").text());
-              current_views += 1;
-              $("."+post_id+"viewCount").text(current_views);
-            }
-          });
+          // this.postViewsRef$.subscribe((val)=>{
+          //   for(let c = 0; c < val.length; c++){
+          //     $("."+val[c].post_id+"viewCount").text("0");
+          //   }
+          //   for(let v =0; v < val.length; v++){
+          //     let key = Object.keys(val[v])[0];
+          //     console.log(key);
+          //     let post_id =  val[v].post_id;
+          //     console.log(post_id);
+          //     let current_views = parseInt($("."+post_id+"viewCount").text());
+          //     current_views += 1;
+          //     $("."+post_id+"viewCount").text(current_views);
+          //   }
+          // });
           
         });
       }
@@ -882,6 +861,114 @@ export class UserfeedPage {
       console.log('Loading dismissed!');
     }
     //
+
+
+    //report
+    async reportSuccessfull(){
+      const alert = await this.alertController.create({
+        header: 'Reported',
+        subHeader: 'Report successful',
+        message: 'Thank you for reporting, our team will soon review the post.',
+        buttons: ['OK']
+      });
+  
+      await alert.present();
+    }
+
+    async report(post_id) {
+      const reportActionSheet = await this.actionSheetController.create({
+        header: 'Report content',
+        buttons: [{
+          text: "it's spam",
+          role: 'destructive',
+          // icon: 'megaphone',
+          handler: () => {
+            var report = this.requests.Report('https://uploaded.herokuapp.com/users/users',post_id,"it's spam");
+            report.subscribe(re=>{
+              this.reportSuccessfull();
+            });
+          }
+        },{
+          text: "it's innapropriate",
+          role: 'destructive',
+          // icon: 'megaphone',
+          handler: () => {
+            this.innapropriate(post_id);
+          }
+        }
+
+      ]
+      });
+      await reportActionSheet.present();
+    }
+
+    async innapropriate(post_id){
+      const InnapropriateActionSheet = await this.actionSheetController.create({
+        header: 'Innapropriate content',
+        buttons: [{
+          text: "Nudity or sexual activity",
+          role: 'destructive',
+          // icon: 'megaphone',
+          handler: () => {
+            var report = this.requests.Report('https://uploaded.herokuapp.com/users/users',post_id,"Nudity or sexual activity");
+            report.subscribe(re=>{
+              console.log(re);
+              this.reportSuccessfull();
+            });
+          }
+        },{
+          text: "Hate speech or symbols",
+          role: 'destructive',
+          // icon: 'megaphone',
+          handler: () => {
+            var report = this.requests.Report('https://uploaded.herokuapp.com/users/users',post_id,"Hate speech or symbols");
+            report.subscribe(re=>{
+              console.log(re);
+              this.reportSuccessfull();
+            });
+          }
+        },
+        {
+          text: "Violence",
+          role: 'destructive',
+          // icon: 'megaphone',
+          handler: () => {
+            var report = this.requests.Report('https://uploaded.herokuapp.com/users/users',post_id,"violence");
+            report.subscribe(re=>{
+              console.log(re);
+              this.reportSuccessfull();
+            });
+          }
+        },{
+          text: "Bullying or harrasment",
+          role: 'destructive',
+          // icon: 'megaphone',
+          handler: () => {
+            var report = this.requests.Report('https://uploaded.herokuapp.com/users/users',post_id,"Bullying or harrasment");
+            report.subscribe(re=>{
+              console.log(re);
+              this.reportSuccessfull();
+            });
+          }
+        },{
+          text: "Intellectual property violation",
+          role: 'destructive',
+          // icon: 'megaphone',
+          handler: () => {
+            var report = this.requests.Report('https://uploaded.herokuapp.com/users/users',post_id,"IP violation");
+            report.subscribe(re=>{
+              console.log(re);
+              this.reportSuccessfull();
+            });
+
+          }
+        }
+
+      ]
+      });
+      await InnapropriateActionSheet.present();
+
+    }
 
 
 

@@ -8,6 +8,8 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { Router } from '@angular/router';
 import { AngularFireDatabase} from 'angularfire2/database';
 import { Storage } from '@ionic/storage';
+import { RequestsService } from './services/requests.service';
+import { CacheService } from 'ionic-cache';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -24,7 +26,9 @@ export class AppComponent {
     public alertController: AlertController,
     private route: Router,
     private database:AngularFireDatabase,
-    private storage: Storage
+    private storage: Storage,
+    private requests: RequestsService,
+    private CacheService: CacheService,
   ) {
     this.initializeApp();
     
@@ -38,6 +42,9 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
+      this.CacheService.setDefaultTTL(60*60*12);
+      this.CacheService.setOfflineInvalidate(false);
+
       this.setupPush();
       
     });
@@ -48,16 +55,27 @@ export class AppComponent {
 
     this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
 
-    this.oneSignal.handleNotificationOpened().subscribe(() => {
+    this.oneSignal.handleNotificationOpened().subscribe((data) => {
       // do something when a notification is opened
       //got to notifications page
-      this.route.navigate(['/home/tabs/tab3']);
+      // this.route.navigate(['/home/tabs/tab3']);
+      console.table(data)
+      console.log(data.notification.payload.notificationID);
+      var notification_id = data.notification.payload.notificationID;
+      var url = "https://uploaded.herokuapp.com/users/users";
+      this.storage.get("mail").then((email)=>{
+        var post = this.requests.getNotificationPost(url,notification_id,email);
+        post.subscribe(re=>{
+          this.storage.set("uerFeedUsername", re["Response"]);
+          this.route.navigate(['/home/tabs/userfeed']);
+        });
+      });      
     });
 
-    this.oneSignal.handleNotificationReceived().subscribe(() => {
-      this.storage.get("current_userID").then(val=>{
-        this.database.object("userReceivedNotification/"+val).set(true);
-      });
+    this.oneSignal.handleNotificationReceived().subscribe((data) => {
+      // this.storage.get("current_userID").then(val=>{
+      //   this.database.object("userReceivedNotification/"+val).set(true);
+      // });
     // do something when notification is received
     // let msg = data.payload.body;
     // let title = data.payload.title;

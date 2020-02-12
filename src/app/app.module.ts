@@ -16,6 +16,7 @@ import * as Hammer from 'hammerjs';
 import { HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import { IonicStorageModule } from '@ionic/storage';
 import { RequestsService } from './services/requests.service';
+import {NotificationServiceService} from './services/notification-service.service';
 import { MediaCapture, MediaFile, CaptureError,CaptureAudioOptions } from '@ionic-native/media-capture/ngx';
 import { Media } from '@ionic-native/media/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
@@ -27,6 +28,11 @@ import { Camera } from '@ionic-native/Camera/ngx';
 import { File } from '@ionic-native/File/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import {Tab1Page} from './tab1/tab1.page';
+import {TabsPage } from './tabs/tabs.page';
+import { CacheModule } from 'ionic-cache';
+
 
 export class CustomHammerConfig extends HammerGestureConfig {
   overrides = {
@@ -42,13 +48,18 @@ export class CustomHammerConfig extends HammerGestureConfig {
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
+    CacheModule.forRoot(),
     IonicStorageModule.forRoot(),
   ],
   providers: [
     StatusBar,
     SplashScreen,
     RequestsService,
+    Tab1Page,
+    TabsPage,
+    NotificationServiceService,
     MediaCapture,
+    InAppBrowser,
     Media,
     Keyboard,
     OneSignal,

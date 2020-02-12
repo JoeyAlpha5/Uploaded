@@ -5,6 +5,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { TabsPage } from '../tabs/tabs.page';
+import { Tab1Page } from '../tab1/tab1.page';
 import * as $ from 'jquery';
 
 @Component({
@@ -17,8 +18,8 @@ export class Tab3Page {
   notificationssRef$: Observable<any[]>;
   username: Observable<any>;
   userNotif: Observable<any>
-  constructor(private tabs: TabsPage,private database:AngularFireDatabase,private statusBar: StatusBar, private storage: Storage, private route: Router,) {
-    this.notificationssRef$ = this.database.list("notification", ref => ref.orderByChild('date')).valueChanges();
+  constructor(private tabs: TabsPage,private database:AngularFireDatabase,private statusBar: StatusBar, private storage: Storage, private route: Router,private tab1: Tab1Page) {
+    this.notificationssRef$ = this.database.list("notification", ref => ref.orderByChild('date').limitToLast(10) ).valueChanges();
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
     this.statusBar.styleDefault();
@@ -43,6 +44,7 @@ export class Tab3Page {
   }
 
   ionViewDidEnter() {
+    // this.tab1.stopOtherVids();
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
     this.statusBar.styleDefault();

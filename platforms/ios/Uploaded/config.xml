@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="uploaded.uploaded" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="uploaded.uploaded" version="0.0.13" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="LocalStorage">
         <param name="ios-package" value="CDVLocalStorage" />
     </feature>
@@ -19,12 +19,18 @@
         <param name="ios-package" value="CDVGestureHandler" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="Device">
-        <param name="ios-package" value="CDVDevice" />
-    </feature>
     <feature name="File">
         <param name="ios-package" value="CDVFile" />
         <param name="onload" value="true" />
+    </feature>
+    <feature name="CordovaHttpPlugin">
+        <param name="ios-package" value="CordovaHttpPlugin" />
+    </feature>
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
+    </feature>
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
     </feature>
     <feature name="FileTransfer">
         <param name="ios-package" value="CDVFileTransfer" />
@@ -50,21 +56,27 @@
         <param name="ios-package" value="CDVStatusBar" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="SocialSharing">
+        <param name="ios-package" value="SocialSharing" />
+        <param name="onload" value="true" />
+    </feature>
     <feature name="SQLitePlugin">
         <param name="ios-package" value="SQLitePlugin" />
     </feature>
     <feature name="OneSignalPush">
         <param name="ios-package" value="OneSignalPush" />
     </feature>
-    <feature name="SocialSharing">
-        <param name="ios-package" value="SocialSharing" />
+    <feature name="InAppBrowser">
+        <param name="ios-package" value="CDVInAppBrowser" />
         <param name="onload" value="true" />
     </feature>
-    <feature name="CordovaHttpPlugin">
-        <param name="ios-package" value="CordovaHttpPlugin" />
+    <feature name="UIInAppBrowser">
+        <param name="ios-package" value="CDVUIInAppBrowser" />
+        <param name="onload" value="true" />
     </feature>
-    <feature name="Camera">
-        <param name="ios-package" value="CDVCamera" />
+    <feature name="WKInAppBrowser">
+        <param name="ios-package" value="CDVWKInAppBrowser" />
+        <param name="onload" value="true" />
     </feature>
     <name>Uploaded</name>
     <description>Breaking New Boundaries For Artists</description>
@@ -144,12 +156,11 @@
     <preference name="PageLength" value="0" />
     <preference name="PaginationBreakingMode" value="page" />
     <preference name="PaginationMode" value="unpaginated" />
+    <preference name="CameraUsesGeolocation" value="false" />
     <preference name="deployment-target" value="11.0" />
-    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
     <preference name="KeepAVAudioSessionAlwaysActive" value="NO" />
     <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="StatusBarStyle" value="lightcontent" />
-    <preference name="CameraUsesGeolocation" value="false" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="SplashMaintainAspectRatio" value="true" />
@@ -164,4 +175,5 @@
     <preference name="loadUrlTimeoutValue" value="700000" />
     <preference name="KeyboardResize" value="true" />
     <preference name="KeyboardStyle" value="dark" />
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
 </widget>

@@ -13,6 +13,7 @@ export class RequestsService {
 
   constructor(private storage: Storage,private toast: ToastController, private http: HttpClient, public afs: AngularFirestore, private platform: Platform) { }
 
+
   //get profile api
   getProfile(url, email): Observable<any> {
       return this.http.get(url, {params: {email: email, type: 'profile'}}).pipe(
@@ -23,6 +24,15 @@ export class RequestsService {
       );
   }
 
+  //get 5 first users to tag
+  getTagUsers(url,username):Observable<any>{
+    return this.http.get(url, {params: {url: url, type: 'getTags',username:username}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results;
+      })
+    );
+  }
 
   getProfilePlaylists(url, email): Observable<any>{
     return this.http.get(url, {params: {email: email, type: 'profile'}}).pipe(
@@ -144,7 +154,14 @@ export class RequestsService {
     );
   }
 
-
+  getNotificationPost(url,notification_id,email): Observable<any>{
+    return this.http.get(url, {params: {type: 'notification_post', id: notification_id,email:email}}).pipe(
+      map(results => {
+        console.log("Results",results); 
+        return results;
+      })
+    );
+  }
 
   Upload(url,user_email,file_name, description,genre,playlisted,publishDay,tags,duration): Observable<any> {
     let postData = new FormData();
@@ -165,9 +182,17 @@ export class RequestsService {
     );
   }
 
+  Report(url,post_id,subject){
+    return this.http.get(url, {params: {type: 'report', post: post_id,subject:subject}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results;
+      })
+    );
+  }
 
-  Login(url,user_email,password): Observable<any> {
-    return this.http.get(url, {params: {type: 'login', email: user_email,password:password}}).pipe(
+  Login(url,user_email,password,mobileInput): Observable<any> {
+    return this.http.get(url, {params: {type: 'login', email: user_email,password:password,mobile:mobileInput}}).pipe(
       map(results => {
         console.log("Results",results);
         return results;
