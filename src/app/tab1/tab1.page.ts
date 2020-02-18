@@ -48,8 +48,8 @@ export class Tab1Page {
   @ViewChild('slider', {static: false}) slide: IonSlides;
 
 
-  constructor(private cache: CacheService,public alertController: AlertController,private socialSharing: SocialSharing,private keyboard: Keyboard,private tabs: TabsPage,private platform: Platform,public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage,private oneSignal: OneSignal) {
-    this.commentsRef$ = this.database.list("comments").valueChanges();
+  constructor(private cache: CacheService,public alertController: AlertController,private socialSharing: SocialSharing,private keyboard: Keyboard,private tabs: TabsPage,private platform: Platform,public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage,private oneSignal: OneSignal,) {
+    this.commentsRef$ = this.cache.loadFromObservable("comments", this.database.list("comments").valueChanges());
     this.postViewsRef$ = this.database.list("views").valueChanges();
     this.likedComments = this.database.list("comment_likes").valueChanges();
 
@@ -263,87 +263,6 @@ export class Tab1Page {
 
     async getNext(username,slideNum){
       this.slide.slideNext();
-      // console.log("user "+ username);
-      // $("#"+slideNum+"playPause").remove();
-      // console.log("ended");
-      // $("#"+slideNum+"commentBox").remove();
-      // $("#"+slideNum+"FirstPostData").remove();
-      // $("#"+slideNum+"oldCommentsInput").remove();
-      // let profile_url = 'https://uploaded.herokuapp.com/users/users';
-      // $("."+slideNum+"Spinner").show();
-      // $("."+slideNum+"videobcg").css("display","none");
-      // this.stopOtherVids();
-      // this.storage.get("mail").then((email)=>{
-      //   let user_post: Observable <any>;
-      //   let req = this.requests;
-      //   let com = this.commentsRef$;
-      //   this.nextPostData = this.requests.getUserFeed(profile_url, username,email);
-      //   this.nextPostData.subscribe();
-      //   //disable the firsts
-      //   this.display_firsts = false;
-      //   //
-      //   $("#"+slideNum+"FirstPostData").remove();
-      //   setTimeout(async function(){
-      //     console.log("fetching video");
-      //     user_post = await req.getUserFeed(profile_url, username,email);
-      //     user_post.subscribe((users_post)=>{
-      //       console.log(users_post);
-      //       let post_id = users_post[0].post_id;
-      //       console.log(post_id);
-      //       let video_file =  "https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/"+users_post[0].file+"?alt=media#t="+users_post[0].start+"";
-      //       let post_description = users_post[0].description;
-
-      //       $("#"+slideNum+"videobsource").attr("src",video_file);
-      //       let new_vid = <HTMLVideoElement>document.getElementById(slideNum+"videobcg");
-
-      //       $("."+slideNum+"PostDescription").text(post_description);
-      //       let comments_array = [];
-      //       com.subscribe((comment)=>{
-      //         console.log(comment);
-      //         // $("."+slideNum+"commentSection").html("");
-      //         for (var c = 0; c < comment.length; c ++){
-      //           if(comment[c].post == post_id){
-      //             console.log(comment[c].post == post_id);
-      //             console.log(comment[c].post, post_id);
-      //             comments_array.push(comment[c]);
-      //           }
-      //           // {{post.post_id}}CommentsCount
-      //           $("#"+post_id+"CommentsCount").text(comments_array.length)
-      //         }
-
-      //         // $("."+slideNum+"CommentLabel").html("<span (click)='postComment("+post_id+","+slideNum+")'>Post</span>");
-
-      //         console.log(comments_array);
-      //       });
-      //       console.log(com);
-      //       new_vid.load();
-      //       // this.stopOtherVids();
-      //       let a = document.getElementsByTagName("video");
-      //       console.log("videos", a);
-      //       for(let b = 0; b < a.length; b++){a[b].pause() }
-      //       //
-      //       new_vid.play();
-      //       $("."+slideNum+"videobcg").css("display","block");
-      //       $("."+slideNum+"Spinner").hide();
-      //       $("#"+slideNum+"playPause2").attr("name", "pause");
-      //       if(window.innerWidth > 360 ){
-      //         $("#"+slideNum+"playPause").css("margin-right", "2.8px");
-      //         $("#"+slideNum+"playPause2").css("margin-right", "2.8px");
-      //         $("#"+slideNum+"playPause").css("margin-top", "1px");
-      //         $("#"+slideNum+"playPause2").css("margin-right", "1px");
-      //       }else{
-      //         $("#"+slideNum+"playPause").css("margin-right", "2px");
-      //         $("#"+slideNum+"playPause2").css("margin-right", "2px");
-      //         $("#"+slideNum+"playPause").css("margin-top", "0px");
-      //         $("#"+slideNum+"playPause2").css("margin-right", "0px");
-      //       }
-
-            
-  
-      //     });
-      //   },2000);
-      //   // return this.requests;
-      // });
     }
 
     CommentsUp(i){
@@ -356,8 +275,6 @@ export class Tab1Page {
       if(this.platform.is("ios")){
         $("."+i+"userInfo").css("margin-bottom","0px");
         $("."+i+"playPauseDiv").hide();
-        // $("."+i+"userInfo").css("margin-bottom","82%");
-        // $("."+i+"PostData").css("margin-top","-100%");
       }else{
         this.statusBar.overlaysWebView(false);
         $("."+i+"userInfo").css("margin-bottom","0px");
@@ -369,11 +286,9 @@ export class Tab1Page {
       this.statusBar.overlaysWebView(true);
       this.tabs.bottom = true; 
       console.log("Move comments down");
-      
       if(this.platform.is("android")){
         $("."+i+"playPauseDiv").show();
       }
-
       if(this.platform.is("ios")){
         if(move_bottom_bar != false){
           $("."+i+"userInfo").css("margin-bottom","71px");
@@ -398,14 +313,6 @@ export class Tab1Page {
     share(file){
       this.presentActionSheet();
     }
-
-    // ionicSlide(post_id){
-    //   this.slide.getActiveIndex().then((val) => { 
-    //     console.log(val);
-    //     this.playVideo(val,post_id);
-    //   });
-    // }
-
     ionViewWillLeave(){
       this.slide.getActiveIndex().then((val) => { 
         console.log("left slide ", val);
@@ -424,7 +331,6 @@ export class Tab1Page {
         this.commnentsTab[x].scrollTop = this.commnentsTab[x].scrollHeight;
         console.log("scroll top",this.commnentsTab[x].scrollTop);
         console.log("scroll height",this.commnentsTab[x].scrollHeight);
-        //element.scrollTop = element.scrollHeight;
       }
     }
     
@@ -622,6 +528,9 @@ export class Tab1Page {
 
     removeItems(i,post_id){
       $("."+i+"LatestComment").hide();
+      //remove list of video posts
+      $("."+i+"videoPostList").hide();
+
       console.log(this.keyboard.isVisible);
       console.log($("."+"allComments").css("display"));
       if(this.keyboard.isVisible == true || $("."+"allComments").css("display") == "block"){
@@ -835,7 +744,7 @@ export class Tab1Page {
           this.route.navigate(['/home/tabs/tab1']);
         }else{
             console.log(this.email);
-            this.results =  this.requests.getFeed(profile_url, this.email); 
+            this.results = this.cache.loadFromObservable("posts",  this.requests.getFeed(profile_url, this.email)); 
             this.results.subscribe(x=>{
               console.log("feed result", x.length);
               if(x.length == 0){
@@ -851,6 +760,19 @@ export class Tab1Page {
       });
     }
 
+    videoFullScreen(index){
+      // get current
+
+    }
+
+    goToPost(index){
+      this.slide.slideTo(index);
+    }
+
+    viewVideoPostList(i){
+      var post_list = $("."+i+"videoPostList");
+      post_list.show();
+    }
 
     // ListenLoad(){
     //   this.results.subscribe((x)=>{

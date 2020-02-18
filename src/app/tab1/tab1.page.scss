@@ -588,6 +588,42 @@ svg._18eSE {
     margin-top: 11.4%;
 }
 
+ion-icon#enterFullScreen,#videoList,#videoPostList {
+  position: absolute;
+  float: left;
+  z-index: 99999999;
+  left: 0;
+  color: white;
+  top: 0;
+  margin-top: 35%;
+  margin-left: 10px;
+  opacity: 0.5;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
+#videoPostList{
+  height: 300px;
+  opacity: 1;
+  overflow-y: scroll;
+  width: 300px;
+  display: none;
+  border-radius: 10px;
+  box-shadow: 2px 4px 6px #080808;
+}
+
+ion-icon#videoList {
+  margin-left: 40px !important;
+}
+
+#videoPostList p{
+  font-size:13px;
+}
+
+#vidoeIndex{
+  --background:black;
+  color: white;
+}
 
 #reportIcon {
   position: absolute;

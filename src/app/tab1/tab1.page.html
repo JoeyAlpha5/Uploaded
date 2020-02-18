@@ -54,6 +54,13 @@
       <div id="eyeView">
         <div class="postViews"><span class="{{ item.post_id }}views" id="{{i}}ReservedPostViews">{{ item.post_id }}</span></div>
       </div>
+      <ion-icon name="expand" id="enterFullScreen" (click)="videoFullScreen(i)"></ion-icon>
+      <ion-icon name="arrow-dropdown" id="videoList" (click)="viewVideoPostList(i)"></ion-icon>
+      <div id="videoPostList" class="{{i}}videoPostList">
+        <ion-item id="vidoeIndex" *ngFor="let video of ( results | async); let v = index" (click)="goToPost(v)">
+          <p>{{ video.description }}</p>
+        </ion-item>
+    </div>
 
       <div id="userinfo" class="{{i}}userInfo" *ngIf="userInfo ==  true">
         <p id="postDescription" class="{{i}}PostDescription">{{ item.description }}</p>
