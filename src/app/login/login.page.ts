@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { RequestsService } from '../services/requests.service';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 export class LoginPage implements OnInit {
 
   checked = false;
-  constructor(public toast: ToastController,public loadingController: LoadingController, private statusBar: StatusBar,private route: Router, private requests: RequestsService,private storage: Storage,private iab: InAppBrowser ) {
+  constructor(public toast: ToastController,public loadingController: LoadingController, private statusBar: StatusBar,private route: Router, private requests: RequestsService,private storage: Storage,private iab: InAppBrowser,private screenOrientation: ScreenOrientation) {
+    this.screenOrientation.ORIENTATIONS.PORTRAIT;
     // let status bar overlay webview
     this.statusBar.overlaysWebView(false);
     // // set status bar to white

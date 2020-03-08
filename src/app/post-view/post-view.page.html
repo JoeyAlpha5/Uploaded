@@ -7,10 +7,11 @@
         (swiperight)="swiped(i,item.post_id,'right')" (swipeleft)="swiped(i,item.post_id,'left')"
         (swipeup)="onSwipeUp( item.user_id,item.user_email,i )">
         <div id="streamIcon">Playlisted</div>
+        <div id="viewCount"> <ion-icon id="" name="eye"></ion-icon> <span id="{{i}}postViewCountCont"></span></div>
         <ion-icon id="backIcon" (click)="back()" name="close"></ion-icon>
         <video  playsinline webkit-playsinline class="videobcg" id="{{i}}videobcgP">
           <source id="{{i}}videobsource"
-            src="https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{ item.file }}?alt=media#t={{ item.start }}"
+            src="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480/{{ item.file }}.mp4?alt=media#t={{ item.start }}"
             type="video/mp4">
         </video>
         <div id="{{i}}FirstPostData" *ngIf="display_firsts == true">

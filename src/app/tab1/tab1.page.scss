@@ -430,6 +430,11 @@ div#profileImage {
   transform: translate3d(0, 0, 0) !important;
   z-index: 10000;
 
+  font {
+    font-size: 11px !important;
+    color: #fc8700;
+  }
+
   span{
     float: left;
     margin-top: 18%;
@@ -437,6 +442,7 @@ div#profileImage {
     color: white;
     font-size: 14px;
     font-weight: bold;
+    text-align: left;
   }
 
     div#image {
@@ -612,8 +618,21 @@ ion-icon#enterFullScreen,#videoList,#videoPostList {
   box-shadow: 2px 4px 6px #080808;
 }
 
+
+div#viewCount {
+  position: absolute;
+  top: 0;
+  color: white;
+  margin-top: 24px;
+  margin-left: 51px;
+  z-index: 999999;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
 ion-icon#videoList {
-  margin-left: 40px !important;
+  margin-left: 15px !important;
+  font-size: 30px;
 }
 
 #videoPostList p{

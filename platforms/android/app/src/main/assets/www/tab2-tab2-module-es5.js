@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Search\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <!--<ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>-->\n\n  <!-- Searchbar with cancel button always shown -->\n  <!-- Animated Searchbar -->\n  <ion-searchbar placeholder=\"Search artists..\" [(ngModel)]=\"searchTerm\" animated (ionChange) = \"getSearchResults()\"></ion-searchbar>\n  <div id=\"searchTags\" *ngIf=\"displaySearchVideos == false\">\n    <ion-chip (click)=\"setSearchFilter('artists')\">\n      <ion-label>Artists</ion-label>\n    </ion-chip>\n    <ion-chip (click)=\"setSearchFilter('places')\">\n      <ion-label>Places</ion-label>\n    </ion-chip>\n    <ion-chip (click)=\"setSearchFilter('tags')\">\n      <ion-label>Tags</ion-label>\n    </ion-chip>\n  </div>\n\n  <div *ngIf=\"artists == true\">\n    <div *ngFor='let item of ( results | async)'>\n      <ion-item  id=\"searchItem\" button *ngIf=\"item.id != userID\" (click)=\"viewProfile(item.id,item.email)\">\n        <div id=\"dp\" [ngStyle]=\"{'background-image': 'url(https://uploadedstream.storage.googleapis.com/' + item.image+ ')'}\"></div>\n        <p>{{ item.first_name + \" \"  + item.last_name }}<br/><span id=\"searchUsername\">@{{ item.username }}</span> </p>\n      </ion-item>\n    </div>\n  </div>\n\n  <div *ngIf=\"places == true\">\n      <p>Places box</p>\n  </div>\n\n  <div *ngIf=\"tags == true\">\n      <p>tags box</p>\n  </div>\n\n  <ion-content *ngIf=\"displaySearchVideos == true\">\n    <div id=\"oneBigOne\" (click)=\"viewPost(one.username)\"  *ngFor='let one of ( oneSearchContent | async)'>\n      <video class=\"searchVids\" playsinline webkit-playsinline loop [muted]=\"true\"  autoplay>\n        <source src=\"https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{one.file}}?alt=media\" type=\"video/mp4\">\n      </video>\n    </div>\n\n    <div id=\"playlist\" (click)=\"viewPost(item.username)\" *ngFor='let item of ( searchContent | async)'>\n      <video class=\"searchVids\" playsinline webkit-playsinline loop [muted]=\"true\"  autoplay>\n        <source src=\"https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{item.file }}?alt=media\" type=\"video/mp4\">\n      </video>\n    </div> \n  </ion-content>\n\n  <div id=\"bottomPadding\"></div>\n \n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Search\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <!--<ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n    <ion-refresher-content></ion-refresher-content>\n  </ion-refresher>-->\n\n  <!-- Searchbar with cancel button always shown -->\n  <!-- Animated Searchbar -->\n  <ion-searchbar placeholder=\"Search artists..\" [(ngModel)]=\"searchTerm\" animated (ionChange) = \"getSearchResults()\"></ion-searchbar>\n  <div id=\"searchTags\" *ngIf=\"displaySearchVideos == false\">\n    <ion-chip (click)=\"setSearchFilter('artists')\">\n      <ion-label>Artists</ion-label>\n    </ion-chip>\n    <ion-chip (click)=\"setSearchFilter('places')\">\n      <ion-label>Places</ion-label>\n    </ion-chip>\n    <ion-chip (click)=\"setSearchFilter('tags')\">\n      <ion-label>Tags</ion-label>\n    </ion-chip>\n  </div>\n\n  <div *ngIf=\"artists == true\">\n    <div *ngFor='let item of ( results | async)'>\n      <ion-item  id=\"searchItem\" button *ngIf=\"item.id != userID\" (click)=\"viewProfile(item.id,item.email)\">\n        <div id=\"dp\" [ngStyle]=\"{'background-image': 'url(https://uploadedstream.storage.googleapis.com/' + item.image+ ')'}\"></div>\n        <p>{{ item.first_name + \" \"  + item.last_name }}<br/><span id=\"searchUsername\">@{{ item.username }}</span> </p>\n      </ion-item>\n    </div>\n  </div>\n\n  <div *ngIf=\"places == true\">\n      <p>Places box</p>\n  </div>\n\n  <div *ngIf=\"tags == true\">\n      <p>tags box</p>\n  </div>\n\n  <ion-content *ngIf=\"displaySearchVideos == true\">\n    <div id=\"oneBigOne\" (click)=\"viewPost(one.username)\"  *ngFor='let one of ( oneSearchContent | async)'>\n      <video class=\"searchVids\" poster=\"https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480/{{one.file }}.png\" playsinline webkit-playsinline loop [muted]=\"true\"  autoplay>\n        <source src=\"https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480,du_10/{{one.file}}.mp4\" type=\"video/mp4\">\n      </video>\n    </div>\n\n    <div id=\"playlist\" (click)=\"viewPost(item.username)\" *ngFor='let item of ( searchContent | async)'>\n      <video class=\"searchVids\" poster=\"https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480/{{item.file }}.png\" playsinline webkit-playsinline loop [muted]=\"true\"  autoplay>\n        <source src=\"https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480,du_10/{{item.file }}.mp4\" type=\"video/mp4\">\n      </video>\n    </div> \n  </ion-content>\n\n  <div id=\"bottomPadding\"></div>\n \n</ion-content>\n"
 
 /***/ }),
 
@@ -85,6 +85,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm5/ionic-storage.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _tabs_tabs_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../tabs/tabs.page */ "./src/app/tabs/tabs.page.ts");
+/* harmony import */ var _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/screen-orientation/ngx */ "./node_modules/@ionic-native/screen-orientation/ngx/index.js");
+
 
 
 
@@ -94,13 +96,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Tab2Page = /** @class */ (function () {
-    function Tab2Page(tabs, platform, requests, statusBar, route, storage) {
+    function Tab2Page(tabs, platform, requests, statusBar, route, storage, screenOrientation) {
         this.tabs = tabs;
         this.platform = platform;
         this.requests = requests;
         this.statusBar = statusBar;
         this.route = route;
         this.storage = storage;
+        this.screenOrientation = screenOrientation;
         this.searchTerm = '';
         this.profile_url = 'https://uploaded.herokuapp.com/users/users';
         this.displaySearchVideos = true;
@@ -108,6 +111,8 @@ var Tab2Page = /** @class */ (function () {
         this.artists = true;
         this.places = false;
         this.tags = false;
+        this.initial_load = false;
+        this.screenOrientation.ORIENTATIONS.PORTRAIT;
         this.statusBar.overlaysWebView(false);
         this.statusBar.styleDefault();
         this.tabs.bgColor = '#000000';
@@ -158,10 +163,13 @@ var Tab2Page = /** @class */ (function () {
             else {
                 _this.storage.get('current_userID').then(function (val) {
                     _this.userID = val;
-                    _this.searchContent = _this.requests.searchPage(_this.profile_url);
-                    _this.oneSearchContent = _this.requests.searchPageOneBig(_this.profile_url);
-                    _this.oneSearchContent.subscribe();
-                    _this.searchContent.subscribe();
+                    if (_this.initial_load == false) {
+                        _this.initial_load = true;
+                        _this.searchContent = _this.requests.searchPage(_this.profile_url);
+                        _this.oneSearchContent = _this.requests.searchPageOneBig(_this.profile_url);
+                        _this.oneSearchContent.subscribe();
+                        _this.searchContent.subscribe();
+                    }
                 });
                 _this.restartVideos();
             }
@@ -202,7 +210,8 @@ var Tab2Page = /** @class */ (function () {
         { type: _services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"] },
         { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-        { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"] }
+        { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"] },
+        { type: _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_8__["ScreenOrientation"] }
     ]; };
     Tab2Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -210,7 +219,7 @@ var Tab2Page = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./tab2.page.html */ "./node_modules/raw-loader/index.js!./src/app/tab2/tab2.page.html"),
             styles: [__webpack_require__(/*! ./tab2.page.scss */ "./src/app/tab2/tab2.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_tabs_tabs_page__WEBPACK_IMPORTED_MODULE_7__["TabsPage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Platform"], _services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_tabs_tabs_page__WEBPACK_IMPORTED_MODULE_7__["TabsPage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Platform"], _services_requests_service__WEBPACK_IMPORTED_MODULE_2__["RequestsService"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _ionic_storage__WEBPACK_IMPORTED_MODULE_5__["Storage"], _ionic_native_screen_orientation_ngx__WEBPACK_IMPORTED_MODULE_8__["ScreenOrientation"]])
     ], Tab2Page);
     return Tab2Page;
 }());

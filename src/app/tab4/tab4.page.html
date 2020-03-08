@@ -30,7 +30,7 @@
           <p id='username'>{{ profile.username }} </p>
           <!--<p id='Posts'>{{ profile.total_posts }} Uploaded playlists</p>-->
           <p id='bio'>{{ profile.bio }}</p>
-          <a *ngIf="profile.website != '' " href="{{ profile.website }}" id="link"><ion-icon name="globe" id="globe"></ion-icon> {{ profile.website }}</a>
+          <span *ngIf="profile.website != '' " (click)="openWebsite(profile.website)" id="link"><ion-icon name="musical-notes" id="globe"></ion-icon><!--{{ profile.website }}--></span>
           <span id="location"><ion-icon name="pin" id="globe"></ion-icon>{{ profile.location }}</span>
           <p id='Following'> <span>Followers:<br/><font id="Followers">{{ profile.followers }}</font></span>  <span>Following:<br/> <font id="Followings">{{ profile.following }}</font></span>  </p>
       </div>

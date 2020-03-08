@@ -45,6 +45,7 @@
 		7A3D43110B5841F59ACA4314 /* CDVLocalFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E04E419FEFC498390F3AACD /* CDVLocalFilesystem.m */; };
 		7EE6B2E862DC43908B6E7630 /* CDVWKWebViewEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 15244841D70344849B466A3E /* CDVWKWebViewEngine.m */; };
 		7F98444BEC5241DF9DD353FE /* CDVJpegHeaderWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = C0447ADCBAAC478A8BF62581 /* CDVJpegHeaderWriter.m */; };
+		86DA04BED2314E50AB774DA7 /* CDVOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = ED1CC080AF2A4C33B38DAAD0 /* CDVOrientation.m */; };
 		87980B22F8384FE3A62AD369 /* NSString+SSURLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A71DDE754A4094823FA620 /* NSString+SSURLEncoding.m */; };
 		8C9ECF6ABF1E4046BB73BEBF /* TextResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D52C702AD194D0C8D40A293 /* TextResponseSerializer.m */; };
 		908259EAC7DC499996A2B8E1 /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E2B7417789A4506BBB448B5 /* CDVCamera.m */; };
@@ -185,6 +186,7 @@
 		D0920F6A827C4F3EB759DA8D /* CDVIonicKeyboard.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVIonicKeyboard.m; path = "cordova-plugin-ionic-keyboard/CDVIonicKeyboard.m"; sourceTree = "<group>"; };
 		D2E4545B0D194D7988EB2A5B /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = "cordova-plugin-advanced-http/AFURLResponseSerialization.m"; sourceTree = "<group>"; };
 		D4C72113E6F245B08E2DFE08 /* sqlite3.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = "cordova-sqlite-storage/sqlite3.h"; sourceTree = "<group>"; };
+		D5F3A0A9BD80498DB168602A /* CDVOrientation.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVOrientation.h; path = "cordova-plugin-screen-orientation/CDVOrientation.h"; sourceTree = "<group>"; };
 		D8A070E6B56B45F39DEFA571 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = "cordova-plugin-advanced-http/AFHTTPSessionManager.h"; sourceTree = "<group>"; };
 		D9A281827FC74F559AFFF001 /* CDVWKProcessPoolFactory.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVWKProcessPoolFactory.m; path = "cordova-plugin-ionic-webview/CDVWKProcessPoolFactory.m"; sourceTree = "<group>"; };
 		DB385B857FD646B49EF4A29B /* CDVStatusBar.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVStatusBar.h; path = "cordova-plugin-statusbar/CDVStatusBar.h"; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		EB92A2037319430689ADA3A9 /* CordovaHttpPlugin.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CordovaHttpPlugin.h; path = "cordova-plugin-advanced-http/CordovaHttpPlugin.h"; sourceTree = "<group>"; };
 		EC8981F18BCF43B287DCCCC5 /* CDVStatusBar.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVStatusBar.m; path = "cordova-plugin-statusbar/CDVStatusBar.m"; sourceTree = "<group>"; };
+		ED1CC080AF2A4C33B38DAAD0 /* CDVOrientation.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVOrientation.m; path = "cordova-plugin-screen-orientation/CDVOrientation.m"; sourceTree = "<group>"; };
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		EE582F476D64CB3F86D62F71 /* libPods-Uploaded.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Uploaded.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF6D1C583589411FB1E98D33 /* CDVWKWebViewUIDelegate.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVWKWebViewUIDelegate.m; path = "cordova-plugin-ionic-webview/CDVWKWebViewUIDelegate.m"; sourceTree = "<group>"; };
@@ -415,6 +418,8 @@
 				623D27948DF74AB9A112BB68 /* CDVUIInAppBrowser.h */,
 				FEA248A1AB65469E82880967 /* CDVWKInAppBrowser.h */,
 				33DE6975CF4B4575B1AE67D8 /* CDVWKInAppBrowserUIDelegate.h */,
+				ED1CC080AF2A4C33B38DAAD0 /* CDVOrientation.m */,
+				D5F3A0A9BD80498DB168602A /* CDVOrientation.h */,
 			);
 			name = Plugins;
 			path = Uploaded/Plugins;
@@ -620,6 +625,7 @@
 				301D1B95E2DC49C6A9D654C6 /* CDVUIInAppBrowser.m in Sources */,
 				CBC3B7EA1E1D4E60B2A7C84B /* CDVWKInAppBrowser.m in Sources */,
 				AC7D6F1F795D4D7D82E3CBC3 /* CDVWKInAppBrowserUIDelegate.m in Sources */,
+				86DA04BED2314E50AB774DA7 /* CDVOrientation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

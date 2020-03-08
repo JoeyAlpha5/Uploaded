@@ -23,7 +23,7 @@
             <p id='username'>{{ profile.username }} </p>
             <!--<p id='Posts'>{{ profile.total_posts }} Uploaded playlists</p>-->
             <p id='bio'>{{ profile.bio }}</p>
-            <a *ngIf="profile.website != '' " href="{{ profile.website }}" id="link"><ion-icon name="globe" id="globe"></ion-icon> {{ profile.website }}</a>
+            <span *ngIf="profile.website != '' " (click)="openWebsite(profile.website)" id="link"><ion-icon name="musical-notes" id="globe"></ion-icon><!--{{ profile.website }}--></span>
             <span id="location" *ngIf="profile.location != '' " ><ion-icon name="pin" id="globe"></ion-icon>{{ profile.location }}</span>
             <p id='Following'> <span (click)="follow(profile.username,1)"><b>Followers:</b><br/> <font id="Followers">{{ profile.followers }}</font></span>  <span (click)="follow(profile.username,0)"><b>Following: </b><br/> <font id="Followings">{{ profile.following }}</font></span>  </p>
         </div>
@@ -36,8 +36,8 @@
             <ion-slide id="postCont"> 
               <div id="playlists" *ngFor='let item of ( Playlists | async)' >
                 <div id="playlist" *ngIf="item.playlisted == true">
-                  <video class="searchVids" playsinline webkit-playsinline loop autoplay [muted]="true" (click)="viewPost(item.id)" >
-                    <source src="https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{item.post_file}}?alt=media" type="video/mp4">
+                  <video class="searchVids" poster="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480,du_10/{{item.post_file}}.png" playsinline webkit-playsinline loop autoplay [muted]="true" (click)="viewPost(item.id)" >
+                    <source src="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480,du_10/{{item.post_file}}.mp4" type="video/mp4">
                   </video>
                   <!-- <div id="playlistPreview" (click)="viewPost(item.id)" (press)="Playlist(item.id)">
                     <ion-icon name="thumbs-up"></ion-icon><span id="metric">{{ item.likes }} likes</span>

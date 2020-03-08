@@ -207,6 +207,16 @@ export class PostViewPage {
       }
     }
 
+    setPostViews(id,post_id){
+      this.storage.get("username").then(username=>{
+        console.log("username is " , username, " post id is ", post_id, " index is ", id);
+        var postViews = this.requests.setPostViews('https://uploaded.herokuapp.com/users/users', post_id,username);
+        postViews.subscribe(re=>{
+          console.log("number of views is ", re);
+          $("#"+id+"postViewCountCont").text(re["view_count"])
+        });
+      });
+    }
 
     attchKeyBoard(){
       this.statusBar.overlaysWebView(false);
@@ -274,6 +284,7 @@ export class PostViewPage {
       if(video.paused == true){
  
         this.currentSlideVideo();
+        this.setPostViews(id,post_id);
         $("#"+post_id+"actualCommnents").show();
         // {{ post. }}actualCommnents
         $("."+id+"PostData").show();

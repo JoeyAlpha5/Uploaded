@@ -329,6 +329,17 @@ ion-icon#profileIocn {
   opacity: 0;
 }
 
+div#viewCount {
+  position: absolute;
+  top: 0;
+  color: white;
+  margin-top: 24px;
+  margin-left: 51px;
+  z-index: 999999;
+  -webkit-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
+}
+
 
 div#streamIcon {
   position: absolute;

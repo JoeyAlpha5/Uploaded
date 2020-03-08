@@ -116,6 +116,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 var STORAGE_KEY = "stored_videos";
 var UploadPage = /** @class */ (function () {
     function UploadPage(cloud_storage, ref, plt, actionSheetController, filePath, webview, camera, file_, http, tabs, requests, toastController, statusBar, route, loadingController, storage) {

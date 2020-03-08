@@ -15,7 +15,7 @@ import { Camera, CameraOptions, PictureSourceType } from '@ionic-native/Camera/n
 import { File, FileEntry } from '@ionic-native/File/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
-
+// import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 const STORAGE_KEY = "stored_videos";
 @Component({
@@ -31,7 +31,7 @@ export class UploadPage implements OnInit {
   Tags: any;
   progress: number = 0;
   downloadURL: Observable<string>;
-  constructor(private cloud_storage: AngularFireStorage, private ref: ChangeDetectorRef,private plt: Platform,private actionSheetController: ActionSheetController,private filePath: FilePath,private webview: WebView,private camera: Camera, private file_: File,private http: HttpClient,private tabs: TabsPage,private requests: RequestsService,public toastController: ToastController,private statusBar: StatusBar,private route: Router, public loadingController: LoadingController,private storage: Storage ) { 
+  constructor(private cloud_storage: AngularFireStorage, private ref: ChangeDetectorRef,private plt: Platform,private actionSheetController: ActionSheetController,private filePath: FilePath,private webview: WebView,private camera: Camera, private file_: File,private http: HttpClient,private tabs: TabsPage,private requests: RequestsService,public toastController: ToastController,private statusBar: StatusBar,private route: Router, public loadingController: LoadingController,private storage: Storage,) { 
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();
     this.tabs.bgColor = '#000000';

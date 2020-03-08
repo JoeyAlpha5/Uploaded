@@ -32,6 +32,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import {Tab1Page} from './tab1/tab1.page';
 import {TabsPage } from './tabs/tabs.page';
 import { CacheModule } from 'ionic-cache';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+
 
 
 export class CustomHammerConfig extends HammerGestureConfig {
@@ -43,7 +45,11 @@ export class CustomHammerConfig extends HammerGestureConfig {
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,
+  imports: [
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule, 
+    HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
@@ -62,6 +68,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     InAppBrowser,
     Media,
     Keyboard,
+    ScreenOrientation,
     OneSignal,
     SocialSharing ,
     { provide: StorageBucket, useValue: 'gs://uploaded-9719b.appspot.com/' },

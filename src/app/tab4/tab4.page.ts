@@ -9,7 +9,9 @@ import { ToastController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TabsPage } from '../tabs/tabs.page';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 // import { AngularCropperjsComponent } from 'angular-cropperjs';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 @Component({
   selector: 'app-tab4',
   templateUrl: './tab4.page.html',
@@ -22,7 +24,9 @@ export class Tab4Page implements OnInit {
   // myImage = null;
   // scaleValX = 1;
   // scaleValY = 1;
-  constructor(private tabs: TabsPage,public loadingController: LoadingController,private statusBar: StatusBar,public actionSheetController: ActionSheetController,public toastController: ToastController, private requests: RequestsService,private storage: Storage,private route: Router  ) { 
+  initial_load:boolean = false;
+  constructor(private iab: InAppBrowser,private tabs: TabsPage,public loadingController: LoadingController,private statusBar: StatusBar,public actionSheetController: ActionSheetController,public toastController: ToastController, private requests: RequestsService,private storage: Storage,private route: Router,private screenOrientation: ScreenOrientation  ) { 
+    this.screenOrientation.ORIENTATIONS.PORTRAIT;
     this.statusBar.overlaysWebView(true);
     this.tabs.bgColor = '#000000';
     //cropper options
@@ -162,14 +166,11 @@ export class Tab4Page implements OnInit {
       if(val == undefined){
         this.route.navigate(['login']);
       }else{
-        this.results =  this.requests.getProfile(profile_url, val); 
-        // this.results.subscribe(profile => {
-        //   console.log("profile", profile);
-        //   this.renderProfile(profile);
-  
-        // });
-  
-        this.Playlists = this.requests.getProfilePlaylists(profile_url, val); 
+        if(this.initial_load == false){
+          this.initial_load = true;
+          this.results =  this.requests.getProfile(profile_url, val);   
+          this.Playlists = this.requests.getProfilePlaylists(profile_url, val); 
+        }
       }
     });
   }
@@ -185,6 +186,13 @@ export class Tab4Page implements OnInit {
 
   Playlist(post_id){
     this.presentActionSheet(post_id);
+  }
+
+
+  openWebsite(website){
+    console.log(website);
+    const browser = this.iab.create(website,'_system');
+    browser.show()
   }
 
   viewPost(post_id){

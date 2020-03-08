@@ -24,6 +24,17 @@ export class RequestsService {
       );
   }
 
+
+  //set the post videws
+  setPostViews(url,post_id,username):Observable<any>{
+    return this.http.get(url, {params: {url: url, type: 'setViews',username:username,post_id:post_id}}).pipe(
+      map(results => {
+        console.log("Results",results);
+        return results;
+      })
+    );
+  }
+
   //get 5 first users to tag
   getTagUsers(url,username):Observable<any>{
     return this.http.get(url, {params: {url: url, type: 'getTags',username:username}}).pipe(
@@ -99,10 +110,10 @@ export class RequestsService {
     );
   }
 
-  getFeed(url,user_email): Observable<any> {
-    return this.http.get(url, {params: {type: 'feed', email: user_email}}).pipe(
+  getFeed(url,user_email,count): Observable<any> {
+    return this.http.get(url, {params: {type: 'feed', email: user_email,count:count}}).pipe(
       map(results => {
-        console.log("Results",results);
+          console.table(results["Response"]);
         return results["Response"];
       })
     );

@@ -458,6 +458,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
         "cordova.InAppBrowser.open",
         "window.open"
       ]
+    },
+    {
+      "id": "cordova-plugin-screen-orientation.screenorientation",
+      "file": "plugins/cordova-plugin-screen-orientation/www/screenorientation.js",
+      "pluginId": "cordova-plugin-screen-orientation",
+      "clobbers": [
+        "cordova.plugins.screenorientation"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -479,6 +487,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-sqlite-storage": "3.3.0",
     "onesignal-cordova-plugin": "2.8.2",
     "cordova-plugin-cocoapod-support": "1.6.2",
-    "cordova-plugin-inappbrowser": "3.2.0"
+    "cordova-plugin-inappbrowser": "3.2.0",
+    "cordova-plugin-screen-orientation": "3.0.2"
   };
 });

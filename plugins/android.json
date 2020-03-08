@@ -43,6 +43,9 @@
     "cordova-plugin-media-capture": {
       "PACKAGE_NAME": "uploaded.uploaded"
     },
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "uploaded.uploaded"
+    },
     "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "uploaded.uploaded"
     },

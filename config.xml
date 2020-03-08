@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="uploaded.uploaded" version="0.0.13" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="uploaded.uploaded" version="0.1.19" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Uploaded</name>
     <description>Breaking New Boundaries For Artists</description>
     <author email="chjalome@gmail.com" href="behance.net/jalome">JoeyAlpha5</author>

@@ -6,6 +6,7 @@ import * as $ from 'jquery';
 import { Storage } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TabsPage } from '../tabs/tabs.page';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -21,7 +22,7 @@ export class ProfilePage implements OnInit {
   following: boolean;
 
   //profile_url = 'http://127.0.0.1:8000/users/users'
-  constructor(private tabs: TabsPage,private requests: RequestsService,private statusBar: StatusBar,private route: Router,private storage: Storage ) {
+  constructor(private iab: InAppBrowser,private tabs: TabsPage,private requests: RequestsService,private statusBar: StatusBar,private route: Router,private storage: Storage ) {
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();  
     this.tabs.bgColor = '#000000';  
@@ -109,6 +110,12 @@ export class ProfilePage implements OnInit {
     console.log("dragged");
   }
 
+
+  openWebsite(website){
+    console.log(website);
+    const browser = this.iab.create(website,'_system');
+    browser.show()
+  }
 
   viewUserFeed(username){
     this.storage.set("uerFeedUsername", username);

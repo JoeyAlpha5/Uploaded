@@ -17,6 +17,10 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { AlertController } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
+import { forkJoin } from 'rxjs';
+import { map } from 'rxjs/operators';
+// import { NavController } from '@ionic/angular';
+// import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -24,7 +28,9 @@ import { CacheService } from 'ionic-cache';
 })
 export class Tab1Page {
 
-  results: Observable<any>;
+  // Posts = [];
+  results: Observable<any[]>;
+  posts = [];
   display_firsts: boolean = true;
   nextPostData: Observable<any>;
   commentsRef$: Observable<any[]>;
@@ -42,16 +48,39 @@ export class Tab1Page {
   latest_comment: any;
   mute: boolean = true;
   percent: any;
+  initial_load: boolean = false;
   circle_circum = 294.159265359;
   tag = false;
   commentInput = "";
   @ViewChild('slider', {static: false}) slide: IonSlides;
 
 
-  constructor(private cache: CacheService,public alertController: AlertController,private socialSharing: SocialSharing,private keyboard: Keyboard,private tabs: TabsPage,private platform: Platform,public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage,private oneSignal: OneSignal,) {
+  constructor(private cache: CacheService,public alertController: AlertController,private socialSharing: SocialSharing,private keyboard: Keyboard,private tabs: TabsPage,private platform: Platform,public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage,private oneSignal: OneSignal,/*private screenOrientation: ScreenOrientation*/) {
     this.commentsRef$ = this.cache.loadFromObservable("comments", this.database.list("comments").valueChanges());
     this.postViewsRef$ = this.database.list("views").valueChanges();
     this.likedComments = this.database.list("comment_likes").valueChanges();
+    // this.screenOrientation.ORIENTATIONS.PORTRAIT;
+
+    // detect orientation changes
+    // this.screenOrientation.onChange().subscribe(
+    //   () => {
+    //       console.log("Orientation Changed");
+    //       //if it is in landscape mode
+    //       if(this.screenOrientation.type == "landscape-primary"){
+    //         $("#image").css("margin-top","12%");
+    //         $("#profileUsername").css("margin-top","15%");
+    //         $("#PostData").css("margin-top", "5%");
+    //         $("#enterFullScreen").css("margin-left","15px");
+    //         $("#videoList").hide();
+    //       }else{
+    //         $("#image").css("margin-top","13%");
+    //         $("#profileUsername").css("margin-top","18%");
+    //         $("#PostData").css("margin-top", "20%");
+    //         $("#videoList").show();
+    //         $("#enterFullScreen").css("margin-left","10px");
+    //       }
+    //   }
+    // );
 
     // this.commentsRef$ = this.database.list("reposts").valueChanges();
     this.statusBar.overlaysWebView(true);
@@ -72,7 +101,7 @@ export class Tab1Page {
 
     slideOpts = {
       initialSlide: 0,
-      speed: 400
+      speed: 100
     };
 
     pass: any;
@@ -82,7 +111,7 @@ export class Tab1Page {
       //ensure previous videos are paused
       // executor (`the producing code, "singer")
       let a = document.getElementsByTagName("video");
-      console.table("videos", a);
+      // console.table("videos", a);
       for(let b = 0; b < a.length; b++){a[b].pause() }
     }
 
@@ -207,10 +236,10 @@ export class Tab1Page {
         // this.latest_comment.subscribe();
         let length_of_comments = val.length;
         this.latest_comment = val[length_of_comments-1];
-        console.table("Comments",val, val[length_of_comments-1]);
+        // console.table("Comments",val, val[length_of_comments-1]);
         this.slide.getActiveIndex().then(i=>{
           let current_coments_display = $("."+i+"userInfo").css("display");
-          console.table(current_coments_display);
+          // console.table(current_coments_display);
           if(current_coments_display == "none"){
             $("."+i+"LatestComment").show();
             setTimeout(function(){
@@ -225,8 +254,8 @@ export class Tab1Page {
           //display the last comment added
           for(let x = 0; x < this.commnentsTab.length; x++){
             this.commnentsTab[x].scrollTop = this.commnentsTab[x].scrollHeight;
-            console.log("scroll top",this.commnentsTab[x].scrollTop);
-            console.log("scroll height",this.commnentsTab[x].scrollHeight);
+            // console.log("scroll top",this.commnentsTab[x].scrollTop);
+            // console.log("scroll height",this.commnentsTab[x].scrollHeight);
             //element.scrollTop = element.scrollHeight;
           }
           //reset the comments count for each post
@@ -248,8 +277,8 @@ export class Tab1Page {
           //display the last comment added
           for(let x = 0; x < this.commnentsTab2.length; x++){
             this.commnentsTab2[x].scrollTop = this.commnentsTab2[x].scrollHeight;
-            console.log("scroll top2",this.commnentsTab2[x].scrollTop);
-            console.log("scroll height2",this.commnentsTab2[x].scrollHeight);
+            // console.log("scroll top2",this.commnentsTab2[x].scrollTop);
+            // console.log("scroll height2",this.commnentsTab2[x].scrollHeight);
             //element.scrollTop = element.scrollHeight;
           }
 
@@ -338,7 +367,7 @@ export class Tab1Page {
       var video = <HTMLVideoElement> document.getElementById(id+"videobcg");
       this.tabs.bottom = true;
       let CommentsBox =  $(".allComments");
-      console.log(CommentsBox);
+      // console.log(CommentsBox);
       //close all comment boxes
       this.CommentsDown(id,true);
       this.refresh =  true;
@@ -355,9 +384,9 @@ export class Tab1Page {
       this.tabs.bottom = true;
       console.log(id);
       if(video.paused == true){
-
- 
+        //sent views
         this.currentSlideVideo();
+        this.setPostViews(id,post_id);
         $("#"+post_id+"actualCommnents").show();
         $("."+id+"PostData").show();
 
@@ -420,6 +449,17 @@ export class Tab1Page {
     }
 
 
+    setPostViews(id,post_id){
+      this.storage.get("username").then(username=>{
+        console.log("username is " , username, " post id is ", post_id, " index is ", id);
+        var postViews = this.requests.setPostViews('https://uploaded.herokuapp.com/users/users', post_id,username);
+        postViews.subscribe(re=>{
+          console.log("number of views is ", re);
+          $("#"+id+"viewCountCont").text(re["view_count"])
+        });
+      });
+    }
+
     //set the video length
     displayVideoDuration(current_lenght,video_length,current_slide ){
       let video_percent = Math.round((current_lenght/video_length)*100);
@@ -430,7 +470,12 @@ export class Tab1Page {
       setInterval(()=>{
         this.slide.getActiveIndex().then(slide=>{
           let video = <HTMLVideoElement>document.getElementById(slide+"videobcg");
-          let video_percent =Math.floor(video.currentTime/video.duration*100);
+          var video_percent;
+          if(video == null || video == undefined){
+            video_percent = Math.floor(0/100*100);
+          }else{
+            video_percent = Math.floor(video.currentTime/video.duration*100);
+          }
           this.percent = video_percent;
         });
       },1000);
@@ -441,6 +486,25 @@ export class Tab1Page {
     currentSlideVideo(){
       this.stopOtherVids();
       this.slide.getActiveIndex().then((currentSlide)=>{
+
+        //if divisible by ten
+        if((currentSlide+1)%10 == 0){
+          console.log("last video id is ", currentSlide);
+          var profile_url =  'https://uploaded.herokuapp.com/users/users';
+          this.results = this.requests.getFeed(profile_url,this.email,currentSlide+1);
+          this.results.subscribe(x=>{
+            //loop through the new posts and check if any of them exists in the posts array
+            for (var p = 0; p < x.length; p++){
+              console.log(this.posts.some(post => post["post_id"] == x[p].post_id)); 
+              if(this.posts.some(post => post["post_id"] == x[p].post_id) == false){
+                this.posts.push(x[p]);
+              } 
+            }
+            console.log("new posts ", this.posts);
+          });
+        }
+      //
+
         console.log("currentSlide after change is ", currentSlide);
         let current_post = $("#"+currentSlide+"PostViews").text();
         let current_post_exits = true;
@@ -542,7 +606,7 @@ export class Tab1Page {
       }else{
         let current_coments_display = $("."+i+"userInfo");
         console.log(current_coments_display.css("display"));
-        if(current_coments_display.css("display") == "block"){
+        if(current_coments_display.css("display") == "block" /*|| this.screenOrientation.type == "landscape-primary"*/){
           $("."+i+"userInfo").css("display", "none");
           $("#"+i+"repostIcon").hide();
           $("#"+post_id+"repostCount").hide();
@@ -711,7 +775,7 @@ export class Tab1Page {
 
     }
 
-    saveUserToken(){
+   async saveUserToken(){
       // savetoken
       this.oneSignal.getIds().then(identity => {
         let id = identity.userId;
@@ -744,28 +808,48 @@ export class Tab1Page {
           this.route.navigate(['/home/tabs/tab1']);
         }else{
             console.log(this.email);
-            this.results = this.cache.loadFromObservable("posts",  this.requests.getFeed(profile_url, this.email)); 
-            this.results.subscribe(x=>{
-              console.log("feed result", x.length);
-              if(x.length == 0){
-                this.tabs.bgColor = 'black';
-                $("#tab1Content").append("<p style='font-size:15px; color:grey;text-align:-webkit-center;margin-top:20%;'>Feed looks empty, follow others to start seeing content<br><ion-icon name='eye' style='margin-top:16px;font-size:30px;'></ion-icon></p>");
-              }
-            });
-            // let lstLoad = this.ListenLoad;
-            // window.addEventListener('load', function () {
-            //   lstLoad();
-            // });
+            if(this.initial_load == true){
+              this.setFirstViews();
+              
+            }else{
+              this.results = this.cache.loadFromObservable("posts",  this.requests.getFeed(profile_url, this.email,0)); 
+              this.results.subscribe(x=>{
+                this.posts = x;
+                console.log("feed result", x.length);
+  
+                if(x.length == 0){
+                  this.tabs.bgColor = 'black';
+                  // $("#tab1Content").append("<p style='font-size:15px; color:grey;text-align:-webkit-center;margin-top:20%;'>Feed looks empty, follow others to start seeing content<br><ion-icon name='eye' style='margin-top:16px;font-size:30px;'></ion-icon></p>");
+                }
+  
+                if(this.initial_load ==true){
+                  console.log("initial load is ", this.initial_load)
+                  
+                }
+              });
+            }
         }
       });
     }
 
-    videoFullScreen(index){
+    videoFullScreen(index,post_id){
       // get current
+      // console.log(this.screenOrientation.type);
+      // if(this.screenOrientation.type != "landscape-primary"){
+      //   this.tabs.bottom = false;
+      //   this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+      //   this.removeItems(index,post_id)
+      // }else{
+      //   this.tabs.bottom = true;
+      //   this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      //   this.removeItems(index,post_id)
+      // }
+
 
     }
 
     goToPost(index){
+    //  this.screenOrientation.ORIENTATIONS.PORTRAIT;
       this.slide.slideTo(index);
     }
 
@@ -798,26 +882,18 @@ export class Tab1Page {
           let slide_post = $("#"+index+"ReservedPostViews").text();
           let slide_post2 = $("#"+index+"PostViews").text();
           console.log("slide number ", slide_post, " ", slide_post2);
-          this.storage.get("current_userID").then((val)=>{
-            this.database.list("views/").remove(JSON.stringify(val+slide_post));
-            this.database.list("views/").remove(JSON.stringify(val+slide_post2));
-            console.log(JSON.stringify(val+slide_post));
-          });
       });
     }
 
 
     async setFirstViews(){
         await this.slide.getActiveIndex().then((index)=>{
-          console.log("current index is", index);
           this.results.subscribe((val)=>{
-            console.log("current video at index 0 ", val[0]);
-            console.log("all videos  ", val);
-      
               let post_id = JSON.stringify(val[0].post_id);
                 this.slide.getActiveIndex().then((val) => { 
-                  console.log(val);
+                  console.log("first video slid id is ",val);
                   this.playVideo(val,post_id);
+                  this.initial_load = true;
                 });
           });
         });
@@ -837,6 +913,8 @@ export class Tab1Page {
 
     //handles the number of live viewer
     async swiped(id,post_id,direction){
+
+
       this.commentInput = "";
       console.log("post", post_id)
       console.log("left");
@@ -855,7 +933,7 @@ export class Tab1Page {
             console.log(val);
             this.playVideo(val,post_id);
             console.log("current post id after swipe ",current_post_id);
-            //
+            console.log("slide num ", id);
           });
         });
         console.log(current_post_id);

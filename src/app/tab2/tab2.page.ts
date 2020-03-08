@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
 import { TabsPage } from '../tabs/tabs.page';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -24,8 +26,10 @@ export class Tab2Page {
   artists: boolean = true;
   places: boolean = false;
   tags: boolean = false;
+  initial_load: boolean = false;
   places_results: Observable<any>; 
-  constructor(private tabs: TabsPage,private platform: Platform,private requests: RequestsService, private statusBar: StatusBar,private route: Router,private storage: Storage ) {
+  constructor(private tabs: TabsPage,private platform: Platform,private requests: RequestsService, private statusBar: StatusBar,private route: Router,private storage: Storage,private screenOrientation: ScreenOrientation ) {
+    this.screenOrientation.ORIENTATIONS.PORTRAIT;
     this.statusBar.overlaysWebView(false);
     this.statusBar.styleDefault();
     this.tabs.bgColor = '#000000';
@@ -82,10 +86,13 @@ export class Tab2Page {
       }else{
         this.storage.get('current_userID').then((val) => {
           this.userID = val;
-          this.searchContent =  this.requests.searchPage(this.profile_url);
-          this.oneSearchContent = this.requests.searchPageOneBig(this.profile_url);
-          this.oneSearchContent.subscribe();
-          this.searchContent.subscribe();
+          if(this.initial_load == false){
+            this.initial_load = true;
+            this.searchContent =  this.requests.searchPage(this.profile_url);
+            this.oneSearchContent = this.requests.searchPageOneBig(this.profile_url);
+            this.oneSearchContent.subscribe();
+            this.searchContent.subscribe();
+          }
         });
 
         this.restartVideos()
@@ -109,7 +116,7 @@ export class Tab2Page {
   getSearchResults(){
     console.log(this.searchTerm);
     var user_email = JSON.parse(localStorage.getItem('email'));
-    this.results = this.requests.getSearchResults(this.profile_url, this.searchTerm, user_email);
+    this.results = this.requests.getSearchResults(this.profile_url, this.searchTerm, user_email);    
     // this.places_results = this.requests.getSearchPlacesResult(this.profile_url,this.searchTerm,user_email) 
     if(this.searchTerm != ""){
       this.displaySearchVideos = false;

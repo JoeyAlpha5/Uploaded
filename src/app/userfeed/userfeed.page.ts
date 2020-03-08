@@ -354,6 +354,7 @@ export class UserfeedPage {
       if(video.paused == true){
  
         this.currentSlideVideo();
+        // this.setPostViews(id,post_id);
         $("#"+post_id+"actualCommnents").show();
         // {{ post. }}actualCommnents
         $("."+id+"PostData").show();
@@ -377,12 +378,23 @@ export class UserfeedPage {
 
     }
 
+    setPostViews(id,post_id){
+      this.storage.get("username").then(username=>{
+        console.log("username is " , username, " post id is ", post_id, " index is ", id);
+        var postViews = this.requests.setPostViews('https://uploaded.herokuapp.com/users/users', post_id,username);
+        postViews.subscribe(re=>{
+          console.log("number of views is ", re);
+          $("#"+id+"userViewCountCont").text(re["view_count"])
+        });
+      });
+    }
 
     currentSlideVideo(){
       this.stopOtherVids();
       this.slide.getActiveIndex().then((currentSlide)=>{
         console.log("currentSlide after change is ", currentSlide);
         let current_post = $("#"+currentSlide+"PostViews").text();
+        console.log("current post after slide ", current_post);
         let current_post_exits = true;
         console.log(current_post);
         if(current_post == "" || current_post == undefined || currentSlide == null){
@@ -395,6 +407,7 @@ export class UserfeedPage {
           let video_length = video.duration;
           this.displayVideoDuration(video.currentTime,video_length,currentSlide );
           video.play(); 
+          this.setPostViews(currentSlide,current_post);
       });
     }
 

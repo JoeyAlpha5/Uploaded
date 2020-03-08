@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { TabsPage } from '../tabs/tabs.page';
 import { Tab1Page } from '../tab1/tab1.page';
 import * as $ from 'jquery';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @Component({
   selector: 'app-tab3',
@@ -18,8 +19,13 @@ export class Tab3Page {
   notificationssRef$: Observable<any[]>;
   username: Observable<any>;
   userNotif: Observable<any>
-  constructor(private tabs: TabsPage,private database:AngularFireDatabase,private statusBar: StatusBar, private storage: Storage, private route: Router,private tab1: Tab1Page) {
-    this.notificationssRef$ = this.database.list("notification", ref => ref.orderByChild('date').limitToLast(10) ).valueChanges();
+  initial_load: boolean = false;
+  constructor(private tabs: TabsPage,private database:AngularFireDatabase,private statusBar: StatusBar, private storage: Storage, private route: Router,private tab1: Tab1Page,private screenOrientation: ScreenOrientation) {
+    this.screenOrientation.ORIENTATIONS.PORTRAIT;
+    if(this.initial_load == false){
+      this.initial_load = true;
+      this.notificationssRef$ = this.database.list("notification", ref => ref.orderByChild('date').limitToLast(10) ).valueChanges();
+    }
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
     this.statusBar.styleDefault();

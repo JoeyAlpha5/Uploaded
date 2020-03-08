@@ -46,14 +46,14 @@
 
   <ion-content *ngIf="displaySearchVideos == true">
     <div id="oneBigOne" (click)="viewPost(one.username)"  *ngFor='let one of ( oneSearchContent | async)'>
-      <video class="searchVids" playsinline webkit-playsinline loop [muted]="true"  autoplay>
-        <source src="https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{one.file}}?alt=media" type="video/mp4">
+      <video class="searchVids" poster="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480/{{one.file }}.png" playsinline webkit-playsinline loop [muted]="true"  autoplay>
+        <source src="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480,du_10/{{one.file}}.mp4" type="video/mp4">
       </video>
     </div>
 
     <div id="playlist" (click)="viewPost(item.username)" *ngFor='let item of ( searchContent | async)'>
-      <video class="searchVids" playsinline webkit-playsinline loop [muted]="true"  autoplay>
-        <source src="https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{item.file }}?alt=media" type="video/mp4">
+      <video class="searchVids" poster="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480/{{item.file }}.png" playsinline webkit-playsinline loop [muted]="true"  autoplay>
+        <source src="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480,du_10/{{item.file }}.mp4" type="video/mp4">
       </video>
     </div> 
   </ion-content>

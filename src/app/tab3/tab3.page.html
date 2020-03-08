@@ -15,30 +15,30 @@
       <ion-item id="actualNotif">
         <div (click)="viewUser(notif.userid)" *ngIf="notif.profile != 'none'" id="dp" [ngStyle]="{ background: 'url(https://uploadedstream.storage.googleapis.com/' + notif.profile+ ')'}"></div>
         <div (click)="viewUser(notif.userid)" *ngIf="notif.profile == 'none'" id="dp"></div>
-        <span (click)="viewPost(notif.post)"><b>{{ notif.first_name }}</b>  {{ notif.msg }}<span id="{{i}}DateHolder" class="datePlaceholder"></span></span>
+        <span (click)="viewPost(notif.post)" class="notifDetails"><b>{{ notif.first_name }}</b>  {{ notif.msg }}<span id="{{i}}DateHolder" class="datePlaceholder"></span></span>
         <div *ngIf="notif.post_image" (click)="viewPost(notif.post)" id="postCover">
           <video class="searchVids" playsinline webkit-playsinline loop autoplay [muted]="true" (click)="viewPost(item.id)" >
-            <source src="https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{notif.post_image}}?alt=media" type="video/mp4">
+            <source src="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_240,du_10/{{notif.post_image}}.mp4" type="video/mp4">
           </video>
         </div>
       </ion-item>
       <ion-item id="actualNotif" *ngIf="notif.to == username">
         <div (click)="viewUser(notif.userid)" *ngIf="notif.profile != 'none'" id="dp" [ngStyle]="{ background: 'url(https://uploadedstream.storage.googleapis.com/' + notif.profile+ ')'}"></div>
         <div (click)="viewUser(notif.userid)" *ngIf="notif.profile == 'none'" id="dp"></div>
-        <span id="msg"><b>{{ notif.first_name }}</b> {{ notif.msg }}<span id="{{i}}DateHolder" class="datePlaceholder"></span></span>
+        <span id="msg" class="notifDetails"><b>{{ notif.first_name }}</b> {{ notif.msg }}<span id="{{i}}DateHolder" class="datePlaceholder"></span></span>
         <div *ngIf="notif.post_image" (click)="viewPost(notif.post)" id="postCover">
           <video class="searchVids" playsinline webkit-playsinline loop autoplay [muted]="true" (click)="viewPost(item.id)" >
-            <source src="https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{notif.post_image}}?alt=media" type="video/mp4">
+            <source src="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_240,du_10/{{notif.post_image}}.mp4" type="video/mp4">
           </video>
         </div>
       </ion-item>
       <ion-item id="actualNotif" *ngIf="notif.type == 'follow'">
         <div (click)="viewUser(notif.userid)" *ngIf="notif.profile != 'none'" id="dp" [ngStyle]="{ background: 'url(https://uploadedstream.storage.googleapis.com/' + notif.profile+ ')'}"></div>
         <div (click)="viewUser(notif.userid)" *ngIf="notif.profile == 'none'" id="dp"></div>
-        <span id="msg" (click)="viewUser(notif.userid)"><b>{{ notif.first_name }}</b> {{ notif.msg }}<span id="{{i}}DateHolder" class="datePlaceholder"></span></span> 
+        <span id="msg" class="notifDetails" (click)="viewUser(notif.userid)"><b>{{ notif.first_name }}</b> {{ notif.msg }}<span id="{{i}}DateHolder" class="datePlaceholder"></span></span> 
         <div *ngIf="notif.post_image"  id="postCover" (click)="viewPost(notif.post)">
           <video class="searchVids" playsinline webkit-playsinline loop autoplay [muted]="true" (click)="viewPost(item.id)" >
-            <source src="https://firebasestorage.googleapis.com/v0/b/uploaded-9719b.appspot.com/o/{{notif.post_image}}?alt=media" type="video/mp4">
+            <source src="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_240,du_10/{{notif.post_image}}.mp4" type="video/mp4">
           </video>
         </div>
         <span id="{{i}}DateHolder" class="datePlaceholder"></span>

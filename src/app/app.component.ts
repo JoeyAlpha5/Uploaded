@@ -42,7 +42,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      this.CacheService.setDefaultTTL(60*60*12);
+      this.CacheService.setDefaultTTL(30);
       this.CacheService.setOfflineInvalidate(false);
 
       this.setupPush();
