@@ -139,6 +139,9 @@ let MessagingPage = class MessagingPage {
         jquery__WEBPACK_IMPORTED_MODULE_9__("#messageInput").css("margin-bottom", "56px");
     }
     ionViewDidEnter() {
+        //set previous url
+        window.history.pushState({ prevUrl: window.location.href }, null, "");
+        //     
         // Put here the code you want to execute
         this.statusBar.overlaysWebView(false);
         this.statusBar.backgroundColorByHexString('#ffffff');

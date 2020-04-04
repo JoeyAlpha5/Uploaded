@@ -291,8 +291,8 @@ export class RequestsService {
   }
   //
 
-  searchPage(url){
-    return this.http.get(url, {params: {type: 'searchPage'}}).pipe(
+  searchPage(url,count){
+    return this.http.get(url, {params: {type: 'searchPage',count:count}}).pipe(
       map(results => {
         console.log("Results",results);
         return results["Response"];

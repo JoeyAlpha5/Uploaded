@@ -13,7 +13,7 @@
         <!-- <ion-icon id="reportIcon" (click)="report(item.post_id)" name="information-circle-outline"></ion-icon> -->
         <video playsinline webkit-playsinline class="videobcg" (ended)="getNext(item.username,i)" id="{{i}}videobcgf">
           <source id="{{i}}videobsource"
-            src="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480/{{ item.file }}.mp4?alt=media#t={{ item.start }}"
+            src="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480/{{ item.file }}.mp4"
             type="video/mp4">
         </video>
         <div id="{{i}}FirstPostData" *ngIf="display_firsts == true">
@@ -98,7 +98,7 @@
             <circle id="{{i}}Circle" cx="52" cy="52" r="50" fill="transparent" stroke-linecap="round" stroke-width="4" stroke-dashoffset="387.69908169872417" class="_3yudO" stroke="white" stroke-width="3"></circle>
           </svg>
           <div class="circle" (click)="onSwipeUp( item.user_id,item.user_email,i )" id="image"
-            [ngStyle]="{'background-image': 'url(https://uploadedstream.storage.googleapis.com/'+ item.image +')'}">
+            [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/www-uploadedstream-com/image/upload/v1583762562/'+ item.image +'.jpg)'}">
             <ion-icon id="profileIocn" name="contact" *ngIf="item.image == 'none'"></ion-icon>
           </div>
           <span (click)="onSwipeUp( item.user_id,item.user_email,i )">@{{ item.username }}</span>

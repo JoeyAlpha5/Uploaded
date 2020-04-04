@@ -33,6 +33,9 @@ export class FollowingPage implements OnInit {
   };
 
   ionViewDidEnter(){
+    //set previous url
+    window.history.pushState({ prevUrl: window.location.href }, null, "")
+    //    
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
     this.statusBar.styleDefault();

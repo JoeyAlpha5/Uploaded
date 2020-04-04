@@ -8,12 +8,11 @@
 
 
 <ion-content>
-
-
-  <ion-list id="notifs">
+<div id="currentNotification" (scroll)="scrolling()">
+  <ion-list id="notifs" >
     <ion-item-sliding #item *ngFor='let notif of ( notificationssRef$ | async)?.slice().reverse(); let i = index'>
       <ion-item id="actualNotif">
-        <div (click)="viewUser(notif.userid)" *ngIf="notif.profile != 'none'" id="dp" [ngStyle]="{ background: 'url(https://uploadedstream.storage.googleapis.com/' + notif.profile+ ')'}"></div>
+        <div (click)="viewUser(notif.userid)" *ngIf="notif.profile != 'none'" id="dp" [ngStyle]="{ background: 'url(https://res.cloudinary.com/www-uploadedstream-com/video/upload/' + notif.profile+ '.jpg)'}"></div>
         <div (click)="viewUser(notif.userid)" *ngIf="notif.profile == 'none'" id="dp"></div>
         <span (click)="viewPost(notif.post)" class="notifDetails"><b>{{ notif.first_name }}</b>  {{ notif.msg }}<span id="{{i}}DateHolder" class="datePlaceholder"></span></span>
         <div *ngIf="notif.post_image" (click)="viewPost(notif.post)" id="postCover">
@@ -23,7 +22,7 @@
         </div>
       </ion-item>
       <ion-item id="actualNotif" *ngIf="notif.to == username">
-        <div (click)="viewUser(notif.userid)" *ngIf="notif.profile != 'none'" id="dp" [ngStyle]="{ background: 'url(https://uploadedstream.storage.googleapis.com/' + notif.profile+ ')'}"></div>
+        <div (click)="viewUser(notif.userid)" *ngIf="notif.profile != 'none'" id="dp" [ngStyle]="{ background: 'url(https://res.cloudinary.com/www-uploadedstream-com/image/upload/v1583762562/' + notif.profile+ '.jpg)'}"></div>
         <div (click)="viewUser(notif.userid)" *ngIf="notif.profile == 'none'" id="dp"></div>
         <span id="msg" class="notifDetails"><b>{{ notif.first_name }}</b> {{ notif.msg }}<span id="{{i}}DateHolder" class="datePlaceholder"></span></span>
         <div *ngIf="notif.post_image" (click)="viewPost(notif.post)" id="postCover">
@@ -33,7 +32,7 @@
         </div>
       </ion-item>
       <ion-item id="actualNotif" *ngIf="notif.type == 'follow'">
-        <div (click)="viewUser(notif.userid)" *ngIf="notif.profile != 'none'" id="dp" [ngStyle]="{ background: 'url(https://uploadedstream.storage.googleapis.com/' + notif.profile+ ')'}"></div>
+        <div (click)="viewUser(notif.userid)" *ngIf="notif.profile != 'none'" id="dp" [ngStyle]="{ background: 'url(https://res.cloudinary.com/www-uploadedstream-com/image/upload/v1583762562/' + notif.profile+ '.jpg)'}"></div>
         <div (click)="viewUser(notif.userid)" *ngIf="notif.profile == 'none'" id="dp"></div>
         <span id="msg" class="notifDetails" (click)="viewUser(notif.userid)"><b>{{ notif.first_name }}</b> {{ notif.msg }}<span id="{{i}}DateHolder" class="datePlaceholder"></span></span> 
         <div *ngIf="notif.post_image"  id="postCover" (click)="viewPost(notif.post)">
@@ -51,5 +50,6 @@
       </ion-item-options> -->
     </ion-item-sliding>
   </ion-list>
-
+  <ion-spinner name="bubbles" color="primary"></ion-spinner>
+</div>
 </ion-content>

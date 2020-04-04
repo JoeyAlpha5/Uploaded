@@ -154,6 +154,10 @@ export class Tab4Page implements OnInit {
   }
 
   ionViewDidEnter() {
+    //set current page
+    this.storage.set("prev_page", document.location.href);
+    //
+
     // Put here the code you want to execute
     this.statusBar.overlaysWebView(true);
     this.tabs.bgColor = '#000000';

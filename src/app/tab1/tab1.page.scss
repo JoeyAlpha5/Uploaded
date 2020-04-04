@@ -594,6 +594,15 @@ svg._18eSE {
     margin-top: 11.4%;
 }
 
+
+img#videoListImg {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  margin-right: 23px;
+}
+
 ion-icon#enterFullScreen,#videoList,#videoPostList {
   position: absolute;
   float: left;
@@ -618,6 +627,23 @@ ion-icon#enterFullScreen,#videoList,#videoPostList {
   box-shadow: 2px 4px 6px #080808;
 }
 
+div#spinnderCont {
+  height: 47px;
+  background: black;
+}
+
+#infiniteScoll{
+  background: black;
+}
+
+div#viewCount span {
+  font-size: 13px;
+}
+
+
+.videoLoader {
+  position: absolute;
+}
 
 div#viewCount {
   position: absolute;
@@ -635,13 +661,16 @@ ion-icon#videoList {
   font-size: 30px;
 }
 
-#videoPostList p{
-  font-size:13px;
+#videoPostList p {
+  font-size: 13px;
+  float: left;
+  width: 69%;
 }
 
 #vidoeIndex{
   --background:black;
   color: white;
+  height: 48px;
 }
 
 #reportIcon {

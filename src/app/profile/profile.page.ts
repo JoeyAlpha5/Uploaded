@@ -42,6 +42,10 @@ export class ProfilePage implements OnInit {
   }
 
   ionViewDidEnter() {
+    //set current page
+    this.storage.set("prev_page", document.location.href);
+    // 
+
     this.statusBar.overlaysWebView(true);
     this.tabs.bgColor = '#000000';
     this.tabs.bottom = true;

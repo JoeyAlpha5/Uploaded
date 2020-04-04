@@ -125,6 +125,9 @@ let NotifymePage = class NotifymePage {
         this.route.navigate(['/home/tabs/notifications']);
     }
     ionViewDidEnter() {
+        //set current page
+        this.storage.set("prev_page", document.location.href);
+        //     
         this.statusBar.overlaysWebView(false);
         this.statusBar.backgroundColorByHexString('#ffffff');
         this.statusBar.styleDefault();

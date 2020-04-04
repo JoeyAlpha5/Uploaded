@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
 import { TabsPage } from '../tabs/tabs.page';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
-
+import * as $ from 'jquery';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -16,6 +16,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 export class Tab2Page {
 
   results: Observable<any>;
+  search_videos = [];
   searchTerm = '';
   profile_url =  'https://uploaded.herokuapp.com/users/users';
   userID: Observable<any>;
@@ -74,7 +75,38 @@ export class Tab2Page {
     this.tabs.tab5 = "white";
   }
 
+
+  search_scrollin(){
+    // (videos_list[0].scrollHeight - videos_list[0].scrollTop) == 300
+    var video_list = document.getElementById("searchVids");
+    console.log("Scroll top ",video_list.scrollTop);
+    console.log("Scroll height" ,video_list.scrollHeight);
+    console.log("inner height ", $("#searchVids").innerHeight());
+    // console.log(video_list.scrollHeight - video_list.scrollTop);
+    if(Math.floor($("#searchVids").innerHeight() + video_list.scrollTop) == video_list.scrollHeight){
+      console.log("reached bottom");
+      var total_videos = document.getElementsByClassName("searc_videos");
+      var number_of_current_vids = total_videos[0].childElementCount;
+      console.log("total childre ", number_of_current_vids-1);
+      this.searchContent = this.requests.searchPage(this.profile_url, number_of_current_vids-1);
+      this.searchContent.subscribe(v=>{
+        console.log("new videos ", v);
+        for(var i = 0; i < v.length; i++){
+          console.log(this.search_videos.some(post => post["post_id"] == v[i].post_id)); 
+          if(this.search_videos.some(post => post["post_id"] == v[i].post_id) == false){
+            this.search_videos.push(v[i]);
+          } 
+        }
+      });
+
+    }
+  }
+
   ionViewDidEnter() {
+    //set current page
+    this.storage.set("prev_page", document.location.href);
+    //
+
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
     this.statusBar.styleDefault();
@@ -88,10 +120,20 @@ export class Tab2Page {
           this.userID = val;
           if(this.initial_load == false){
             this.initial_load = true;
-            this.searchContent =  this.requests.searchPage(this.profile_url);
+            this.searchContent =  this.requests.searchPage(this.profile_url,16);
             this.oneSearchContent = this.requests.searchPageOneBig(this.profile_url);
             this.oneSearchContent.subscribe();
             this.searchContent.subscribe();
+
+            //loop through the videos and check if any of them exists in the posts array
+            this.searchContent.subscribe(x=>{
+              for (var p = 0; p < x.length; p++){
+                this.search_videos.push(x[p]);
+              }
+            });
+          //
+
+
           }
         });
 

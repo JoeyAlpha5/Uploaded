@@ -20,11 +20,12 @@ export class Tab3Page {
   username: Observable<any>;
   userNotif: Observable<any>
   initial_load: boolean = false;
+  resluts_limit = 10;
   constructor(private tabs: TabsPage,private database:AngularFireDatabase,private statusBar: StatusBar, private storage: Storage, private route: Router,private tab1: Tab1Page,private screenOrientation: ScreenOrientation) {
     this.screenOrientation.ORIENTATIONS.PORTRAIT;
     if(this.initial_load == false){
       this.initial_load = true;
-      this.notificationssRef$ = this.database.list("notification", ref => ref.orderByChild('date').limitToLast(10) ).valueChanges();
+      this.notificationssRef$ = this.database.list("notification", ref => ref.orderByChild('date').limitToLast(this.resluts_limit) ).valueChanges();
     }
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
@@ -40,6 +41,21 @@ export class Tab3Page {
     });
   }
 
+  scrolling(){
+    console.log("scrolling");
+    var content_children = document.getElementById("notifs").childElementCount;
+    var notif_inner_height = $("#currentNotification").innerHeight();
+    var scroll_top = document.getElementById("currentNotification").scrollTop;
+    var scroll_height = document.getElementById("currentNotification").scrollHeight;
+    if(Math.floor(scroll_height - scroll_top) == Math.floor(notif_inner_height)){
+      console.log("inner_height ", notif_inner_height, " scroll top ", scroll_top, " scroll height ", scroll_height, " scroll height - scroll top ", scroll_height - scroll_top);
+      console.log("children ", content_children)
+      this.resluts_limit +=10;
+      this.notificationssRef$ = this.database.list("notification", ref => ref.orderByChild('date').limitToLast(this.resluts_limit) ).valueChanges();
+
+    }
+
+  }
 
   changeIconColors(){
     this.tabs.tab1 = "white";
@@ -50,6 +66,10 @@ export class Tab3Page {
   }
 
   ionViewDidEnter() {
+    //set current page
+    this.storage.set("prev_page", document.location.href);
+    //
+
     // this.tab1.stopOtherVids();
     this.statusBar.overlaysWebView(false);
     this.statusBar.backgroundColorByHexString('#ffffff');
@@ -67,6 +87,7 @@ export class Tab3Page {
 
       //date calc
       this.notificationssRef$.subscribe(notif=>{
+        //scroll to bottom if results not == 10
         let notifi = notif.reverse();
         for(let count = 0; count < notif.length; count++){
           if(notifi[count].date){

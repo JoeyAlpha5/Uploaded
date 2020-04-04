@@ -32,7 +32,12 @@
         </div>
       </div>
       
-      <div id="{{i}}newPostData" *ngFor="let post of ( nextPostData | async); let p = index">
+
+
+      <div id="{{i}}videoLoader" class="videoLoader">
+        <ion-spinner name="bubbles" color="primary"></ion-spinner>
+      </div>
+      <!-- <div id="{{i}}newPostData" *ngFor="let post of ( nextPostData | async); let p = index">
         <div *ngIf="post.username == item.username ">
           <div id="PostData" class="{{p}}PostData">
             <ion-icon class="icon heartIcon" *ngIf="post.liked == 0" name="heart" id="{{post.post_id}}likeIcon"
@@ -50,7 +55,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
       
       <div id="eyeView">
@@ -58,10 +63,14 @@
       </div>
       <!-- <ion-icon name="expand" id="enterFullScreen" (click)="videoFullScreen(i,item.post_id)"></ion-icon> -->
       <ion-icon name="arrow-dropdown" id="videoList" (click)="viewVideoPostList(i)"></ion-icon>
-      <div id="videoPostList" class="{{i}}videoPostList">
-        <ion-item id="vidoeIndex" *ngFor="let video of ( posts ); let v = index" (click)="goToPost(v)">
-          <p>{{ video.description }}</p>
-        </ion-item>
+      <div id="videoPostList" class="{{i}}videoPostList" (scroll)="scrolling(i)">
+          <ion-item id="vidoeIndex" *ngFor="let video of ( posts ); let v = index" (click)="goToPost(v)">
+            <p id="videoListDesc">{{ video.description }}</p>
+            <img id="videoListImg" src="https://res.cloudinary.com/www-uploadedstream-com/video/upload/w_300,h_300,c_crop/{{ video.file }}.jpg"/>
+          </ion-item>
+        <div id="spinnderCont">
+          <ion-spinner name="bubbles" color="primary"></ion-spinner>
+        </div>
     </div>
 
       <div id="userinfo" class="{{i}}userInfo" *ngIf="userInfo ==  true">
@@ -77,7 +86,7 @@
             </span>
           </div>
       </div>
-        <div id="{{i}}nextPostComments" *ngFor="let post of ( nextPostData | async); let p = index">
+        <!-- <div id="{{i}}nextPostComments" *ngFor="let post of ( nextPostData | async); let p = index">
           <div id="{{ post.post_id }}actualCommnents">
           <div *ngIf="post.username == item.username " class="commentBox" id="{{i}}commentBoxNew">
             <span id="comment" *ngFor='let comment of (commentsRef$ | async); let x = index'>
@@ -88,7 +97,7 @@
             </span>
           </div>
           </div>
-        </div>
+        </div> -->
         <!--<input type="text"  (focus)="CommentsUp(i)" (blur)="CommentsDown(i)"*/ class="commentInput" id="{{item.post_id}}commentInput" placeholder="Add Comment...">-->
         <input type="text" [(ngModel)]="commentInput" (ngModelChange)="userTyping()"  (focus)="CommentsUp(i)" class="commentInput" id="{{i}}commentInput"
           placeholder="Add Comment...">
@@ -103,7 +112,7 @@
           <circle id="{{i}}Circle" cx="52" cy="52" r="50" fill="transparent" stroke-linecap="round" stroke-width="4" stroke-dashoffset="387.69908169872417" class="_3yudO" stroke="white" stroke-width="3"></circle>
         </svg>
         <div class="circle" (click)="onSwipeUp( item.user_id,item.user_email,i )" id="image"
-          [ngStyle]="{'background-image': 'url(https://uploadedstream.storage.googleapis.com/'+ item.image +')'}">
+          [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/www-uploadedstream-com/image/upload/v1583762562/'+ item.image +'.jpg)'}">
           <ion-icon id="profileIocn" name="contact" *ngIf="item.image == 'none'"></ion-icon>
         </div>
         <span id="profileUsername" (click)="onSwipeUp( item.user_id,item.user_email,i )">@{{ item.username }}<br>
@@ -156,9 +165,9 @@
       [showUnits]="false"
       [startFromZero]="false"
     ></circle-progress>
-      <div id="playPause" class="{{i}}playPauseDiv {{i}}playPauseDiv2" *ngFor="let post of ( nextPostData | async); let p = index">
+      <!-- <div id="playPause" class="{{i}}playPauseDiv {{i}}playPauseDiv2" *ngFor="let post of ( nextPostData | async); let p = index">
           <ion-icon class="playPauseIcon" *ngIf="post.username == item.username" (click)="playVideo(i, post.post_id)" id="{{i}}playPause2" name="pause"></ion-icon>
-      </div>
+      </div> -->
 
       <div id="{{item.post_id}}allComments" class="allComments animated fadeInUp">
         <div id="scrollableComments" class="scrollableComments">
@@ -211,7 +220,7 @@
          <p><span>@{{latest_comment.user}}</span> {{ latest_comment.comment }}</p>
       </div>
 
-      <div>{{ posts.length }}</div>
+      <!-- <div>{{ posts.length }}</div> -->
 
       <ion-spinner name="crescent" id="spinner" class="{{i}}Spinner"></ion-spinner>
     </ion-slide>

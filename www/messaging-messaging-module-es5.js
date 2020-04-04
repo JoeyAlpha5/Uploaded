@@ -143,6 +143,9 @@ var MessagingPage = /** @class */ (function () {
     };
     MessagingPage.prototype.ionViewDidEnter = function () {
         var _this = this;
+        //set previous url
+        window.history.pushState({ prevUrl: window.location.href }, null, "");
+        //     
         // Put here the code you want to execute
         this.statusBar.overlaysWebView(false);
         this.statusBar.backgroundColorByHexString('#ffffff');

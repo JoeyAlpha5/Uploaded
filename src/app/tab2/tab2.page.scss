@@ -28,6 +28,13 @@ div#playlists {
 }
 
 
+div#searchVids {
+  width: 100%;
+  overflow: scroll;
+  height: 45%;
+  text-align: -webkit-center;
+}
+
 #playlistPreview {
   float: left;
   color: white;
@@ -88,11 +95,11 @@ div#searchTags span {
   font-weight: bold;
 }
 
-div#bottomPadding {
-  bottom: 0px;
-  height: 268px;
-  width: 100%;
-}
+// div#bottomPadding {
+//   bottom: 0px;
+//   height: 268px;
+//   width: 100%;
+// }
 
 div#playlist video {
   width: 100%;
@@ -106,4 +113,11 @@ div#playlist video {
 
 video {
   object-fit: cover;
+}
+
+
+@media (min-height:800px){
+  div#searchVids {
+    height: 56.5%;
+  }
 }

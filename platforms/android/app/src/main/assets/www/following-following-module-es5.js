@@ -121,6 +121,9 @@ var FollowingPage = /** @class */ (function () {
     };
     FollowingPage.prototype.ionViewDidEnter = function () {
         var _this = this;
+        //set previous url
+        window.history.pushState({ prevUrl: window.location.href }, null, "");
+        //    
         this.statusBar.overlaysWebView(false);
         this.statusBar.backgroundColorByHexString('#ffffff');
         this.statusBar.styleDefault();

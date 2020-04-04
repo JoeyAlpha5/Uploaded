@@ -17,8 +17,6 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 import { AlertController } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
-import { forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
 // import { NavController } from '@ionic/angular';
 // import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 @Component({
@@ -32,7 +30,7 @@ export class Tab1Page {
   results: Observable<any[]>;
   posts = [];
   display_firsts: boolean = true;
-  nextPostData: Observable<any>;
+  // nextPostData: Observable<any>;
   commentsRef$: Observable<any[]>;
   repostsRef$: Observable<any[]>;
   commnentsTab: any;
@@ -53,7 +51,7 @@ export class Tab1Page {
   tag = false;
   commentInput = "";
   @ViewChild('slider', {static: false}) slide: IonSlides;
-
+ 
 
   constructor(private cache: CacheService,public alertController: AlertController,private socialSharing: SocialSharing,private keyboard: Keyboard,private tabs: TabsPage,private platform: Platform,public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage,private oneSignal: OneSignal,/*private screenOrientation: ScreenOrientation*/) {
     this.commentsRef$ = this.cache.loadFromObservable("comments", this.database.list("comments").valueChanges());
@@ -224,7 +222,38 @@ export class Tab1Page {
     }
 
 
-    
+    //scroll event
+    scrolling(index){
+      var videos_list = document.getElementsByClassName(index+"videoPostList");
+
+      var inner_height = $("."+index+"videoPostList:eq(0)").innerHeight();
+      console.log("scrool height ",videos_list[0].scrollHeight);
+      console.log("scroll top ",videos_list[0].scrollTop);
+      console.log("inner height is ", inner_height);
+      if((videos_list[0].scrollHeight - Math.floor(videos_list[0].scrollTop)) == 300){
+        console.log("scrolling ", index);
+        console.log("scrool height ",videos_list[0].scrollHeight);
+        console.log("scrool top ",videos_list[0].scrollTop);
+        console.log(videos_list[0]);
+        //
+        this.slide.length().then(l=>{
+          console.log("slide length ", l);
+            //get more posts
+            var profile_url =  'https://uploaded.herokuapp.com/users/users';
+            this.results = this.requests.getFeed(profile_url,this.email,l+1);
+            this.results.subscribe(x=>{
+              //loop through the new posts and check if any of them exists in the posts array
+              for (var p = 0; p < x.length; p++){
+                console.log(this.posts.some(post => post["post_id"] == x[p].post_id)); 
+                if(this.posts.some(post => post["post_id"] == x[p].post_id) == false){
+                  this.posts.push(x[p]);
+                } 
+              }
+              console.log("new posts ", this.posts);
+            });
+        });
+      }
+    }
 
 
     displayComments(){
@@ -488,22 +517,27 @@ export class Tab1Page {
       this.slide.getActiveIndex().then((currentSlide)=>{
 
         //if divisible by ten
-        if((currentSlide+1)%10 == 0){
-          console.log("last video id is ", currentSlide);
-          var profile_url =  'https://uploaded.herokuapp.com/users/users';
-          this.results = this.requests.getFeed(profile_url,this.email,currentSlide+1);
-          this.results.subscribe(x=>{
-            //loop through the new posts and check if any of them exists in the posts array
-            for (var p = 0; p < x.length; p++){
-              console.log(this.posts.some(post => post["post_id"] == x[p].post_id)); 
-              if(this.posts.some(post => post["post_id"] == x[p].post_id) == false){
-                this.posts.push(x[p]);
-              } 
+        console.log("current slide ", currentSlide+1 , " divisible by 10 " ,(currentSlide+2)%10 )
+        if((currentSlide+2)%10 == 0){
+          this.slide.length().then(l=>{
+            if(l == currentSlide+1){
+              console.log("last video id is ", currentSlide);
+              var profile_url =  'https://uploaded.herokuapp.com/users/users';
+              this.results = this.requests.getFeed(profile_url,this.email,l+1);
+              this.results.subscribe(x=>{
+                //loop through the new posts and check if any of them exists in the posts array
+                for (var p = 0; p < x.length; p++){
+                  console.log(this.posts.some(post => post["post_id"] == x[p].post_id)); 
+                  if(this.posts.some(post => post["post_id"] == x[p].post_id) == false){
+                    this.posts.push(x[p]);
+                  } 
+                }
+                console.log("new posts ", this.posts);
+              });
             }
-            console.log("new posts ", this.posts);
           });
         }
-      //
+        //
 
         console.log("currentSlide after change is ", currentSlide);
         let current_post = $("#"+currentSlide+"PostViews").text();
@@ -518,7 +552,14 @@ export class Tab1Page {
         // this.videoDuration.subscribe((duration)=>{
           let video_length = video.duration;
           this.displayVideoDuration(video.currentTime,video_length,currentSlide );
-          video.play(); 
+          $("#"+currentSlide+"videoLoader").hide();
+            video.play(); 
+            //check if the video is actually playing
+            console.log("current video is paused ", video.paused);
+            if(video.paused){
+              $("#"+currentSlide+"playPause").attr("name", "play");
+            }
+            
           // console.log(duration, video_length);
           // video.currentTime = parseFloat(duration[0]);
           // console.log("post username ", duration[2]);
@@ -790,6 +831,10 @@ export class Tab1Page {
     }
 
     async ionViewDidEnter() {
+      //set current page
+      this.storage.set("prev_page", document.location.href);
+      //
+
       this.statusBar.overlaysWebView(true);
       this.tabs.bgColor = 'transparent';
       this.displayComments();

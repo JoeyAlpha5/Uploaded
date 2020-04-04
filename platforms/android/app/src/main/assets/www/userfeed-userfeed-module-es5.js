@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content>\n    <!--<ion-refresher  *ngIf=\"refresh ==  true\" id=\"refresher\" slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n      <ion-refresher-content></ion-refresher-content>\n    </ion-refresher>-->\n    <ion-slides #slider id=\"slides\" (ionSlideDidChange)=\"currentSlideVideo()\" (ionSlidesDidLoad)=\"setFirstViews()\" [options]=\"slideOpts\">\n      <ion-slide id='slider' *ngFor='let item of ( results | async); let i = index'\n        (swiperight)=\"swiped(i,item.post_id,'right')\" (swipeleft)=\"swiped(i,item.post_id,'left')\"\n        (swipeup)=\"onSwipeUp( item.user_id,item.user_email,i )\">\n        <div id=\"liveDot\"></div>\n        <div id=\"streamIcon\">Stream</div>\n        <div id=\"viewCount\"> <ion-icon id=\"\" name=\"eye\"></ion-icon> <span id=\"{{i}}userViewCountCont\"></span></div>\n        <ion-icon id=\"backIcon\" (click)=\"back()\" name=\"close\"></ion-icon>\n        <!-- <ion-icon id=\"reportIcon\" (click)=\"report(item.post_id)\" name=\"information-circle-outline\"></ion-icon> -->\n        <video playsinline webkit-playsinline class=\"videobcg\" (ended)=\"getNext(item.username,i)\" id=\"{{i}}videobcgf\">\n          <source id=\"{{i}}videobsource\"\n            src=\"https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480/{{ item.file }}.mp4?alt=media#t={{ item.start }}\"\n            type=\"video/mp4\">\n        </video>\n        <div id=\"{{i}}FirstPostData\" *ngIf=\"display_firsts == true\">\n          <div id=\"PostData\" class=\"{{i}}PostData\">\n            <ion-icon class=\"icon\" *ngIf=\"item.liked == 0\" name=\"heart\" id=\"{{item.post_id}}likeIcon\"\n              (click)=\"like(item.post_id,i)\"></ion-icon><span *ngIf=\"item.liked == 0\"\n              id=\"{{item.post_id}}likeCount\">{{ item.like }}</span>\n            <ion-icon class=\"icon\" *ngIf=\"item.liked == 1\" [ngStyle]=\"{color:'#fc8700'}\" name=\"heart\"\n              id=\"{{item.post_id}}likeIcon\" (click)=\"like(item.post_id,i)\"></ion-icon><span *ngIf=\"item.liked == 1\"\n              id=\"{{item.post_id}}likeCount\">{{ item.like }}</span>\n            <ion-icon class=\"icon\" (click)=\"repost(item.post_id)\" name=\"share-alt\" id=\"{{i}}repostIcon\"></ion-icon><span\n              id=\"{{item.post_id}}repostCount\">{{ item.reposts }}</span>\n            <ion-icon class=\"icon\" (click)=\"share(item.file)\" name=\"share\" id=\"{{i}}shareIcon\"></ion-icon><br/>\n            <ion-icon class=\"icon\" name=\"text\" id=\"{{ i }}postIcon\" (click)=\"showAllComments(item.post_id, i)\"></ion-icon>\n            <span id=\"{{item.post_id}}CommentsCount\">0</span>\n            <div class=\"postViews\"><span class=\"{{ item.post_id }}views\" id=\"{{i}}PostViews\">{{ item.post_id }}</span>\n            </div>\n          </div>\n        </div>\n        \n        <div id=\"{{i}}newPostData\" *ngFor=\"let post of ( nextPostData | async); let p = index\">\n          <div *ngIf=\"post.username == item.username \">\n            <div id=\"PostData\" class=\"{{p}}PostData\">\n              <ion-icon class=\"icon\" *ngIf=\"post.liked == 0\" name=\"heart\" id=\"{{post.post_id}}likeIcon\"\n                (click)=\"like(post.post_id,i)\"></ion-icon><span *ngIf=\"post.liked == 0\"\n                id=\"{{post.post_id}}likeCount\">{{ post.like }}</span>\n              <ion-icon class=\"icon\" *ngIf=\"post.liked == 1\" [ngStyle]=\"{color:'#fc8700'}\" name=\"heart\"\n                id=\"{{post.post_id}}likeIcon\" (click)=\"like(post.post_id,i)\"></ion-icon><span *ngIf=\"post.liked == 1\"\n                id=\"{{post.post_id}}likeCount\">{{ post.like }}</span>\n              <ion-icon class=\"icon\" (click)=\"repost(post.post_id)\" name=\"share-alt\" id=\"{{i}}repostIcon\"></ion-icon><span\n                id=\"{{post.post_id}}repostCount\">{{ post.reposts }}</span>\n              <ion-icon class=\"icon\" (click)=\"share(post.file)\" name=\"share\" id=\"{{i}}shareIcon\"></ion-icon><br/>\n              <ion-icon class=\"icon\" name=\"text\" id=\"{{ i }}postIcon\" (click)=\"showAllComments(post.post_id,i)\">\n              </ion-icon><span id=\"{{post.post_id}}CommentsCount\">0</span>\n              <div class=\"postViews\"><span class=\"{{ post.post_id }}views\" id=\"{{i}}PostViews\">{{ post.post_id }}</span>\n              </div>\n            </div>\n          </div>\n        </div>\n  \n        \n        <div id=\"eyeView\">\n          <!-- <ion-icon class=\"icon\" name=\"eye\" id=\"eye\"></ion-icon><span id=\"{{i}}viewCount\" class=\"{{item.post_id}}viewCount \">0</span><br> -->\n          <div class=\"postViews\"><span class=\"{{ item.post_id }}views\" id=\"{{i}}ReservedPostViews\">{{ item.post_id }}</span></div>\n        </div>\n  \n        <div id=\"userinfo\" class=\"{{i}}userInfo\" *ngIf=\"userInfo ==  true\">\n          <!--<p id=\"postGenre\">{{ item.genre }}</p>-->\n          <p id=\"postDescription\" class=\"{{i}}PostDescription\">{{ item.description }}</p>\n          <span id=\"commentsHeading\">Comments</span><br />\n          <div *ngIf=\"display_firsts == true\" class=\"{{i}}oldPostComments\" id=\"{{ item.post_id }}actualCommnents\">\n            <div class=\"commentBox\" id=\"{{i}}commentBox\">\n              <span id=\"comment\" *ngFor='let comment of (commentsRef$ | async); let x = index'>\n                <span *ngIf=\"item.post_id == comment.post\" class=\"{{i}}commentSection\" id=\"userComment\">\n                  <span id=\"userCommenter\">@{{comment.user}}</span><span> {{ comment.comment }}</span>\n                </span>\n              </span>\n            </div>\n        </div>\n          <div id=\"{{i}}nextPostComments\" *ngFor=\"let post of ( nextPostData | async); let p = index\">\n            <div id=\"{{ post.post_id }}actualCommnents\">\n            <div *ngIf=\"post.username == item.username \" class=\"commentBox\" id=\"{{i}}commentBoxNew\">\n              <span id=\"comment\" *ngFor='let comment of (commentsRef$ | async); let x = index'>\n                <span *ngIf=\"post.post_id == comment.post\" class=\"{{i}}commentSection\" id=\"userComment\">\n                  <span id=\"userCommenter\">@{{comment.user}}</span><span> {{ comment.comment }}</span>\n                </span>\n              </span>\n            </div>\n            </div>\n          </div>\n          <!--<input type=\"text\"  (focus)=\"CommentsUp(i)\" (blur)=\"CommentsDown(i)\"*/ class=\"commentInput\" id=\"{{item.post_id}}commentInput\" placeholder=\"Add Comment...\">-->\n          <input type=\"text\" (focus)=\"CommentsUp(i)\" class=\"commentInput\" id=\"{{i}}commentInput\"\n            placeholder=\"Add Comment...\">\n          <label class=\"{{i}}CommentLabel\" for=\"{{i}}commentInput\" id=\"commentBtn\"><span\n              (click)=\"postComment(i)\">Post</span></label>\n        </div>\n  \n  \n  \n        <div id=\"profileImage\" *ngIf=\"item.image\">\n          <svg class=\"_18eSE\" width=\"60\" height=\"60\" viewBox=\"0 0 104 104\">\n            <circle id=\"{{i}}Circle\" cx=\"52\" cy=\"52\" r=\"50\" fill=\"transparent\" stroke-linecap=\"round\" stroke-width=\"4\" stroke-dashoffset=\"387.69908169872417\" class=\"_3yudO\" stroke=\"white\" stroke-width=\"3\"></circle>\n          </svg>\n          <div class=\"circle\" (click)=\"onSwipeUp( item.user_id,item.user_email,i )\" id=\"image\"\n            [ngStyle]=\"{'background-image': 'url(https://uploadedstream.storage.googleapis.com/'+ item.image +')'}\">\n            <ion-icon id=\"profileIocn\" name=\"contact\" *ngIf=\"item.image == 'none'\"></ion-icon>\n          </div>\n          <span (click)=\"onSwipeUp( item.user_id,item.user_email,i )\">@{{ item.username }}</span>\n        </div>\n  \n        <div class=\"{{i}}heartAnimations\" id=\"heartAnimations\">\n          <ion-icon class=\"icon\" class=\"animated infinite fadeOutUp 2s\" name=\"heart\" id=\"animation1\"></ion-icon><br>\n          <ion-icon class=\"icon\" class=\"animated infinite fadeOutUp 2s\" name=\"heart\" id=\"animation2\"></ion-icon><br>\n          <ion-icon class=\"icon\" class=\"animated infinite fadeOutUp 2s\" name=\"heart\" id=\"animation3\"></ion-icon><br>\n          <ion-icon class=\"icon\" class=\"animated infinite fadeOutUp 2s\" name=\"heart\" id=\"animation4\"></ion-icon>\n        </div>\n  \n        <div id=\"overlay\" class=\"{{item.post_id}}Overlay\" (click)=\"removeItems(i, item.post_id)\">\n        </div>\n\n        <div id=\"{{i}}videoControlOverlay\" class=\"videoControlOverlay\">\n          <div id=\"backButton\" (click)=\"videoBack(i,item.post_id)\">\n            <ion-icon id=\"rewindIcon\" [ngStyle]=\"{color:'#ffffff'}\" name=\"rewind\"></ion-icon>\n          </div>\n          <div id=\"middleButton\" (click)=\"removeItems(i, item.post_id)\"></div>\n          <div id=\"forwardButton\" (click)=\"videoForward(i,item.post_id)\">\n            <ion-icon id=\"fowardIcon\" [ngStyle]=\"{color:'#ffffff'}\" name=\"fastforward\"></ion-icon>\n          </div>\n        </div>\n  \n        <!-- <div id=\"newPostOverlay\" *ngFor=\"let post of ( nextPostData | async); let p = index\">\n          <div *ngIf=\"post.username == item.username\" id=\"overlay\" (click)=\"removeItems(i, post.post_id)\">\n          </div>\n        </div> -->\n  \n        <div *ngIf=\"display_firsts == true\" id=\"playPause\" class=\"{{i}}playPauseDiv {{i}}playPauseBtn2\">\n            <ion-icon class=\"playPauseIcon\" id=\"{{i}}playPause\" (click)=\"playVideo(i, item.post_id)\" name=\"pause\"></ion-icon>\n        </div>\n  \n  \n        <circle-progress id=\"ngCircle\" class=\"{{i}}videoProgress\"\n        [percent]=\"percent\"\n        [radius]=\"25\"\n        [outerStrokeWidth]=\"2\"\n        [innerStrokeWidth]=\"2\"\n        [outerStrokeColor]=\"'#fc8700'\"\n        [innerStrokeColor]=\"'#ffffff'\"\n        [animation]=\"true\"\n        [animationDuration]=\"300\"\n        [showTitle]=\"false\"\n        [showSubtitle]=\"false\"\n        [showUnits]=\"false\"\n        [startFromZero]=\"false\"\n      ></circle-progress>\n        <div id=\"playPause\" class=\"{{i}}playPauseDiv {{i}}playPauseDiv2\" *ngFor=\"let post of ( nextPostData | async); let p = index\">\n            <ion-icon class=\"playPauseIcon\" *ngIf=\"post.username == item.username\" (click)=\"playVideo(i, post.post_id)\" id=\"{{i}}playPause2\" name=\"pause\"></ion-icon>\n        </div>\n  \n        <div id=\"{{item.post_id}}allComments\" class=\"allComments animated fadeInUp\">\n          <div id=\"scrollableComments\" class=\"scrollableComments\">\n            <div class=\"totalComments\" id=\"{{item.post_id}}totalCOmments\"></div>\n            <div *ngFor='let comment of (commentsRef$ | async),let c = index' id=\"{{item.post_id}}allComments\">\n              <div id=\"allcomComment\" *ngIf=\"item.post_id == comment.post\"><span>@{{comment.user}}</span>\n                <p>{{ comment.comment }}</p>\n                <ion-icon class=\"{{c}}likeComment\" id=\"likeComment\" name=\"heart-empty\" (click)=\"likeComment(c)\">\n                </ion-icon>\n              </div>\n            </div>\n          </div>\n  \n          <ion-footer keyboard-attach class=\"bar-assertive\">\n            <div id=\"fullComments\">\n              <input type=\"text\" (focus)=\"attchKeyBoard()\" (blur)=\"dettchKeyBoard()\" class=\"commentInput2\"\n                id=\"{{item.post_id}}commentInput2\" placeholder=\"Add Comment...\">\n              <label for=\"{{item.post_id}}commentInput2\" id=\"commentBtn\"><span (click)=\"postComment2(item.post_id)\"\n                  id=\"commentBtn\">Post</span></label>\n            </div>\n          </ion-footer>\n        </div>\n  \n  \n  \n        <!-- <div *ngFor=\"let post of ( nextPostData | async); let p = index\" id=\"{{post.post_id}}allComments\"\n          class=\"allComments animated fadeInUp\">\n          <div id=\"scrollableComments\" class=\"scrollableComments\">\n            <div class=\"totalComments\" id=\"{{post.post_id}}totalCOmments\"></div>\n            <div *ngFor='let comment of (commentsRef$ | async),let c = index' id=\"{{post.post_id}}allComments\">\n              <div id=\"allcomComment\" *ngIf=\"post.post_id == comment.post\"><span>@{{comment.user}}</span>\n                <p>{{ comment.comment }}</p>\n                <ion-icon class=\"{{c}}likeComment\" id=\"likeComment\" name=\"heart-empty\" (click)=\"likeComment(c)\">\n                </ion-icon>\n              </div>\n            </div>\n          </div>\n  \n          <ion-footer keyboard-attach class=\"bar-assertive\">\n            <div id=\"fullComments\">\n              <input type=\"text\" (focus)=\"attchKeyBoard()\" (blur)=\"dettchKeyBoard()\" class=\"commentInput2\"\n                id=\"{{post.post_id}}commentInput2\" placeholder=\"Add Comment...\">\n              <label for=\"{{post.post_id}}commentInput2\" id=\"commentBtn\"><span (click)=\"postComment2(post.post_id)\"\n                  id=\"commentBtn\">Post</span></label>\n            </div>\n          </ion-footer>\n        </div> -->\n  \n        <div id=\"disapearingComment\" class=\"{{i}}LatestComment animated fadeInUp\" *ngIf=\"latest_comment.post == item.post_id\">\n           <p><span>@{{latest_comment.user}}</span> {{ latest_comment.comment }}</p>\n        </div>\n  \n        <div>{{ results.length }}</div>\n  \n        <ion-spinner name=\"crescent\" id=\"spinner\" class=\"{{i}}Spinner\"></ion-spinner>\n      </ion-slide>\n  \n    </ion-slides>\n  \n  \n  \n  </ion-content>"
+module.exports = "<ion-content>\n    <!--<ion-refresher  *ngIf=\"refresh ==  true\" id=\"refresher\" slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\n      <ion-refresher-content></ion-refresher-content>\n    </ion-refresher>-->\n    <ion-slides #slider id=\"slides\" (ionSlideDidChange)=\"currentSlideVideo()\" (ionSlidesDidLoad)=\"setFirstViews()\" [options]=\"slideOpts\">\n      <ion-slide id='slider' *ngFor='let item of ( results | async); let i = index'\n        (swiperight)=\"swiped(i,item.post_id,'right')\" (swipeleft)=\"swiped(i,item.post_id,'left')\"\n        (swipeup)=\"onSwipeUp( item.user_id,item.user_email,i )\">\n        <div id=\"liveDot\"></div>\n        <div id=\"streamIcon\">Stream</div>\n        <div id=\"viewCount\"> <ion-icon id=\"\" name=\"eye\"></ion-icon> <span id=\"{{i}}userViewCountCont\"></span></div>\n        <ion-icon id=\"backIcon\" (click)=\"back()\" name=\"close\"></ion-icon>\n        <!-- <ion-icon id=\"reportIcon\" (click)=\"report(item.post_id)\" name=\"information-circle-outline\"></ion-icon> -->\n        <video playsinline webkit-playsinline class=\"videobcg\" (ended)=\"getNext(item.username,i)\" id=\"{{i}}videobcgf\">\n          <source id=\"{{i}}videobsource\"\n            src=\"https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480/{{ item.file }}.mp4\"\n            type=\"video/mp4\">\n        </video>\n        <div id=\"{{i}}FirstPostData\" *ngIf=\"display_firsts == true\">\n          <div id=\"PostData\" class=\"{{i}}PostData\">\n            <ion-icon class=\"icon\" *ngIf=\"item.liked == 0\" name=\"heart\" id=\"{{item.post_id}}likeIcon\"\n              (click)=\"like(item.post_id,i)\"></ion-icon><span *ngIf=\"item.liked == 0\"\n              id=\"{{item.post_id}}likeCount\">{{ item.like }}</span>\n            <ion-icon class=\"icon\" *ngIf=\"item.liked == 1\" [ngStyle]=\"{color:'#fc8700'}\" name=\"heart\"\n              id=\"{{item.post_id}}likeIcon\" (click)=\"like(item.post_id,i)\"></ion-icon><span *ngIf=\"item.liked == 1\"\n              id=\"{{item.post_id}}likeCount\">{{ item.like }}</span>\n            <ion-icon class=\"icon\" (click)=\"repost(item.post_id)\" name=\"share-alt\" id=\"{{i}}repostIcon\"></ion-icon><span\n              id=\"{{item.post_id}}repostCount\">{{ item.reposts }}</span>\n            <ion-icon class=\"icon\" (click)=\"share(item.file)\" name=\"share\" id=\"{{i}}shareIcon\"></ion-icon><br/>\n            <ion-icon class=\"icon\" name=\"text\" id=\"{{ i }}postIcon\" (click)=\"showAllComments(item.post_id, i)\"></ion-icon>\n            <span id=\"{{item.post_id}}CommentsCount\">0</span>\n            <div class=\"postViews\"><span class=\"{{ item.post_id }}views\" id=\"{{i}}PostViews\">{{ item.post_id }}</span>\n            </div>\n          </div>\n        </div>\n        \n        <div id=\"{{i}}newPostData\" *ngFor=\"let post of ( nextPostData | async); let p = index\">\n          <div *ngIf=\"post.username == item.username \">\n            <div id=\"PostData\" class=\"{{p}}PostData\">\n              <ion-icon class=\"icon\" *ngIf=\"post.liked == 0\" name=\"heart\" id=\"{{post.post_id}}likeIcon\"\n                (click)=\"like(post.post_id,i)\"></ion-icon><span *ngIf=\"post.liked == 0\"\n                id=\"{{post.post_id}}likeCount\">{{ post.like }}</span>\n              <ion-icon class=\"icon\" *ngIf=\"post.liked == 1\" [ngStyle]=\"{color:'#fc8700'}\" name=\"heart\"\n                id=\"{{post.post_id}}likeIcon\" (click)=\"like(post.post_id,i)\"></ion-icon><span *ngIf=\"post.liked == 1\"\n                id=\"{{post.post_id}}likeCount\">{{ post.like }}</span>\n              <ion-icon class=\"icon\" (click)=\"repost(post.post_id)\" name=\"share-alt\" id=\"{{i}}repostIcon\"></ion-icon><span\n                id=\"{{post.post_id}}repostCount\">{{ post.reposts }}</span>\n              <ion-icon class=\"icon\" (click)=\"share(post.file)\" name=\"share\" id=\"{{i}}shareIcon\"></ion-icon><br/>\n              <ion-icon class=\"icon\" name=\"text\" id=\"{{ i }}postIcon\" (click)=\"showAllComments(post.post_id,i)\">\n              </ion-icon><span id=\"{{post.post_id}}CommentsCount\">0</span>\n              <div class=\"postViews\"><span class=\"{{ post.post_id }}views\" id=\"{{i}}PostViews\">{{ post.post_id }}</span>\n              </div>\n            </div>\n          </div>\n        </div>\n  \n        \n        <div id=\"eyeView\">\n          <!-- <ion-icon class=\"icon\" name=\"eye\" id=\"eye\"></ion-icon><span id=\"{{i}}viewCount\" class=\"{{item.post_id}}viewCount \">0</span><br> -->\n          <div class=\"postViews\"><span class=\"{{ item.post_id }}views\" id=\"{{i}}ReservedPostViews\">{{ item.post_id }}</span></div>\n        </div>\n  \n        <div id=\"userinfo\" class=\"{{i}}userInfo\" *ngIf=\"userInfo ==  true\">\n          <!--<p id=\"postGenre\">{{ item.genre }}</p>-->\n          <p id=\"postDescription\" class=\"{{i}}PostDescription\">{{ item.description }}</p>\n          <span id=\"commentsHeading\">Comments</span><br />\n          <div *ngIf=\"display_firsts == true\" class=\"{{i}}oldPostComments\" id=\"{{ item.post_id }}actualCommnents\">\n            <div class=\"commentBox\" id=\"{{i}}commentBox\">\n              <span id=\"comment\" *ngFor='let comment of (commentsRef$ | async); let x = index'>\n                <span *ngIf=\"item.post_id == comment.post\" class=\"{{i}}commentSection\" id=\"userComment\">\n                  <span id=\"userCommenter\">@{{comment.user}}</span><span> {{ comment.comment }}</span>\n                </span>\n              </span>\n            </div>\n        </div>\n          <div id=\"{{i}}nextPostComments\" *ngFor=\"let post of ( nextPostData | async); let p = index\">\n            <div id=\"{{ post.post_id }}actualCommnents\">\n            <div *ngIf=\"post.username == item.username \" class=\"commentBox\" id=\"{{i}}commentBoxNew\">\n              <span id=\"comment\" *ngFor='let comment of (commentsRef$ | async); let x = index'>\n                <span *ngIf=\"post.post_id == comment.post\" class=\"{{i}}commentSection\" id=\"userComment\">\n                  <span id=\"userCommenter\">@{{comment.user}}</span><span> {{ comment.comment }}</span>\n                </span>\n              </span>\n            </div>\n            </div>\n          </div>\n          <!--<input type=\"text\"  (focus)=\"CommentsUp(i)\" (blur)=\"CommentsDown(i)\"*/ class=\"commentInput\" id=\"{{item.post_id}}commentInput\" placeholder=\"Add Comment...\">-->\n          <input type=\"text\" (focus)=\"CommentsUp(i)\" class=\"commentInput\" id=\"{{i}}commentInput\"\n            placeholder=\"Add Comment...\">\n          <label class=\"{{i}}CommentLabel\" for=\"{{i}}commentInput\" id=\"commentBtn\"><span\n              (click)=\"postComment(i)\">Post</span></label>\n        </div>\n  \n  \n  \n        <div id=\"profileImage\" *ngIf=\"item.image\">\n          <svg class=\"_18eSE\" width=\"60\" height=\"60\" viewBox=\"0 0 104 104\">\n            <circle id=\"{{i}}Circle\" cx=\"52\" cy=\"52\" r=\"50\" fill=\"transparent\" stroke-linecap=\"round\" stroke-width=\"4\" stroke-dashoffset=\"387.69908169872417\" class=\"_3yudO\" stroke=\"white\" stroke-width=\"3\"></circle>\n          </svg>\n          <div class=\"circle\" (click)=\"onSwipeUp( item.user_id,item.user_email,i )\" id=\"image\"\n            [ngStyle]=\"{'background-image': 'url(https://res.cloudinary.com/www-uploadedstream-com/image/upload/v1583762562/'+ item.image +'.jpg)'}\">\n            <ion-icon id=\"profileIocn\" name=\"contact\" *ngIf=\"item.image == 'none'\"></ion-icon>\n          </div>\n          <span (click)=\"onSwipeUp( item.user_id,item.user_email,i )\">@{{ item.username }}</span>\n        </div>\n  \n        <div class=\"{{i}}heartAnimations\" id=\"heartAnimations\">\n          <ion-icon class=\"icon\" class=\"animated infinite fadeOutUp 2s\" name=\"heart\" id=\"animation1\"></ion-icon><br>\n          <ion-icon class=\"icon\" class=\"animated infinite fadeOutUp 2s\" name=\"heart\" id=\"animation2\"></ion-icon><br>\n          <ion-icon class=\"icon\" class=\"animated infinite fadeOutUp 2s\" name=\"heart\" id=\"animation3\"></ion-icon><br>\n          <ion-icon class=\"icon\" class=\"animated infinite fadeOutUp 2s\" name=\"heart\" id=\"animation4\"></ion-icon>\n        </div>\n  \n        <div id=\"overlay\" class=\"{{item.post_id}}Overlay\" (click)=\"removeItems(i, item.post_id)\">\n        </div>\n\n        <div id=\"{{i}}videoControlOverlay\" class=\"videoControlOverlay\">\n          <div id=\"backButton\" (click)=\"videoBack(i,item.post_id)\">\n            <ion-icon id=\"rewindIcon\" [ngStyle]=\"{color:'#ffffff'}\" name=\"rewind\"></ion-icon>\n          </div>\n          <div id=\"middleButton\" (click)=\"removeItems(i, item.post_id)\"></div>\n          <div id=\"forwardButton\" (click)=\"videoForward(i,item.post_id)\">\n            <ion-icon id=\"fowardIcon\" [ngStyle]=\"{color:'#ffffff'}\" name=\"fastforward\"></ion-icon>\n          </div>\n        </div>\n  \n        <!-- <div id=\"newPostOverlay\" *ngFor=\"let post of ( nextPostData | async); let p = index\">\n          <div *ngIf=\"post.username == item.username\" id=\"overlay\" (click)=\"removeItems(i, post.post_id)\">\n          </div>\n        </div> -->\n  \n        <div *ngIf=\"display_firsts == true\" id=\"playPause\" class=\"{{i}}playPauseDiv {{i}}playPauseBtn2\">\n            <ion-icon class=\"playPauseIcon\" id=\"{{i}}playPause\" (click)=\"playVideo(i, item.post_id)\" name=\"pause\"></ion-icon>\n        </div>\n  \n  \n        <circle-progress id=\"ngCircle\" class=\"{{i}}videoProgress\"\n        [percent]=\"percent\"\n        [radius]=\"25\"\n        [outerStrokeWidth]=\"2\"\n        [innerStrokeWidth]=\"2\"\n        [outerStrokeColor]=\"'#fc8700'\"\n        [innerStrokeColor]=\"'#ffffff'\"\n        [animation]=\"true\"\n        [animationDuration]=\"300\"\n        [showTitle]=\"false\"\n        [showSubtitle]=\"false\"\n        [showUnits]=\"false\"\n        [startFromZero]=\"false\"\n      ></circle-progress>\n        <div id=\"playPause\" class=\"{{i}}playPauseDiv {{i}}playPauseDiv2\" *ngFor=\"let post of ( nextPostData | async); let p = index\">\n            <ion-icon class=\"playPauseIcon\" *ngIf=\"post.username == item.username\" (click)=\"playVideo(i, post.post_id)\" id=\"{{i}}playPause2\" name=\"pause\"></ion-icon>\n        </div>\n  \n        <div id=\"{{item.post_id}}allComments\" class=\"allComments animated fadeInUp\">\n          <div id=\"scrollableComments\" class=\"scrollableComments\">\n            <div class=\"totalComments\" id=\"{{item.post_id}}totalCOmments\"></div>\n            <div *ngFor='let comment of (commentsRef$ | async),let c = index' id=\"{{item.post_id}}allComments\">\n              <div id=\"allcomComment\" *ngIf=\"item.post_id == comment.post\"><span>@{{comment.user}}</span>\n                <p>{{ comment.comment }}</p>\n                <ion-icon class=\"{{c}}likeComment\" id=\"likeComment\" name=\"heart-empty\" (click)=\"likeComment(c)\">\n                </ion-icon>\n              </div>\n            </div>\n          </div>\n  \n          <ion-footer keyboard-attach class=\"bar-assertive\">\n            <div id=\"fullComments\">\n              <input type=\"text\" (focus)=\"attchKeyBoard()\" (blur)=\"dettchKeyBoard()\" class=\"commentInput2\"\n                id=\"{{item.post_id}}commentInput2\" placeholder=\"Add Comment...\">\n              <label for=\"{{item.post_id}}commentInput2\" id=\"commentBtn\"><span (click)=\"postComment2(item.post_id)\"\n                  id=\"commentBtn\">Post</span></label>\n            </div>\n          </ion-footer>\n        </div>\n  \n  \n  \n        <!-- <div *ngFor=\"let post of ( nextPostData | async); let p = index\" id=\"{{post.post_id}}allComments\"\n          class=\"allComments animated fadeInUp\">\n          <div id=\"scrollableComments\" class=\"scrollableComments\">\n            <div class=\"totalComments\" id=\"{{post.post_id}}totalCOmments\"></div>\n            <div *ngFor='let comment of (commentsRef$ | async),let c = index' id=\"{{post.post_id}}allComments\">\n              <div id=\"allcomComment\" *ngIf=\"post.post_id == comment.post\"><span>@{{comment.user}}</span>\n                <p>{{ comment.comment }}</p>\n                <ion-icon class=\"{{c}}likeComment\" id=\"likeComment\" name=\"heart-empty\" (click)=\"likeComment(c)\">\n                </ion-icon>\n              </div>\n            </div>\n          </div>\n  \n          <ion-footer keyboard-attach class=\"bar-assertive\">\n            <div id=\"fullComments\">\n              <input type=\"text\" (focus)=\"attchKeyBoard()\" (blur)=\"dettchKeyBoard()\" class=\"commentInput2\"\n                id=\"{{post.post_id}}commentInput2\" placeholder=\"Add Comment...\">\n              <label for=\"{{post.post_id}}commentInput2\" id=\"commentBtn\"><span (click)=\"postComment2(post.post_id)\"\n                  id=\"commentBtn\">Post</span></label>\n            </div>\n          </ion-footer>\n        </div> -->\n  \n        <div id=\"disapearingComment\" class=\"{{i}}LatestComment animated fadeInUp\" *ngIf=\"latest_comment.post == item.post_id\">\n           <p><span>@{{latest_comment.user}}</span> {{ latest_comment.comment }}</p>\n        </div>\n  \n        <div>{{ results.length }}</div>\n  \n        <ion-spinner name=\"crescent\" id=\"spinner\" class=\"{{i}}Spinner\"></ion-spinner>\n      </ion-slide>\n  \n    </ion-slides>\n  \n  \n  \n  </ion-content>"
 
 /***/ }),
 
@@ -127,9 +127,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var UserfeedPage = /** @class */ (function () {
-    function UserfeedPage(location, alertController, keyboard, tabs, platform, loadingController, statusBar, actionSheetController, toastController, requests, database, route, storage, oneSignal) {
+    function UserfeedPage(navCtrl, location, alertController, keyboard, tabs, platform, loadingController, statusBar, actionSheetController, toastController, requests, database, route, storage, oneSignal) {
         var _this = this;
+        this.navCtrl = navCtrl;
         this.location = location;
         this.alertController = alertController;
         this.keyboard = keyboard;
@@ -172,8 +174,18 @@ var UserfeedPage = /** @class */ (function () {
         });
     }
     UserfeedPage.prototype.back = function () {
+        var _this = this;
+        // console.log(clearInterval());
         this.tabs.bottom = true;
-        this.location.back();
+        // this.location.back();
+        // this.location.
+        // console.log(this.navCtrl.navigateBack);
+        this.storage.get("prev_page").then(function (prev_page) {
+            console.log("previous page is ", prev_page);
+            var url_index = prev_page.indexOf("home");
+            var prev_tab = prev_page.substring(url_index);
+            _this.route.navigate(["/" + prev_tab]);
+        });
     };
     UserfeedPage.prototype.stopOtherVids = function () {
         //ensure previous videos are paused
@@ -687,10 +699,10 @@ var UserfeedPage = /** @class */ (function () {
                                     _this.setFirstViews();
                                     // this.getCurrentSlid();
                                     //listend for page load to display video count
-                                    var lstLoad = _this.ListenLoad;
-                                    window.addEventListener('load', function () {
-                                        lstLoad();
-                                    });
+                                    // let lstLoad = this.ListenLoad;
+                                    // window.addEventListener('load', function () {
+                                    //   lstLoad();
+                                    // });
                                 });
                             });
                         });
@@ -700,18 +712,17 @@ var UserfeedPage = /** @class */ (function () {
             });
         });
     };
-    UserfeedPage.prototype.ListenLoad = function () {
-        var _this = this;
-        this.results.subscribe(function (x) {
-            if (document.readyState == "complete") {
-                for (var a = 0; a < x.length; a++) {
-                    var circ = JSON.stringify(_this.circle_circum / x[a].post_count);
-                    console.log(circ);
-                    jquery__WEBPACK_IMPORTED_MODULE_2__("#" + a + "Circle").css("stroke-dasharray", circ + ", 10");
-                }
-            }
-        });
-    };
+    // ListenLoad(){
+    //   this.results.subscribe((x)=>{
+    //     if(document.readyState == "complete"){
+    //       for(let a =0; a < x.length; a++){
+    //         let circ =  JSON.stringify(this.circle_circum/x[a].post_count);
+    //         console.log(circ);
+    //         $("#"+a+"Circle").css("stroke-dasharray", circ+", 10");
+    //       } 
+    //     }
+    //   });
+    // }
     UserfeedPage.prototype.presentNotificationToast = function (msg) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var toast;
@@ -748,26 +759,27 @@ var UserfeedPage = /** @class */ (function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        this.ListenLoad();
-                        return [4 /*yield*/, this.slide.getActiveIndex().then(function (index) {
-                                console.log("current index is", index);
-                                _this.results.subscribe(function (val) {
-                                    console.log("current video at index 0 ", val[0]);
-                                    console.log("all videos  ", val);
-                                    var post_id = JSON.stringify(val[0].post_id);
-                                    _this.storage.get("current_userID").then(function (val) {
-                                        // this.database.list("views/").remove(JSON.stringify(val+post_id));
-                                        // this.database.object("views/"+JSON.stringify(val+post_id)).set({"user": val, "post_id":post_id});
-                                        //display views
-                                        _this.slide.getActiveIndex().then(function (val) {
-                                            console.log(val);
-                                            _this.playVideo(val, post_id);
-                                        });
+                    case 0: 
+                    // this.ListenLoad();
+                    return [4 /*yield*/, this.slide.getActiveIndex().then(function (index) {
+                            console.log("current index is", index);
+                            _this.results.subscribe(function (val) {
+                                console.log("current video at index 0 ", val[0]);
+                                console.log("all videos  ", val);
+                                var post_id = JSON.stringify(val[0].post_id);
+                                _this.storage.get("current_userID").then(function (val) {
+                                    // this.database.list("views/").remove(JSON.stringify(val+post_id));
+                                    // this.database.object("views/"+JSON.stringify(val+post_id)).set({"user": val, "post_id":post_id});
+                                    //display views
+                                    _this.slide.getActiveIndex().then(function (val) {
+                                        console.log(val);
+                                        _this.playVideo(val, post_id);
                                     });
                                 });
-                            })];
+                            });
+                        })];
                     case 1:
+                        // this.ListenLoad();
                         _a.sent();
                         return [2 /*return*/];
                 }
@@ -777,8 +789,7 @@ var UserfeedPage = /** @class */ (function () {
     //handles the number of live viewer
     UserfeedPage.prototype.swiped = function (id, post_id, direction) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var idd, video, current_post_id_1, prev_post_id_1, current_post_id_2, prev_post_id_2;
-            var _this = this;
+            var idd, video, current_post_id, prev_post_id, current_post_id, prev_post_id;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 //
                 console.log("post", post_id);
@@ -790,60 +801,60 @@ var UserfeedPage = /** @class */ (function () {
                 console.log("paused", video.paused);
                 console.log(direction);
                 if (direction == "left") {
-                    current_post_id_1 = jquery__WEBPACK_IMPORTED_MODULE_2__("#" + parseInt(id + 1) + "PostViews").text();
-                    prev_post_id_1 = jquery__WEBPACK_IMPORTED_MODULE_2__("#" + id + "PostViews").text();
-                    this.storage.get("current_userID").then(function (val) {
-                        _this.database.list("views/").remove(JSON.stringify(val + current_post_id_1));
-                        _this.database.list("views/").remove(JSON.stringify(val + prev_post_id_1));
-                        _this.database.object("views/" + JSON.stringify(val + current_post_id_1)).set({ "user": val, "post_id": current_post_id_1 });
-                        //display views
-                        // this.slide.getActiveIndex().then((val) => { 
-                        //   console.log(val);
-                        //   this.playVideo(val,post_id);
-                        // });
-                        // this.postViewsRef$.subscribe((val)=>{
-                        //   for(let c = 0; c < val.length; c++){
-                        //     $("."+val[c].post_id+"viewCount").text("0");
-                        //   }
-                        //   for(let v =0; v < val.length; v++){
-                        //     let key = Object.keys(val[v])[0];
-                        //     console.log(key);
-                        //     let post_id =  val[v].post_id;
-                        //     console.log(post_id);
-                        //     let current_views = parseInt($("."+post_id+"viewCount").text());
-                        //     current_views += 1;
-                        //     $("."+post_id+"viewCount").text(current_views);
-                        //   }
-                        // });
-                    });
-                    console.log(current_post_id_1);
+                    current_post_id = jquery__WEBPACK_IMPORTED_MODULE_2__("#" + parseInt(id + 1) + "PostViews").text();
+                    prev_post_id = jquery__WEBPACK_IMPORTED_MODULE_2__("#" + id + "PostViews").text();
+                    // this.storage.get("current_userID").then((val)=>{
+                    //   this.database.list("views/").remove(JSON.stringify(val+current_post_id))
+                    //   this.database.list("views/").remove(JSON.stringify(val+prev_post_id))
+                    //   this.database.object("views/"+JSON.stringify(val+current_post_id)).set({"user": val, "post_id":current_post_id});
+                    //   //display views
+                    //   // this.slide.getActiveIndex().then((val) => { 
+                    //   //   console.log(val);
+                    //   //   this.playVideo(val,post_id);
+                    //   // });
+                    //   // this.postViewsRef$.subscribe((val)=>{
+                    //   //   for(let c = 0; c < val.length; c++){
+                    //   //     $("."+val[c].post_id+"viewCount").text("0");
+                    //   //   }
+                    //   //   for(let v =0; v < val.length; v++){
+                    //   //     let key = Object.keys(val[v])[0];
+                    //   //     console.log(key);
+                    //   //     let post_id =  val[v].post_id;
+                    //   //     console.log(post_id);
+                    //   //     let current_views = parseInt($("."+post_id+"viewCount").text());
+                    //   //     current_views += 1;
+                    //   //     $("."+post_id+"viewCount").text(current_views);
+                    //   //   }
+                    //   // });
+                    // });
+                    console.log(current_post_id);
                 }
                 else if (direction == "right") {
-                    current_post_id_2 = jquery__WEBPACK_IMPORTED_MODULE_2__("#" + idd + "PostViews").text();
-                    prev_post_id_2 = jquery__WEBPACK_IMPORTED_MODULE_2__("#" + parseInt(id) + "PostViews").text();
-                    this.storage.get("current_userID").then(function (val) {
-                        _this.database.list("views/").remove(JSON.stringify(val + current_post_id_2));
-                        _this.database.list("views/").remove(JSON.stringify(val + prev_post_id_2));
-                        _this.database.object("views/" + JSON.stringify(val + current_post_id_2)).set({ "user": val, "post_id": current_post_id_2 });
-                        // this.slide.getActiveIndex().then((val) => { 
-                        //   console.log(val);
-                        //   this.playVideo(val,post_id);
-                        // });
-                        // this.postViewsRef$.subscribe((val)=>{
-                        //   for(let c = 0; c < val.length; c++){
-                        //     $("."+val[c].post_id+"viewCount").text("0");
-                        //   }
-                        //   for(let v =0; v < val.length; v++){
-                        //     let key = Object.keys(val[v])[0];
-                        //     console.log(key);
-                        //     let post_id =  val[v].post_id;
-                        //     console.log(post_id);
-                        //     let current_views = parseInt($("."+post_id+"viewCount").text());
-                        //     current_views += 1;
-                        //     $("."+post_id+"viewCount").text(current_views);
-                        //   }
-                        // });
-                    });
+                    current_post_id = jquery__WEBPACK_IMPORTED_MODULE_2__("#" + idd + "PostViews").text();
+                    prev_post_id = jquery__WEBPACK_IMPORTED_MODULE_2__("#" + parseInt(id) + "PostViews").text();
+                    // this.storage.get("current_userID").then((val)=>{
+                    //   this.database.list("views/").remove(JSON.stringify(val+current_post_id));
+                    //   this.database.list("views/").remove(JSON.stringify(val+prev_post_id));
+                    //   this.database.object("views/"+JSON.stringify(val+current_post_id)).set({"user": val, "post_id":current_post_id});
+                    //   // this.slide.getActiveIndex().then((val) => { 
+                    //   //   console.log(val);
+                    //   //   this.playVideo(val,post_id);
+                    //   // });
+                    //   // this.postViewsRef$.subscribe((val)=>{
+                    //   //   for(let c = 0; c < val.length; c++){
+                    //   //     $("."+val[c].post_id+"viewCount").text("0");
+                    //   //   }
+                    //   //   for(let v =0; v < val.length; v++){
+                    //   //     let key = Object.keys(val[v])[0];
+                    //   //     console.log(key);
+                    //   //     let post_id =  val[v].post_id;
+                    //   //     console.log(post_id);
+                    //   //     let current_views = parseInt($("."+post_id+"viewCount").text());
+                    //   //     current_views += 1;
+                    //   //     $("."+post_id+"viewCount").text(current_views);
+                    //   //   }
+                    //   // });
+                    // });
                 }
                 return [2 /*return*/];
             });
@@ -1075,6 +1086,7 @@ var UserfeedPage = /** @class */ (function () {
         });
     };
     UserfeedPage.ctorParameters = function () { return [
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
         { type: _angular_common__WEBPACK_IMPORTED_MODULE_12__["Location"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
         { type: _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_10__["Keyboard"] },
@@ -1100,7 +1112,7 @@ var UserfeedPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./userfeed.page.html */ "./node_modules/raw-loader/index.js!./src/app/userfeed/userfeed.page.html"),
             styles: [__webpack_require__(/*! ./userfeed.page.scss */ "./src/app/userfeed/userfeed.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common__WEBPACK_IMPORTED_MODULE_12__["Location"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_10__["Keyboard"], _tabs_tabs_page__WEBPACK_IMPORTED_MODULE_9__["TabsPage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], _services_requests_service__WEBPACK_IMPORTED_MODULE_4__["RequestsService"], angularfire2_database__WEBPACK_IMPORTED_MODULE_8__["AngularFireDatabase"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"], _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"], _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_11__["OneSignal"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"], _angular_common__WEBPACK_IMPORTED_MODULE_12__["Location"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"], _ionic_native_keyboard_ngx__WEBPACK_IMPORTED_MODULE_10__["Keyboard"], _tabs_tabs_page__WEBPACK_IMPORTED_MODULE_9__["TabsPage"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"], _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_7__["StatusBar"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ActionSheetController"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"], _services_requests_service__WEBPACK_IMPORTED_MODULE_4__["RequestsService"], angularfire2_database__WEBPACK_IMPORTED_MODULE_8__["AngularFireDatabase"], _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"], _ionic_storage__WEBPACK_IMPORTED_MODULE_6__["Storage"], _ionic_native_onesignal_ngx__WEBPACK_IMPORTED_MODULE_11__["OneSignal"]])
     ], UserfeedPage);
     return UserfeedPage;
 }());

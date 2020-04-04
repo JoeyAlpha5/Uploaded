@@ -14,11 +14,11 @@
         <div id="bannerPlaceholder"  *ngIf="profile.cover == undefined">
         </div>
 
-        <div id="bannerPlaceholder" *ngIf="profile.cover != undefined" [ngStyle]="{'background-image': 'url(https://uploadedstream.storage.googleapis.com/' + profile.cover+ ')'}">
+        <div id="bannerPlaceholder" *ngIf="profile.cover != undefined" [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/www-uploadedstream-com/image/upload/v1583762562/' + profile.cover+ '.jpg)'}">
         </div>
   
         <div id='profileBlock'>
-             <div id="outerCircle" (click)="viewUserFeed(profile.username)" *ngIf="profile.image != undefined"><div id="circle"><div  id='dp' [ngStyle]="{ 'background-image': 'url(https://uploadedstream.storage.googleapis.com/'+profile.image+')'}" ></div></div></div>
+             <div id="outerCircle" (click)="viewUserFeed(profile.username)" *ngIf="profile.image != undefined"><div id="circle"><div  id='dp' [ngStyle]="{ 'background-image': 'url(https://res.cloudinary.com/www-uploadedstream-com/image/upload/v1583762562/'+profile.image+'.jpg)'}" ></div></div></div>
              <div id="outerCircle" (click)="viewUserFeed(profile.username)" *ngIf="profile.image == undefined"><div id="circle"><div *ngIf="profile.image == undefined" id='dp'><ion-icon id="profileIocn" name="contact" *ngIf="profile.image == undefined"></ion-icon>  </div></div></div>
             <p id='username'>{{ profile.username }} </p>
             <!--<p id='Posts'>{{ profile.total_posts }} Uploaded playlists</p>-->

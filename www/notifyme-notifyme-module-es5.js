@@ -130,6 +130,9 @@ var NotifymePage = /** @class */ (function () {
     };
     NotifymePage.prototype.ionViewDidEnter = function () {
         var _this = this;
+        //set current page
+        this.storage.set("prev_page", document.location.href);
+        //     
         this.statusBar.overlaysWebView(false);
         this.statusBar.backgroundColorByHexString('#ffffff');
         this.statusBar.styleDefault();

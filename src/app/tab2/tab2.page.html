@@ -51,13 +51,16 @@
       </video>
     </div>
 
-    <div id="playlist" (click)="viewPost(item.username)" *ngFor='let item of ( searchContent | async)'>
-      <video class="searchVids" poster="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480/{{item.file }}.png" playsinline webkit-playsinline loop [muted]="true"  autoplay>
-        <source src="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480,du_10/{{item.file }}.mp4" type="video/mp4">
-      </video>
-    </div> 
+      <div id="searchVids" (scroll)="search_scrollin()" class="searc_videos">
+        <div id="playlist" (click)="viewPost(item.username)" *ngFor='let item of ( search_videos )'>
+          <video class="searchVids" poster="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480/{{item.file }}.png" playsinline webkit-playsinline loop [muted]="true"  autoplay>
+            <source src="https://res.cloudinary.com/www-uploadedstream-com/video/upload/c_pad,h_360,q_70,w_480,du_10/{{item.file }}.mp4" type="video/mp4">
+          </video>
+        </div> 
+        <ion-spinner name="bubbles" color="primary"></ion-spinner>
+    </div>
   </ion-content>
 
-  <div id="bottomPadding"></div>
+  <!-- <div id="bottomPadding"></div> -->
  
 </ion-content>

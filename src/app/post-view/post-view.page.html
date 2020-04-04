@@ -67,7 +67,7 @@
             <circle id="{{i}}Circle" cx="52" cy="52" r="50" fill="transparent" stroke-linecap="round" stroke-width="4" stroke-dashoffset="387.69908169872417" class="_3yudO" stroke="white" stroke-width="3"></circle>
           </svg>
           <div class="circle" (click)="onSwipeUp( item.user_id,item.user_email,i )" id="image"
-            [ngStyle]="{'background-image': 'url(https://uploadedstream.storage.googleapis.com/'+ item.image +')'}">
+            [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/www-uploadedstream-com/image/upload/v1583762562/'+ item.image +'.jpg)'}">
             <ion-icon id="profileIocn" name="contact" *ngIf="item.image == 'none'"></ion-icon>
           </div>
           <span (click)="onSwipeUp( item.user_id,item.user_email,i )">@{{ item.username }}</span>

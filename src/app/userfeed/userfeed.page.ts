@@ -16,7 +16,7 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { Location } from '@angular/common';
 import { AlertController } from '@ionic/angular';
-
+import { NavController } from '@ionic/angular';
 
 
 
@@ -46,7 +46,7 @@ export class UserfeedPage {
   circle_circum = 294.159265359;
   @ViewChild('slider', {static: false}) slide: IonSlides;
 
-  constructor(private location: Location,public alertController: AlertController,private keyboard: Keyboard,private tabs: TabsPage,private platform: Platform,public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage,private oneSignal: OneSignal) {
+  constructor(public navCtrl:NavController,private location: Location,public alertController: AlertController,private keyboard: Keyboard,private tabs: TabsPage,private platform: Platform,public loadingController: LoadingController,private statusBar: StatusBar, public actionSheetController: ActionSheetController, public toastController: ToastController, private requests: RequestsService, private database:AngularFireDatabase,private route: Router,private storage: Storage,private oneSignal: OneSignal) {
     this.commentsRef$ = this.database.list("comments").valueChanges();
     this.postViewsRef$ = this.database.list("views").valueChanges();
     this.likedComments = this.database.list("comment_likes").valueChanges();
@@ -78,8 +78,17 @@ export class UserfeedPage {
     email: any;
 
     back(){
+      // console.log(clearInterval());
       this.tabs.bottom = true;
-      this.location.back();
+      // this.location.back();
+      // this.location.
+      // console.log(this.navCtrl.navigateBack);
+      this.storage.get("prev_page").then(prev_page=>{
+        console.log("previous page is ", prev_page);
+        var url_index = prev_page.indexOf("home");
+        var prev_tab = prev_page.substring(url_index);
+        this.route.navigate(["/"+prev_tab]);
+      });
     }
 
     stopOtherVids(){
@@ -667,7 +676,7 @@ export class UserfeedPage {
     }
 
 
-    async ionViewDidEnter() {
+    async ionViewDidEnter() {      
       this.statusBar.overlaysWebView(true);
       this.statusBar.backgroundColorByHexString('#ffffff');
       this.statusBar.styleDefault();
@@ -691,10 +700,10 @@ export class UserfeedPage {
                 this.setFirstViews();
                 // this.getCurrentSlid();
                 //listend for page load to display video count
-                let lstLoad = this.ListenLoad;
-                window.addEventListener('load', function () {
-                  lstLoad();
-                });
+                // let lstLoad = this.ListenLoad;
+                // window.addEventListener('load', function () {
+                //   lstLoad();
+                // });
                 
   
               });
@@ -707,19 +716,19 @@ export class UserfeedPage {
     }
 
 
-    ListenLoad(){
-      this.results.subscribe((x)=>{
-        if(document.readyState == "complete"){
-          for(let a =0; a < x.length; a++){
-            let circ =  JSON.stringify(this.circle_circum/x[a].post_count);
-            console.log(circ);
+    // ListenLoad(){
+    //   this.results.subscribe((x)=>{
+    //     if(document.readyState == "complete"){
+    //       for(let a =0; a < x.length; a++){
+    //         let circ =  JSON.stringify(this.circle_circum/x[a].post_count);
+    //         console.log(circ);
             
             
-            $("#"+a+"Circle").css("stroke-dasharray", circ+", 10");
-          } 
-        }
-      });
-    }
+    //         $("#"+a+"Circle").css("stroke-dasharray", circ+", 10");
+    //       } 
+    //     }
+    //   });
+    // }
 
     async presentNotificationToast(msg){
       const toast = await this.toastController.create({message: msg.body, duration: 3000});
@@ -745,7 +754,7 @@ export class UserfeedPage {
 
 
     async setFirstViews(){
-        this.ListenLoad();
+        // this.ListenLoad();
         await this.slide.getActiveIndex().then((index)=>{
           console.log("current index is", index);
           this.results.subscribe((val)=>{
@@ -783,58 +792,58 @@ export class UserfeedPage {
       if(direction == "left"){
         let current_post_id = $("#"+parseInt(id+1)+"PostViews").text();
         let prev_post_id = $("#"+id+"PostViews").text();
-        this.storage.get("current_userID").then((val)=>{
-          this.database.list("views/").remove(JSON.stringify(val+current_post_id))
-          this.database.list("views/").remove(JSON.stringify(val+prev_post_id))
-          this.database.object("views/"+JSON.stringify(val+current_post_id)).set({"user": val, "post_id":current_post_id});
-          //display views
-          // this.slide.getActiveIndex().then((val) => { 
-          //   console.log(val);
-          //   this.playVideo(val,post_id);
-          // });
-          // this.postViewsRef$.subscribe((val)=>{
-          //   for(let c = 0; c < val.length; c++){
-          //     $("."+val[c].post_id+"viewCount").text("0");
-          //   }
-          //   for(let v =0; v < val.length; v++){
-          //     let key = Object.keys(val[v])[0];
-          //     console.log(key);
-          //     let post_id =  val[v].post_id;
-          //     console.log(post_id);
-          //     let current_views = parseInt($("."+post_id+"viewCount").text());
-          //     current_views += 1;
-          //     $("."+post_id+"viewCount").text(current_views);
-          //   }
-          // });
-        });
+        // this.storage.get("current_userID").then((val)=>{
+        //   this.database.list("views/").remove(JSON.stringify(val+current_post_id))
+        //   this.database.list("views/").remove(JSON.stringify(val+prev_post_id))
+        //   this.database.object("views/"+JSON.stringify(val+current_post_id)).set({"user": val, "post_id":current_post_id});
+        //   //display views
+        //   // this.slide.getActiveIndex().then((val) => { 
+        //   //   console.log(val);
+        //   //   this.playVideo(val,post_id);
+        //   // });
+        //   // this.postViewsRef$.subscribe((val)=>{
+        //   //   for(let c = 0; c < val.length; c++){
+        //   //     $("."+val[c].post_id+"viewCount").text("0");
+        //   //   }
+        //   //   for(let v =0; v < val.length; v++){
+        //   //     let key = Object.keys(val[v])[0];
+        //   //     console.log(key);
+        //   //     let post_id =  val[v].post_id;
+        //   //     console.log(post_id);
+        //   //     let current_views = parseInt($("."+post_id+"viewCount").text());
+        //   //     current_views += 1;
+        //   //     $("."+post_id+"viewCount").text(current_views);
+        //   //   }
+        //   // });
+        // });
         console.log(current_post_id);
       }else if(direction == "right"){
         let current_post_id = $("#"+idd+"PostViews").text();
         let prev_post_id = $("#"+parseInt(id)+"PostViews").text();
-        this.storage.get("current_userID").then((val)=>{
-          this.database.list("views/").remove(JSON.stringify(val+current_post_id));
-          this.database.list("views/").remove(JSON.stringify(val+prev_post_id));
-          this.database.object("views/"+JSON.stringify(val+current_post_id)).set({"user": val, "post_id":current_post_id});
-          // this.slide.getActiveIndex().then((val) => { 
-          //   console.log(val);
-          //   this.playVideo(val,post_id);
-          // });
-          // this.postViewsRef$.subscribe((val)=>{
-          //   for(let c = 0; c < val.length; c++){
-          //     $("."+val[c].post_id+"viewCount").text("0");
-          //   }
-          //   for(let v =0; v < val.length; v++){
-          //     let key = Object.keys(val[v])[0];
-          //     console.log(key);
-          //     let post_id =  val[v].post_id;
-          //     console.log(post_id);
-          //     let current_views = parseInt($("."+post_id+"viewCount").text());
-          //     current_views += 1;
-          //     $("."+post_id+"viewCount").text(current_views);
-          //   }
-          // });
+        // this.storage.get("current_userID").then((val)=>{
+        //   this.database.list("views/").remove(JSON.stringify(val+current_post_id));
+        //   this.database.list("views/").remove(JSON.stringify(val+prev_post_id));
+        //   this.database.object("views/"+JSON.stringify(val+current_post_id)).set({"user": val, "post_id":current_post_id});
+        //   // this.slide.getActiveIndex().then((val) => { 
+        //   //   console.log(val);
+        //   //   this.playVideo(val,post_id);
+        //   // });
+        //   // this.postViewsRef$.subscribe((val)=>{
+        //   //   for(let c = 0; c < val.length; c++){
+        //   //     $("."+val[c].post_id+"viewCount").text("0");
+        //   //   }
+        //   //   for(let v =0; v < val.length; v++){
+        //   //     let key = Object.keys(val[v])[0];
+        //   //     console.log(key);
+        //   //     let post_id =  val[v].post_id;
+        //   //     console.log(post_id);
+        //   //     let current_views = parseInt($("."+post_id+"viewCount").text());
+        //   //     current_views += 1;
+        //   //     $("."+post_id+"viewCount").text(current_views);
+        //   //   }
+        //   // });
           
-        });
+        // });
       }
     }
 

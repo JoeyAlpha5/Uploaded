@@ -77,7 +77,12 @@ export class PostViewPage {
 
     back(){
       this.tabs.bottom = true;
-      this.location.back();
+      this.storage.get("prev_page").then(prev_page=>{
+        console.log("previous page is ", prev_page);
+        var url_index = prev_page.indexOf("home");
+        var prev_tab = prev_page.substring(url_index);
+        this.route.navigate(["/"+prev_tab]);
+      });
     }
 
     stopOtherVids(){
@@ -573,7 +578,7 @@ export class PostViewPage {
     }
 
 
-    async ionViewDidEnter() {
+    async ionViewDidEnter() {     
       this.statusBar.overlaysWebView(true);
       this.statusBar.backgroundColorByHexString('#ffffff');
       this.statusBar.styleDefault();
